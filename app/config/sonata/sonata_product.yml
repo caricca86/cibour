@@ -1,0 +1,24 @@
+sonata_product:
+    products:
+        cibour.product.prodotto:
+            provider: cibour.product.prodotto.type
+            manager: cibour.product.prodotto.manager
+
+    seo:
+        product:
+            site: '@sonataproject'
+            creator: '@th0masr'
+            domain: 'http://demo.sonata-project.org'
+            media_prefix: 'http://demo.sonata-project.org'
+            media_format: 'reference'
+
+
+
+# Enable Doctrine to map the provided entities
+doctrine:
+    orm:
+        entity_managers:
+            default:
+                mappings:
+                    ApplicationSonataProductBundle: ~
+                    SonataProductBundle: ~

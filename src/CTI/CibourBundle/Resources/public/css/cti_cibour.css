@@ -1,0 +1,121 @@
+@font-face {
+    font-family: Gotham;
+    src: url(GothamRoundedLight.otf);
+}
+
+nav {
+    background-color: black;
+}
+
+body {
+    font-family: "Gotham", Arial, sans-serif !important;
+}
+
+nav i {
+    font-size: 25px;
+    color:white;
+    line-height: 40px;
+}
+
+nav li.last a {
+    padding-right: 30px;
+}
+
+.navbar-nav > li > a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
+    background-color: transparent;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: transparent;
+}
+
+#cibour-navbar-collapse {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.navbar-form {
+    margin-top: 7px;
+    margin-bottom: 7px;
+    padding-right: 0;
+}
+
+.navbar-form input {
+    background-color: black;
+    border-color: white;
+    color: white;
+}
+
+.navbar-form i {
+    position: relative;
+    right: 25px;
+    font-size: 14px;
+}
+
+#myCarousel {
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+.carousel-indicators {
+    bottom: -30px;
+
+}
+
+.carousel-indicators li {
+    border-color: black;
+}
+
+.carousel-indicators .active {
+    background-color: black;
+}
+
+#slider .carousel-control {
+    padding-top:6%;
+    width:5%;
+}
+
+.popover-content li a {
+    clear: both;
+    color: #333;
+    display: block;
+    font-weight: 400;
+    line-height: 1.42857;
+    padding: 3px 20px;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.popover-content .divider {
+    background-color: #e5e5e5;
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+}
+
+#collapseHome {
+    background-color: white;
+    position: absolute;
+    z-index: 100;
+}
+
+#clock {
+    position: absolute;
+    letter-spacing: 10px;
+    font-size: 45px;
+    color: #99b0c2;
+}
+
+.content {
+    margin-top: 65px;
+}
+
+#toggle-header {
+    background-color: white;
+    opacity: 0.7;
+}

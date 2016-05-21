@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Application\Sonata\CustomerBundle\Entity\Address" exclusion-policy="all" xml-root-name="address">
+
+        <property xml-attribute-map="true" name="id" serialized-name="Iccodind" type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="current"     type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="type"        type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="name"        type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="firstname"   type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="lastname"    type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="address1"    serialized-name="Icindrg1" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="address2"    serialized-name="Icindrg2" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="address3"    serialized-name="Icindrg3" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="postcode"    serialized-name="Iccaap" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="city"        serialized-name="Iccitta" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="countryCode" serialized-name="Icnazion" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="phone"       serialized-name="Ictelefo" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
+        <property name="customer" serialized-name="Iccodcli" type="sonata_customer_customer_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
+        <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
+        <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
+
+    </class>
+</serializer>

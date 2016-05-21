@@ -1,0 +1,11 @@
+services:
+    cibour.product.prodotto.manager:
+        class: Sonata\ProductBundle\Entity\ProductManager
+        arguments:
+            - Application\Sonata\ProductBundle\Entity\Prodotto
+            - @doctrine
+
+    cibour.product.prodotto.type:
+        class: Application\Sonata\ProductBundle\Provider\ProdottoProductProvider
+        arguments:
+            - @serializer

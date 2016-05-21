@@ -1,0 +1,70 @@
+<?php
+
+namespace CTI\CibourBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Produttore
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Produttore
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descrizione", type="string", length=255)
+     */
+    private $descrizione;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Application\Sonata\ProductBundle\Entity\Product", mappedBy="produttore")
+     */
+    private $prodotti;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+    /**
+     * Set descrizione
+     *
+     * @param string $descrizione
+     * @return Produttore
+     */
+    public function setDescrizione($descrizione)
+    {
+        $this->descrizione = $descrizione;
+
+        return $this;
+    }
+
+    /**
+     * Get descrizione
+     *
+     * @return string 
+     */
+    public function getDescrizione()
+    {
+        return $this->descrizione;
+    }
+}
