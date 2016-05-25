@@ -17,14 +17,13 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <field name="partita_iva" column="p_iva" type="string" length="12" nullable="true" unique="true" />
-
-        <field name="codice_fiscale" column="cod_fis" type="string" length="16" nullable="true" unique="true" />
+        <field name="partita_iva" column="partita_iva" type="string" length="12" nullable="true" />
+        <field name="codice_fiscale" column="codice_fiscale" type="string" length="16" nullable="true" />
 
         <field name="provincia" column="provincia" type="string" length="2" />
 
         <field name="richiesta_fattura" column="richiesta_fattura" type="boolean" />
 
-        <field name="note" column="note" type="text" />
+        <field name="note" column="note" type="text" nullable="true" />
     </entity>
 </doctrine-mapping>

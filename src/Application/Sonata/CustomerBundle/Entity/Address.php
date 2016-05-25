@@ -28,7 +28,20 @@ class Address extends BaseAddress
      */
     protected $id;
 
-    private $provincia;
+    /**
+     * @var string
+     */
+    protected $provincia;
+
+    /**
+     * @var string
+     */
+    protected $partita_iva;
+
+    /**
+     * @var string
+     */
+    protected $codice_fiscale;
 
     /**
      * Get id
@@ -62,4 +75,51 @@ class Address extends BaseAddress
     {
         return $this->provincia;
     }
+
+    /**
+     * Set partita_iva
+     *
+     * @param string $partitaIva
+     * @return Address
+     */
+    public function setPartitaIva($partitaIva)
+    {
+        $this->partita_iva = $partitaIva;
+
+        return $this;
+    }
+
+    /**
+     * Get partita_iva
+     *
+     * @return string 
+     */
+    public function getPartitaIva()
+    {
+        return $this->partita_iva;
+    }
+
+    /**
+     * Set codice_fiscale
+     *
+     * @param string $codiceFiscale
+     * @return Address
+     */
+    public function setCodiceFiscale($codiceFiscale)
+    {
+        $this->codice_fiscale = $codiceFiscale;
+
+        return $this;
+    }
+
+    /**
+     * Get codice_fiscale
+     *
+     * @return string 
+     */
+    public function getCodiceFiscale()
+    {
+        return $this->codice_fiscale;
+    }
+
 }

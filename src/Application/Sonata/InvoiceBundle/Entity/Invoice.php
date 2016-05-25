@@ -40,27 +40,27 @@ class Invoice extends BaseInvoice
     /**
      * @var string
      */
-    private $partita_iva;
+    protected $partita_iva;
 
     /**
      * @var string
      */
-    private $codice_fiscale;
+    protected $codice_fiscale;
 
     /**
      * @var string
      */
-    private $provincia;
+    protected $provincia;
 
     /**
      * @var boolean
      */
-    private $richiesta_fattura;
+    protected $richiesta_fattura = false;
 
     /**
      * @var string
      */
-    private $note;
+    protected $note;
 
     /**
      * Set partita_iva

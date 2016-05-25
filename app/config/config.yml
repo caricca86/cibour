@@ -130,6 +130,8 @@ jms_serializer:
             - { path: %kernel.root_dir%/../vendor/sonata-project/user-bundle/Resources/config/serializer/FOSUserBundle, namespace_prefix: 'FOS\UserBundle' }
             - { path: %kernel.root_dir%/../vendor/sonata-project/ecommerce/src/BasketBundle/Resources/config/serializer/Component, namespace_prefix: 'Sonata\Component\Basket' }
             - { path: %kernel.root_dir%/../vendor/sonata-project/datagrid-bundle/Resources/config/serializer, namespace_prefix: 'Sonata\DatagridBundle' }
+            - { path: %kernel.root_dir%/../src/Application/Sonata/OrderBundle/Resources/config/serializer, namespace_prefix: 'Sonata\OrderBundle' }
+
 
 # Assetic Configuration
 #assetic:

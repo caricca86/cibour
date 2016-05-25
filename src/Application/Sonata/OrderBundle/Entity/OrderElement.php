@@ -37,4 +37,14 @@ class OrderElement extends BaseOrderElement
     {
         return $this->id;
     }
+
+    public function getProductSku()
+    {
+        if ($this->product != null)
+        {
+            return $this->getProduct()->getSku();
+        }
+
+        return null;
+    }
 }

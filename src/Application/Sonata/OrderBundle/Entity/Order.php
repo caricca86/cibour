@@ -29,6 +29,26 @@ class Order extends BaseOrder
     protected $id;
 
     /**
+     * @var string
+     */
+    private $billingPartitaIva;
+
+    /**
+     * @var string
+     */
+    private $billingCodiceFiscale;
+
+    /**
+     * @var string
+     */
+    protected $billingProvincia;
+
+    /**
+     * @var string
+     */
+    protected $shippingProvincia;
+
+    /**
      * Get id
      *
      * @return integer $id
@@ -36,5 +56,97 @@ class Order extends BaseOrder
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set billingProvincia
+     *
+     * @param string $billingProvincia
+     * @return Order
+     */
+    public function setBillingProvincia($billingProvincia)
+    {
+        $this->billingProvincia = $billingProvincia;
+
+        return $this;
+    }
+
+    /**
+     * Get billingProvincia
+     *
+     * @return string 
+     */
+    public function getBillingProvincia()
+    {
+        return $this->billingProvincia;
+    }
+
+    /**
+     * Set shippingProvincia
+     *
+     * @param string $shippingProvincia
+     * @return Order
+     */
+    public function setShippingProvincia($shippingProvincia)
+    {
+        $this->shippingProvincia = $shippingProvincia;
+
+        return $this;
+    }
+
+    /**
+     * Get shippingProvincia
+     *
+     * @return string 
+     */
+    public function getShippingProvincia()
+    {
+        return $this->shippingProvincia;
+    }
+
+    /**
+     * Set billingPartitaIva
+     *
+     * @param string $billingPartitaIva
+     * @return Order
+     */
+    public function setBillingPartitaIva($billingPartitaIva)
+    {
+        $this->billingPartitaIva = $billingPartitaIva;
+
+        return $this;
+    }
+
+    /**
+     * Get billingPartitaIva
+     *
+     * @return string 
+     */
+    public function getBillingPartitaIva()
+    {
+        return $this->billingPartitaIva;
+    }
+
+    /**
+     * Set billingCodiceFiscale
+     *
+     * @param string $billingCodiceFiscale
+     * @return Order
+     */
+    public function setBillingCodiceFiscale($billingCodiceFiscale)
+    {
+        $this->billingCodiceFiscale = $billingCodiceFiscale;
+
+        return $this;
+    }
+
+    /**
+     * Get billingCodiceFiscale
+     *
+     * @return string 
+     */
+    public function getBillingCodiceFiscale()
+    {
+        return $this->billingCodiceFiscale;
     }
 }

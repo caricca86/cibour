@@ -10,6 +10,12 @@
 
 namespace Application\Sonata\ProductBundle\Provider;
 
+use Application\Sonata\ProductBundle\Entity\Product;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\Component\Basket\BasketElementInterface;
+use Sonata\Component\Delivery\ServiceDeliveryInterface;
+use Sonata\Component\Order\OrderElementInterface;
+use Sonata\Component\Order\OrderInterface;
 use Sonata\ProductBundle\Model\BaseProductProvider;
 
 /**
@@ -30,5 +36,110 @@ class ProdottoProductProvider extends BaseProductProvider
     public function getBaseControllerName()
     {
         return 'SonataProductBundle:Prodotto';
+    }
+
+    public function createOrderElement(BasketElementInterface $basketElement, $format = 'json')
+    {
+        /** @var OrderElementInterface $orderElement */
+        $orderElement = new $this->orderElementClassName;
+        $orderElement->setQuantity($basketElement->getQuantity());
+        $orderElement->setUnitPriceExcl($basketElement->getUnitPrice(false));
+        $orderElement->setUnitPriceInc($basketElement->getUnitPrice(true));
+        $orderElement->setPrice($basketElement->getPrice(true));
+        $orderElement->setVatRate($basketElement->getVatRate());
+        $orderElement->setDesignation($basketElement->getName());
+        $orderElement->setProductType($this->getCode());
+        $orderElement->setStatus(OrderInterface::STATUS_PENDING);
+        $orderElement->setDeliveryStatus(ServiceDeliveryInterface::STATUS_OPEN);
+        $orderElement->setCreatedAt(new \DateTime);
+        $orderElement->setOptions($basketElement->getOptions());
+
+        $product = $basketElement->getProduct();
+        $orderElement->setProduct($product);
+        $orderElement->setDescription($product->getDescription());
+        $orderElement->setProductId($product->getId());
+        $orderElement->setRawProduct($this->getRawProduct($product, $format));
+
+        return $orderElement;
+    }
+
+    public function buildEditForm(FormMapper $formMapper, $isVariation = false)
+    {
+        $formMapper->with('Product');
+
+        $formMapper->add('enabled');
+
+        $formMapper
+            ->add('name')
+            ->add('sku')
+            ->add('produttore')
+            ->add('price', 'number')
+            ->add('priceIncludingVat')
+            ->add('vatRate', 'number')
+            ->add('stock', 'integer')
+            ->add('macroregione', 'choice', array(
+                'choices' => Product::$macroregione_choice_list))
+            ->add('pezzatura')
+            ->add('tipo_dieta', 'choice', array(
+                'choices' => Product::$tipo_dieta_choice_list,
+                'required' => false))
+            ->add('superfood')
+            ->add('superfood_description')
+            ->add('gluten_free')
+        ;
+
+        if (!$isVariation || in_array('description', $this->variationFields)) {
+            $formMapper->add('description', 'sonata_formatter_type', array(
+                'source_field'         => 'rawDescription',
+                'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
+                'format_field'         => 'descriptionFormatter',
+                'target_field'         => 'description',
+                'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher()
+            ));
+        }
+
+        if (!$isVariation || in_array('short_description', $this->variationFields)) {
+            $formMapper->add('shortDescription', 'sonata_formatter_type', array(
+                'source_field'         => 'rawShortDescription',
+                'source_field_options' => array('attr' => array('class' => 'span10', 'rows' => 20)),
+                'format_field'         => 'shortDescriptionFormatter',
+                'target_field'         => 'shortDescription',
+                'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher()
+            ));
+        }
+        $formMapper->add('metodo_produzione', 'choice', array(
+            'choices' => Product::$meotodo_produzione_choice_list,
+            'required' => false));
+        $formMapper->end();
+
+        if (!$isVariation || in_array('image', $this->variationFields) || in_array('gallery', $this->variationFields)) {
+            $formMapper->with('Media');
+
+            if (!$isVariation || in_array('image', $this->variationFields)) {
+                $formMapper->add('image', 'sonata_type_model_list', array(
+                    'required' => false
+                ), array(
+                    'link_parameters' => array(
+                        'context'  => 'product_catalog',
+                        'filter'   => array('context' => array('value' => 'product_catalog')),
+                        'provider' => ''
+                    )
+                ));
+            }
+
+            if (!$isVariation || in_array('gallery', $this->variationFields)) {
+                $formMapper->add('gallery', 'sonata_type_model_list', array(
+                    'required' => false
+                ), array(
+                    'link_parameters' => array(
+                        'context'  => 'product_catalog',
+                        'filter'   => array('context' => array('value' => 'product_catalog')),
+                        'provider' => ''
+                    )
+                ));
+            }
+
+            $formMapper->end();
+        }
     }
 }

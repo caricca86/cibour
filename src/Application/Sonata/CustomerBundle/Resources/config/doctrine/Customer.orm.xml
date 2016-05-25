@@ -17,7 +17,5 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <field name="partita_iva" column="p_iva" type="string" length="12" nullable="true" unique="true" />
-        <field name="codice_fiscale" column="cod_fis" type="string" length="16" nullable="true" unique="true" />
     </entity>
 </doctrine-mapping>

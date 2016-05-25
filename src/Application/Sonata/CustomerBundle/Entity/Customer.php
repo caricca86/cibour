@@ -37,59 +37,5 @@ class Customer extends BaseCustomer
     {
         return $this->id;
     }
-    /**
-     * @var string
-     */
-    private $partita_iva;
 
-    /**
-     * @var string
-     */
-    private $codice_fiscale;
-
-    /**
-     * Set partita_iva
-     *
-     * @param string $partitaIva
-     * @return Customer
-     */
-    public function setPartitaIva($partitaIva)
-    {
-        $this->partita_iva = $partitaIva;
-
-        return $this;
-    }
-
-    /**
-     * Get partita_iva
-     *
-     * @return string 
-     */
-    public function getPartitaIva()
-    {
-        return $this->partita_iva;
-    }
-
-    /**
-     * Set codice_fiscale
-     *
-     * @param string $codiceFiscale
-     * @return Customer
-     */
-    public function setCodiceFiscale($codiceFiscale)
-    {
-        $this->codice_fiscale = $codiceFiscale;
-
-        return $this;
-    }
-
-    /**
-     * Get codice_fiscale
-     *
-     * @return string 
-     */
-    public function getCodiceFiscale()
-    {
-        return $this->codice_fiscale;
-    }
 }
