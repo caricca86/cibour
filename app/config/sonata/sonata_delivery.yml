@@ -1,7 +1,7 @@
 sonata_delivery:
     methods:
         free: ~
-        take_away: application.sonata.delivery.take_away
+        one_day:   application.sonata.delivery.one_day
 
     services:
         free_address_required:

@@ -11,7 +11,7 @@
     -->
 
     <services>
-        <service id="application.sonata.delivery.take_away" class="Application\Sonata\DeliveryBundle\Model\TakeAwayDelivery">
+        <service id="application.sonata.delivery.one_day" class="Application\Sonata\DeliveryBundle\Model\OneDayDelivery">
             <tag name="sonata.delivery.method" />
         </service>
     </services>

@@ -10,5 +10,8 @@
             <argument>cibour.block.home.slider</argument>
             <argument type="service" id="templating" />
         </service>
+
+        <service id="cibour.counter.trending_now" class="CTI\CibourBundle\Entity\Counter\TrendingNowCounter">
+        </service>
     </services>
 </container>

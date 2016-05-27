@@ -23,14 +23,29 @@ use Sonata\Component\Delivery\BaseServiceDelivery;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class TakeAwayDelivery extends BaseServiceDelivery
+class OneDayDelivery extends BaseServiceDelivery
 {
+    public function getPrice()
+    {
+        return 10;
+    }
+
+    public function getName()
+    {
+        return 'Corriere Espresso (1 giorno)';
+    }
+
+    public function getVatRate()
+    {
+        return 0;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function isAddressRequired()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -38,6 +53,6 @@ class TakeAwayDelivery extends BaseServiceDelivery
      */
     public function getCode()
     {
-        return 'take_away';
+        return 'one_day';
     }
 }

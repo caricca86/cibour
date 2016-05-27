@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- PRODUCT -->
+        <parameter key="sonata.product.admin.product.class">Sonata\ProductBundle\Admin\ProductAdmin</parameter>
+        <parameter key="sonata.product.admin.product.controller">SonataProductBundle:ProductAdmin</parameter>
+
+        <parameter key="sonata.product.admin.product.variation.class">Sonata\ProductBundle\Admin\ProductVariationAdmin</parameter>
+        <parameter key="sonata.product.admin.product.variation.controller">SonataProductBundle:ProductVariationAdmin</parameter>
+
+        <!-- PRODUCTCATEGORY -->
+        <parameter key="sonata.product.admin.product_category.class">Sonata\ProductBundle\Admin\ProductCategoryAdmin</parameter>
+        <parameter key="sonata.product.admin.product_category.controller">SonataAdminBundle:CRUD</parameter>
+
+        <!-- PRODUCTCOLLECTION -->
+        <parameter key="sonata.product.admin.product_collection.class">Sonata\ProductBundle\Admin\ProductCollectionAdmin</parameter>
+        <parameter key="sonata.product.admin.product_collection.controller">SonataAdminBundle:CRUD</parameter>
+
+        <!-- DELIVERY -->
+        <parameter key="sonata.product.admin.delivery.class">Application\Sonata\ProductBundle\Admin\DeliveryAdmin</parameter>
+        <parameter key="sonata.product.admin.delivery.controller">SonataAdminBundle:CRUD</parameter>
+
+        <parameter key="sonata.product.admin.product.manager">Sonata\ProductBundle\Model\DoctrineModelManager</parameter>
+    </parameters>
+
+</container>

@@ -48,8 +48,8 @@ nav li.last a {
 
 .navbar-form input {
     background-color: black;
-    border-color: white;
     color: white;
+    border: 1px solid white;
 }
 
 .navbar-form i {
@@ -83,19 +83,39 @@ nav li.last a {
 
 .popover-content li a {
     clear: both;
-    color: #333;
+    color: white;
     display: block;
     font-weight: 400;
     line-height: 1.42857;
-    padding: 3px 20px;
+    padding: 5px 10px;
     white-space: nowrap;
     text-decoration: none;
+    text-transform: uppercase;
 }
 
-.popover-content .divider {
+.popover {
+    background-color: black;
+    opacity: 0.7;
+    border: 0;
+}
+
+.popover.bottom > .arrow::after {
+    border-bottom-color: black;
+}
+
+.popover-content .first-group a {
+    padding: 10px;
+}
+
+.popover-content .first-group .first a {
+    padding-top: 35px;
+}
+
+nav .popover-content .divider {
     background-color: #e5e5e5;
     height: 1px;
-    margin: 9px 0;
+    margin-top: 30px;
+    margin-bottom: 35px;
     overflow: hidden;
 }
 
