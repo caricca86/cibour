@@ -19,19 +19,26 @@ class Produttore
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nome", type="string", length=255)
+     */
+    protected $nome;
 
     /**
      * @var string
      *
      * @ORM\Column(name="descrizione", type="string", length=255)
      */
-    private $descrizione;
+    protected $descrizione;
 
     /**
      * @ORM\OneToMany(targetEntity="Application\Sonata\ProductBundle\Entity\Product", mappedBy="produttore")
      */
-    private $prodotti;
+    protected $prodotti;
 
 
     /**

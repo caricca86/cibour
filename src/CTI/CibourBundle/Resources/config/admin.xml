@@ -26,4 +26,13 @@
         <parameter key="sonata.product.admin.product.manager">Sonata\ProductBundle\Model\DoctrineModelManager</parameter>
     </parameters>
 
+    <services>
+        <service id="cibour.admin.produttore" class="CTI\CibourBundle\Admin\ProduttoreAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_dashboard="false" label="Produttore" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument />
+            <argument>CTI\CibourBundle\Entity\Produttore</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+        </service>
+    </services>
+
 </container>
