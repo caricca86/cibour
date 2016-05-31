@@ -1,0 +1,29 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% block sonata_page_breadcrumb %}
+
+{% endblock %}
+
+<div class="sonata-user-show row row-fluid">
+        <div class="col-lg-12 menu" style="padding: 8px 0;">
+            {% block sonata_profile_menu %}
+                {{ sonata_block_render({'type': 'sonata.user.block.menu'}, {'current_uri': app.request.requestUri},
+                {'menu_class': 'nav'}, {'children_class': 'null'}) }}
+            {% endblock %}
+        </div>
+    <div class="span12 col-lg-12">
+        {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+
+        {% block sonata_profile_content '' %}
+    </div>
+
+</div>

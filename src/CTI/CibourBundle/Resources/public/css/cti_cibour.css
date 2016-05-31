@@ -87,7 +87,7 @@ nav li.last a {
     display: block;
     font-weight: 400;
     line-height: 1.42857;
-    padding: 5px 10px;
+    padding: 0 10px;
     white-space: nowrap;
     text-decoration: none;
     text-transform: uppercase;
@@ -107,15 +107,11 @@ nav li.last a {
     padding: 10px;
 }
 
-.popover-content .first-group .first a {
-    padding-top: 35px;
-}
-
 nav .popover-content .divider {
     background-color: #e5e5e5;
     height: 1px;
-    margin-top: 30px;
-    margin-bottom: 35px;
+    margin-top: 20px;
+    margin-bottom: 15px;
     overflow: hidden;
 }
 
@@ -139,4 +135,63 @@ nav .popover-content .divider {
 #toggle-header {
     background-color: white;
     opacity: 0.7;
+}
+
+.form-control {
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 14px;
+    height: 28px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}
+
+.form-control:focus {
+    border-color: grey;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(128, 128, 128, 0.6);
+    outline: 0 none;
+}
+
+.select2-container .select2-choice {
+    -moz-user-select: none;
+    background-clip: padding-box;
+    background-color: #fff;
+    background-image: linear-gradient(to top, #eee 0px, #fff 50%);
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    color: #444;
+    display: block;
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+    padding: 0 0 0 8px;
+    position: relative;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* User Profile*/
+.sonata-user-show .menu {
+    text-align: center;
+    margin-top: 60px;
+}
+.sonata-user-show .menu .list-group .list-group-item {
+    display: inline-block;
+    border: 0;
+    padding: 10px 30px;
+}
+
+.panel-body {
+    text-align: center;
+}
+
+.panel-body h3 {
+    text-transform: uppercase;
 }

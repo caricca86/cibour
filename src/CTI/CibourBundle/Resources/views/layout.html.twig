@@ -57,9 +57,13 @@ file that was distributed with this source code.
                                         <li>
                                             <a href="#"  role="button" data-toggle="popover" data-html="true" data-placement="bottom" data-content='<ul class="list-unstyled">
                                             <span class="first-group">
-                                        <li class="first"><a href="#">Account</a></li>
-                                        <li><a href="#">Ordini</a></li>
-                                        <li><a href="#">Sign In</a></li>
+                                        {% if app.user %}
+                                            <li class="first"><a href="{{ path('fos_user_profile_show') }}">Account</a></li>
+                                            <li><a href="{{ path('sonata_order_index') }}">Ordini</a></li>
+                                            <li><a href="{{ path('fos_user_security_logout') }}">Sign Out</a></li>
+                                        {% else %}
+                                            <li class="first"><a href="{{ path('fos_user_security_login') }}">Log in/Register</a></li>
+                                        {% endif %}
                                         </span>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="#">Trending now</a></li>

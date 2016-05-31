@@ -38,7 +38,7 @@ class DeliveryAdmin extends Admin
             ->add('code', 'sonata_delivery_choice')
             ->add('perItem')
             ->add('countryCode', 'country')
-            ->add('zone')
+            //->add('zone')
         ;
     }
 
@@ -60,6 +60,7 @@ class DeliveryAdmin extends Admin
             ->add('enabled')
             ->add('perItem')
             ->add('countryCode')
+            ->add('zone')
         ;
     }
 

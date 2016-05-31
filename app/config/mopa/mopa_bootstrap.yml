@@ -3,4 +3,5 @@ mopa_bootstrap:
         show_legend: false
         render_optional_text: false
         render_required_asterisk: true
+        horizontal_input_wrapper_class:  col-lg-12
 #    menu: ~  # enables twig helpers for menu
