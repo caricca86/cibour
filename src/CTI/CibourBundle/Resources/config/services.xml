@@ -13,5 +13,12 @@
 
         <service id="cibour.counter.trending_now" class="CTI\CibourBundle\Entity\Counter\TrendingNowCounter">
         </service>
+
+        <service id="sonata.product.controller.api.product" class="Application\Sonata\ProductBundle\Controller\Api\ProductController">
+            <argument type="service" id="sonata.product.set.manager" />
+            <argument type="service" id="sonata.product.pool" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="sonata.formatter.pool" />
+        </service>
     </services>
 </container>

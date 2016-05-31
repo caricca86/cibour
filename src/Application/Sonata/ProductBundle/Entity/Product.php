@@ -39,6 +39,10 @@ abstract class Product extends BaseProduct
         '1' => 'Dinamico'
     );
 
+    protected $descriptionFormatter = 'markdown';
+
+    protected $shortDescriptionFormatter = 'markdown';
+
     /**
      * @var integer $id
      */

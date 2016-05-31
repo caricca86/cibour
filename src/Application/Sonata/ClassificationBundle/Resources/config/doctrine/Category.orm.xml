@@ -17,5 +17,7 @@
             <generator strategy="AUTO"/>
         </id>
 
+        <field name="codice" column="codice" type="string" length="5" />
+
     </entity>
 </doctrine-mapping>

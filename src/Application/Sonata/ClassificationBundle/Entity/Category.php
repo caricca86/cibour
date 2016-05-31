@@ -29,6 +29,11 @@ class Category extends BaseCategory
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $codice;
+
+    /**
      * Get id
      *
      * @return integer $id
@@ -36,5 +41,28 @@ class Category extends BaseCategory
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set codice
+     *
+     * @param string $codice
+     * @return Category
+     */
+    public function setCodice($codice)
+    {
+        $this->codice = $codice;
+
+        return $this;
+    }
+
+    /**
+     * Get codice
+     *
+     * @return string 
+     */
+    public function getCodice()
+    {
+        return $this->codice;
     }
 }

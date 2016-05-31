@@ -31,6 +31,13 @@ class Produttore
     /**
      * @var string
      *
+     * @ORM\Column(name="codice", type="string", length=5)
+     */
+    protected $codice;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="descrizione", type="string", length=255)
      */
     protected $descrizione;
@@ -114,5 +121,51 @@ class Produttore
     public function getProdotti()
     {
         return $this->prodotti;
+    }
+
+    /**
+     * Set nome
+     *
+     * @param string $nome
+     * @return Produttore
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+
+        return $this;
+    }
+
+    /**
+     * Get nome
+     *
+     * @return string 
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * Set codice
+     *
+     * @param string $codice
+     * @return Produttore
+     */
+    public function setCodice($codice)
+    {
+        $this->codice = $codice;
+
+        return $this;
+    }
+
+    /**
+     * Get codice
+     *
+     * @return string 
+     */
+    public function getCodice()
+    {
+        return $this->codice;
     }
 }

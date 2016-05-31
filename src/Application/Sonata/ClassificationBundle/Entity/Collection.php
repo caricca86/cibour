@@ -29,6 +29,11 @@ class Collection extends BaseCollection
     protected $id;
 
     /**
+     * @var string
+     */
+    private $codice;
+
+    /**
      * Get id
      *
      * @return integer $id
@@ -36,5 +41,28 @@ class Collection extends BaseCollection
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set codice
+     *
+     * @param string $codice
+     * @return Collection
+     */
+    public function setCodice($codice)
+    {
+        $this->codice = $codice;
+
+        return $this;
+    }
+
+    /**
+     * Get codice
+     *
+     * @return string 
+     */
+    public function getCodice()
+    {
+        return $this->codice;
     }
 }

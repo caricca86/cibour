@@ -12,16 +12,20 @@ class ProduttoreAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('nome')
+            ->add('codice')
             ->add('descrizione');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('nome');
+        $datagridMapper->add('nome')
+        ->add('codice')
+        ->add('prodotti');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('nome');
+        $listMapper->addIdentifier('nome')
+        ->add('codice');
     }
 }
