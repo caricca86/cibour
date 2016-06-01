@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="CTI\CibourBundle\Entity\Produttore" exclusion-policy="all" xml-root-name="produttore">
+
+        <property xml-attribute-map="true" name="id" type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
+        <property name="nome"  type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="codice" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="descrizione" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
+    </class>
+</serializer>

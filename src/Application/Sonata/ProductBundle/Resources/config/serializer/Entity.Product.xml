@@ -10,6 +10,5 @@
         <discriminator-class value="cibour.product.prodotto">Application\Sonata\ProductBundle\Entity\Prodotto</discriminator-class>
 
         <property xml-attribute-map="true" name="id" type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-
     </class>
 </serializer>

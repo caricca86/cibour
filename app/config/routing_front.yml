@@ -4,6 +4,11 @@ cti_cibour:
     type:     annotation
     prefix:   /
 
+cti_cibour_api:
+    resource: CTI\CibourBundle\Controller\Api\ProduttoreApiController
+    type:     rest
+    prefix:   /api/
+
 sonata_user_security:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"
 

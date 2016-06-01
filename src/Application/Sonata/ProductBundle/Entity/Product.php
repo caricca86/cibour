@@ -129,6 +129,11 @@ abstract class Product extends BaseProduct
         return $this->produttore;
     }
 
+    public function getProduttoreCodice()
+    {
+        return $this->produttore->getCodice();
+    }
+
     /**
      * Set macroregione
      *

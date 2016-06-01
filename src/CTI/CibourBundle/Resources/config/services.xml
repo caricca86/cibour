@@ -19,6 +19,9 @@
             <argument type="service" id="sonata.product.pool" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="sonata.formatter.pool" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="sonata.product_category.product" />
+            <argument type="service" id="sonata.product_collection.product" />
         </service>
     </services>
 </container>

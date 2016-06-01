@@ -168,4 +168,9 @@ class Produttore
     {
         return $this->codice;
     }
+
+    public function __toString()
+    {
+        return $this->nome;
+    }
 }

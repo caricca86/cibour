@@ -11,6 +11,7 @@
 
 namespace Application\Sonata\ProductBundle\Controller\Api;
 
+use Doctrine\ORM\EntityManager;
 use JMS\Serializer\SerializationContext;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
@@ -33,6 +34,9 @@ use FOS\RestBundle\Controller\Annotations\View;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
+use Sonata\ProductBundle\Entity\ProductCategoryManager;
+use Sonata\ProductBundle\Entity\ProductCollectionManager;
+use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,6 +71,12 @@ class ProductController extends BaseProductController
      */
     protected $formatterPool;
 
+    protected $entityManager;
+
+    protected $productCategoryManager;
+
+    protected $productCollectionManager;
+
     /**
      * Constructor
      *
@@ -75,12 +85,17 @@ class ProductController extends BaseProductController
      * @param FormFactoryInterface    $formFactory    Symfony form factory
      * @param FormatterPool           $formatterPool
      */
-    public function __construct(ProductManagerInterface $productManager, Pool $productPool, FormFactoryInterface $formFactory, FormatterPool $formatterPool)
+    public function __construct(ProductManagerInterface $productManager, Pool $productPool, FormFactoryInterface $formFactory, FormatterPool $formatterPool, EntityManager $entityManager,
+                                ProductCategoryManager $productCategoryManager, ProductCollectionManager $productCollectionManager)
     {
         $this->productManager   = $productManager;
         $this->productPool      = $productPool;
         $this->formFactory      = $formFactory;
         $this->formatterPool    = $formatterPool;
+        $this->entityManager    = $entityManager;
+        $this->productCategoryManager = $productCategoryManager;
+        $this->productCollectionManager = $productCollectionManager;
+
     }
 
     /**
@@ -238,13 +253,23 @@ class ProductController extends BaseProductController
             'provider_name'   => $provider,
         ));
 
+        $form
+            ->add('produttore_codice', null, array('mapped' => false))
+            ->add('categoria_codice', null, array('mapped' => false))
+            ->add('subcategoria_codice', null, array('mapped' => false));
+
         $form->bind($request);
 
         if ($form->isValid()) {
             $product = $form->getData();
             $product->setDescription($this->formatterPool->transform($product->getDescriptionFormatter(), $product->getRawDescription()));
             $product->setShortDescription($this->formatterPool->transform($product->getShortDescriptionFormatter(), $product->getRawShortDescription()));
+            $produttore = $this->entityManager->getRepository('CTICibourBundle:Produttore')->findOneByCodice($form->get('produttore_codice')->getData());
+            $product->setProduttore($produttore);
             $manager->save($product);
+
+            $categoria = $this->entityManager->getRepository('ApplicationSonataClassificationBundle:Category')->findOneByCodice($form->get('categoria_codice')->getData());
+            $this->productCategoryManager->addCategoryToProduct($product, $categoria);
 
             $view = \FOS\RestBundle\View\View::create($product);
             $serializationContext = SerializationContext::create();
