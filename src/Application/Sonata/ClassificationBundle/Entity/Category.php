@@ -28,6 +28,8 @@ class Category extends BaseCategory
      */
     protected $id;
 
+    protected $enabled = true;
+
     /**
      * @var string
      */

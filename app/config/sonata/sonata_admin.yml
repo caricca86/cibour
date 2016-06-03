@@ -79,6 +79,7 @@ sonata_admin:
                     - sonata.classification.admin.category
                     - sonata.classification.admin.tag
                     - sonata.classification.admin.collection
+                    - cibour.admin.caratteristica_gustativa
 
             sonata.admin.group.site_builder:
                 label:           Site Builder

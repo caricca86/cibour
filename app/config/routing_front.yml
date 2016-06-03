@@ -1,13 +1,8 @@
 # these 2 references : sonata_demo and sonata_qa can be safely removed
 cti_cibour:
-    resource: "@CTICibourBundle/Controller/"
+    resource: CTI\CibourBundle\Controller\DefaultController
     type:     annotation
     prefix:   /
-
-cti_cibour_api:
-    resource: CTI\CibourBundle\Controller\Api\ProduttoreApiController
-    type:     rest
-    prefix:   /api/
 
 sonata_user_security:
     resource: "@SonataUserBundle/Resources/config/routing/sonata_security_1.xml"

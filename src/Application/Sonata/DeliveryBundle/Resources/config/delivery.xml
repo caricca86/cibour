@@ -14,5 +14,20 @@
         <service id="application.sonata.delivery.one_day" class="Application\Sonata\DeliveryBundle\Model\OneDayDelivery">
             <tag name="sonata.delivery.method" />
         </service>
+        <service id="application.sonata.delivery.three_days" class="Application\Sonata\DeliveryBundle\Model\ThreeDaysDelivery">
+            <tag name="sonata.delivery.method" />
+        </service>
+        <service id="application.sonata.delivery.seven_days" class="Application\Sonata\DeliveryBundle\Model\SevenDaysDelivery">
+            <tag name="sonata.delivery.method" />
+        </service>
+        <service id="application.sonata.delivery.one_day_take_away" class="Application\Sonata\DeliveryBundle\Model\OneDayTakeAwayDelivery">
+            <tag name="sonata.delivery.method" />
+        </service>
+        <service id="application.sonata.delivery.three_days_take_away" class="Application\Sonata\DeliveryBundle\Model\ThreeDaysTakeAwayDelivery">
+            <tag name="sonata.delivery.method" />
+        </service>
+        <service id="application.sonata.delivery.seven_days_take_away" class="Application\Sonata\DeliveryBundle\Model\SevenDaysTakeAwayDelivery">
+            <tag name="sonata.delivery.method" />
+        </service>
     </services>
 </container>

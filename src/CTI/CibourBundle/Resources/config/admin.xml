@@ -34,6 +34,13 @@
             <argument>SonataAdminBundle:CRUD</argument>
         </service>
 
+        <service id="cibour.admin.caratteristica_gustativa" class="CTI\CibourBundle\Admin\CaratteristicaGustativaAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_classification" show_in_dashboard="false" label="Caratteristica Gustativa" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument />
+            <argument>CTI\CibourBundle\Entity\CaratteristicaGustativa</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+        </service>
+
         <service id="sonata.classification.admin.category" class="Application\Sonata\ClassificationBundle\Admin\CategoryAdmin">
             <tag name="sonata.admin" manager_type="orm" group="sonata_classification" label="label_categories"  label_catalogue="%sonata.classification.admin.category.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
             <argument />

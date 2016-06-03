@@ -87,6 +87,8 @@ class ProdottoProductProvider extends BaseProductProvider
             ->add('superfood')
             ->add('superfood_description')
             ->add('gluten_free')
+            ->add('caratteristica_gustativa')
+            ->add('abbinamento')
         ;
 
         if (!$isVariation || in_array('description', $this->variationFields)) {

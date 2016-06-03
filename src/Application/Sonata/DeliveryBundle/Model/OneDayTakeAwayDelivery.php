@@ -23,7 +23,7 @@ use Sonata\Component\Delivery\BaseServiceDelivery;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class OneDayDelivery extends BaseServiceDelivery
+class OneDayTakeAwayDelivery extends BaseServiceDelivery
 {
     public function getPrice()
     {
@@ -32,7 +32,7 @@ class OneDayDelivery extends BaseServiceDelivery
 
     public function getName()
     {
-        return 'Consegna entro 24 ore';
+        return 'Consegna entro 24 ore (ritiro a mano)';
     }
 
     public function getVatRate()
@@ -45,7 +45,7 @@ class OneDayDelivery extends BaseServiceDelivery
      */
     public function isAddressRequired()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -53,6 +53,6 @@ class OneDayDelivery extends BaseServiceDelivery
      */
     public function getCode()
     {
-        return 'one_day';
+        return 'one_day_take_away';
     }
 }

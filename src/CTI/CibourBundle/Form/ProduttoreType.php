@@ -15,8 +15,8 @@ class ProduttoreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nome')
-            ->add('codice')
+            ->add('nome', null, array('required' => true))
+            ->add('codice', null, array('required' => true))
             ->add('descrizione')
         ;
     }

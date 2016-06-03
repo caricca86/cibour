@@ -2,6 +2,11 @@ sonata_delivery:
     methods:
         free: ~
         one_day:   application.sonata.delivery.one_day
+        three_days: application.sonata.delivery.three_days
+        seven_days: application.sonata.delivery.seven_days
+        one_day_take_away: application.sonata.delivery.one_day_take_away
+        three_days_take_away: application.sonata.delivery.three_days_take_away
+        seven_days_take_away: application.sonata.delivery.seven_days_take_away
 
     services:
         free_address_required:

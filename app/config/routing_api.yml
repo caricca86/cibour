@@ -2,6 +2,11 @@ NelmioApiDocBundle:
     resource:     "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:       /doc
 
+cti_cibour_api_ecommerce_produttore:
+    resource: CTI\CibourBundle\Controller\Api\ProduttoreApiController
+    type:     rest
+    prefix:   /ecommerce
+
 sonata_api_classification:
     type:         rest
     prefix:       /classification

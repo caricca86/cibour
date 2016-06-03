@@ -24,21 +24,29 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ProduttoreApiController extends FOSRestController
 {
     /**
-     * @Rest\Get("/api/ecommerce/produttore/all")
+     * @ApiDoc(
+     *  resource="/api/ecommerce/produttori",
+     *  description="Ritorna tutti i produttori",
+     *  statusCodes={
+     *      201="Returned when successful",
+     *      403="Returned when user don't have authorization"
+     *  }
+     * )
+     * @Rest\Get("/produttori")
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      */
-    public function getAllAction()
+    public function getProduttoriAction()
     {
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('CTICibourBundle:Produttore')->findAll();
 
-        return array('mat_probatori' => $entities);
+        return array('produttori' => $entities);
     }
 
     /**
      * @ApiDoc(
-     *  resource="/api/mat_probatorio",
-     *  description="Ritorna un singolo materiale probatorio",
+     *  resource="/api/ecommerce/produttori",
+     *  description="Ritorna un singolo produttore",
      *  requirements={
      *      {
      *      "name"="id",
@@ -54,10 +62,10 @@ class ProduttoreApiController extends FOSRestController
      *  }
      * )
      *
-     * @Rest\Get("/{id}", requirements={"id" = "\d+"})
+     * @Rest\Get("/produttori/{id}", requirements={"id" = "\d+"})
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      */
-    public function getAction($id)
+    public function getProduttoreAction($id)
     {
         $entity = $this->getEntity($id);
 
@@ -66,19 +74,18 @@ class ProduttoreApiController extends FOSRestController
 
     /**
      * @ApiDoc(
-     *  resource="/api/mat_probatorio",
-     *  description="Crea un nuovo materiale probatorio e ritorna l'entità dopo la creazione",
-     *  input="Bs\PlutoBundle\Form\MatProbatorioType",
+     *  resource="/api/ecommerce/produttori",
+     *  description="Crea un nuovo produttore",
      *  statusCodes={
      *      201="Returned when successful",
      *      400="Returned when form validation error occurs",
      *      403="Returned when user don't have authorization"
      *  }
      * )
-     * @Rest\Post()
+     * @Rest\Post("/produttori")
      * @Rest\View(statusCode=400)
      */
-    public function newAction()
+    public function postProduttoreAction()
     {
         $entity = new Produttore();
 
@@ -87,14 +94,14 @@ class ProduttoreApiController extends FOSRestController
 
     /**
      * @ApiDoc(
-     *  description="Modifica un singolo materiale probatorio senza immagine",
-     *  input="Bs\PlutoBundle\Form\MatProbatorioType",
+     *  description="Modifica un produttore",
+     *  input="CTI\CibourBundle\Entity\Produttore",
      *  requirements={
      *      {
      *      "name"="id",
      *      "dataType"="integer",
      *      "requirement"="\d+",
-     *      "description"="id del materiale probatorio",
+     *      "description"="id del produttore",
      *      }
      *  },
      *  statusCodes={
@@ -104,10 +111,10 @@ class ProduttoreApiController extends FOSRestController
      *      404="Returned when entity is not found"
      *  }
      * )
-     * @Rest\Put("/{id}")
+     * @Rest\Put("/produttori/{id}")
      * @Rest\View(statusCode=400)
      */
-    public function editAction($id)
+    public function putProduttoreAction($id)
     {
         $entity = $this->getEntity($id);
 

@@ -89,6 +89,16 @@ abstract class Product extends BaseProduct
     protected $metodo_produzione;
 
     /**
+     * @var \CTI\CibourBundle\Entity\CaratteristicaGustativa
+     */
+    protected $caratteristica_gustativa;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    protected $abbinamento;
+
+    /**
      * Get id
      *
      * @return integer $id
@@ -293,5 +303,70 @@ abstract class Product extends BaseProduct
     public function getMetodoProduzione()
     {
         return $this->metodo_produzione;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->abbinamento = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set caratteristica_gustativa
+     *
+     * @param \CTI\CibourBundle\Entity\CaratteristicaGustativa $caratteristicaGustativa
+     * @return Product
+     */
+    public function setCaratteristicaGustativa(\CTI\CibourBundle\Entity\CaratteristicaGustativa $caratteristicaGustativa = null)
+    {
+        $this->caratteristica_gustativa = $caratteristicaGustativa;
+
+        return $this;
+    }
+
+    /**
+     * Get caratteristica_gustativa
+     *
+     * @return \CTI\CibourBundle\Entity\CaratteristicaGustativa 
+     */
+    public function getCaratteristicaGustativa()
+    {
+        return $this->caratteristica_gustativa;
+    }
+
+    /**
+     * Add abbinamento
+     *
+     * @param \CTI\CibourBundle\Entity\CaratteristicaGustativa $abbinamento
+     * @return Product
+     */
+    public function addAbbinamento(\CTI\CibourBundle\Entity\CaratteristicaGustativa $abbinamento)
+    {
+        $this->abbinamento[] = $abbinamento;
+
+        return $this;
+    }
+
+    /**
+     * Remove abbinamento
+     *
+     * @param \CTI\CibourBundle\Entity\CaratteristicaGustativa $abbinamento
+     */
+    public function removeAbbinamento(\CTI\CibourBundle\Entity\CaratteristicaGustativa $abbinamento)
+    {
+        $this->abbinamento->removeElement($abbinamento);
+    }
+
+    /**
+     * Get abbinamento
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAbbinamento()
+    {
+        return $this->abbinamento;
     }
 }

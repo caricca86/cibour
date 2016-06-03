@@ -262,14 +262,14 @@ class ProductController extends BaseProductController
 
         if ($form->isValid()) {
             $product = $form->getData();
-            $product->setDescription($this->formatterPool->transform($product->getDescriptionFormatter(), $product->getRawDescription()));
-            $product->setShortDescription($this->formatterPool->transform($product->getShortDescriptionFormatter(), $product->getRawShortDescription()));
+            $product->setDescription($this->formatterPool->transform('markdown', $product->getRawDescription()));
+            $product->setShortDescription($this->formatterPool->transform('markdown', $product->getRawShortDescription()));
             $produttore = $this->entityManager->getRepository('CTICibourBundle:Produttore')->findOneByCodice($form->get('produttore_codice')->getData());
             $product->setProduttore($produttore);
             $manager->save($product);
 
             $categoria = $this->entityManager->getRepository('ApplicationSonataClassificationBundle:Category')->findOneByCodice($form->get('categoria_codice')->getData());
-            $this->productCategoryManager->addCategoryToProduct($product, $categoria);
+            $this->productCategoryManager->addCategoryToProduct($product, $categoria, true);
 
             $view = \FOS\RestBundle\View\View::create($product);
             $serializationContext = SerializationContext::create();

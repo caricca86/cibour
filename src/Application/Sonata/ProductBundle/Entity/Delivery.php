@@ -28,6 +28,8 @@ class Delivery extends BaseDelivery
      */
     protected $id;
 
+    protected $zone = 'Italy';
+
     /**
      * Get id
      *
