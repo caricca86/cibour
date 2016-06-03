@@ -49,13 +49,16 @@ security:
                 path:           /admin/logout
             anonymous:    true
 
-        api:
-            pattern:   /api/(.*)
-            http_basic:
-                realm:         "Secured Demo Area"
-                provider:       in_memory
+        oauth_token:
+            pattern:    ^/oauth/v2/token
+            security:   false
 
-            stateless: true
+        api:
+            pattern:      ^/api
+            context:      user
+            stateless:    true
+            fos_oauth:    true
+            anonymous:    false
 
         # This firewall is used to handle the public login area
         # This part is handled by the FOS User Bundle
@@ -81,6 +84,7 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/(.*), role: IS_AUTHENTICATED_FULLY }
 
         # Admin login page needs to be access without credential
         - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }

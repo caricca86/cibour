@@ -1,0 +1,16 @@
+fos_oauth_server:
+    db_driver: orm       # Driver availables: orm, mongodb, or propel
+    client_class:        Application\FOS\OAuthServerBundle\Entity\Client
+    access_token_class:  Application\FOS\OAuthServerBundle\Entity\AccessToken
+    refresh_token_class: Application\FOS\OAuthServerBundle\Entity\RefreshToken
+    auth_code_class:     Application\FOS\OAuthServerBundle\Entity\AuthCode
+    service:
+            user_provider: fos_user.user_manager
+            options:
+                supported_scopes: user
+                access_token_lifetime: 604800
+
+services:
+  fos_oauth_server.controller.token:
+        class: Application\FOS\OAuthServerBundle\Controller\TokenController
+        arguments: [@fos_oauth_server.server]
