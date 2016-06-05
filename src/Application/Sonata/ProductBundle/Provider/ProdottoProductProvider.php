@@ -10,6 +10,7 @@
 
 namespace Application\Sonata\ProductBundle\Provider;
 
+use Application\Sonata\ProductBundle\Entity\Prodotto;
 use Application\Sonata\ProductBundle\Entity\Product;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\Component\Basket\BasketElementInterface;
@@ -79,10 +80,10 @@ class ProdottoProductProvider extends BaseProductProvider
             ->add('vatRate', 'number')
             ->add('stock', 'integer')
             ->add('macroregione', 'choice', array(
-                'choices' => Product::$macroregione_choice_list))
+                'choices' => Prodotto::$macroregione_choice_list))
             ->add('pezzatura')
             ->add('tipo_dieta', 'choice', array(
-                'choices' => Product::$tipo_dieta_choice_list,
+                'choices' => Prodotto::$tipo_dieta_choice_list,
                 'required' => false))
             ->add('superfood')
             ->add('superfood_description')
@@ -111,7 +112,7 @@ class ProdottoProductProvider extends BaseProductProvider
             ));
         }
         $formMapper->add('metodo_produzione', 'choice', array(
-            'choices' => Product::$meotodo_produzione_choice_list,
+            'choices' => Prodotto::$meotodo_produzione_choice_list,
             'required' => false));
         $formMapper->end();
 

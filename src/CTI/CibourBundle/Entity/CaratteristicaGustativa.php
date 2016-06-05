@@ -36,7 +36,7 @@ class CaratteristicaGustativa
     protected $descrizione;
 
     /**
-     * @ORM\OneToMany(targetEntity="Application\Sonata\ProductBundle\Entity\Product", mappedBy="caratteristica_gustativa")
+     * @ORM\OneToMany(targetEntity="Application\Sonata\ProductBundle\Entity\Prodotto", mappedBy="caratteristica_gustativa")
      */
     protected $prodotti;
 
@@ -106,10 +106,10 @@ class CaratteristicaGustativa
     /**
      * Add prodotti
      *
-     * @param \Application\Sonata\ProductBundle\Entity\Product $prodotti
+     * @param \Application\Sonata\ProductBundle\Entity\Prodotto $prodotti
      * @return CaratteristicaGustativa
      */
-    public function addProdotti(\Application\Sonata\ProductBundle\Entity\Product $prodotti)
+    public function addProdotti(\Application\Sonata\ProductBundle\Entity\Prodotto $prodotti)
     {
         $this->prodotti[] = $prodotti;
 
@@ -119,9 +119,9 @@ class CaratteristicaGustativa
     /**
      * Remove prodotti
      *
-     * @param \Application\Sonata\ProductBundle\Entity\Product $prodotti
+     * @param \Application\Sonata\ProductBundle\Entity\Prodotto $prodotti
      */
-    public function removeProdotti(\Application\Sonata\ProductBundle\Entity\Product $prodotti)
+    public function removeProdotti(\Application\Sonata\ProductBundle\Entity\Prodotto $prodotti)
     {
         $this->prodotti->removeElement($prodotti);
     }

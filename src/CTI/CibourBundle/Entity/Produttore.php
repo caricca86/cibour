@@ -43,7 +43,7 @@ class Produttore
     protected $descrizione;
 
     /**
-     * @ORM\OneToMany(targetEntity="Application\Sonata\ProductBundle\Entity\Product", mappedBy="produttore")
+     * @ORM\OneToMany(targetEntity="Application\Sonata\ProductBundle\Entity\Prodotto", mappedBy="produttore")
      */
     protected $prodotti;
 
@@ -93,10 +93,10 @@ class Produttore
     /**
      * Add prodotti
      *
-     * @param \Application\Sonata\ProductBundle\Entity\Product $prodotti
+     * @param \Application\Sonata\ProductBundle\Entity\Prodotto $prodotti
      * @return Produttore
      */
-    public function addProdotti(\Application\Sonata\ProductBundle\Entity\Product $prodotti)
+    public function addProdotti(\Application\Sonata\ProductBundle\Entity\Prodotto $prodotti)
     {
         $this->prodotti[] = $prodotti;
 
@@ -106,9 +106,9 @@ class Produttore
     /**
      * Remove prodotti
      *
-     * @param \Application\Sonata\ProductBundle\Entity\Product $prodotti
+     * @param \Application\Sonata\ProductBundle\Entity\Prodotto $prodotti
      */
-    public function removeProdotti(\Application\Sonata\ProductBundle\Entity\Product $prodotti)
+    public function removeProdotti(\Application\Sonata\ProductBundle\Entity\Prodotto $prodotti)
     {
         $this->prodotti->removeElement($prodotti);
     }

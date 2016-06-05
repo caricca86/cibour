@@ -14,6 +14,22 @@
         repository-class="Application\Sonata\ProductBundle\Repository\ProdottoRepository"
         >
 
+        <many-to-one target-entity="CTI\CibourBundle\Entity\Produttore" field="produttore" inversed-by="prodotti"/>
+        <many-to-one target-entity="CTI\CibourBundle\Entity\CaratteristicaGustativa" field="caratteristica_gustativa" inversed-by="prodotti"/>
+        <many-to-many target-entity="CTI\CibourBundle\Entity\CaratteristicaGustativa" field="abbinamento" />
+
+        <attribute-overrides>
+            <attribute-override name="sku">
+                <field column="sku"            type="string"     nullable="false" length="255" />
+            </attribute-override>
+        </attribute-overrides>
+        <field name="macroregione" column="macroregione" type="string" length="1" nullable="true" />
+        <field name="pezzatura" column="pezzatura" type="string" nullable="true" />
+        <field name="tipo_dieta" column="tipo_dieta" type="string" length="1" nullable="true" />
+        <field name="superfood" column="superfood" type="boolean" nullable="true" />
+        <field name="superfood_description" column="superfood_description" type="text" nullable="true" />
+        <field name="gluten_free" column="gluten_free" type="boolean" nullable="true" />
+        <field name="metodo_produzione" column="metodo_produzione" type="string" length="1" nullable="true" />
 
 
         <!--

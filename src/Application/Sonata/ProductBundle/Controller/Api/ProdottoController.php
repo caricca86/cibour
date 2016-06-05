@@ -49,7 +49,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class ProductController extends BaseProductController
+class ProdottoController extends BaseProductController
 {
     /**
      * @var ProductManagerInterface
@@ -255,8 +255,8 @@ class ProductController extends BaseProductController
 
         $form
             ->add('produttore_codice', null, array('mapped' => false))
-            ->add('categoria_codice', null, array('mapped' => false))
-            ->add('subcategoria_codice', null, array('mapped' => false));
+            ->add('categoria_codice', null, array('mapped' => false));
+            //->add('subcategoria_codice', null, array('mapped' => false));
 
         $form->bind($request);
 
@@ -502,7 +502,7 @@ class ProductController extends BaseProductController
      */
     protected function getProduct($id)
     {
-        $product = $this->productManager->findOneBy(array('id' => $id));
+        $product = $this->productManager->findOneBy(array('sku' => $id));
 
         if (null === $product) {
             throw new NotFoundHttpException(sprintf('Product (%d) not found', $id));
