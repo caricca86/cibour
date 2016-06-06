@@ -30,7 +30,11 @@
         <field name="superfood_description" column="superfood_description" type="text" nullable="true" />
         <field name="gluten_free" column="gluten_free" type="boolean" nullable="true" />
         <field name="metodo_produzione" column="metodo_produzione" type="string" length="1" nullable="true" />
-
+        <field name="alimentazione" column="alimentazione" type="integer" nullable="true" />
+        <field name="agricoltura" column="agricoltura" type="integer" nullable="true" />
+        <field name="ambiente" column="ambiente" type="integer" nullable="true" />
+        <field name="artigianato" column="artigianato" type="integer" nullable="true" />
+        <field name="arte" column="arte" type="integer" nullable="true" />
 
         <!--
             Define your product here

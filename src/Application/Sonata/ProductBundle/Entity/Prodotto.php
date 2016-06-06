@@ -93,6 +93,31 @@ class Prodotto extends Product
     protected $abbinamento;
 
     /**
+     * @var integer
+     */
+    protected $alimentazione;
+
+    /**
+     * @var integer
+     */
+    protected $agricoltura;
+
+    /**
+     * @var integer
+     */
+    protected $ambiente;
+
+    /**
+     * @var integer
+     */
+    protected $artigianato;
+
+    /**
+     * @var integer
+     */
+    protected $arte;
+
+    /**
      * Get id
      *
      * @return integer $id
@@ -364,4 +389,118 @@ class Prodotto extends Product
         return $this->abbinamento;
     }
 
+    /**
+     * Set alimentazione
+     *
+     * @param integer $alimentazione
+     * @return Prodotto
+     */
+    public function setAlimentazione($alimentazione)
+    {
+        $this->alimentazione = $alimentazione;
+
+        return $this;
+    }
+
+    /**
+     * Get alimentazione
+     *
+     * @return integer 
+     */
+    public function getAlimentazione()
+    {
+        return $this->alimentazione;
+    }
+
+    /**
+     * Set agricoltura
+     *
+     * @param integer $agricoltura
+     * @return Prodotto
+     */
+    public function setAgricoltura($agricoltura)
+    {
+        $this->agricoltura = $agricoltura;
+
+        return $this;
+    }
+
+    /**
+     * Get agricoltura
+     *
+     * @return integer 
+     */
+    public function getAgricoltura()
+    {
+        return $this->agricoltura;
+    }
+
+    /**
+     * Set ambiente
+     *
+     * @param integer $ambiente
+     * @return Prodotto
+     */
+    public function setAmbiente($ambiente)
+    {
+        $this->ambiente = $ambiente;
+
+        return $this;
+    }
+
+    /**
+     * Get ambiente
+     *
+     * @return integer 
+     */
+    public function getAmbiente()
+    {
+        return $this->ambiente;
+    }
+
+    /**
+     * Set artigianato
+     *
+     * @param integer $artigianato
+     * @return Prodotto
+     */
+    public function setArtigianato($artigianato)
+    {
+        $this->artigianato = $artigianato;
+
+        return $this;
+    }
+
+    /**
+     * Get artigianato
+     *
+     * @return integer 
+     */
+    public function getArtigianato()
+    {
+        return $this->artigianato;
+    }
+
+    /**
+     * Set arte
+     *
+     * @param integer $arte
+     * @return Prodotto
+     */
+    public function setArte($arte)
+    {
+        $this->arte = $arte;
+
+        return $this;
+    }
+
+    /**
+     * Get arte
+     *
+     * @return integer 
+     */
+    public function getArte()
+    {
+        return $this->arte;
+    }
 }

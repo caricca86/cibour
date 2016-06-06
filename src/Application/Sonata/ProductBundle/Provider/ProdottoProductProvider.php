@@ -116,30 +116,28 @@ class ProdottoProductProvider extends BaseProductProvider
             'required' => false));
         $formMapper->end();
 
+        $formMapper->with('Pentagramma');
+        $formMapper
+            ->add('alimentazione')
+            ->add('agricoltura')
+            ->add('ambiente')
+            ->add('artigianato')
+            ->add('arte');
+        $formMapper->end();
+
+
         if (!$isVariation || in_array('image', $this->variationFields) || in_array('gallery', $this->variationFields)) {
             $formMapper->with('Media');
 
             if (!$isVariation || in_array('image', $this->variationFields)) {
                 $formMapper->add('image', 'sonata_type_model_list', array(
                     'required' => false
-                ), array(
-                    'link_parameters' => array(
-                        'context'  => 'product_catalog',
-                        'filter'   => array('context' => array('value' => 'product_catalog')),
-                        'provider' => ''
-                    )
                 ));
             }
 
             if (!$isVariation || in_array('gallery', $this->variationFields)) {
                 $formMapper->add('gallery', 'sonata_type_model_list', array(
                     'required' => false
-                ), array(
-                    'link_parameters' => array(
-                        'context'  => 'product_catalog',
-                        'filter'   => array('context' => array('value' => 'product_catalog')),
-                        'provider' => ''
-                    )
                 ));
             }
 
