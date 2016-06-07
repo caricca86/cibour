@@ -41,16 +41,52 @@ file that was distributed with this source code.
 
     <div class="row" itemscope itemtype="http://schema.org/Product">
         <div class="col-md-12">
-            <div>
-                {% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded img-responsive pull-left', 'style': 'margin: 0 10px 10px 0;'} %}
-                <p>
-                    <h5>{{ product.name }}</h5>
-                    {{ product.produttore }}
-                </p>
-                {{ product.price }}
-                {% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded img-responsive pull-right', 'style': 'margin: 0 10px 10px 0;'} %}
+            <div class="col-sm-3 text-center">
+                {% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded img-responsive', 'style': 'margin: 0 10px 10px 0;'} %}
+            </div>
+            <div class="col-sm-6">
+                <h4 itemprop="name">{{ product.name }}</h4>
+                <h5 itemprop="produttore">{{ product.produttore }}</h5>
+                <h6 itemprop="price">{{ sonata_product_price(product, currency, true)|number_format_currency(currency) }}</h6>
+                <div class="col-md-12 hidden-sm">
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded img-responsive pull-left', 'style': 'margin: 0 10px 10px 0; width:50px;'} %}
+                        {% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded img-responsive pull-right', 'style': 'margin: 0 10px 10px 0; width:50px;'} %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 text-center">
+                {% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded img-responsive', 'style': 'margin: 0 10px 10px 0;'} %}
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5">
+            <table class="table text-center prodotto">
+                <tr>
+                    <th class="{% if product.glutenFree %}disabled{% endif %}"><small>GLUTEN FREE</small></th>
+                    <th><small> {{ product.tipoDieta }}</small></th>
+                    <th><small>{{ product.metodoProduzione }}</small></th>
+                </tr>
+                <tr>
+                    <td><a href="#descrizione" aria-controls="descrizione" role="tab" data-toggle="tab">Descrizione</a></td>
+                    <td><a href="#eat-with" aria-controls="eat-with" role="tab" data-toggle="tab">eat with</a></td>
+                    <td><a href="#more" aria-controls="more" role="tab" data-toggle="tab">prodotti simili</a></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-12">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="descrizione">{{ product.description }}</div>
+                <div role="tabpanel" class="tab-pane" id="eat-with">eat with</div>
+                <div role="tabpanel" class="tab-pane" id="more">more</div>
+            </div>
+        </div>
+    </div>
+    <div class="row" itemscope itemtype="http://schema.org/Product">
         {% block product_left %}
             <div class="col-md-8">
                 {% block product_carousel %}
@@ -62,7 +98,7 @@ file that was distributed with this source code.
             <div class="col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 itemprop="name" class="panel-title">{% block product_title %}{{ product.name }}{% endblock %}</h3>
+                        <h3  class="panel-title">{% block product_title %}{{ product.name }}{% endblock %}</h3>
                     </div>
 
                     {% block product_properties %}
@@ -71,8 +107,7 @@ file that was distributed with this source code.
                                 <li class="list-group-item">
                                     {% block product_unit_price %}
                                         <small class="list-group-item-text">
-                                            {{ 'product_price'|trans({}, "SonataProductBundle") }}:&nbsp;
-                                            <span itemprop="price">{{ sonata_product_price(product, currency, true)|number_format_currency(currency) }}</span>
+
                                         </small><br/>
                                     {% endblock %}
                                     {% block product_reference %}

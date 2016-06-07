@@ -183,7 +183,7 @@ class Prodotto extends Product
      */
     public function getMacroregione()
     {
-        return $this->macroregione;
+        return Prodotto::$macroregione_choice_list[$this->macroregione];
     }
 
     /**
@@ -229,7 +229,7 @@ class Prodotto extends Product
      */
     public function getTipoDieta()
     {
-        return $this->tipo_dieta;
+        return Prodotto::$tipo_dieta_choice_list[$this->tipo_dieta];
     }
 
     /**
@@ -321,7 +321,7 @@ class Prodotto extends Product
      */
     public function getMetodoProduzione()
     {
-        return $this->metodo_produzione;
+        return Prodotto::$meotodo_produzione_choice_list[$this->metodo_produzione];
     }
 
     /**

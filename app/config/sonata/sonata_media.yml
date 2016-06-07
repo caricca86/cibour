@@ -16,7 +16,7 @@ sonata_media:
                 - sonata.media.provider.vimeo
 
             formats:
-                small: { width: 100, quality: 100}
+                small: { width: 250, quality: 100}
                 big:   { width: 970 , quality: 100}
 
         news:

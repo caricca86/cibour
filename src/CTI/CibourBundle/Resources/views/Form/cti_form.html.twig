@@ -1,7 +1,7 @@
 {% extends 'MopaBootstrapBundle:Form:fields.html.twig' %}
 
 {%- block form_widget_simple -%}
-    {% set attr = attr|merge({'placeholder': label}) %}
+    {% set attr = attr|merge({'placeholder': label, 'class': 'input-sm'}) %}
     {{ parent() }}
 
 {%- endblock form_widget_simple -%}
