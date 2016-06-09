@@ -15,9 +15,12 @@ use Application\Sonata\ProductBundle\Entity\Product;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
+use Sonata\Component\Form\Transformer\QuantityTransformer;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
+use Sonata\Component\Product\ProductInterface;
 use Sonata\ProductBundle\Model\BaseProductProvider;
+use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -142,6 +145,35 @@ class ProdottoProductProvider extends BaseProductProvider
             }
 
             $formMapper->end();
+        }
+    }
+
+    /**
+     * This function return the form used in the product view page
+     *
+     * @param  \Sonata\Component\Product\ProductInterface $product      A Sonata product instance
+     * @param  \Symfony\Component\Form\FormBuilder        $formBuilder  Symfony form builder
+     * @param  boolean                                    $showQuantity Specifies if quantity field will be displayed (default true)
+     * @param  array                                      $options      An options array
+     * @return void
+     */
+    public function defineAddBasketForm(ProductInterface $product, FormBuilder $formBuilder, $showQuantity = false, array $options = array())
+    {
+        $basketElement = $this->createBasketElement($product);
+
+        // create the product form
+        $formBuilder
+            ->setData($basketElement)
+            ->add('productId', 'hidden');
+
+        if ($showQuantity) {
+            $formBuilder->add('quantity', 'integer');
+        } else {
+            $transformer = new QuantityTransformer();
+            $formBuilder->add(
+                $formBuilder->create('quantity', 'hidden', array('data' => 1))
+                    ->addModelTransformer($transformer)
+            );
         }
     }
 }

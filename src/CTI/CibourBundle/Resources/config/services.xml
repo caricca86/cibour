@@ -23,5 +23,16 @@
             <argument type="service" id="sonata.product_category.product" />
             <argument type="service" id="sonata.product_collection.product" />
         </service>
+
+        <service id="sonata.order.controller.api.order" class="Application\Sonata\OrderBundle\Controller\Api\OrderController">
+            <argument type="service" id="sonata.order.manager" />
+        </service>
+
+        <service id="sonata.customer.controller.api.customer" class="Application\Sonata\CustomerBundle\Controller\Api\CustomerController">
+            <argument type="service" id="sonata.customer.manager" />
+            <argument type="service" id="sonata.order.manager" />
+            <argument type="service" id="sonata.address.manager" />
+            <argument type="service" id="form.factory" />
+        </service>
     </services>
 </container>

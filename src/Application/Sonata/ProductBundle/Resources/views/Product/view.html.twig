@@ -30,9 +30,7 @@ file that was distributed with this source code.
 {% endblock %}
 
 {% block breadcrumb %}
-    <div class="clearfix">
-        {{ sonata_block_render_event('breadcrumb', { 'context': 'catalog', 'product': product, 'current_uri': app.request.requestUri }) }}
-    </div>
+
 {% endblock %}
 
 {% block product %}
@@ -47,14 +45,37 @@ file that was distributed with this source code.
             <div class="col-sm-6">
                 <h4 itemprop="name">{{ product.name }}</h4>
                 <h5 itemprop="produttore">{{ product.produttore }}</h5>
-                <h6 itemprop="price">{{ sonata_product_price(product, currency, true)|number_format_currency(currency) }}</h6>
+                <h6 itemprop="price">
+                    {% block product_price_price %}
+                        {% if provider.hasEnabledVariations(product) %}
+                            {{ cheapest_variation.price|number_format_currency(currency) }}
+                        {% else %}
+                            {{ sonata_product_price(product, currency, true)|number_format_currency(currency) }}
+                        {% endif %}
+                    {% endblock %}
+                </h6>
                 <div class="col-md-12 hidden-sm">
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        {% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded img-responsive pull-left', 'style': 'margin: 0 10px 10px 0; width:50px;'} %}
-                        {% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded img-responsive pull-right', 'style': 'margin: 0 10px 10px 0; width:50px;'} %}
+                    <div class="col-md-6">
+                        <img src="
+                            {% if product.macroregione == 0 %}
+                                {{ asset('bundles/cticibour/images/italia/nord.png') }}
+                            {% elseif product.macroregione == 1 %}
+                                {{ asset('bundles/cticibour/images/italia/centro.png') }}
+                            {% elseif product.macroregione == 2 %}
+                                {{ asset('bundles/cticibour/images/italia/sud.png') }}
+                            {% elseif product.macroregione == 3 %}
+                                {{ asset('bundles/cticibour/images/italia/isole.png') }}
+                            {% endif %}
+                        " style="margin: 0 10px 10px 0; width:50px;" class="img-rounded img-responsive pull-left" itemprop="image">                    </div>
+                    {% if product.isSalable %}
+                    <div class="col-md-6">
+                        {% block product_basket %}
+                            {% include "ApplicationSonataBasketBundle:Basket:add_product_form.html.twig" %}
+                        {% endblock %}
                     </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-sm-3 text-center">
@@ -71,14 +92,15 @@ file that was distributed with this source code.
                     <th><small>{{ product.metodoProduzione }}</small></th>
                 </tr>
                 <tr>
-                    <td><a href="#descrizione" aria-controls="descrizione" role="tab" data-toggle="tab">Descrizione</a></td>
+                    <td><a class="active" href="#descrizione" aria-controls="descrizione" role="tab" data-toggle="tab">Descrizione</a></td>
                     <td><a href="#eat-with" aria-controls="eat-with" role="tab" data-toggle="tab">eat with</a></td>
                     <td><a href="#more" aria-controls="more" role="tab" data-toggle="tab">prodotti simili</a></td>
                 </tr>
             </table>
         </div>
         <div class="col-md-4"></div>
-        <div class="col-md-12">
+    </div>
+        <div class="col-xs-12">
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="descrizione">{{ product.description }}</div>
                 <div role="tabpanel" class="tab-pane" id="eat-with">eat with</div>
@@ -86,110 +108,10 @@ file that was distributed with this source code.
             </div>
         </div>
     </div>
-    <div class="row" itemscope itemtype="http://schema.org/Product">
-        {% block product_left %}
-            <div class="col-md-8">
-                {% block product_carousel %}
-
-                {% endblock %}
-            </div>
-        {% endblock %}
-        {% block product_right %}
-            <div class="col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3  class="panel-title">{% block product_title %}{{ product.name }}{% endblock %}</h3>
-                    </div>
-
-                    {% block product_properties %}
-                        <ul class="list-group">
-                            {% block product_generic_properties %}
-                                <li class="list-group-item">
-                                    {% block product_unit_price %}
-                                        <small class="list-group-item-text">
-
-                                        </small><br/>
-                                    {% endblock %}
-                                    {% block product_reference %}
-                                        <small class="list-group-item-text">
-                                            {{ 'product_reference'|trans({}, "SonataProductBundle") }}:&nbsp;
-                                            <span itemprop="sku">{{ product.sku }}</span>
-                                        </small>
-                                    {% endblock %}
-                                </li>
-                            {% endblock %}
-                            <li class="list-group-item">
-                                <span itemprop="description">
-                                    {% block product_description_short %}
-                                        {{ product.shortDescription|raw }}<br/>
-                                        <a href="#fullDescription">{% trans from "SonataProductBundle" %}product_full_description_link{% endtrans %}</a>
-                                    {% endblock %}
-                                </span>
-                            </li>
-                            {% block product_errors %}
-                                {% if not provider.hasVariations(product) and sonata_product_stock(product) == 0 %}
-                                    <li class="list-group-item">
-                                        <span class="text-danger">
-                                            {% trans from 'SonataProductBundle' %}product_out_of_stock{% endtrans %}
-                                        </span>
-                                    </li>
-                                {% endif %}
-                                <li class="list-group-item text-danger" id="sonata_add_basket_error" style="display:none;"></li>
-                            {% endblock %}
-                        </ul>
-                    {% endblock %}
-
-                    <div class="panel-footer">
-                        {% block  product_variations_form_block %}
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    {{ sonata_block_render({'type': 'sonata.product.block.variations_form'}, {'product': product, 'variations_properties': variations_properties, 'form_field_options': {'horizontal_input_wrapper_class': 'col-lg-4', 'horizontal_label_class': 'control-label col-lg-8', 'render_required_asterisk': false}}) }}
-                                </div>
-                            </div>
-                        {% endblock %}
-
-                        {% block product_delivery %}
-                            <div class="row">
-                                Block 'product_delivery' to override
-                            </div>
-                        {% endblock %}
-
-                        {% if product.isSalable %}
-                            <div itemprop="offers" class="row" itemscope itemtype="http://schema.org/Offer">
-                                <div class="col-lg-12">
-                                    {% block product_basket %}
-                                        {% include "SonataBasketBundle:Basket:add_product_form.html.twig" %}
-                                    {% endblock %}
-                                </div>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        {% endblock %}
-    </div>
-{% endblock %}
-
-{% block product_cross %}
-    <!-- Cross selling -->
-    <div>
-        {% block product_cross_selling %}
-            {% include "SonataProductBundle:Product:view_similar.html.twig" %}
-        {% endblock %}
-    </div>
-    <!-- End Cross selling -->
-{% endblock %}
-
-{% block product_full_description %}
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title"><a id="fullDescription"></a>{% trans from "SonataProductBundle" %}product_full_description{% endtrans %}</h3>
-        </div>
-        <div class="panel-body">
-            {{ product.description|raw }}
-        </div>
-    </div>
-{% endblock %}
-{% block product_comments %}
-    {{ sonata_block_render_event('sonata.comment', {'id': 'front-product-' ~ product.id}) }}
+    <script>
+        $('table.prodotto a').click(function (e){
+            $('table.prodotto a.active').removeClass('active');
+            $(this).addClass('active');
+        })
+    </script>
 {% endblock %}

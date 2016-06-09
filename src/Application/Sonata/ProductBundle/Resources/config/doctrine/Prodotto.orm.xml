@@ -20,7 +20,7 @@
 
         <attribute-overrides>
             <attribute-override name="sku">
-                <field column="sku"            type="string"     nullable="false" length="255" />
+                <field column="sku"            type="string"     nullable="false" length="255" unique="true" />
             </attribute-override>
         </attribute-overrides>
         <field name="macroregione" column="macroregione" type="string" length="1" nullable="true" />

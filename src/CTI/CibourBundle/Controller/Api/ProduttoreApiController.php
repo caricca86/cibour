@@ -11,6 +11,8 @@ namespace CTI\CibourBundle\Controller\Api;
 
 use CTI\CibourBundle\Entity\Produttore;
 use CTI\CibourBundle\Form\ProduttoreType;
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception\ConstraintViolationException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -77,7 +79,7 @@ class ProduttoreApiController extends FOSRestController
      *  resource="/api/ecommerce/produttori",
      *  description="Crea un nuovo produttore",
      *  statusCodes={
-     *      201="Returned when successful",
+     *      200="Returned when successful",
      *      400="Returned when form validation error occurs",
      *      403="Returned when user don't have authorization"
      *  }
@@ -105,7 +107,7 @@ class ProduttoreApiController extends FOSRestController
      *      }
      *  },
      *  statusCodes={
-     *      204="Returned when successful",
+     *      200="Returned when successful",
      *      400="Returned when form validation error occurs",
      *      403="Returned when user don't have authorization",
      *      404="Returned when entity is not found"
@@ -123,7 +125,7 @@ class ProduttoreApiController extends FOSRestController
 
     private function processForm(Produttore $entity)
     {
-        $statusCode = ($entity->getId() === null) ? 201 : 204;
+        $statusCode = 200;
 
         $em = $this->getDoctrine()->getManager();
 

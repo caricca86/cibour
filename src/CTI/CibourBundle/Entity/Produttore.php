@@ -3,12 +3,15 @@
 namespace CTI\CibourBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Produttore
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @UniqueEntity("codice")
  */
 class Produttore
 {
@@ -25,13 +28,15 @@ class Produttore
      * @var string
      *
      * @ORM\Column(name="nome", type="string", length=255)
+     * @Assert\NotNull()
      */
     protected $nome;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="codice", type="string", length=5)
+     * @ORM\Column(name="codice", type="string", length=5, unique=true)
+     * @Assert\NotNull()
      */
     protected $codice;
 
@@ -39,6 +44,7 @@ class Produttore
      * @var string
      *
      * @ORM\Column(name="descrizione", type="string", length=255)
+     * @Assert\NotNull()
      */
     protected $descrizione;
 

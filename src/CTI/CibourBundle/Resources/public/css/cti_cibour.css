@@ -5,11 +5,12 @@
 
 nav {
     background-color: black;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 body {
     font-family: "Gotham", Arial, sans-serif !important;
+    color: black;
 }
 
 nav i {
@@ -95,7 +96,7 @@ nav li.last a {
 
 .popover {
     background-color: black;
-    opacity: 0.7;
+    opacity: 0.8;
     border: 0;
 }
 
@@ -137,12 +138,34 @@ nav .popover-content .divider {
     opacity: 0.7;
 }
 
+.btn {
+    -moz-user-select: none;
+    background-image: none;
+    background-color: white;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+/* Form */
+
 .form-control {
     box-shadow: none;
     padding: 0;
     padding-left: 8px;
     transition: none;
     border-color: black;
+    text-align: left;
 }
 /*
 .form-control {
@@ -171,6 +194,10 @@ nav .popover-content .divider {
     padding: 0;
 }
 
+.form-actions {
+    text-align: center;
+}
+
 .select2-container .select2-choice {
     -moz-user-select: none;
     background-clip: padding-box;
@@ -187,6 +214,7 @@ nav .popover-content .divider {
     position: relative;
     text-decoration: none;
     white-space: nowrap;
+    padding-left: 8px;
 }
 
 .select2-container .select2-choice .select2-arrow {
@@ -222,6 +250,14 @@ nav .popover-content .divider {
 .select2-drop.select2-drop-above.select2-drop-active {
     border-top: 1px solid #5897fb;
 }
+.select2-container.select2-drop-above .select2-choice {
+    background-image: none;
+}
+
+.select2-dropdown-open.select2-drop-above .select2-choice, .select2-dropdown-open.select2-drop-above .select2-choices {
+    background-image: none;
+    border: 0;
+}
 
 /* User Profile*/
 .sonata-user-show .menu {
@@ -255,4 +291,12 @@ table.table.prodotto th {
 
 table.table.prodotto td {
     border-top: 1px solid black;
+}
+
+table.prodotto a.active{
+    text-decoration: underline;
+}
+
+table.prodotto a {
+    color: black;
 }
