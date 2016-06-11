@@ -187,7 +187,10 @@ class Prodotto extends Product
      */
     public function getMacroregione()
     {
-        return Prodotto::$macroregione_choice_list[$this->macroregione];
+        if ($this->macroregione != null) {
+            return Prodotto::$macroregione_choice_list[$this->macroregione];
+        }
+        return $this->macroregione;
     }
 
     /**
@@ -233,7 +236,11 @@ class Prodotto extends Product
      */
     public function getTipoDieta()
     {
-        return Prodotto::$tipo_dieta_choice_list[$this->tipo_dieta];
+        if ($this->tipo_dieta != null){
+            return Prodotto::$tipo_dieta_choice_list[$this->tipo_dieta];
+        }
+
+        return $this->tipo_dieta;
     }
 
     /**
@@ -325,7 +332,11 @@ class Prodotto extends Product
      */
     public function getMetodoProduzione()
     {
-        return Prodotto::$meotodo_produzione_choice_list[$this->metodo_produzione];
+        if ($this->metodo_produzione != null) {
+            return Prodotto::$meotodo_produzione_choice_list[$this->metodo_produzione];
+        }
+
+        return $this->metodo_produzione;
     }
 
     /**

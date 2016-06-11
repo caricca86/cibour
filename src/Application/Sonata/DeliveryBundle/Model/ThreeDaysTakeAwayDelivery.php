@@ -55,4 +55,8 @@ class ThreeDaysTakeAwayDelivery extends BaseServiceDelivery
     {
         return 'three_days_take_away';
     }
+
+    public function getEnabled(){
+        return true;
+    }
 }

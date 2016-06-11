@@ -55,4 +55,8 @@ class SevenDaysDelivery extends BaseServiceDelivery
     {
         return 'seven_days';
     }
+
+    public function getEnabled(){
+        return true;
+    }
 }

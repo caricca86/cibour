@@ -14,24 +14,15 @@
         <service id="cibour.counter.trending_now" class="CTI\CibourBundle\Entity\Counter\TrendingNowCounter">
         </service>
 
-        <service id="sonata.product.controller.api.product" class="Application\Sonata\ProductBundle\Controller\Api\ProdottoController">
-            <argument type="service" id="sonata.product.set.manager" />
-            <argument type="service" id="sonata.product.pool" />
-            <argument type="service" id="form.factory" />
-            <argument type="service" id="sonata.formatter.pool" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="sonata.product_category.product" />
-            <argument type="service" id="sonata.product_collection.product" />
-        </service>
-
-        <service id="sonata.order.controller.api.order" class="Application\Sonata\OrderBundle\Controller\Api\OrderController">
-            <argument type="service" id="sonata.order.manager" />
-        </service>
-
         <service id="sonata.customer.controller.api.customer" class="Application\Sonata\CustomerBundle\Controller\Api\CustomerController">
             <argument type="service" id="sonata.customer.manager" />
             <argument type="service" id="sonata.order.manager" />
             <argument type="service" id="sonata.address.manager" />
+            <argument type="service" id="form.factory" />
+        </service>
+
+        <service id="sonata.classification.controller.api.category" class="Application\Sonata\ClassificationBundle\Controller\Api\CategoryController">
+            <argument type="service" id="sonata.classification.manager.category" />
             <argument type="service" id="form.factory" />
         </service>
     </services>

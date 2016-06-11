@@ -55,4 +55,8 @@ class OneDayTakeAwayDelivery extends BaseServiceDelivery
     {
         return 'one_day_take_away';
     }
+
+    public function getEnabled(){
+        return true;
+    }
 }

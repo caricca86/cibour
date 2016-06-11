@@ -11,6 +11,7 @@
 
 namespace Application\Sonata\OrderBundle\Controller\Api;
 
+use JMS\Serializer\SerializationContext;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
 use Sonata\Component\Order\OrderManagerInterface;
@@ -19,8 +20,12 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sonata\CoreBundle\Form\FormHelper;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Sonata\OrderBundle\Controller\OrderController as Controller;
+use Sonata\OrderBundle\Controller\Api\OrderController as Controller;
 
 /**
  * Class OrderController
@@ -29,7 +34,7 @@ use Sonata\OrderBundle\Controller\OrderController as Controller;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class OrderController extends Controller
+class OrderController
 {
     /**
      * @var \Sonata\Component\Order\OrderManagerInterface
@@ -37,13 +42,20 @@ class OrderController extends Controller
     protected $orderManager;
 
     /**
+     * @var FormFactoryInterface
+     */
+    protected $formFactory;
+
+    /**
      * Constructor
      *
      * @param OrderManagerInterface $orderManager
+     * @param FormFactoryInterface $formFactory
      */
-    public function __construct(OrderManagerInterface $orderManager)
+    public function __construct(OrderManagerInterface $orderManager, FormFactoryInterface $formFactory)
     {
         $this->orderManager = $orderManager;
+        $this->formFactory     = $formFactory;
     }
 
     /**
@@ -59,6 +71,7 @@ class OrderController extends Controller
      * @QueryParam(name="orderBy", array=true, requirements="ASC|DESC", nullable=true, strict=true, description="Query orders order by clause (key is field, value is direction")
      * @QueryParam(name="status", requirements="\d+", nullable=true, strict=true, description="Filter on order statuses")
      * @QueryParam(name="customer", requirements="\d+", nullable=true, strict=true, description="Filter on customer id")
+     * @QueryParam(name="processato", requirements="\d+", nullable=true, default=false, description="Filtra gli ordini processati dall'ERP")
      *
      * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
      *
@@ -71,11 +84,13 @@ class OrderController extends Controller
         $supportedCriteria = array(
             'status' => "",
             'customer' => "",
+            'processato' => ""
         );
 
         $page     = $paramFetcher->get('page');
         $limit    = $paramFetcher->get('count');
         $sort     = $paramFetcher->get('orderBy');
+        $processato = $paramFetcher->get('processato');
         $criteria = array_intersect_key($paramFetcher->all(), $supportedCriteria);
 
         foreach ($criteria as $key => $value) {
@@ -160,5 +175,69 @@ class OrderController extends Controller
         }
 
         return $order;
+    }
+
+    /**
+     * Updates an order
+     *
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="order identifier"}
+     *  },
+     *  input={"class"="sonata_ecommerce_api_form_order", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\OrderBundle\Entity\Order", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while order update",
+     *      404="Returned when unable to find order"
+     *  }
+     * )
+     *
+     * @param integer $id      A Order identifier
+     * @param Request $request A Symfony request
+     *
+     * @return Order
+     *
+     * @throws NotFoundHttpException
+     */
+    public function putOrderAction($id, Request $request)
+    {
+        return $this->handleWriteOrder($request, $id);
+    }
+
+    /**
+     * Write a order, this method is used by both POST and PUT action methods
+     *
+     * @param Request      $request Symfony request
+     * @param integer|null $id      A order identifier
+     *
+     * @return \FOS\RestBundle\View\View|FormInterface
+     */
+    protected function handleWriteOrder($request, $id = null)
+    {
+        $order = $id ? $this->getOrder($id) : null;
+
+        $form = $this->formFactory->createNamed(null, 'sonata_ecommerce_api_form_order', $order, array(
+            'csrf_protection' => false
+        ));
+
+        FormHelper::removeFields($request->request->all(), $form);
+
+        $form->submit($request, true);
+
+        if ($form->isValid()) {
+            $order = $form->getData();
+            $this->orderManager->save($order);
+
+            $view = \FOS\RestBundle\View\View::create($order);
+            $serializationContext = SerializationContext::create();
+            $serializationContext->setGroups(array('sonata_api_read'));
+            $serializationContext->enableMaxDepthChecks();
+            $view->setSerializationContext($serializationContext);
+
+            return $view;
+        }
+
+        return $form;
     }
 }

@@ -258,18 +258,22 @@ class ProdottoController extends BaseProductController
             ->add('categoria_codice', null, array('mapped' => false));
             //->add('subcategoria_codice', null, array('mapped' => false));
 
-        $form->bind($request);
+        $form->submit($request, false);
 
         if ($form->isValid()) {
             $product = $form->getData();
             $product->setDescription($this->formatterPool->transform('markdown', $product->getRawDescription()));
             $product->setShortDescription($this->formatterPool->transform('markdown', $product->getRawShortDescription()));
-            $produttore = $this->entityManager->getRepository('CTICibourBundle:Produttore')->findOneByCodice($form->get('produttore_codice')->getData());
-            $product->setProduttore($produttore);
-            $manager->save($product);
-
-            $categoria = $this->entityManager->getRepository('ApplicationSonataClassificationBundle:Category')->findOneByCodice($form->get('categoria_codice')->getData());
-            $this->productCategoryManager->addCategoryToProduct($product, $categoria, true);
+            if ($form->get('produttore_codice')->getData() != null) {
+                $produttore = $this->entityManager->getRepository('CTICibourBundle:Produttore')->findOneByCodice($form->get('produttore_codice')->getData());
+                $product->setProduttore($produttore);
+                $manager->save($product);
+            }
+            if ($form->get('categoria_codice')->getData() != null)
+            {
+                $categoria = $this->entityManager->getRepository('ApplicationSonataClassificationBundle:Category')->findOneByCodice($form->get('categoria_codice')->getData());
+                $this->productCategoryManager->addCategoryToProduct($product, $categoria, true);
+            }
 
             $view = \FOS\RestBundle\View\View::create($product);
             $serializationContext = SerializationContext::create();

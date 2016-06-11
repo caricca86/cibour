@@ -55,4 +55,8 @@ class SevenDaysTakeAwayDelivery extends BaseServiceDelivery
     {
         return 'seven_days_take_away';
     }
+
+    public function getEnabled(){
+        return true;
+    }
 }

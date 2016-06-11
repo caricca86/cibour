@@ -55,4 +55,8 @@ class OneDayDelivery extends BaseServiceDelivery
     {
         return 'one_day';
     }
+
+    public function getEnabled(){
+        return true;
+    }
 }

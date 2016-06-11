@@ -17,10 +17,15 @@
             <generator strategy="AUTO"/>
         </id>
 
+        <field name="fattura" type="boolean" column="fattura" />
+        <field name="processato" type="boolean" column="processato" />
+
+        <field name="billingAddressId" type="integer" column="billing_address_id" />
         <field name="billingPartitaIva" type="string" column="billing_partita_iva" length="12" nullable="true"/>
         <field name="billingCodiceFiscale" type="string" column="billing_codice_fiscale" length="16" nullable="true"/>
         <field name="billingProvincia" type="string" column="billing_provincia" length="255"/>
 
+        <field name="shippingAddressId" type="integer" column="shipping_address_id" nullable="true" />
         <field name="shippingProvincia" type="string" column="shipping_provincia" length="255"/>
 
     </entity>

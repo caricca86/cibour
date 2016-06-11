@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="sonata.ecommerce.api.form.type.order" class="Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType">
+            <tag name="form.type" alias="sonata_ecommerce_api_form_order" />
+
+            <argument type="service" id="jms_serializer.metadata_factory" />
+            <argument type="service" id="doctrine" />
+            <argument>sonata_ecommerce_api_form_order</argument>
+            <argument>Application\Sonata\OrderBundle\Entity\Order</argument>
+            <argument>sonata_api_write</argument>
+        </service>
+    </services>
+
+</container>

@@ -22,7 +22,6 @@ use Sonata\OrderBundle\Entity\BaseOrder as BaseOrder;
  */
 class Order extends BaseOrder
 {
-
     /**
      * @var integer $id
      */
@@ -31,12 +30,12 @@ class Order extends BaseOrder
     /**
      * @var string
      */
-    private $billingPartitaIva;
+    protected $billingPartitaIva;
 
     /**
      * @var string
      */
-    private $billingCodiceFiscale;
+    protected $billingCodiceFiscale;
 
     /**
      * @var string
@@ -47,6 +46,26 @@ class Order extends BaseOrder
      * @var string
      */
     protected $shippingProvincia;
+
+    /**
+     * @var boolean
+     */
+    protected $fattura = false;
+
+    /**
+     * @var boolean
+     */
+    protected $processato = false;
+
+    /**
+     * @var integer
+     */
+    protected $billingAddressId;
+
+    /**
+     * @var integer
+     */
+    protected $shippingAddressId;
 
     /**
      * Get id
@@ -148,5 +167,97 @@ class Order extends BaseOrder
     public function getBillingCodiceFiscale()
     {
         return $this->billingCodiceFiscale;
+    }
+
+    /**
+     * Get fattura
+     *
+     * @return boolean
+     */
+    public function getFattura()
+    {
+        return $this->fattura;
+    }
+
+    /**
+     * Set fattura
+     *
+     * @param boolean $fattura
+     * @return Order;
+     */
+    public function setFattura($fattura)
+    {
+        $this->fattura = $fattura;
+
+        return $this;
+    }
+
+    /**
+     * Set billingAddressId
+     *
+     * @param integer $billingAddressId
+     * @return Order
+     */
+    public function setBillingAddressId($billingAddressId)
+    {
+        $this->billingAddressId = $billingAddressId;
+
+        return $this;
+    }
+
+    /**
+     * Get billingAddressId
+     *
+     * @return integer 
+     */
+    public function getBillingAddressId()
+    {
+        return $this->billingAddressId;
+    }
+
+    /**
+     * Set shippingAddressId
+     *
+     * @param integer $shippingAddressId
+     * @return Order
+     */
+    public function setShippingAddressId($shippingAddressId)
+    {
+        $this->shippingAddressId = $shippingAddressId;
+
+        return $this;
+    }
+
+    /**
+     * Get shippingAddressId
+     *
+     * @return integer 
+     */
+    public function getShippingAddressId()
+    {
+        return $this->shippingAddressId;
+    }
+
+    /**
+     * Set processato
+     *
+     * @param boolean $processato
+     * @return Order
+     */
+    public function setProcessato($processato)
+    {
+        $this->processato = $processato;
+
+        return $this;
+    }
+
+    /**
+     * Get processato
+     *
+     * @return boolean 
+     */
+    public function getProcessato()
+    {
+        return $this->processato;
     }
 }

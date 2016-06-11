@@ -133,6 +133,7 @@ class BasketTransformer extends BaseBasketTransformer
         $order->setLocale($customer->getLocale());
 
         if ($deliveryMethod->isAddressRequired()) {
+            $order->setShippingAddressId($deliveryAddress->getId());
             $order->setShippingAddress1($deliveryAddress->getAddress1());
             $order->setShippingAddress2($deliveryAddress->getAddress2());
             $order->setShippingAddress3($deliveryAddress->getAddress3());
@@ -144,6 +145,7 @@ class BasketTransformer extends BaseBasketTransformer
             $order->setShippingPhone($deliveryAddress->getPhone());
         }
 
+        $order->setBillingAddressId($billingAddress->getId());
         $order->setBillingPartitaIva($billingAddress->getPartitaIva());
         $order->setBillingCodiceFiscale($billingAddress->getCodiceFiscale());
         $order->setBillingAddress1($billingAddress->getAddress1());

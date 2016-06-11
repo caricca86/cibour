@@ -2,18 +2,18 @@
 <serializer>
     <class name="Sonata\OrderBundle\Entity\BaseOrder" exclusion-policy="all" xml-root-name="order">
 
-        <property name="reference"           type="string"   expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="reference"           type="string"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="paymentMethod"       type="string"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="deliveryMethod"      type="string"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="currency"            type="string"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="status"              type="integer"  expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="status"              type="integer"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="paymentStatus"       type="integer"  expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="deliveryStatus"      type="integer"  expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="validatedAt"         type="DateTime" expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="username"            type="string"   expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="username"            type="string"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="totalInc"            type="double"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="totalExcl"           type="double"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="deliveryCost"        type="double"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="deliveryCost"        type="double"   expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="deliveryVat"         type="double"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="locale"              type="string"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
 

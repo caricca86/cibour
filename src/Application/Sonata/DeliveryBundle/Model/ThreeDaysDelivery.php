@@ -55,4 +55,8 @@ class ThreeDaysDelivery extends BaseServiceDelivery
     {
         return 'three_days';
     }
+
+    public function getEnabled(){
+        return true;
+    }
 }

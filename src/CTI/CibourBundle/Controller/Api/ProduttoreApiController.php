@@ -85,7 +85,7 @@ class ProduttoreApiController extends FOSRestController
      *  }
      * )
      * @Rest\Post("/produttori")
-     * @Rest\View(statusCode=400)
+     * @Rest\View(statusCode=200)
      */
     public function postProduttoreAction()
     {
@@ -114,7 +114,7 @@ class ProduttoreApiController extends FOSRestController
      *  }
      * )
      * @Rest\Put("/produttori/{id}")
-     * @Rest\View(statusCode=400)
+     * @Rest\View(statusCode=200)
      */
     public function putProduttoreAction($id)
     {
@@ -123,10 +123,45 @@ class ProduttoreApiController extends FOSRestController
         return $this->processForm($entity);
     }
 
+    /**
+     * Deletes a product
+     *
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="product identifier"}
+     *  },
+     *  statusCodes={
+     *      200="Returned when post is successfully deleted",
+     *      400="Returned when an error has occurred while product deletion",
+     *      404="Returned when unable to find product"
+     *  }
+     * )
+     *
+     * @param integer $id A Product identifier
+     *
+     * @return \FOS\RestBundle\View\View
+     *
+     * @throws NotFoundHttpException
+     * @Rest\Delete("/produttori/{id}")
+     * @Rest\View(statusCode=200)
+     */
+    public function deleteProduttoreAction($id)
+    {
+        $produttore = $this->getEntity($id);
+        $em = $this->getDoctrine()->getManager();
+
+        try {
+            $em->remove($produttore);
+            $em->flush();
+        } catch (\Exception $e) {
+            return View::create(array('error' => $e->getMessage()), 400);
+        }
+
+        return array('deleted' => true);
+    }
+
     private function processForm(Produttore $entity)
     {
-        $statusCode = 200;
-
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(new ProduttoreType(), $entity, array('csrf_protection' => false));
@@ -141,7 +176,6 @@ class ProduttoreApiController extends FOSRestController
             $view = View::create();
 
             $response = new Response();
-            $response->setStatusCode($statusCode);
 
             $view->setResponse($response);
 
@@ -150,7 +184,16 @@ class ProduttoreApiController extends FOSRestController
             return $view;
         }
 
-        return array('' => $form);
+        $view = View::create();
+
+        $response = new Response();
+
+        $view->setResponse($response);
+
+        $view->setData(array('' => $form));
+        $view->setStatusCode(400);
+
+        return $view;
     }
 
     /**
@@ -160,7 +203,7 @@ class ProduttoreApiController extends FOSRestController
     private function getEntity($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('CTICibourBundle:Produttore')->find($id);
+        $entity = $em->getRepository('CTICibourBundle:Produttore')->findOneBy(array('codice' => $id));
 
         if(!$entity)
         {
