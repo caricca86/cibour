@@ -10,6 +10,11 @@ file that was distributed with this source code.
 #}
 {% extends 'SonataPageBundle::base_layout.html.twig' %}
 
+{% block sonata_page_head %}
+    {{ parent() }}
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+{% endblock %}
+
 {% block sonata_page_body_tag %}
 <body>
 

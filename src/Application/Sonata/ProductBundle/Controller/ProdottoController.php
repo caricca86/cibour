@@ -20,5 +20,41 @@ use Sonata\ProductBundle\Controller\BaseProductController;
  */
 class ProdottoController extends BaseProductController
 {
+    /**
+     * @param $product
+     *
+     * @throws NotFoundHttpException
+     *
+     * @return Response
+     */
+    public function viewAjaxAction($product)
+    {
+        if (!is_object($product)) {
+            throw new NotFoundHttpException('invalid product instance');
+        }
+
+        $provider = $this->get('sonata.product.pool')->getProvider($product);
+
+        $formBuilder = $this->get('form.factory')->createNamedBuilder('add_basket', 'form', null, array('data_class' => $this->container->getParameter('sonata.basket.basket_element.class'), 'csrf_protection' => false));
+        $provider->defineAddBasketForm($product, $formBuilder);
+
+        $form = $formBuilder->getForm()->createView();
+
+        $currency = $this->get('sonata.price.currency.detector')->getCurrency();
+
+        // Add twitter/FB metadata
+        $this->updateSeoMeta($product, $currency);
+
+        return $this->render(
+            sprintf('%s:view.html.twig', $provider->getBaseControllerName()),
+            array(
+                'provider'      => $provider,
+                'product'       => $product,
+                'cheapest_variation' => $provider->getCheapestEnabledVariation($product),
+                'currency'      => $currency,
+                'form'          => $form,
+            )
+        );
+    }
 
 }

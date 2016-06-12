@@ -24,6 +24,17 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Prodotto extends Product
 {
+    const MACROREGIONE_NORD = 0;
+    const MACROREGIONE_CENTRO = 1;
+    const MACROREGIONE_SUD = 2;
+    const MACROREGIONE_ISOLE = 3;
+
+    const DIETA_VEGETARIANA = 0;
+    const DIETA_VEGANA = 1;
+
+    const METODO_PRODUZIONE_BIOLOGICO = 0;
+    const METODO_PRODUZIONE_DINAMICO = 1;
+
     static $macroregione_choice_list = array(
         '0' => 'Nord',
         '1' => 'Centro',
@@ -36,7 +47,7 @@ class Prodotto extends Product
         '1' => 'Vegana'
     );
 
-    static $meotodo_produzione_choice_list = array(
+    static $metodo_produzione_choice_list = array(
         '0' => 'Biologico',
         '1' => 'Dinamico'
     );
@@ -517,5 +528,52 @@ class Prodotto extends Product
     public function getArte()
     {
         return $this->arte;
+    }
+
+    public function getMacroregioneName()
+    {
+        $macroregione_list = self::getMacroregioneList();
+
+        return $macroregione_list[$this->getMacroregione()];
+    }
+
+    public static function getMacroregioneList()
+    {
+        return array(
+            self::MACROREGIONE_NORD => 'Nord',
+            self::MACROREGIONE_CENTRO => 'Centro',
+            self::MACROREGIONE_SUD => 'Sud',
+            self::MACROREGIONE_ISOLE => 'Isole'
+        );
+    }
+
+    public function getTipoDietaName()
+    {
+        $tipo_dieta_list = self::getTipoDietaList();
+
+        return $tipo_dieta_list[$this->getTipoDieta()];
+    }
+
+    public static function getTipoDietaList()
+    {
+        return array(
+            self::DIETA_VEGETARIANA => 'Vegetariana',
+            self::DIETA_VEGANA => 'Vegana'
+        );
+    }
+
+    public function getMetodoProduzioneName()
+    {
+        $metodo_produzione_list = self::getMetodoProduzioneList();
+
+        return $metodo_produzione_list[$this->getMetodoProduzione()];
+    }
+
+    public static function getMetodoProduzioneList()
+    {
+        return array(
+            self::METODO_PRODUZIONE_BIOLOGICO => 'Biologico',
+            self::METODO_PRODUZIONE_DINAMICO => 'Dinamico'
+        );
     }
 }

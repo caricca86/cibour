@@ -110,7 +110,7 @@ class TrendingNowProductsBlock extends BaseBlockService
         $resolver->setDefaults(array(
             'number'     => 5,
             'title'      => 'Trending Now',
-            'template'   => 'SonataProductBundle:Block:recent_products.html.twig'
+            'template'   => 'ApplicationSonataProductBundle:Block:recent_products.html.twig'
         ));
     }
 

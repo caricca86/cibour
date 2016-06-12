@@ -48,14 +48,15 @@ sonata_media:
                 - sonata.media.provider.image
 
             formats:
-                preview:   { width: 100, quality: 100}
+                preview:   { width: 50, quality: 100}
+                slider:    { width: 170, quality: 100}
                 small:     { width: 250, quality: 100}
                 large:     { width: 750, quality: 100}
 
     cdn:
         # define the public base url for the uploaded media
         server:
-            path:      %sonata_media.cdn.host%
+            path:      http://localhost/cibour/web/uploads/media
 
     filesystem:
         # define where the uploaded file will be stored

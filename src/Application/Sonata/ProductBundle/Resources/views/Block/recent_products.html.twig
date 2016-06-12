@@ -8,4 +8,83 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 
 #}
-{% extends 'SonataProductBundle:Block:_base_products_block.html.twig' %}
+
+{% extends sonata_block.templates.block_base %}
+{% block block %}
+<div class="row">
+    <div class="col-md-12">
+        <h5>ULTIMI ARRIVI</h5>
+
+        <div id="recent-products-carousel" class="carousel product-carousel slide">
+
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="row">
+                        {% for product in products|slice(0, 5) if product.enabled %}
+                        {% set link = url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) %}
+                        <div class="col-sm-2">
+                            <a href="{{ link }}">
+                                {% if product.image %}
+                                    {% thumbnail product.image, 'slider' with {'itemprop': 'image', 'class': 'img-responsive', 'width': null, 'height': null} %}
+                                {% else %}
+                                    <img src="http://placehold.it/500x500" alt="Image" class="img-responsive">
+                                {% endif %}
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!--/row-->
+                </div>
+                <!--/item-->
+                <div class="item">
+                    <div class="row">
+                        {% for product in products|slice(6, 11) if product.enabled %}
+                            <div class="col-sm-2">
+                                <a href="{{ link }}">
+                                    {% if product.image %}
+                                        {% thumbnail product.image, 'slider' with {'itemprop': 'image', 'class': 'img-responsive', 'width': null, 'height': null} %}
+                                    {% else %}
+                                        <img src="http://placehold.it/500x500" alt="Image" class="img-responsive">
+                                    {% endif %}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!--/row-->
+                </div>
+                <!--/item-->
+            </div>
+            <!--/carousel-inner-->
+            <a class="left carousel-control" href="#recent-products-carousel" data-slide="prev">‹</a>
+
+            <a class="right carousel-control" href="#recent-products-carousel" data-slide="next">›</a>
+        </div>
+        <!--/myCarousel-->
+    </div>
+</div>
+<div id="recent-products-view" class="scheda-prodotto row" style="display: none;">
+
+</div>
+<script>
+$('#recent-products-carousel .item a').click(function(e) {
+    e.preventDefault();
+    var target = $('#recent-products-view');
+    var loader = '<hr><img class="img-responsive center-block" src="{{ asset('bundles/cticibour/images/ajax_loader.gif') }}" /><hr>';
+
+    var url = $(this).attr('href');
+    $.ajax({url: url,
+        beforeSend: function() {
+            target.html(loader);
+            target.slideDown();
+        },
+        success: function(result) {
+            target.html(result);
+            $('.close', target).click( function(){
+                target.slideUp();
+            });
+        }
+    });
+});
+</script>
+{% endblock %}

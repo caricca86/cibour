@@ -83,10 +83,10 @@ class ProdottoProductProvider extends BaseProductProvider
             ->add('vatRate', 'number')
             ->add('stock', 'integer')
             ->add('macroregione', 'choice', array(
-                'choices' => Prodotto::$macroregione_choice_list))
+                'choices' => Prodotto::getMacroregioneList()))
             ->add('pezzatura')
             ->add('tipo_dieta', 'choice', array(
-                'choices' => Prodotto::$tipo_dieta_choice_list,
+                'choices' => Prodotto::getTipoDietaList(),
                 'required' => false))
             ->add('superfood')
             ->add('superfood_description')
@@ -115,7 +115,7 @@ class ProdottoProductProvider extends BaseProductProvider
             ));
         }
         $formMapper->add('metodo_produzione', 'choice', array(
-            'choices' => Prodotto::$meotodo_produzione_choice_list,
+            'choices' => Prodotto::getMetodoProduzioneList(),
             'required' => false));
         $formMapper->end();
 
@@ -134,14 +134,14 @@ class ProdottoProductProvider extends BaseProductProvider
 
             if (!$isVariation || in_array('image', $this->variationFields)) {
                 $formMapper->add('image', 'sonata_type_model_list', array(
-                    'required' => false
-                ));
+                    'required' => false), array('link_parameters' => array('context' => 'sonata_product'))
+                );
             }
 
             if (!$isVariation || in_array('gallery', $this->variationFields)) {
                 $formMapper->add('gallery', 'sonata_type_model_list', array(
-                    'required' => false
-                ));
+                    'required' => false), array('link_parameters' => array('context' => 'sonata_product'))
+                );
             }
 
             $formMapper->end();

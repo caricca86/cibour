@@ -15,38 +15,36 @@ file that was distributed with this source code.
     {% else %}
         <td>
             {{ form_widget(formView.productId) }}
-            <div class="col-sm-4 hidden-xs">
+            <div class="col-sm-2 hidden-xs">
                 {% block product_thumbnail %}
-                    {% thumbnail basketElement.product.image, 'preview' with {'itemprop':'image', 'class': 'img-rounded img-responsive'} %}
+                    {% thumbnail basketElement.product.image, 'preview' with {'itemprop':'image', 'class': 'img-responsive'} %}
                 {% endblock %}
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-10">
                 {% block product_name %}
-                    <strong><a href="{{ url('sonata_product_view', {'productId': basketElement.product.id, 'slug': basketElement.product.slug}) }}">{{ basketElement.name }}</a></strong>
+                    <a href="{{ url('sonata_product_view', {'productId': basketElement.product.id, 'slug': basketElement.product.slug}) }}">{{ basketElement.name }}</a>
                 {% endblock %}
                 {% block product_sku %}
-                    <p>{{ 'sonata.product.sku'|trans([], 'SonataProductBundle') }}: {{ basketElement.product.sku }}</p>
                 {% endblock %}
                 {% block product_variations %}{% endblock %}
             </div>
             {% if formView.quantity.vars.errors|length > 0 %}
                 <span class="has-error">{{ form_errors(formView.quantity) }}</span>
             {% endif %}
-            {% block product_description %}{% endblock %}
         </td>
-        <td class="number">
+        <td class="text-center">
             {% block product_unit_price %}
                 {{ basketElement.getUnitPrice(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}
             {% endblock %}
         </td>
-        <td>
+        <td class="text-center">
             {% block product_quantity %}
                 <div{% if formView.quantity.vars.errors|length > 0 %} class="has-error"{% endif %}>
                     {{ form_widget(formView.quantity, {'attr': {'class': 'input-mini', 'min': 1}, 'horizontal_input_wrapper_class': ''}) }}
                 </div>
             {% endblock %}
         </td>
-        <td class="number">
+        <td class="text-center">
             {% block product_total_inc %}
                 {{ basketElement.getTotal(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}
             {% endblock %}

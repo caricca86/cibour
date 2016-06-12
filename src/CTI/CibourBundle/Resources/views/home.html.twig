@@ -1,16 +1,15 @@
 <div class="collapse text-center" id="collapseHome">
     <div class="container">
-    <div class="row">
-        <div class="col-xs-12 text-center">
-            <div id="clock"></div>
-            <img src="{{ asset('bundles/cticibour/images/HOME_NETWORK.jpg') }}" class="img-responsive center-block">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <img src="{{ asset('bundles/cticibour/images/HOME_NETWORK.jpg') }}" class="img-responsive center-block">
+            </div>
         </div>
-    </div>
-    <div class="row">
-            <a role="button" data-toggle="collapse" href="#collapseHome" aria-expanded="false" aria-controls="collapseHome">
-                <img src="{{ asset('bundles/cticibour/images/cibour_logo.png') }}" height="25">
-            </a>
-    </div>
+        <div class="row">
+                <a role="button" data-toggle="collapse" href="#collapseHome" aria-expanded="false" aria-controls="collapseHome">
+                    <img src="{{ asset('bundles/cticibour/images/cibour_logo.png') }}" height="25">
+                </a>
+        </div>
     </div>
 </div>
 
@@ -27,13 +26,6 @@
         $('#collapseHome .container').height($(window).height());
     });
 
-$('#clock').countdown('2016/06/23', function(event) {
-    var totalHours = event.offset.totalDays * 24 + event.offset.hours;
-    $(this).html(event.strftime(totalHours + 'h %Mm %Ss'));
-});
 var container = $('#collapseHome .row');
-var content = $('#clock');
-content.css("left", (container.width()-content.width())/2);
-content.css("top", (container.height()-content.height())/2);
 
 </script>
