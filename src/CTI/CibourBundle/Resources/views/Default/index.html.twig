@@ -6,6 +6,11 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            {{ sonata_block_render({'type': 'sonata.product.block.recent_products', 'settings': {'number': 12}},
+            {'title' : 'Ultimi Arrivi',
+            'template' : 'ApplicationSonataProductBundle:Block:recent_products.html.twig'}) }}
+        </div>
+        <div class="col-md-12">
             <h5>TRENDING NOW</h5>
             <div id="slider" class="carousel slide">
                 <!-- Carousel items -->
