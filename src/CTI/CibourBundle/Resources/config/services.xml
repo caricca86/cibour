@@ -11,7 +11,9 @@
             <argument type="service" id="templating" />
         </service>
 
-        <service id="cibour.counter.trending_now" class="CTI\CibourBundle\Entity\Counter\TrendingNowCounter">
+        <service id="cibour.counter.manager" class="CTI\CibourBundle\Entity\CounterManager">
+            <argument>CTI\CibourBundle\Entity\Counter</argument>
+            <argument type="service" id="doctrine" />
         </service>
 
         <service id="sonata.customer.controller.api.customer" class="Application\Sonata\CustomerBundle\Controller\Api\CustomerController">

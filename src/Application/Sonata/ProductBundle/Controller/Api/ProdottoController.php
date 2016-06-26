@@ -11,6 +11,7 @@
 
 namespace Application\Sonata\ProductBundle\Controller\Api;
 
+use CTI\CibourBundle\Entity\Counter;
 use Doctrine\ORM\EntityManager;
 use JMS\Serializer\SerializationContext;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
@@ -272,7 +273,12 @@ class ProdottoController extends BaseProductController
             if ($form->get('categoria_codice')->getData() != null)
             {
                 $categoria = $this->entityManager->getRepository('ApplicationSonataClassificationBundle:Category')->findOneByCodice($form->get('categoria_codice')->getData());
-                $this->productCategoryManager->addCategoryToProduct($product, $categoria, true);
+                try {
+                    $this->productCategoryManager->addCategoryToProduct($product, $categoria, true);
+                } catch (\Exception $e) {
+                    $manager->delete($product);
+                    return \FOS\RestBundle\View\View::create(array('error' => 'La categoria non esiste. Il prodotto non sarà creato.'), 400);
+                }
             }
 
             $view = \FOS\RestBundle\View\View::create($product);

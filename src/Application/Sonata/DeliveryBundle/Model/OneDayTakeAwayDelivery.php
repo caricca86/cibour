@@ -59,4 +59,9 @@ class OneDayTakeAwayDelivery extends BaseServiceDelivery
     public function getEnabled(){
         return true;
     }
+
+    public function getPriority()
+    {
+        return 1;
+    }
 }

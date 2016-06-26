@@ -4,9 +4,33 @@
 }
 
 a {
-    color: black !important;
+    color: black;
 }
 
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Re-applies the controls on :hover and :focus
+input[type="number"]:hover,
+input[type="number"]:focus {
+    -moz-appearance: number-input;
+}*/
+
+a:hover, a:focus {
+    color: black;
+    text-decoration: none;
+}
+
+ .radio, .checkbox {
+     margin-bottom: 10px;
+     margin-top: 10px;
+     padding: 0;
+ }
+
+.product-view small {
+    color: black;
+}
 nav {
     background-color: black;
     opacity: 0.8;
@@ -18,6 +42,12 @@ body {
     color: black;
 }
 
+#navbar {
+    background-color: black;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
 nav i {
     font-size: 25px;
     color:white;
@@ -25,7 +55,8 @@ nav i {
 }
 
 nav li.last a {
-    padding-right: 30px;
+    margin-right: 10px;
+    padding-left: 5px;
 }
 
 .navbar-nav > li > a {
@@ -47,15 +78,17 @@ nav li.last a {
 }
 
 .navbar-form {
-    margin-top: 7px;
+    margin-top: 8px;
     margin-bottom: 7px;
     padding-right: 0;
+    padding-left: 10px;
 }
 
 .navbar-form input {
     background-color: black;
     color: white;
     border: 1px solid white;
+    border-radius: 5px;
 }
 
 .navbar-form i {
@@ -130,6 +163,11 @@ nav .popover-content .divider {
     z-index: 100;
 }
 
+#collapseHome a img, #toggle-header a img {
+    max-height: 25px;
+    padding: 5px;
+}
+
 .content {
     margin-top: 65px;
 }
@@ -157,6 +195,10 @@ nav .popover-content .divider {
     vertical-align: middle;
     white-space: nowrap;
     text-transform: uppercase;
+}
+
+.btn:focus, .btn:hover {
+    color: inherit;
 }
 
 /* Form */
@@ -272,30 +314,32 @@ nav .popover-content .divider {
     padding: 10px 30px;
 }
 
-.panel-body {
-    text-align: center;
-}
-
-.panel-body h3 {
-    text-transform: uppercase;
-}
-
 /* Scheda Prodotto */
 table.prodotto {
     text-transform: uppercase;
+    margin-top: 40px;
+    margin-bottom: 25px;
 }
 
 .scheda-prodotto {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     margin-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
 }
 .product-view .close {
     font-size: 35px;
     font-weight: 100;
     opacity: 1;
     filter: alpha(opacity=100);
+}
+
+.product-view h4 {
+    margin-bottom: 15px;
+}
+
+.product-view h5, .product-view h6 {
+    margin-bottom: 25px;
 }
 
 table.table.prodotto th {
@@ -312,14 +356,21 @@ table.prodotto a.active{
     text-decoration: underline;
 }
 
-table.prodotto a {
-    color: black;
+#sonata_add_basket_submit {
+    margin-top: 26px;
+    padding-bottom: 0;
 }
-
 /* Basket stepper */
 
 ul.stepper {
-    margin-top: 30px;
+    margin-top: 70px !important;
+    margin-bottom: 30px !important;
+    text-transform: uppercase;
+    height: auto !important;
+}
+
+ul.stepper li p {
+    color: black;
 }
 ul.stepper li {
     width: 190px !important;
@@ -344,9 +395,10 @@ ul.stepper li div.img-circle {
 
 }
 
-/* Table */
+/* Table bag */
 .table.bag {
     text-transform: uppercase;
+    margin-bottom: 90px;
 }
 
 .table.bag > thead > tr > th {
@@ -355,7 +407,75 @@ ul.stepper li div.img-circle {
     margin-bottom: 25px;
 }
 
-.table.bag td {
-    padding: 15px 10px;
+.table.bag tbody td {
+    padding-top: 30px;
     vertical-align: middle;
+}
+
+.table.bag tr:first-child td, .table.bag tfoot tr:first-child th{
+    padding-top: 40px;
+}
+
+.table.bag img {
+    margin-right: 20px;
+}
+
+.table.bag td input[type="number"] {
+    max-width: 50px;
+}
+
+.sonata-basket-nextstep {
+    text-decoration: underline !important;
+}
+
+.basket-control {
+    text-decoration: underline !important;
+}
+
+/* panels */
+.panel {
+    border: 0;
+}
+.panel-body, .panel-heading {
+    text-align: center;
+}
+
+.panel-heading {
+    text-transform: uppercase;
+}
+
+.panel-body h3 {
+    text-transform: uppercase;
+}
+
+.panel-body {
+    padding-bottom: 30px;
+    border-bottom: 1px solid black;
+    margin-bottom: 90px;
+}
+
+.panel.panel-final-review {
+    margin-bottom: 40px;
+}
+
+.panel.panel-final-review .panel-body {
+    padding-bottom: 20px;
+    margin-bottom: 0;
+}
+.list-group-item.delivery-address {
+    border:0;
+}
+
+.sonata-payment-confirmation b {
+    text-transform: uppercase;
+
+}
+
+.sonata-payment-confirmation div {
+    margin-bottom: 90px;
+    margin-top: 65px;
+}
+
+.sonata-payment-confirmation p {
+    margin-bottom: 40px;
 }

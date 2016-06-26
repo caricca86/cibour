@@ -10,6 +10,7 @@
 
 namespace Application\Sonata\OrderBundle\Entity;
 
+use Sonata\Component\Order\OrderElementInterface;
 use Sonata\OrderBundle\Entity\BaseOrderElement as BaseOrderElement;
 
 /**
@@ -29,6 +30,11 @@ class OrderElement extends BaseOrderElement
     protected $id;
 
     /**
+     * @var string $product_sku
+     */
+    protected $product_sku;
+
+    /**
      * Get id
      *
      * @return integer $id
@@ -38,13 +44,22 @@ class OrderElement extends BaseOrderElement
         return $this->id;
     }
 
+    /**
+     * @param string $product_sku
+     * @return OrderElement
+     */
+    public function setProductSku($product_sku)
+    {
+        $this->product_sku = $product_sku;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getProductSku()
     {
-        if ($this->product != null)
-        {
-            return $this->getProduct()->getSku();
-        }
-
-        return null;
+        return $this->product_sku;
     }
 }

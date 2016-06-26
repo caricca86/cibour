@@ -1,0 +1,40 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+<div class="sonata-payment-confirmation text-center">
+    {% if order.isvalidated %}
+        <div><b>{{ 'title_validation_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}</b></div>
+        <p>
+            {% autoescape false %}
+                {{ 'message_validation_payment'|trans({}, 'SonataPaymentBundle') }}
+            {% endautoescape %}
+        </p>
+
+    {% elseif order.ispending %}
+        <div><b>{{ 'title_pending_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}</b></div>
+
+        <p>
+            {{ 'message_pending_payment'|trans({}, 'SonataPaymentBundle') }}
+        </p>
+    {% else %}
+
+        <div><b>{{ 'title_not_validated_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}</b></div>
+
+        <p>
+            {{ 'message_not_validated_payment'|trans({}, 'SonataPaymentBundle') }}
+        </p>
+
+    {% endif %}
+</div>
+<a class="btn basket-control" href="{{ url('sonata_user_profile_show') }}">{{ 'message_view_user_profile'|trans({}, 'SonataPaymentBundle') }}</a>
+
+<a class="btn basket-control pull-right" href="{{ url('sonata_order_view', {'reference' : order.reference }) }}">{{ 'message_view_order_payment'|trans({}, 'SonataPaymentBundle') }}</a>
+

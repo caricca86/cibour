@@ -42,10 +42,10 @@ file that was distributed with this source code.
             <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="col-md-12">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 {% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'center-block img-responsive'} %}
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <h4 itemprop="name">{{ product.name }}</h4>
                 <h5 itemprop="produttore">{{ product.produttore }}</h5>
                 <h6 itemprop="price">
@@ -56,6 +56,9 @@ file that was distributed with this source code.
                             {{ sonata_product_price(product, currency, true)|number_format_currency(currency) }}
                         {% endif %}
                     {% endblock %}
+                </h6>
+                <h6 itemprop="pezzatura">
+                    {{ product.pezzatura }}
                 </h6>
                 <div class="col-md-12 hidden-sm">
                 </div>
@@ -71,7 +74,7 @@ file that was distributed with this source code.
                             {% elseif product.macroregione == 3 %}
                                 {{ asset('bundles/cticibour/images/italia/isole.png') }}
                             {% endif %}
-                        " style="margin: 0 10px 10px 0; width:50px;" class="img-responsive pull-left" itemprop="image">
+                        " style="margin: 17px 0px 0px 0; max-height: 70px;" class="img-responsive pull-left" itemprop="image">
                     </div>
                     {% if product.isSalable %}
                     <div class="col-md-6">
@@ -82,31 +85,38 @@ file that was distributed with this source code.
                     {% endif %}
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <canvas id="pentagono" class="center-block" width="250" height="250"></canvas>
             </div>
         </div>
     </div>
-    <div class="">
-        <div class="col-sm-5">
-            <table class="table text-center prodotto">
-                <tr>
-                    <th class="{% if product.glutenFree %}disabled{% endif %}"><small>GLUTEN FREE</small></th>
-                    <th><small> {{ product.tipoDieta }}</small></th>
-                    <th><small>{{ product.metodoProduzione }}</small></th>
-                </tr>
-                <tr>
-                    <td><a class="active" href="#descrizione" aria-controls="descrizione" role="tab" data-toggle="tab">Descrizione</a></td>
-                    <td><a href="#eat-with" aria-controls="eat-with" role="tab" data-toggle="tab">eat with</a></td>
-                    <td><a href="#more" aria-controls="more" role="tab" data-toggle="tab">prodotti simili</a></td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-md-4"></div>
+    <div class="col-sm-5">
+        <table class="table text-center prodotto">
+            <tr>
+                <th class="{% if product.glutenFree %}disabled{% endif %}"><small>GLUTEN FREE</small></th>
+                <th><small> {{ product.tipoDieta }}</small></th>
+                <th><small>{{ product.metodoProduzione }}</small></th>
+            </tr>
+            <tr>
+                <td><a class="active" href="#descrizione" aria-controls="descrizione" role="tab" data-toggle="tab">OVERVIEW</a></td>
+                <td><a href="#eat-with" aria-controls="eat-with" role="tab" data-toggle="tab">EAT WITH</a></td>
+                <td><a href="#more" aria-controls="more" role="tab" data-toggle="tab">MORE LIKE THIS</a></td>
+            </tr>
+        </table>
     </div>
+    {% if product.superfood %}
+    <div class="col-sm-4 col-sm-offset-3">
+        <table class="table text-center prodotto">
+            <tr>
+                <th style="color:99b0c2;"><small>SUPERFOOD</small></th>
+                <th><small>{{ product.superfoodDescription }}</small></th>
+            </tr>
+        </table>
+    </div>
+    {% endif %}
         <div class="col-xs-12">
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="descrizione">{{ product.description }}</div>
+                <div role="tabpanel" class="tab-pane active" id="descrizione">{{ product.rawDescription }}</div>
                 <div role="tabpanel" class="tab-pane" id="eat-with">eat with</div>
                 <div role="tabpanel" class="tab-pane" id="more">more</div>
             </div>

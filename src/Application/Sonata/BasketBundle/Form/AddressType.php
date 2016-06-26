@@ -60,40 +60,41 @@ class AddressType extends BaseAddressType
                         'validation_groups'  => false
                     )
                 );
+        } else {
+            $builder->add('name', null, array('required' => !count($addresses)));
+
+            if (isset($options['types'])) {
+                $builder->add('type', 'choice', array(
+                        'choices' => $options['types'],
+                        'translation_domain' => 'SonataCustomerBundle')
+                );
+            }
+
+            $builder
+                ->add('firstname', null, array('required' => !count($addresses)))
+                ->add('lastname', null, array('required' => !count($addresses)))
+                ->add('codice_fiscale', null, array('required' => false))
+                ->add('partita_iva', null, array('required' => false))
+                ->add('address1', null, array('required' => !count($addresses)))
+                ->add('address2')
+                ->add('postcode', null, array('required' => !count($addresses)))
+                ->add('city', null, array('required' => !count($addresses)))
+                ->add('provincia', null, array('required' => !count($addresses)))
+                ->add('phone')
+            ;
+
+            $countries = $this->getBasketDeliveryCountries();
+
+            $countryOptions = array('required' => !count($addresses));
+
+            if (count($countries) > 0) {
+                $countryOptions['choices'] = $countries;
+            }
+
+            $builder->add('countryCode', 'country', $countryOptions);
         }
 
-        $builder->add('name', null, array('required' => !count($addresses)));
 
-        if (isset($options['types'])) {
-            $builder->add('type', 'choice', array(
-                    'choices' => $options['types'],
-                    'translation_domain' => 'SonataCustomerBundle')
-            );
-        }
-
-        $builder
-            ->add('firstname', null, array('required' => !count($addresses)))
-            ->add('lastname', null, array('required' => !count($addresses)))
-            ->add('codice_fiscale', null, array('required' => false))
-            ->add('partita_iva', null, array('required' => false))
-            ->add('address1', null, array('required' => !count($addresses)))
-            ->add('address2')
-            ->add('address3')
-            ->add('postcode', null, array('required' => !count($addresses)))
-            ->add('city', null, array('required' => !count($addresses)))
-            ->add('provincia', null, array('required' => !count($addresses)))
-            ->add('phone')
-        ;
-
-        $countries = $this->getBasketDeliveryCountries();
-
-        $countryOptions = array('required' => !count($addresses));
-
-        if (count($countries) > 0) {
-            $countryOptions['choices'] = $countries;
-        }
-
-        $builder->add('countryCode', 'country', $countryOptions);
     }
 
     /**

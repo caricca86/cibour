@@ -35,7 +35,10 @@ file that was distributed with this source code.
                     {% set quantityAttrs = {'min': 1} %}
                 {% endif %}
                         <button type="submit" class="btn pull-right" id="sonata_add_basket_submit"{% if sonata_product_stock(product) == 0 %} disabled{% endif %}>
-                            {% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded img-responsive pull-right', 'style': 'margin: 0 10px 10px 0; width:50px;'} %}
+                            <div class="text-center">
+                                <img src="{{ asset('bundles/cticibour/images/icon_aggiungi_carrello.png') }}" class="img-responsive center-block">
+                                <h5 style="margin: 0;"><small>ADD TO BAG</small></h5>
+                            </div>
                         </button>
                 {{ form_rest(form) }}
             </form>

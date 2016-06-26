@@ -1,0 +1,6 @@
+<dl>
+    {% if not product.isMaster %}
+        <dt>{{ product.name }}</dt>
+        <dd>{{ product.price }}</dd>
+    {% endif %}
+</dl>

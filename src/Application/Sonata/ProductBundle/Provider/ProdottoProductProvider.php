@@ -12,6 +12,7 @@ namespace Application\Sonata\ProductBundle\Provider;
 
 use Application\Sonata\ProductBundle\Entity\Prodotto;
 use Application\Sonata\ProductBundle\Entity\Product;
+use JMS\Serializer\SerializerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\Component\Basket\BasketElementInterface;
 use Sonata\Component\Delivery\ServiceDeliveryInterface;
@@ -35,6 +36,17 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class ProdottoProductProvider extends BaseProductProvider
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct(SerializerInterface $serializer)
+    {
+        parent::__construct($serializer);
+        $this->setOptions(array(
+            'product_add_modal' => true
+        ));
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -64,6 +76,7 @@ class ProdottoProductProvider extends BaseProductProvider
         $orderElement->setDescription($product->getDescription());
         $orderElement->setProductId($product->getId());
         $orderElement->setRawProduct($this->getRawProduct($product, $format));
+        $orderElement->setProductSku($basketElement->getProduct()->getSku());
 
         return $orderElement;
     }

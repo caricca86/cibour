@@ -17,5 +17,7 @@
             <generator strategy="AUTO"/>
         </id>
 
+        <field name="product_sku" column="product_sku" type="string" length="5" nullable="false" />
+
     </entity>
 </doctrine-mapping>

@@ -1,0 +1,23 @@
+{% extends 'MopaBootstrapBundle:Form:fields.html.twig' %}
+
+{%- block form_widget_simple -%}
+    {% set attr = attr|merge({'placeholder': label, 'class': 'input-sm'}) %}
+    {{ parent() }}
+{%- endblock form_widget_simple -%}
+
+{% block textarea_widget %}
+    {% set attr = attr|merge({'placeholder': label, 'class': 'input-sm'}) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block choice_widget_collapsed %}
+    {% set attr = attr|merge({'placeholder': label, 'class': 'input-sm'}) %}
+    {{ parent() }}
+{% endblock %}
+{# Labels #}
+
+{%- block form_label -%}
+
+{%- endblock form_label -%}
+
+{%- block button_label -%}{%- endblock -%}

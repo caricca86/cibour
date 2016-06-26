@@ -59,4 +59,9 @@ class SevenDaysDelivery extends BaseServiceDelivery
     public function getEnabled(){
         return true;
     }
+
+    public function getPriority()
+    {
+        return 10;
+    }
 }

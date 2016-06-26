@@ -68,7 +68,7 @@ sonata_product:
     prefix: /shop/product
 
 sonata_payment:
-    resource: @SonataPaymentBundle/Resources/config/routing/payment.xml
+    resource: @ApplicationSonataPaymentBundle/Resources/config/routing/payment.xml
     prefix: /shop/payment
 
 sonata_invoice:

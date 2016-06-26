@@ -43,8 +43,8 @@ class Prodotto extends Product
     );
 
     static $tipo_dieta_choice_list = array(
-        '0' => 'Vegetariana',
-        '1' => 'Vegana'
+        '0' => 'Vegetarian',
+        '1' => 'Vegan'
     );
 
     static $metodo_produzione_choice_list = array(
@@ -344,7 +344,7 @@ class Prodotto extends Product
     public function getMetodoProduzione()
     {
         if ($this->metodo_produzione != null) {
-            return Prodotto::$meotodo_produzione_choice_list[$this->metodo_produzione];
+            return Prodotto::$metodo_produzione_choice_list[$this->metodo_produzione];
         }
 
         return $this->metodo_produzione;

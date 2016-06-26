@@ -59,4 +59,9 @@ class ThreeDaysDelivery extends BaseServiceDelivery
     public function getEnabled(){
         return true;
     }
+
+    public function getPriority()
+    {
+        return 5;
+    }
 }

@@ -1,0 +1,61 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% block sonata_flash_messages %}
+    {% include 'SonataCoreBundle:FlashMessage:render.html.twig' with {domain: 'SonataCustomerBundle'} %}
+{% endblock %}
+
+{% include 'SonataBasketBundle:Basket:stepper.html.twig' with {step: 'billing'} %}
+
+{% form_theme form 'SonataBasketBundle:Form:label.html.twig' %}
+
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+{{ form_errors(form) }}
+
+<div class="row">
+    {% if form.addresses is defined %}
+        <div class="col-sm-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h4>{% trans from 'SonataBasketBundle' %}sonata.basket.delivery_use_existing_title{% endtrans %}</h4>
+                    </div>
+                </div>
+                <ul class="list-group">
+                    {% for address in form.addresses %}
+                        <li class="list-group-item">
+                            <div class="radio">
+                                <label for="{{ address.vars.id }}">
+                                    {{ form_widget(address, {'checked': (address.vars.value in (form.addresses.vars.preferred_choices|keys))}) }}
+                                    {{ sonata_address_render(address.vars.label, true, true) }}
+                                </label>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    <a href="{{ url('sonata_basket_delivery') }}" class="btn basket-control">{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
+                        {{ form_widget(form.useSelected, {'attr': {'class': 'pull-right btn basket-control'}}) }}
+
+</div>
+    {% else %}
+        <div class="col-sm-12">
+            {{ form_rest(form) }}
+        </div>
+    </div>
+    <a href="{{ url('sonata_basket_delivery') }}" class="btn basket-control">{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
+
+    <button type="submit" class="btn basket-control pull-right">{{ 'sonata.basket.btn_update_payment_step'|trans({}, 'SonataBasketBundle') }}</button>
+</div>
+    {% endif %}
+
+{{ form_end(form) }}
