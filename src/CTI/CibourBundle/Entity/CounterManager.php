@@ -10,12 +10,12 @@ class CounterManager extends BaseEntityManager
 {
     public function addViewToProduct(Product $product)
     {
-        $counter =  $this->getRepository()->findOneBy(array('product' => $product));
+        $counter =  $product->getCounter();
 
         if (!$counter) {
             $em = $this->getEntityManager();
             $counter = new Counter();
-            $counter->setProduct($product);
+            $product->setCounter($counter);
         }
 
         $counter->addView();
@@ -25,12 +25,12 @@ class CounterManager extends BaseEntityManager
 
     public function addSaleToProduct(Product $product)
     {
-        $counter =  $this->getRepository()->findOneBy(array('product' => $product));
+        $counter =  $product->getCounter();
 
         if (!$counter) {
             $em = $this->getEntityManager();
             $counter = new Counter();
-            $counter->setProduct($product);
+            $product->setCounter($counter);
         }
 
         $counter->addSale();

@@ -19,7 +19,7 @@
 
         <field name="provincia" column="provincia" type="string" length="2" />
         <field name="partita_iva" column="partita_iva" type="string" length="12" unique="true" nullable="true" />
-        <field name="codice_fiscale" column="codice_fiscale" type="string" length="16" unique="true" nullable="true" />
+        <field name="codice_fiscale" column="codice_fiscale" type="string" length="16" unique="false" nullable="true" />
 
     </entity>
 </doctrine-mapping>

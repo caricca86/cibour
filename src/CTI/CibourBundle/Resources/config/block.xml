@@ -5,14 +5,21 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sonata.product.block.trending_now_products" class="Application\Sonata\ProductBundle\Block\TrendingNowProductsBlockService">
+        <service id="sonata.product.block.trending_now_products" class="Application\Sonata\ProductBundle\Block\TrendingNowProductsBlock">
             <tag name="sonata.block"/>
 
             <argument>sonata.product.block.trending_now_products</argument>
             <argument type="service" id="templating" />
             <argument type="service" id="doctrine" />
             <argument type="service" id="sonata.price.currency.detector" />
-            <argument type="service" id="cibour.counter.trending_now" />
+        </service>
+        <service id="sonata.product.block.most_popular_products" class="Application\Sonata\ProductBundle\Block\MostPopularProductsBlock">
+            <tag name="sonata.block"/>
+
+            <argument>sonata.product.block.most_popular_products</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="sonata.price.currency.detector" />
         </service>
     </services>
 

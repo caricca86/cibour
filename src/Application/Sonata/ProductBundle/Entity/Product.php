@@ -10,6 +10,7 @@
 
 namespace Application\Sonata\ProductBundle\Entity;
 
+use CTI\CibourBundle\Entity\Counter;
 use Sonata\ProductBundle\Entity\BaseProduct as BaseProduct;
 
 /**
@@ -26,6 +27,8 @@ abstract class Product extends BaseProduct
      * @var integer $id
      */
     protected $id;
+
+    protected $counter;
 
     /**
      * Get id
@@ -45,5 +48,13 @@ abstract class Product extends BaseProduct
         $this->id = $id;
     }
 
+    public function setCounter(Counter $counter)
+    {
+        $this->counter = $counter;
+    }
 
+    public function getCounter()
+    {
+        return $this->counter;
+    }
 }

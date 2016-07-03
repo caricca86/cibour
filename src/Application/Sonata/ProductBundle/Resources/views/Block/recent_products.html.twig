@@ -12,16 +12,16 @@ file that was distributed with this source code.
 {% extends sonata_block.templates.block_base %}
 {% block block %}
 <div class="row">
-    <div class="col-md-12">
-        <h5>RECENTLY ADDED</h5>
+    <div class="col-md-12 slider">
+        <h5>{{ settings.title }}</h5>
 
-        <div id="recent-products-carousel" class="carousel product-carousel slide">
+        <div id="recent-products-carousel_{{ block.id }}" class="carousel product-carousel slide">
 
             <!-- Carousel items -->
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="row">
-                        {% for product in products|slice(0, 5) if product.enabled %}
+                        {% for product in products|slice(0, 6) if product.enabled %}
                         {% set link = url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) %}
                         <div class="col-sm-2">
                             <a href="{{ link }}">
@@ -39,7 +39,8 @@ file that was distributed with this source code.
                 <!--/item-->
                 <div class="item">
                     <div class="row">
-                        {% for product in products|slice(6, 11) if product.enabled %}
+                        {% for product in products|slice(6, 6) if product.enabled %}
+                            {% set link = url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) %}
                             <div class="col-sm-2">
                                 <a href="{{ link }}">
                                     {% if product.image %}
@@ -56,20 +57,20 @@ file that was distributed with this source code.
                 <!--/item-->
             </div>
             <!--/carousel-inner-->
-            <a class="left carousel-control" href="#recent-products-carousel" data-slide="prev">‹</a>
+            <a class="left carousel-control" href="#recent-products-carousel_{{ block.id }}" data-slide="prev">‹</a>
 
-            <a class="right carousel-control" href="#recent-products-carousel" data-slide="next">›</a>
+            <a class="right carousel-control" href="#recent-products-carousel_{{ block.id }}" data-slide="next">›</a>
         </div>
         <!--/myCarousel-->
     </div>
 </div>
-<div id="recent-products-view" class="scheda-prodotto row" style="display: none;">
+<div id="recent-products-view_{{ block.id }}" class="scheda-prodotto row" style="display: none;">
 
 </div>
 <script>
-$('#recent-products-carousel .item a').click(function(e) {
+$('#recent-products-carousel_{{block.id}} .item a').click(function(e) {
     e.preventDefault();
-    var target = $('#recent-products-view');
+    var target = $('#recent-products-view_{{ block.id }}');
     var loader = '<hr><img class="img-responsive center-block" src="{{ asset('bundles/cticibour/images/ajax_loader.gif') }}" /><hr>';
 
     var url = $(this).attr('href');
@@ -85,6 +86,12 @@ $('#recent-products-carousel .item a').click(function(e) {
             });
         }
     });
+
+    $(this).click(function (e) {
+        e.preventDefault();
+
+        target.slideUp();
+    })
 });
 </script>
 {% endblock %}

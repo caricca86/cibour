@@ -37,7 +37,7 @@ file that was distributed with this source code.
     {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
     <!-- Begin product display -->
 
-    <div class="product-view" itemscope itemtype="http://schema.org/Product">
+    <div class="product-view_{{ product.id }}" itemscope itemtype="http://schema.org/Product">
         <div class="col-xs-1 col-xs-offset-11">
             <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
@@ -86,7 +86,7 @@ file that was distributed with this source code.
                 </div>
             </div>
             <div class="col-sm-4">
-                <canvas id="pentagono" class="center-block" width="250" height="250"></canvas>
+                <canvas id="pentagono_{{ product.id }}" class="center-block" width="250" height="250"></canvas>
             </div>
         </div>
     </div>
@@ -123,13 +123,13 @@ file that was distributed with this source code.
         </div>
     </div>
     <script>
-        $('table.prodotto a').click(function (e){
-            $('table.prodotto a.active').removeClass('active');
+        $('.product-view_{{product.id}} table.prodotto a').click(function (e){
+            $('.product-view_{{product.id}} table.prodotto a.active').removeClass('active');
             $(this).addClass('active');
         });
     </script>
     <script>
-        var canvas = document.getElementById('pentagono');
+        var canvas = document.getElementById('pentagono_{{ product.id }}');
         var ctx = canvas.getContext("2d");
 
         function drawShape(ctx, x, y, points, radius1, radius2, alpha0) {

@@ -27,5 +27,6 @@ class CTICibourExtension extends Extension
         $loader->load('services.xml');
         $loader->load('form.xml');
         $loader->load('transformer.xml');
+        $loader->load('block.xml');
     }
 }

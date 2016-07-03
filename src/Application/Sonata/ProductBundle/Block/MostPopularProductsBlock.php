@@ -11,6 +11,7 @@
 
 namespace Application\Sonata\ProductBundle\Block;
 
+use CTI\CibourBundle\Entity\Counter;
 use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
@@ -27,7 +28,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */
-class TrendingNowProductsBlock extends BaseBlockService
+class MostPopularProductsBlock extends BaseBlockService
 {
     /**
      * @var EntityRepository
@@ -58,7 +59,7 @@ class TrendingNowProductsBlock extends BaseBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        $products = $this->productRepository->findMostViewedProducts($blockContext->getSetting('number'));
+        $products = $this->productRepository->findMostSelledProducts($blockContext->getSetting('number'));
 
         $params = array(
             'context'   => $blockContext,
@@ -97,7 +98,7 @@ class TrendingNowProductsBlock extends BaseBlockService
      */
     public function getName()
     {
-        return 'Trending Now';
+        return 'Most Popular';
     }
 
     /**
@@ -107,7 +108,7 @@ class TrendingNowProductsBlock extends BaseBlockService
     {
         $resolver->setDefaults(array(
             'number'     => 5,
-            'title'      => 'Trending Now',
+            'title'      => 'Most Popular',
             'template'   => 'ApplicationSonataProductBundle:Block:recent_products.html.twig'
         ));
     }

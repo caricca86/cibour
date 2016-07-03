@@ -62,9 +62,65 @@
                 <source>form_travelDate</source>
                 <target>Travel date</target>
             </trans-unit>
-            <trans-unit id="form_travelDays">
-                <source>form_travelDays</source>
-                <target>Days number</target>
+            <trans-unit id="form.label_produttore">
+                <source>form.label_produttore</source>
+                <target>Produttore</target>
+            </trans-unit>
+            <trans-unit id="form.label_macroregione">
+                <source>form.label_macroregione</source>
+                <target>Macroregione</target>
+            </trans-unit>
+            <trans-unit id="form.label_pezzatura">
+                <source>form.label_pezzatura</source>
+                <target>Pezzatura</target>
+            </trans-unit>
+            <trans-unit id="form.label_tipo_dieta">
+                <source>form.label_tipo_dieta</source>
+                <target>Tipo Dieta</target>
+            </trans-unit>
+            <trans-unit id="form.label_superfood">
+                <source>form.label_superfood</source>
+                <target>Superfood</target>
+            </trans-unit>
+            <trans-unit id="form.label_superfood_description">
+                <source>form.label_superfood_description</source>
+                <target>Descrizione Superfood</target>
+            </trans-unit>
+            <trans-unit id="form.label_gluten_free">
+                <source>form.label_gluten_free</source>
+                <target>Gluten Free</target>
+            </trans-unit>
+            <trans-unit id="form.label_caratteristica_gustativa">
+                <source>form.label_caratteristica_gustativa</source>
+                <target>Caratteristica Gustativa</target>
+            </trans-unit>
+            <trans-unit id="form.label_abbinamento">
+                <source>form.label_abbinamento</source>
+                <target>Abbinamento</target>
+            </trans-unit>
+            <trans-unit id="form.label_metodo_produzione">
+                <source>form.label_metodo_produzione</source>
+                <target>Metodo di produzione</target>
+            </trans-unit>
+            <trans-unit id="form.label_alimentazione">
+                <source>form.label_alimentazione</source>
+                <target>Alimentazione</target>
+            </trans-unit>
+            <trans-unit id="form.label_agricoltura">
+                <source>form.label_agricoltura</source>
+                <target>Agricoltura</target>
+            </trans-unit>
+            <trans-unit id="form.label_ambiente">
+                <source>form.label_ambiente</source>
+                <target>Ambiente</target>
+            </trans-unit>
+            <trans-unit id="form.label_artigianato">
+                <source>form.label_artigianato</source>
+                <target>Artigianato</target>
+            </trans-unit>
+            <trans-unit id="form.label_arte">
+                <source>form.label_arte</source>
+                <target>Arte</target>
             </trans-unit>
         </body>
     </file>

@@ -22,4 +22,54 @@ use Sonata\ProductBundle\Repository\BaseProductRepository;
  */
 class ProdottoRepository extends BaseProductRepository
 {
+
+    public function findMostSelledProducts($limit = 5)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p', 'i', 'g')
+            ->distinct()
+            ->leftJoin('p.image', 'i')
+            ->leftJoin('p.gallery', 'g')
+            ->leftJoin('p.variations', 'pv')
+            ->leftJoin('p.counter', 'c')
+            ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
+            ->andWhere('p.enabled = :enabled')
+            ->andWhere('pv.enabled = :enabled or pv.enabled IS NULL')
+            ->andWhere('p.stock != 0')
+            ->andWhere('p.price != 0')
+            ->andWhere('pv.stock != 0 or pv.stock IS NULL')
+            ->andWhere('pv.price != 0 or pv.price IS NULL')
+            ->orderBy('c.sales', 'DESC')
+            ->setMaxResults($limit)
+            ->setParameters(array(
+                'enabled' => true
+            ))
+            ->getQuery()
+            ->execute();
+    }
+
+    public function findMostViewedProducts($limit = 5)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p', 'i', 'g')
+            ->distinct()
+            ->leftJoin('p.image', 'i')
+            ->leftJoin('p.gallery', 'g')
+            ->leftJoin('p.variations', 'pv')
+            ->leftJoin('p.counter', 'c')
+            ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
+            ->andWhere('p.enabled = :enabled')
+            ->andWhere('pv.enabled = :enabled or pv.enabled IS NULL')
+            ->andWhere('p.stock != 0')
+            ->andWhere('p.price != 0')
+            ->andWhere('pv.stock != 0 or pv.stock IS NULL')
+            ->andWhere('pv.price != 0 or pv.price IS NULL')
+            ->orderBy('c.views', 'DESC')
+            ->setMaxResults($limit)
+            ->setParameters(array(
+                'enabled' => true
+            ))
+            ->getQuery()
+            ->execute();
+    }
 }

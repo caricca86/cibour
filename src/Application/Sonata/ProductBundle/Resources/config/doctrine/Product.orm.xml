@@ -16,7 +16,11 @@
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
-
+        <one-to-one target-entity="CTI\CibourBundle\Entity\Counter" field="counter" inversed-by="product" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-one>
 
 
 

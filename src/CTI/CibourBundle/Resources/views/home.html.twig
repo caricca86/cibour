@@ -1,14 +1,56 @@
 <div class="collapse text-center" id="collapseHome">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 text-center">
-                <img src="{{ asset('bundles/cticibour/images/HOME_NETWORK.jpg') }}" class="img-responsive center-block">
+            <div class="col-md-6">
+                <img class="img-responsive center-block logo" src="{{ asset('bundles/cticibour/images/home/cibour_logo_black_big.png') }}" >
+            </div>
+            <div class="col-md-6 search">
+                <div class="row">
+                    <div class="col-md-9">
+                        <form class="home-form" action="#" name="form">
+                            <input type="search" name="search" />
+                        </form>
+                    </div>
+                    <div class="col-md-3">
+                        <img class="img-responsive carrello" src="{{ asset('bundles/cticibour/images/home/CARRELLO.png') }}" >
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
-                <a role="button" data-toggle="collapse" href="#collapseHome" aria-expanded="false" aria-controls="collapseHome">
-                    <img src="{{ asset('bundles/cticibour/images/cibour_logo.png') }}" >
-                </a>
+            <img src="{{ asset('bundles/cticibour/images/home/facies_oriz.jpg') }}" >
+        </div>
+        <div class="row login">
+            <div class="col-md-6 join-us">
+                <div class="">JOIN US</div>
+            </div>
+            <div class="col-md-6 sign-in">
+                <div class="">SIGN IN</div>
+            </div>
+        </div>
+        <hr>
+        <div class="row link">
+            <div class="col-md-12 our-network">OUR NETWORK</div>
+            <div class="col-md-3">
+                <img class="img-responsive center-block" src="{{ asset('bundles/cticibour/images/home/TAVOLA.png') }}" >
+                <br>
+                FOOD AS ART
+            </div>
+            <div class="col-md-3">
+                <img class="img-responsive center-block" src="{{ asset('bundles/cticibour/images/home/FYT.png') }}" >
+                <br>
+                FYT
+            </div>
+            <div class="col-md-3">
+                <img class="img-responsive center-block" src="{{ asset('bundles/cticibour/images/home/FODY.png') }}" >
+                <br>
+                FODY
+            </div>
+            <div class="col-md-3">
+                <img class="img-responsive center-block" src="{{ asset('bundles/cticibour/images/home/e-PASTA.png') }}" >
+                <br>
+                E-PASTA
+            </div>
         </div>
     </div>
 </div>
@@ -21,11 +63,10 @@
     </div>
 </div>
 <script>
-    $('#collapseHome .container').height($(window).height());
+
     $('#collapseHome').on('show.bs.collapse', function () {
-        $('#collapseHome .container').height($(window).height());
+        $('#collapseHome .container').height($(document).height());
     });
 
-var container = $('#collapseHome .row');
 
 </script>

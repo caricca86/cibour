@@ -118,6 +118,12 @@ nav li.last a {
 .product-carousel .carousel-control {
     padding-top:6%;
     width:5%;
+    background-image: none !important;
+    color: black;
+}
+
+.slider h5 {
+    text-transform: uppercase;
 }
 
 /* Dropdown menu*/
@@ -159,8 +165,8 @@ nav .popover-content .divider {
 
 #collapseHome {
     background-color: white;
-    position: absolute;
     z-index: 100;
+    width: 100%;
 }
 
 #collapseHome a img, #toggle-header a img {
@@ -478,4 +484,30 @@ ul.stepper li div.img-circle {
 
 .sonata-payment-confirmation p {
     margin-bottom: 40px;
+}
+
+#collapseHome .logo {
+    height: 220px;
+}
+
+#collapseHome .carrello {
+    height: 30px;
+}
+
+#collapseHome .our-network {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    height: 100px;
+}
+
+#collapseHome .join-us, #collapseHome .sign-in {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    height: 100px;
+}
+
+#collapseHome .link img {
+    height: 60px;
 }

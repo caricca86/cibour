@@ -265,6 +265,7 @@ class ProdottoController extends BaseProductController
             $product = $form->getData();
             $product->setDescription($this->formatterPool->transform('markdown', $product->getRawDescription()));
             $product->setShortDescription($this->formatterPool->transform('markdown', $product->getRawShortDescription()));
+            $product->setCounter(new Counter());
             if ($form->get('produttore_codice')->getData() != null) {
                 $produttore = $this->entityManager->getRepository('CTICibourBundle:Produttore')->findOneByCodice($form->get('produttore_codice')->getData());
                 $product->setProduttore($produttore);

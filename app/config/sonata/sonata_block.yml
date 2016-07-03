@@ -93,4 +93,5 @@ sonata_block:
         sonata.seo.block.breadcrumb.homepage:
 
         # Cibour
-        cibour.block.home.slider:
+        sonata.product.block.trending_now_products:
+        sonata.product.block.most_popular_products:

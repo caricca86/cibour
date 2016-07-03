@@ -75,7 +75,7 @@ file that was distributed with this source code.
         </table>
 
 
-        <button type="submit" class="btn basket-control"><i class="glyphicon glyphicon-refresh icon-white"></i>&nbsp;{% trans from 'SonataBasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}</button>
+        <button type="submit" class="btn basket-control">{% trans from 'SonataBasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}</button>
 
         <a href="{{ url('sonata_basket_delivery_address') }}" class="btn pull-right sonata-basket-nextstep"{% if form.vars.errors is not empty %} disabled{% endif %}>{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}&nbsp;</a>
 
@@ -91,7 +91,7 @@ file that was distributed with this source code.
     <p>
         {% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_is_empty{% endtrans %}.
         <br />
-        <a href="{{ path('sonata_catalog_index') }}">{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_go_back_shopping{% endtrans %}</a>.
+        <a href="{{ path('homepage') }}">{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_go_back_shopping{% endtrans %}</a>.
     </p>
 {#
     {{ sonata_block_render({'type': 'sonata.product.block.recent_products', 'settings': {'number': 4}}) }}

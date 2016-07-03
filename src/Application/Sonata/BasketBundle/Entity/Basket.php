@@ -56,6 +56,6 @@ class Basket extends BaseBasket
             }
         }
 
-        return ($price*10)/100;
+        return ($price < 400 ? ($price*10)/100 : 0);
     }
 }

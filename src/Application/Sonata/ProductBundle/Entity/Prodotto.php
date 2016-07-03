@@ -10,6 +10,7 @@
 
 namespace Application\Sonata\ProductBundle\Entity;
 
+use CTI\CibourBundle\Entity\Counter;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**

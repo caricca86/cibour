@@ -28,14 +28,14 @@
 
     <services>
         <service id="cibour.admin.produttore" class="CTI\CibourBundle\Admin\ProduttoreAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_dashboard="false" label="Produttore" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_dashboard="false" label="Produttore" label_translator_strategy="sonata.admin.label.strategy.native"/>
             <argument />
             <argument>CTI\CibourBundle\Entity\Produttore</argument>
             <argument>SonataAdminBundle:CRUD</argument>
         </service>
 
         <service id="cibour.admin.caratteristica_gustativa" class="CTI\CibourBundle\Admin\CaratteristicaGustativaAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_classification" show_in_dashboard="false" label="Caratteristica Gustativa" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <tag name="sonata.admin" manager_type="orm" group="sonata_classification" show_in_dashboard="false" label="Caratteristica Gustativa" label_translator_strategy="sonata.admin.label.strategy.native"/>
             <argument />
             <argument>CTI\CibourBundle\Entity\CaratteristicaGustativa</argument>
             <argument>SonataAdminBundle:CRUD</argument>

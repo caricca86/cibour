@@ -40,7 +40,7 @@ class Counter
     private $sales = 0;
 
     /**
-     * @ORM\OneToOne(targetEntity="Application\Sonata\ProductBundle\Entity\Product")
+     * @ORM\OneToOne(targetEntity="Application\Sonata\ProductBundle\Entity\Product", mappedBy="counter")
      */
     private $product;
 
