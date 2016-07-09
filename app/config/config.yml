@@ -158,7 +158,3 @@ sensio_framework_extra:
     view:    { annotations: false }
     router:  { annotations: true }
     request: { converters:  true }
-
-services:
-    sonata.admin.label.strategy.default:
-                        alias: sonata.admin.label.strategy.native

@@ -163,17 +163,6 @@ nav .popover-content .divider {
     overflow: hidden;
 }
 
-#collapseHome {
-    background-color: white;
-    z-index: 100;
-    width: 100%;
-}
-
-#collapseHome a img, #toggle-header a img {
-    max-height: 25px;
-    padding: 5px;
-}
-
 .content {
     margin-top: 65px;
 }
@@ -486,28 +475,80 @@ ul.stepper li div.img-circle {
     margin-bottom: 40px;
 }
 
-#collapseHome .logo {
-    height: 220px;
+#collapseHome .carrello {
+    margin-top: 150px;
+    max-height: 50px;
 }
 
-#collapseHome .carrello {
-    height: 30px;
+#collapseHome {
+    background-color: white;
+    position: absolute;
+    z-index: 100;
+}
+
+#toggle-header a img {
+    max-height: 25px;
+    padding: 5px;
+}
+
+#collapseHome .logo {
+    margin-top: 135px;
+    margin-bottom: 30px;
 }
 
 #collapseHome .our-network {
     text-align: center;
-    display: table-cell;
-    vertical-align: middle;
-    height: 100px;
+    height: 240px;
+    padding-top: 60px;
+    font-size: 25px;
+    letter-spacing: 4px;
 }
 
 #collapseHome .join-us, #collapseHome .sign-in {
     text-align: center;
-    display: table-cell;
-    vertical-align: middle;
-    height: 100px;
+    height: 240px;
+    width: 100%;
+    padding-top:115px;
+    font-size : 20px ;
+    letter-spacing: 4px;
 }
 
-#collapseHome .link img {
-    height: 60px;
+#collapseHome .search {
+    text-align: center;
+}
+
+#collapseHome .search form {
+    margin-top:150px;
+    height: 50px;
+    width: 90%;
+    margin-bottom: 240px;
+    margin-left: 5%;
+}
+
+#collapseHome .forchetta {
+    position: absolute;
+    left: 9%;
+    margin-top: 5px;
+}
+
+#collapseHome .search input {
+    font-size: 20px;
+    height: 100%;
+    line-height: 50px;
+    padding-left: 45px;
+    width: 100%;
+    border: 1px solid;
+    border-radius: 6px;
+}
+
+#collapseHome .link {
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+#collapseHome hr {
+    margin: 0;
+    border-color: black;
 }

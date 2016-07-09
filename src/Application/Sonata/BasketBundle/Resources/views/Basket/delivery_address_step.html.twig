@@ -14,15 +14,15 @@ file that was distributed with this source code.
 {% endblock %}
 
 {% include 'SonataBasketBundle:Basket:stepper.html.twig' with {step: 'delivery'} %}
-
+{#
 {% form_theme form 'CTICibourBundle:Form:register_form.html.twig' %}
-
+#}
 {{ form_start(form, {'attr': {'role': 'form', 'class': 'form-horizontal'}}) }}
     {{ form_errors(form) }}
 
     <div class="row">
         {% if form.addresses is defined %}
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="panel">
                     <div class="panel-heading">
                         <div class="panel-title">
@@ -59,22 +59,34 @@ file that was distributed with this source code.
                     {% endfor %}
                     </ul>
 
+                    <div class="panel-body">
+                        {{ form_widget(form.useSelected, {
+                            'attr': {'class': 'pull-right btn'},
+                            'disabled': false == has_deliverable
+                        }) }}
+                    </div>
                 </div>
             </div>
-</div>
-
-        <a href="{{ url('sonata_basket_index') }}" class="btn basket-control">{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
-        {{ form_widget(form.useSelected, {'attr': {'class': 'pull-right btn basket-control'},
-        'disabled': false == has_deliverable}) }}
+            <div class="col-sm-6">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4>{% trans from 'SonataBasketBundle' %}sonata.basket.delivery_create_new_title{% endtrans %}</h4>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        {{ form_rest(form) }}
+                    </div>
+                </div>
+            </div>
         {% else %}
             <div class="col-sm-12">
                 {{ form_rest(form) }}
             </div>
+        {% endif %}
     </div>
 
     <a href="{{ url('sonata_basket_index') }}" class="btn basket-control">{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
 
     <button type="submit" class="btn basket-control pull-right">{{ 'sonata.basket.btn_update_delivery_step'|trans({}, 'SonataBasketBundle') }}</button>
-
-    {% endif %}
 {{ form_end(form) }}

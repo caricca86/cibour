@@ -2,7 +2,7 @@
 <serializer>
     <class name="Sonata\OrderBundle\Entity\BaseOrder" exclusion-policy="all" xml-root-name="order">
 
-        <property name="reference"           type="string"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="reference"           type="string"   expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="paymentMethod"       type="string"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="deliveryMethod"      type="string"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="currency"            type="string"   expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />

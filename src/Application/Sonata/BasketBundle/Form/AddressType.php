@@ -14,6 +14,7 @@ namespace Application\Sonata\BasketBundle\Form;
 use Sonata\Component\Basket\BasketInterface;
 
 use Sonata\BasketBundle\Form\AddressType as BaseAddressType;
+use Sonata\Component\Customer\AddressInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -31,6 +32,7 @@ class AddressType extends BaseAddressType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $addresses = $options['addresses'];
+        $type = $options['type'];
 
         if (count($addresses) > 0) {
             $defaultAddress = current($addresses);
@@ -53,49 +55,56 @@ class AddressType extends BaseAddressType
                 ))
                 ->add('useSelected', 'submit', array(
                         'attr' => array(
-                            'class' => 'btn btn-primary',
+                            'class' => 'btn',
                             'style' => 'margin-bottom:20px;'
                         ),
                         'translation_domain' => 'SonataBasketBundle',
                         'validation_groups'  => false
                     )
                 );
-        } else {
-            $builder->add('name', null, array('required' => !count($addresses)));
-
-            if (isset($options['types'])) {
-                $builder->add('type', 'choice', array(
-                        'choices' => $options['types'],
-                        'translation_domain' => 'SonataCustomerBundle')
-                );
-            }
-
-            $builder
-                ->add('firstname', null, array('required' => !count($addresses)))
-                ->add('lastname', null, array('required' => !count($addresses)))
-                ->add('codice_fiscale', null, array('required' => false))
-                ->add('partita_iva', null, array('required' => false))
-                ->add('address1', null, array('required' => !count($addresses)))
-                ->add('address2')
-                ->add('postcode', null, array('required' => !count($addresses)))
-                ->add('city', null, array('required' => !count($addresses)))
-                ->add('provincia', null, array('required' => !count($addresses)))
-                ->add('phone')
-            ;
-
-            $countries = $this->getBasketDeliveryCountries();
-
-            $countryOptions = array('required' => !count($addresses));
-
-            if (count($countries) > 0) {
-                $countryOptions['choices'] = $countries;
-            }
-
-            $builder->add('countryCode', 'country', $countryOptions);
         }
 
+            if (($type == AddressInterface::TYPE_BILLING && !count($addresses)) || $type != AddressInterface::TYPE_BILLING)
+            {
+                $builder->add('name', null, array('required' => !count($addresses)));
 
-    }
+                if (isset($options['types'])) {
+                    $builder->add('type', 'choice', array(
+                            'choices' => $options['types'],
+                            'translation_domain' => 'SonataCustomerBundle')
+                    );
+                }
+
+                $builder
+                    ->add('firstname', null, array('required' => !count($addresses)))
+                    ->add('lastname', null, array('required' => !count($addresses)));
+                if (!$type == AddressInterface::TYPE_DELIVERY)
+                {
+                    $builder
+                        ->add('codice_fiscale', null, array('required' => !count($addresses)))
+                        ->add('partita_iva', null, array('required' => !count($addresses)));
+                }
+                $builder
+                    ->add('address1', null, array('required' => !count($addresses)))
+                    ->add('address2')
+                    ->add('postcode', null, array('required' => !count($addresses)))
+                    ->add('city', null, array('required' => !count($addresses)))
+                    ->add('provincia', null, array('required' => !count($addresses)))
+                    ->add('phone')
+                ;
+
+                $countries = $this->getBasketDeliveryCountries();
+
+                $countryOptions = array('required' => !count($addresses));
+
+                if (count($countries) > 0) {
+                    $countryOptions['choices'] = $countries;
+                }
+
+                $builder->add('countryCode', 'country', $countryOptions);
+            }
+
+        }
 
     /**
      * Returns basket elements delivery countries
@@ -129,6 +138,7 @@ class AddressType extends BaseAddressType
         $resolver->setDefaults(array(
             'data_class'  => $this->addressClass,
             'addresses'   => array(),
+            'type'        => null,
             'validation_groups' => array('front'),
         ));
     }

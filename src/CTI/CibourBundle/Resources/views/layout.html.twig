@@ -41,11 +41,20 @@ file that was distributed with this source code.
 {% endblock %}
 
 {% block sonata_page_container %}
+    <div class="row">
+        {% include "CTICibourBundle::home.html.twig" %}
+    </div>
     <div class="row navbar-fixed-top">
         {% block page_header %}
         <div class="container-fluid">
             <div class="row" id="header">
-                {% include "CTICibourBundle::home.html.twig" %}
+                <div class="row" id="toggle-header">
+                    <div class="col-xs-12 text-center">
+                        <a role="button" data-toggle="collapse" href="#collapseHome" aria-expanded="false" aria-controls="collapseHome">
+                            <img src="{{ asset('bundles/cticibour/images/cibour_logo.png') }}" >
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="container-fluid">

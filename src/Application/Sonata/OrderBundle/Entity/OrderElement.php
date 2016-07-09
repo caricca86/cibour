@@ -32,7 +32,7 @@ class OrderElement extends BaseOrderElement
     /**
      * @var string $product_sku
      */
-    protected $product_sku;
+    protected $productSku;
 
     /**
      * Get id
@@ -45,12 +45,12 @@ class OrderElement extends BaseOrderElement
     }
 
     /**
-     * @param string $product_sku
+     * @param string $productSku
      * @return OrderElement
      */
-    public function setProductSku($product_sku)
+    public function setProductSku($productSku)
     {
-        $this->product_sku = $product_sku;
+        $this->productSku = $productSku;
 
         return $this;
     }
@@ -60,6 +60,6 @@ class OrderElement extends BaseOrderElement
      */
     public function getProductSku()
     {
-        return $this->product_sku;
+        return $this->productSku;
     }
 }
