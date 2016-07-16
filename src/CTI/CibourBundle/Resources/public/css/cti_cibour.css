@@ -46,6 +46,8 @@ body {
     background-color: black;
     opacity: 0.8;
     filter: alpha(opacity=80);
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 nav i {
@@ -72,11 +74,6 @@ nav li.last a {
     background-color: transparent;
 }
 
-#cibour-navbar-collapse {
-    padding-right: 10px;
-    padding-left: 10px;
-}
-
 .navbar-form {
     margin-top: 8px;
     margin-bottom: 7px;
@@ -89,6 +86,7 @@ nav li.last a {
     color: white;
     border: 1px solid white;
     border-radius: 5px;
+    padding-left: 5px;
 }
 
 .navbar-form i {
@@ -97,10 +95,7 @@ nav li.last a {
     font-size: 14px;
 }
 
-#myCarousel {
-    height: 400px;
-    margin-bottom: 20px;
-}
+
 
 .carousel-indicators {
     bottom: -30px;
@@ -124,6 +119,7 @@ nav li.last a {
 
 .slider h5 {
     text-transform: uppercase;
+    padding-left: 25px;
 }
 
 /* Dropdown menu*/
@@ -163,14 +159,18 @@ nav .popover-content .divider {
     overflow: hidden;
 }
 
-.content {
-    margin-top: 65px;
-}
-
 #toggle-header {
     background-color: white;
     opacity: 0.7;
     filter: alpha(opacity=70);
+}
+
+#toggle-header > div {
+    padding-left: 35px;
+}
+
+.carousel-control {
+    background-image: none !important;
 }
 
 .btn {
@@ -484,6 +484,7 @@ ul.stepper li div.img-circle {
     background-color: white;
     position: absolute;
     z-index: 100;
+    max-width: 1920px;
 }
 
 #toggle-header a img {
@@ -492,25 +493,26 @@ ul.stepper li div.img-circle {
 }
 
 #collapseHome .logo {
-    margin-top: 135px;
+    margin-top: 136px;
     margin-bottom: 30px;
+    max-height: 108px;
 }
 
 #collapseHome .our-network {
     text-align: center;
     height: 240px;
-    padding-top: 60px;
-    font-size: 25px;
-    letter-spacing: 4px;
+    padding-top: 45px;
+    font-size: 29px;
+    letter-spacing: 6px;
 }
 
 #collapseHome .join-us, #collapseHome .sign-in {
     text-align: center;
     height: 240px;
     width: 100%;
-    padding-top:115px;
-    font-size : 20px ;
-    letter-spacing: 4px;
+    padding-top:105px;
+    font-size : 22px ;
+    letter-spacing: 6px;
 }
 
 #collapseHome .search {
@@ -518,34 +520,38 @@ ul.stepper li div.img-circle {
 }
 
 #collapseHome .search form {
-    margin-top:150px;
     height: 50px;
-    width: 90%;
     margin-bottom: 240px;
-    margin-left: 5%;
+    margin-left: 15%;
+    margin-top: 150px;
+    width: 77%;
 }
 
 #collapseHome .forchetta {
-    position: absolute;
-    left: 9%;
+    left: 18%;
     margin-top: 5px;
+    position: absolute;
 }
 
 #collapseHome .search input {
+    border: 1px solid;
+    border-radius: 6px;
     font-size: 20px;
     height: 100%;
     line-height: 50px;
-    padding-left: 45px;
+    padding-left: 7%;
     width: 100%;
-    border: 1px solid;
-    border-radius: 6px;
 }
 
 #collapseHome .link {
-    text-align: center;
-    font-size: 18px;
-    letter-spacing: 4px;
+    font-size: 21px;
+    letter-spacing: 6px;
     margin-bottom: 20px;
+    text-align: center;
+}
+
+#collapseHome .link img {
+    margin-bottom: 15px;
 }
 
 #collapseHome hr {

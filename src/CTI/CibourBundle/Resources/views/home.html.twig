@@ -1,10 +1,9 @@
 <div class="collapse text-center" id="collapseHome">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-5">
+        <!--<div class="row">
+            <div class="col-md-4">
                 <img class="img-responsive center-block logo" src="{{ asset('bundles/cticibour/images/home/cibour_logo_black_big.png') }}" >
             </div>
-            <div class="col-md-7 search">
+            <div class="col-md-8 search">
                 <div class="row">
                     <div class="col-xs-10">
                         <form class="home-form" action="#" name="form">
@@ -13,7 +12,7 @@
                         </form>
                     </div>
                     <div class="col-xs-2">
-                        <img class="img-responsive center-block carrello" src="{{ asset('bundles/cticibour/images/home/CARRELLO.png') }}" >
+                        <img class="img-responsive carrello" src="{{ asset('bundles/cticibour/images/home/CARRELLO.png') }}" >
                     </div>
                 </div>
             </div>
@@ -36,34 +35,32 @@
             <div class="col-md-12"><div class="our-network">OUR NETWORK</div></div>
             <div class="col-sm-3 col-xs-6 link">
                 <img class="img-responsive center-block" src="{{ asset('bundles/cticibour/images/home/TAVOLA.png') }}" >
-                <br>
                 FOOD AS ART
             </div>
             <div class="col-sm-3 col-xs-6 link">
                 <img class="img-responsive center-block" src="{{ asset('bundles/cticibour/images/home/FYT.png') }}" >
-                <br>
                 FYT
             </div>
             <div class="col-sm-3 col-xs-6 link">
                 <img class="img-responsive center-block" src="{{ asset('bundles/cticibour/images/home/FODY.png') }}" >
-                <br>
                 FODY
             </div>
             <div class="col-sm-3 col-xs-6 link">
                 <img class="img-responsive center-block" src="{{ asset('bundles/cticibour/images/home/e-PASTA.png') }}" >
-                <br>
                 e-PASTA
             </div>
+        </div> -->
+    <a href="{{ path('sonata_catalog_index') }}">
+        <div class="row">
+            <img class="img-responsive center-block" src="{{ asset('bundles/cticibour/img/header.jpg') }}">
         </div>
-    </div>
-</div>
-
-<div class="row" id="toggle-header">
-    <div class="col-xs-12 text-center">
-        <a role="button" data-toggle="collapse" href="#collapseHome" aria-expanded="false" aria-controls="collapseHome">
-            <img src="{{ asset('bundles/cticibour/images/cibour_logo.png') }}" >
-        </a>
-    </div>
+        <div class="row">
+            <img class="img-responsive center-block" src="{{ asset('bundles/cticibour/img/claim.jpg') }}">
+        </div>
+        <div class="row">
+            <img class="img-responsive center-block" src="{{ asset('bundles/cticibour/img/footer.jpg') }}">
+        </div>
+    </a>
 </div>
 <script>
     $('#collapseHome').on('show.bs.collapse', function () {
