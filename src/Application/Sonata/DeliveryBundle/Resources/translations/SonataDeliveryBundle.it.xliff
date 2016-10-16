@@ -1,0 +1,89 @@
+﻿<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+
+            <!-- Begin - Titles -->
+            <trans-unit id="delivery">
+                <source>delivery</source>
+                <target>Consegna</target>
+            </trans-unit>
+            <!-- End - Titles -->
+
+            <!-- Begin - Breadcrumb translations -->
+            <trans-unit id="breadcrumb.link_delivery_list">
+                <source>breadcrumb.link_delivery_list</source>
+                <target>Consegna</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_delivery_edit">
+                <source>breadcrumb.link_delivery_edit</source>
+                <target>Modifica</target>
+            </trans-unit>
+            <!-- End - Breadcrumb translations -->
+
+            <!-- Begin - Status translations -->
+            <trans-unit id="status_open">
+                <source>status_open</source>
+                <target>Apri</target>
+            </trans-unit>
+            <trans-unit id="status_pending">
+                <source>status_pending</source>
+                <target>In sospeso</target>
+            </trans-unit>
+            <trans-unit id="status_order_unknown">
+                <source>status_order_unknown</source>
+                <target>Ordine sconosciuto</target>
+            </trans-unit>
+            <trans-unit id="status_validated">
+                <source>status_validated</source>
+                <target>Convalidato</target>
+            </trans-unit>
+            <trans-unit id="status_cancelled">
+                <source>status_cancelled</source>
+                <target>Cancellato</target>
+            </trans-unit>
+            <trans-unit id="status_unknown">
+                <source>status_unknown</source>
+                <target>Sconosciuto</target>
+            </trans-unit>
+            <trans-unit id="status_error_validation">
+                <source>status_error_validation</source>
+                <target>Errore di convalida</target>
+            </trans-unit>
+            <trans-unit id="status_wrong_callback">
+                <source>status_wrong_callback</source>
+                <target>Richiamo errato</target>
+            </trans-unit>
+            <trans-unit id="status_wrong_request">
+                <source>status_wrong_request</source>
+                <target>Richiesta errata</target>
+            </trans-unit>
+            <trans-unit id="status_order_not_open">
+                <source>status_order_not_open</source>
+                <target>Ordine non aperto</target>
+            </trans-unit>
+            <trans-unit id="status_error">
+                <source>status_error</source>
+                <target>Errore</target>
+            </trans-unit>
+            <trans-unit id="status_stopped">
+                <source>status_stopped</source>
+                <target>Fermato</target>
+            </trans-unit>
+            <trans-unit id="status_returned">
+                <source>status_returned</source>
+                <target>Rispedito</target>
+            </trans-unit>
+            <trans-unit id="status_completed">
+                <source>status_completed</source>
+                <target>Completato</target>
+            </trans-unit>
+            <trans-unit id="status_sent">
+                <source>status_sent</source>
+                <target>Spedito</target>
+            </trans-unit>
+            <!-- End - Status translations -->
+
+        </body>
+    </file>
+</xliff>

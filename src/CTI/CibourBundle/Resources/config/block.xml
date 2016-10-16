@@ -21,6 +21,30 @@
             <argument type="service" id="doctrine" />
             <argument type="service" id="sonata.price.currency.detector" />
         </service>
+        <service id="sonata.product.block.eat_with_products" class="Application\Sonata\ProductBundle\Block\EatWithProductsBlock">
+            <tag name="sonata.block"/>
+
+            <argument>sonata.product.block.eat_with_products</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="sonata.price.currency.detector" />
+        </service>
+        <service id="sonata.product.block.similar_products" class="Application\Sonata\ProductBundle\Block\SimilarProductsBlock">
+            <tag name="sonata.block"/>
+
+            <argument>sonata.product.block.similar_products</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="sonata.price.currency.detector" />
+        </service>
+        <service id="sonata.product.block.recent_products" class="Application\Sonata\ProductBundle\Block\RecentProductsBlockService">
+            <tag name="sonata.block"/>
+
+            <argument>sonata.product.block.recent_products</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="sonata.price.currency.detector" />
+        </service>
     </services>
 
 </container>

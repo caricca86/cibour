@@ -10,51 +10,93 @@
         </div>
         <div class="modal-body">
             {% block product_details %}
-                <div class="row" itemtype="http://schema.org/Product">
-                    <div class="col-sm-6">
-                        {% block product_image %}{% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded img-responsive'} %}{% endblock%}
-                    </div>
 
-                    <div class="col-sm-6">
-                        <h4 itemprop="name" style="margin-top: 0px;">{% block product_title %}{{ product.name }}{% endblock %}</h4>
+                {% if basket.hasBasketElements %}
 
-                        {% block product_sku %}
-                            <dl class="dl-horizontal" style="margin-bottom: 0;">
-                                <dt style="width: auto;">{{ 'sonata.product.sku'|trans([], 'SonataProductBundle') }}</dt>
-                                <dd style="margin-left: 110px; word-wrap: break-word;">{{ product.sku }}</dd>
-                            </dl>
-                        {% endblock %}
+                    {{ form_errors(form) }}
 
-                        {% block product_properties %}
-                            {{ render(controller(provider.baseControllerName ~ ':renderProperties', {product: product})) }}
-                        {% endblock %}
+                    <form action="{{ url('sonata_basket_update') }}" method="POST" novalidate="novalidate">
 
-                        <dl class="dl-horizontal" style="margin-bottom: 0;">
-                            <dt style="width: auto;">{{ 'header_basket_unit_price'|trans([], 'SonataBasketBundle') }}</dt>
-                            <dd style="margin-left: 110px;">{{ basketElement.getUnitPrice(true)|number_format_currency(currency.label, {}, {}, locale) }}</dd>
+                        <table class="table bag">
 
-                            <dt style="width: auto;">{{ 'header_basket_quantity'|trans([], 'SonataBasketBundle') }}</dt>
-                            <dd style="margin-left: 110px;">{{ quantity }}</dd>
+                            <thead>
+                            <tr>
+                                <th class="col-sm-6">{% trans from 'SonataBasketBundle'%}header_basket_information{% endtrans %}</th>
+                                <th class="text-center">{% trans from 'SonataBasketBundle'%}header_basket_unit_price{% endtrans %}</th>
+                                <th class="col-sm-1 text-center">{% trans from 'SonataBasketBundle'%}header_basket_quantity{% endtrans %}</th>
+                                <th class="text-center">{% trans from 'SonataBasketBundle'%}header_basket_total_inc{% endtrans %}</th>
+                                <th class="text-center">{% trans from 'SonataBasketBundle'%}header_basket_delete{% endtrans %}</th>
+                            </tr>
+                            </thead>
 
-                            <dt style="width: auto;">{{ 'sonata_basket_total_price'|trans([], 'SonataBasketBundle') }}</dt>
-                            <dd style="margin-left: 110px;">{{ price|number_format_currency(currency.label, {}, {}, locale) }}</dd>
-                        </dl>
-                    </div>
-                </div>
+                            <tbody>
+                            {# call each product controller to render its own view #}
+                            {% for basketElement in basket.getBasketElements %}
+                                {% render controller('SonataProductBundle:Product:renderFormBasketElement', {
+                                'formView':       form.basketElements.children[basketElement.position],
+                                'basketElement':  basketElement,
+                                'basket':         basket
+                                }) %}
+                            {% endfor %}
 
-                <div class="col-md-12">
-                    <p>{{ product.rawShortDescription|raw }}</p>
-                </div>
+                            {# mark the widget as rendered ... TODO: create a custom widget type ...#}
+                            {% set dummy = form.basketElements.setrendered %}
+                            </tbody>
+
+                            <tfoot>
+                            <tr>
+                                <td colspan="3" rowspan="{{ 3 + basket.getVatAmounts|length }}"></td>
+                                <th style="text-align: right">{% trans from 'SonataBasketBundle'%}footer_basket_total_excl{% endtrans %}</th>
+                                <td colspan="2" class="number"><b>{{ basket.getTotal(false)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
+                            </tr>
+
+                            {% for item in basket.getVatAmounts %}
+                                <tr>
+                                    <th style="text-align: right">{{ 'footer_basket_vat'|trans({}, 'SonataBasketBundle') }} {{ item.rate }}%</th>
+                                    <td colspan="2" class="number"><b>{{ item.amount|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
+                                </tr>
+                            {% endfor %}
+
+                            <tr>
+                                <th style="text-align: right">{% trans from 'SonataBasketBundle'%}footer_basket_total_vat{% endtrans %}</th>
+                                <td colspan="2" class="number"><b>{{ basket.getVatAmount()|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
+                            </tr>
+
+                            <tr>
+                                <th style="text-align: right">{% trans from 'SonataBasketBundle'%}footer_basket_total_inc{% endtrans %}</th>
+                                <td colspan="2" class="number"><b>{{ basket.getTotal(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
+                            </tr>
+                            </tfoot>
+
+                        </table>
+
+
+                        <button type="submit" class="btn basket-control">{% trans from 'SonataBasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}</button>
+
+                        <a href="{{ url('sonata_basket_delivery_address') }}" class="btn pull-right sonata-basket-nextstep"{% if form.vars.errors is not empty %} disabled{% endif %}>{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}&nbsp;</a>
+
+
+                        {{ form_rest(form) }}
+                    </form>
+                    {#
+                        {% set single_basket_element = basket.basketElements|last %}
+                        {{ sonata_block_render({'type': 'sonata.product.block.similar_products', 'settings': {'number': 4, 'base_product_id': single_basket_element.productId}}) }}
+                    #}
+                {% else %}
+
+                    <p>
+                        {% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_is_empty{% endtrans %}.
+                        <br />
+                        <a href="{{ path('sonata_catalog_index') }}">{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_go_back_shopping{% endtrans %}</a>.
+                    </p>
+                    {#
+                        {{ sonata_block_render({'type': 'sonata.product.block.recent_products', 'settings': {'number': 4}}) }}
+                    #}
+                {% endif %}
             {% endblock %}
         </div>
         <div class="modal-footer">
             <div class="row-fluid">
-                <div class="col-md-4 col-md-offset-1">
-                    <a href="{{ url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) }}" class="btn">&larr; Continue shopping</a>
-                </div>
-                <div class="col-md-4 col-md-offset-1">
-                    <a href="{{ url('sonata_basket_index') }}" class="btn btn-primary btn-large">Proceed to checkout</a>
-                </div>
             </div>
         </div>
     </div>

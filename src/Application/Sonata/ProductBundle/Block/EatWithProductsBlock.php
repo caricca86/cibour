@@ -11,7 +11,6 @@
 
 namespace Application\Sonata\ProductBundle\Block;
 
-use CTI\CibourBundle\Entity\Counter;
 use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
@@ -28,7 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */
-class MostPopularProductsBlock extends BaseBlockService
+class EatWithProductsBlock extends BaseBlockService
 {
     /**
      * @var EntityRepository
@@ -59,7 +58,14 @@ class MostPopularProductsBlock extends BaseBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        $products = $this->productRepository->findMostSelledProducts($blockContext->getSetting('category'), $blockContext->getSetting('number'));
+        $product = $this->productRepository->findOneBy(array('id' => $blockContext->getSetting('base_product_id')));
+        if (!$product)
+        {
+            return;
+        }
+
+        $abbinamento = $product->getAbbinamento()->toArray();
+        $products = $this->productRepository->findAbbinamentoProducts($abbinamento, $blockContext->getSetting('number'));
 
         $params = array(
             'context'   => $blockContext,
@@ -98,7 +104,7 @@ class MostPopularProductsBlock extends BaseBlockService
      */
     public function getName()
     {
-        return 'Most Popular';
+        return 'Eat With';
     }
 
     /**
@@ -108,9 +114,9 @@ class MostPopularProductsBlock extends BaseBlockService
     {
         $resolver->setDefaults(array(
             'number'     => 5,
-            'title'      => 'Most Popular',
-            'template'   => 'ApplicationSonataProductBundle:Block:recent_products.html.twig',
-            'category'      => null
+            'title'      => 'Eat With',
+            'template'   => 'ApplicationSonataProductBundle:Block:eat_with_products.html.twig',
+            'base_product_id' => null,
         ));
     }
 

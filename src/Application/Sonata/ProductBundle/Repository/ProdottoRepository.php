@@ -22,8 +22,164 @@ use Sonata\ProductBundle\Repository\BaseProductRepository;
  */
 class ProdottoRepository extends BaseProductRepository
 {
+    public function findLastActiveProducts($categoria = null, $limit = 5)
+    {
+        if ($categoria != null)
+        {
+            return $this->createQueryBuilder('p')
+                ->select('p', 'i', 'g')
+                ->distinct()
+                ->leftJoin('p.image', 'i')
+                ->leftJoin('p.gallery', 'g')
+                ->leftJoin('p.variations', 'pv')
+                ->leftJoin('p.productCategories', 'pc')
+                ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
+                ->andWhere('p.enabled = :enabled')
+                ->andWhere('pv.enabled = :enabled or pv.enabled IS NULL')
+                ->andWhere('p.stock != 0')
+                ->andWhere('p.price != 0')
+                ->andWhere('pv.stock != 0 or pv.stock IS NULL')
+                ->andWhere('pv.price != 0 or pv.price IS NULL')
+                ->andWhere('pc.category = :categoryId')
+                ->orderBy('p.createdAt', 'DESC')
+                ->setMaxResults($limit)
+                ->setParameters(array(
+                    'enabled' => true,
+                    'categoryId' => $categoria
+                ))
+                ->getQuery()
+                ->execute();
+        } else {
+            return $this->createQueryBuilder('p')
+                ->select('p', 'i', 'g')
+                ->distinct()
+                ->leftJoin('p.image', 'i')
+                ->leftJoin('p.gallery', 'g')
+                ->leftJoin('p.variations', 'pv')
+                ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
+                ->andWhere('p.enabled = :enabled')
+                ->andWhere('pv.enabled = :enabled or pv.enabled IS NULL')
+                ->andWhere('p.stock != 0')
+                ->andWhere('p.price != 0')
+                ->andWhere('pv.stock != 0 or pv.stock IS NULL')
+                ->andWhere('pv.price != 0 or pv.price IS NULL')
+                ->orderBy('p.createdAt', 'DESC')
+                ->setMaxResults($limit)
+                ->setParameters(array(
+                    'enabled' => true
+                ))
+                ->getQuery()
+                ->execute();
+        }
+    }
 
-    public function findMostSelledProducts($limit = 5)
+    public function findMostSelledProducts($categoria = null, $limit = 5)
+    {
+        if ($categoria != null)
+        {
+            return $this->createQueryBuilder('p')
+                ->select('p', 'i', 'g')
+                ->distinct()
+                ->leftJoin('p.image', 'i')
+                ->leftJoin('p.gallery', 'g')
+                ->leftJoin('p.variations', 'pv')
+                ->leftJoin('p.counter', 'c')
+                ->leftJoin('p.productCategories', 'pc')
+                ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
+                ->andWhere('p.enabled = :enabled')
+                ->andWhere('pv.enabled = :enabled or pv.enabled IS NULL')
+                ->andWhere('p.stock != 0')
+                ->andWhere('p.price != 0')
+                ->andWhere('pv.stock != 0 or pv.stock IS NULL')
+                ->andWhere('pv.price != 0 or pv.price IS NULL')
+                ->andWhere('pc.category = :categoryId')
+                ->orderBy('c.sales', 'DESC')
+                ->setMaxResults($limit)
+                ->setParameters(array(
+                    'enabled' => true,
+                    'categoryId' => $categoria
+                ))
+                ->getQuery()
+                ->execute();
+        } else {
+            return $this->createQueryBuilder('p')
+                ->select('p', 'i', 'g')
+                ->distinct()
+                ->leftJoin('p.image', 'i')
+                ->leftJoin('p.gallery', 'g')
+                ->leftJoin('p.variations', 'pv')
+                ->leftJoin('p.counter', 'c')
+                ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
+                ->andWhere('p.enabled = :enabled')
+                ->andWhere('pv.enabled = :enabled or pv.enabled IS NULL')
+                ->andWhere('p.stock != 0')
+                ->andWhere('p.price != 0')
+                ->andWhere('pv.stock != 0 or pv.stock IS NULL')
+                ->andWhere('pv.price != 0 or pv.price IS NULL')
+                ->orderBy('c.sales', 'DESC')
+                ->setMaxResults($limit)
+                ->setParameters(array(
+                    'enabled' => true
+                ))
+                ->getQuery()
+                ->execute();
+        }
+    }
+
+    public function findMostViewedProducts($categoria = null, $limit = 5)
+    {
+        if ($categoria != null)
+        {
+            return $this->createQueryBuilder('p')
+                ->select('p', 'i', 'g')
+                ->distinct()
+                ->leftJoin('p.image', 'i')
+                ->leftJoin('p.gallery', 'g')
+                ->leftJoin('p.variations', 'pv')
+                ->leftJoin('p.counter', 'c')
+                ->leftJoin('p.productCategories', 'pc')
+                ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
+                ->andWhere('p.enabled = :enabled')
+                ->andWhere('pv.enabled = :enabled or pv.enabled IS NULL')
+                ->andWhere('p.stock != 0')
+                ->andWhere('p.price != 0')
+                ->andWhere('pv.stock != 0 or pv.stock IS NULL')
+                ->andWhere('pv.price != 0 or pv.price IS NULL')
+                ->andWhere('pc.category = :categoryId')
+                ->orderBy('c.views', 'DESC')
+                ->setMaxResults($limit)
+                ->setParameters(array(
+                    'enabled' => true,
+                    'categoryId' => $categoria
+                ))
+                ->getQuery()
+                ->execute();
+        } else {
+            return $this->createQueryBuilder('p')
+                ->select('p', 'i', 'g')
+                ->distinct()
+                ->leftJoin('p.image', 'i')
+                ->leftJoin('p.gallery', 'g')
+                ->leftJoin('p.variations', 'pv')
+                ->leftJoin('p.counter', 'c')
+                ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
+                ->andWhere('p.enabled = :enabled')
+                ->andWhere('pv.enabled = :enabled or pv.enabled IS NULL')
+                ->andWhere('p.stock != 0')
+                ->andWhere('p.price != 0')
+                ->andWhere('pv.stock != 0 or pv.stock IS NULL')
+                ->andWhere('pv.price != 0 or pv.price IS NULL')
+                ->orderBy('c.views', 'DESC')
+                ->setMaxResults($limit)
+                ->setParameters(array(
+                    'enabled' => true
+                ))
+                ->getQuery()
+                ->execute();
+        }
+    }
+
+    public function findSimilarProducts($categoria, $limit = 5)
     {
         return $this->createQueryBuilder('p')
             ->select('p', 'i', 'g')
@@ -32,6 +188,7 @@ class ProdottoRepository extends BaseProductRepository
             ->leftJoin('p.gallery', 'g')
             ->leftJoin('p.variations', 'pv')
             ->leftJoin('p.counter', 'c')
+            ->leftJoin('p.productCategories', 'pc')
             ->andWhere('p.parent IS NULL')      // Limit to master products or products without variations
             ->andWhere('p.enabled = :enabled')
             ->andWhere('pv.enabled = :enabled or pv.enabled IS NULL')
@@ -39,16 +196,18 @@ class ProdottoRepository extends BaseProductRepository
             ->andWhere('p.price != 0')
             ->andWhere('pv.stock != 0 or pv.stock IS NULL')
             ->andWhere('pv.price != 0 or pv.price IS NULL')
-            ->orderBy('c.sales', 'DESC')
+            ->andWhere('pc.category = :categoryId')
+            ->orderBy('c.views', 'DESC')
             ->setMaxResults($limit)
             ->setParameters(array(
-                'enabled' => true
+                'enabled' => true,
+                'categoryId' => $categoria
             ))
             ->getQuery()
             ->execute();
     }
 
-    public function findMostViewedProducts($limit = 5)
+    public function findAbbinamentoProducts($abbinamento, $limit = 5)
     {
         return $this->createQueryBuilder('p')
             ->select('p', 'i', 'g')
@@ -64,10 +223,12 @@ class ProdottoRepository extends BaseProductRepository
             ->andWhere('p.price != 0')
             ->andWhere('pv.stock != 0 or pv.stock IS NULL')
             ->andWhere('pv.price != 0 or pv.price IS NULL')
+            ->andWhere('p.caratteristica_gustativa IN(:abbinamento)')
             ->orderBy('c.views', 'DESC')
             ->setMaxResults($limit)
             ->setParameters(array(
-                'enabled' => true
+                'enabled' => true,
+                'abbinamento' => array_values($abbinamento)
             ))
             ->getQuery()
             ->execute();

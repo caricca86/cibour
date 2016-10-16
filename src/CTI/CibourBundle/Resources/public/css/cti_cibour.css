@@ -2,7 +2,11 @@
     font-family: Gotham;
     src: url(GothamRoundedLight.otf);
 }
-
+@font-face{
+font-family:Glyphicons Halflings;
+src:url(glyphicons-halflings-regular.eot);
+src:url(glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url(glyphicons-halflings-regular.woff) format('woff'),url(glyphicons-halflings-regular.ttf) format('truetype'),url(/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')
+}
 a {
     color: black;
 }
@@ -87,6 +91,10 @@ nav li.last a {
     border: 1px solid white;
     border-radius: 5px;
     padding-left: 5px;
+}
+
+#myCarousel .item {
+    max-height: 450px;
 }
 
 .navbar-form i {
@@ -358,8 +366,8 @@ table.prodotto a.active{
 /* Basket stepper */
 
 ul.stepper {
-    margin-top: 70px !important;
-    margin-bottom: 30px !important;
+    margin-top: 125px !important;
+    margin-bottom: 125px !important;
     text-transform: uppercase;
     height: auto !important;
 }
@@ -368,7 +376,8 @@ ul.stepper li p {
     color: black;
 }
 ul.stepper li {
-    width: 190px !important;
+    width: 210px !important;
+    
 }
 
 ul.stepper li.active {
@@ -376,24 +385,27 @@ ul.stepper li.active {
 }
 
 ul.stepper li.active div.img-circle {
-    background: #eee none repeat scroll 0 0 !important;
+    background: #99b0c2 none repeat scroll 0 0 !important;
 }
 
 ul.stepper li div.img-circle {
     background: white none repeat scroll 0 0 !important;
     color: black !important;
     border: 1px solid black;
-    padding-top: 0px !important;
+    
     font-size: 1.3em !important;
-    height: 30px !important;
-    width: 30px !important;
-
+    height: 35px !important;
+    width: 35px !important;
+	text-align:center;
 }
+/*NEW CSS - PRODUCT FORM*/
+#product_form{ width:83%;}
+
 
 /* Table bag */
 .table.bag {
     text-transform: uppercase;
-    margin-bottom: 90px;
+    margin-bottom: 80px;
 }
 
 .table.bag > thead > tr > th {
@@ -476,8 +488,8 @@ ul.stepper li div.img-circle {
 }
 
 #collapseHome .carrello {
-    margin-top: 150px;
-    max-height: 50px;
+    margin-top: 130px;
+    max-height: 41px;
 }
 
 #collapseHome {
@@ -488,19 +500,24 @@ ul.stepper li div.img-circle {
 }
 
 #toggle-header a img {
-    max-height: 25px;
+    max-height: 28px;
     padding: 5px;
 }
 
+.navbar-icons-padding{
+padding-top:12%;
+
+}
+
 #collapseHome .logo {
-    margin-top: 136px;
+    margin-top: 100px;
     margin-bottom: 30px;
     max-height: 108px;
 }
 
 #collapseHome .our-network {
     text-align: center;
-    height: 240px;
+    height: 175px;
     padding-top: 45px;
     font-size: 29px;
     letter-spacing: 6px;
@@ -508,9 +525,9 @@ ul.stepper li div.img-circle {
 
 #collapseHome .join-us, #collapseHome .sign-in {
     text-align: center;
-    height: 240px;
+    height: 170px;
     width: 100%;
-    padding-top:105px;
+    padding-top:70px;
     font-size : 22px ;
     letter-spacing: 6px;
 }
@@ -520,16 +537,16 @@ ul.stepper li div.img-circle {
 }
 
 #collapseHome .search form {
-    height: 50px;
-    margin-bottom: 240px;
+    height: 41px;
+    margin-bottom: 160px;
     margin-left: 15%;
-    margin-top: 150px;
+    margin-top: 130px;
     width: 77%;
 }
 
 #collapseHome .forchetta {
     left: 18%;
-    margin-top: 5px;
+    margin-top: 3px;
     position: absolute;
 }
 
@@ -558,3 +575,38 @@ ul.stepper li div.img-circle {
     margin: 0;
     border-color: black;
 }
+
+.basket_modal .modal-content {
+    color: white !important;
+    background-color: transparent;
+    box-shadow: none;
+    border: 0;
+}
+
+.basket_modal .stepper {
+    display: none;
+}
+
+.basket_modal .table.bag > thead > tr > th {
+    border-bottom: 1px solid black;
+}
+
+.basket_modal .btn, .basket_modal input, .basket_modal a {
+    background-color: transparent;
+    color: white;
+    border-color: white;
+}
+
+.basket_modal .modal-header {
+    border: 0;
+}
+
+.basket_modal .close {
+    color: white;
+    font-weight: 400;
+    text-shadow: none;
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+

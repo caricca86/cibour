@@ -11,7 +11,6 @@
 
 namespace Application\Sonata\ProductBundle\Block;
 
-use CTI\CibourBundle\Entity\Counter;
 use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
@@ -19,6 +18,7 @@ use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Component\Currency\CurrencyDetectorInterface;
+use Sonata\Component\Product\ProductFinderInterface;
 use Sonata\ProductBundle\Repository\BaseProductRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -28,12 +28,17 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Sylvain Deloux <sylvain.deloux@ekino.com>
  */
-class MostPopularProductsBlock extends BaseBlockService
+class SimilarProductsBlock extends BaseBlockService
 {
     /**
      * @var EntityRepository
      */
     protected $productRepository;
+
+    /**
+     * @var ProductFinderInterface
+     */
+    protected $productFinder;
 
     /**
      * @var CurrencyDetectorInterface
@@ -59,7 +64,11 @@ class MostPopularProductsBlock extends BaseBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        $products = $this->productRepository->findMostSelledProducts($blockContext->getSetting('category'), $blockContext->getSetting('number'));
+        if (!$product = $this->getProductRepository()->findOneBy(array('id' => $blockContext->getSetting('base_product_id')))) {
+            return;
+        }
+
+        $products = $this->getProductRepository()->findSimilarProducts($product->getCategories()[0], $blockContext->getSetting('number'));
 
         $params = array(
             'context'   => $blockContext,
@@ -87,8 +96,9 @@ class MostPopularProductsBlock extends BaseBlockService
     {
         $formMapper->add('settings', 'sonata_type_immutable_array', array(
             'keys' => array(
-                array('number', 'integer', array('required' => true)),
-                array('title',  'text',    array('required' => false)),
+                array('number',          'integer', array('required' => true)),
+                array('title',           'text',    array('required' => false)),
+                array('base_product_id', 'integer', array('required' => false)),
             )
         ));
     }
@@ -98,7 +108,7 @@ class MostPopularProductsBlock extends BaseBlockService
      */
     public function getName()
     {
-        return 'Most Popular';
+        return 'Similar products';
     }
 
     /**
@@ -107,10 +117,10 @@ class MostPopularProductsBlock extends BaseBlockService
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'number'     => 5,
-            'title'      => 'Most Popular',
-            'template'   => 'ApplicationSonataProductBundle:Block:recent_products.html.twig',
-            'category'      => null
+            'number'          => 5,
+            'title'           => 'Similar products',
+            'base_product_id' => null,
+            'template'        => 'ApplicationSonataProductBundle:Block:similar_products.html.twig'
         ));
     }
 
@@ -122,5 +132,15 @@ class MostPopularProductsBlock extends BaseBlockService
     protected function getProductRepository()
     {
         return $this->productRepository;
+    }
+
+    /**
+     * Returns the Product finder.
+     *
+     * @return ProductFinderInterface
+     */
+    protected function getProductFinder()
+    {
+        return $this->productFinder;
     }
 }

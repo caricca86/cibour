@@ -11,7 +11,10 @@
 
 namespace Application\Sonata\ProductBundle\Controller;
 
+use Sonata\Component\Basket\BasketElementInterface;
+use Sonata\Component\Basket\BasketInterface;
 use Sonata\ProductBundle\Controller\BaseProductController;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -58,6 +61,30 @@ class ProdottoController extends BaseProductController
                 'form'          => $form,
             )
         );
+    }
+
+    /**
+     * @param FormView               $formView
+     * @param BasketElementInterface $basketElement
+     * @param BasketInterface        $basket
+     *
+     * @return Response
+     */
+    public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement, BasketInterface $basket, $modal = false)
+    {
+        $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
+
+        $view = 'ApplicationSonataProductBundle:Product:form_basket_element.html.twig';
+        if ($modal) {
+            $view = 'ApplicationSonataProductBundle:Product:form_basket_element_modal.html.twig';
+        }
+
+        return $this->render(sprintf($view), array(
+            'formView'      => $formView,
+            'basketElement' => $basketElement,
+            'basket'        => $basket,
+            'modal'         => $modal
+        ));
     }
 
     /**

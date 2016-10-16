@@ -58,7 +58,7 @@ class TrendingNowProductsBlock extends BaseBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        $products = $this->productRepository->findMostViewedProducts($blockContext->getSetting('number'));
+        $products = $this->productRepository->findMostViewedProducts($blockContext->getSetting('category'), $blockContext->getSetting('number'));
 
         $params = array(
             'context'   => $blockContext,
@@ -108,7 +108,8 @@ class TrendingNowProductsBlock extends BaseBlockService
         $resolver->setDefaults(array(
             'number'     => 5,
             'title'      => 'Trending Now',
-            'template'   => 'ApplicationSonataProductBundle:Block:recent_products.html.twig'
+            'template'   => 'ApplicationSonataProductBundle:Block:recent_products.html.twig',
+            'category'      => null
         ));
     }
 

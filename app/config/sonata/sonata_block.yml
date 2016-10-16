@@ -45,7 +45,6 @@ sonata_block:
         # Ecommerce's Blocks
         sonata.order.block.recent_orders:
         sonata.product.block.recent_products:
-        sonata.product.block.similar_products:
         sonata.product.block.categories_menu:
         sonata.product.block.filters_menu:
         sonata.product.block.variations_form:
@@ -95,3 +94,5 @@ sonata_block:
         # Cibour
         sonata.product.block.trending_now_products:
         sonata.product.block.most_popular_products:
+        sonata.product.block.eat_with_products:
+        sonata.product.block.similar_products:

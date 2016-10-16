@@ -1,0 +1,27 @@
+﻿<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="product_not_available">
+                <source>product_not_available</source>
+                <target>Il prodotto non è disponibile.</target>
+            </trans-unit>
+            <trans-unit id="product_not_enabled">
+                <source>product_not_enabled</source>
+                <target>Il prodotto non è abilitato.</target>
+            </trans-unit>
+            <trans-unit id="product_quantity_not_numeric">
+                <source>product_quantity_not_numeric</source>
+                <target>La quantità del prodotto non è un valore numerico.</target>
+            </trans-unit>
+            <trans-unit id="basket_quantity_limit_min">
+                <source>basket_quantity_limit_min</source>
+                <target>Devi avere almeno {{ limit }} elementi nel tuo carrello</target>
+            </trans-unit>
+            <trans-unit id="basket_quantity_limit_max">
+                <source>basket_quantity_limit_max</source>
+                <target>Ci sono solo {{ limit }} prodotti rimasti in negozio, hai provato ad ordinarne {{ value }}.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -117,8 +117,12 @@ file that was distributed with this source code.
         <div class="col-xs-12">
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="descrizione">{{ product.rawDescription }}</div>
-                <div role="tabpanel" class="tab-pane" id="eat-with">eat with</div>
-                <div role="tabpanel" class="tab-pane" id="more">more</div>
+                <div role="tabpanel" class="tab-pane" id="eat-with">
+                {{ sonata_block_render({'type': 'sonata.product.block.eat_with_products', 'settings': {'base_product_id': product.id, 'number': 24}}) }}
+                </div>
+                <div role="tabpanel" class="tab-pane" id="more">
+                {{ sonata_block_render({'type': 'sonata.product.block.similar_products', 'settings': {'base_product_id': product.id, 'number': 24}}) }}
+                </div>
             </div>
         </div>
     </div>

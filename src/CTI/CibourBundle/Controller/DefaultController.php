@@ -4,9 +4,13 @@ namespace CTI\CibourBundle\Controller;
 
 use Application\Sonata\ProductBundle\Entity\Delivery;
 use CTI\CibourBundle\Entity\Counter;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
+use Sonata\Component\Currency\CurrencyDetector;
+use Sonata\ProductBundle\Entity\ProductSetManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
@@ -80,5 +84,141 @@ class DefaultController extends Controller
         $em->flush();
 
         return $this->redirect($this->generateUrl('homepage'));
+    }
+
+    /**
+     * @Route("/shop/catalog/category/{categorySlug}/{categoryId}/{prodottoSlug}/{prodottoId}", name="catalog_category")
+     * @Template()
+     */
+    public function categoryListAction($categorySlug, $categoryId, $prodottoSlug = null, $prodottoId = null)
+    {
+        $page        = $this->getRequest()->get('page', 1);
+        $displayMax  = $this->getRequest()->get('max', 9);
+        $displayMode = $this->getRequest()->get('mode', 'grid');
+        $filter      = $this->getRequest()->get('filter');
+        $option      = $this->getRequest()->get('option');
+
+        if (!in_array($displayMode, array('grid'))) { // "list" mode will be added later
+            throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
+        }
+
+        $category = $this->getCategoryManager()->findOneBy(array(
+            'id'      => $categoryId,
+            'enabled' => true,
+        ));
+
+        $this->get('sonata.seo.page')->setTitle($category ? $category->getName() : $this->get('translator')->trans('catalog_index_title'));
+
+        $prodottoRepository = $this->getDoctrine()->getManager()->getRepository('ApplicationSonataProductBundle:Prodotto');
+
+        $sortByForm = $this->createFormBuilder()
+            ->add('sortBy', 'choice', array(
+                'choices' => array(
+                    'tranding-now' => 'Tranding Now',
+                    'recent' => 'Ultimi Arrivi',
+                    'most-popular' => 'Most Popular'
+                ),
+                'label' => false,
+            ))->getForm();
+
+        $products = $prodottoRepository->findMostViewedProducts($categoryId, 200);
+
+        $sortByForm->handleRequest($this->getRequest());
+
+        if ($sortByForm->isSubmitted() && $sortByForm->isValid()) {
+            $sortBy = $sortByForm->getData()['sortBy'];
+            if ($sortBy == 'tranding-now')
+            {
+                $products = $prodottoRepository->findMostSelledProducts($categoryId, 200);
+            } elseif ($sortBy == 'recent'){
+                $products = $prodottoRepository->findLastActiveProducts($categoryId, 200);
+            }
+        }
+
+        if ($prodottoId != null)
+        {
+            $inEvidenza = $prodottoRepository->find($prodottoId);
+        } else {
+            $inEvidenza = $prodottoRepository->findLastActiveProducts($category->getId(), 1)[0];
+        }
+        return array(
+            'display_mode' => $displayMode,
+            'products'        => $products,
+            'currency'     => $this->getCurrencyDetector()->getCurrency(),
+            'category'     => $category,
+            'provider'     => $this->getProviderFromCategory($category),
+            'inEvidenza'    => $inEvidenza,
+            'sortByForm'    => $sortByForm->createView()
+        );
+    }
+
+    /**
+     * Retrieve Category from its id and slug, if any.
+     *
+     * @return CategoryInterface|null
+     */
+    protected function retrieveCategoryFromQueryString()
+    {
+        $categoryId   = $this->getRequest()->get('category_id');
+        $categorySlug = $this->getRequest()->get('category_slug');
+
+        if (!$categoryId || !$categorySlug) {
+            return null;
+        }
+
+        return $this->getCategoryManager()->findOneBy(array(
+            'id'      => $categoryId,
+            'enabled' => true,
+        ));
+    }
+
+    /**
+     * Gets the product provider associated with $category if any
+     *
+     * @param CategoryInterface $category
+     *
+     * @return null|\Sonata\Component\Product\ProductProviderInterface
+     */
+    protected function getProviderFromCategory(CategoryInterface $category = null)
+    {
+        if (null === $category) {
+            return null;
+        }
+
+        $product = $this->getProductSetManager()->findProductForCategory($category);
+
+        return $product ? $this->getProductPool()->getProvider($product) : null;
+    }
+
+    /**
+     * @return Pool
+     */
+    protected function getProductPool()
+    {
+        return $this->get('sonata.product.pool');
+    }
+
+    /**
+     * @return ProductSetManager
+     */
+    protected function getProductSetManager()
+    {
+        return $this->get('sonata.product.set.manager');
+    }
+
+    /**
+     * @return CurrencyDetector
+     */
+    protected function getCurrencyDetector()
+    {
+        return $this->get('sonata.price.currency.detector');
+    }
+
+    /**
+     * @return CategoryManager
+     */
+    protected function getCategoryManager()
+    {
+        return $this->get('sonata.classification.manager.category');
     }
 }
