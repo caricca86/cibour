@@ -85,7 +85,7 @@ class AddressType extends BaseAddressType
                     ->add('lastname', null, array('required' => !count($addresses),
                         'label' => 'sonata_basket_address_lastname',
                         'translation_domain' => 'SonataBasketBundle'));
-                if (!$type == AddressInterface::TYPE_DELIVERY)
+                if ($type == AddressInterface::TYPE_BILLING)
                 {
                     $builder
                         ->add('codice_fiscale', null, array('required' => !count($addresses),

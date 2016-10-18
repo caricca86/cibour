@@ -15,7 +15,6 @@ file that was distributed with this source code.
 
 {% include 'SonataBasketBundle:Basket:stepper.html.twig' with {step: 'billing'} %}
 
-{% form_theme form 'SonataBasketBundle:Form:label.html.twig' %}
 
 {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 {{ form_errors(form) }}
@@ -46,19 +45,26 @@ file that was distributed with this source code.
                     {% endfor %}
                 </ul>
             </div>
+        <a href="{{ url('sonata_basket_delivery') }}" class="btn basket-control text-up-bold-2">{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
+        {{ form_widget(form.useSelected, {'attr': {'class': 'pull-right btn basket-control'}}) }}
         </div>
     </div>
-    <a href="{{ url('sonata_basket_delivery') }}" class="btn basket-control text-up-bold-2">{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
-                        {{ form_widget(form.useSelected, {'attr': {'class': 'pull-right btn basket-control'}}) }}
+
 
     {% else %}
+        {% form_theme form 'CTICibourBundle:Form:basket_form.html.twig' %}
         <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <div class="col-lg-10 col-sm-10 col-lg-offset-1 col-sm-offset-1 no-pad marg-bot-delivery">
+                <div class="col-xs-12 col-md-4 no-pad "><hr class="delivery"></div>
+                <div class="col-xs-12 col-md-4 no-pad"><h2 class=" text-center text-up-bold-2 marg-top-delivery"> INSERISCI INDIRIZZO DI FATTURAZIONE</h2></div>
+                <div class="col-xs-12 col-md-4 no-pad"><hr class="delivery"></div>
+            </div>
             {{ form_rest(form) }}
+            <a href="{{ url('sonata_basket_delivery') }}" class="btn basket-control text-up-bold-2">{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
+
+            <button type="submit" class="btn basket-control pull-right text-up-bold-2">{{ 'sonata.basket.btn_update_payment_step'|trans({}, 'SonataBasketBundle') }}</button>
         </div>
     </div>
-    <a href="{{ url('sonata_basket_delivery') }}" class="btn basket-control text-up-bold-2">{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
-
-    <button type="submit" class="btn basket-control pull-right text-up-bold-2">{{ 'sonata.basket.btn_update_payment_step'|trans({}, 'SonataBasketBundle') }}</button>
     {% endif %}
 
 {{ form_end(form) }}

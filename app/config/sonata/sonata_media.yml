@@ -48,11 +48,11 @@ sonata_media:
                 - sonata.media.provider.image
 
             formats:
-                preview:   { width: 50, quality: 80}
+                preview:   { width: 50, height: 50, quality: 75, constraint: false}
                 slider_mini:    { width: 170, height: 170, quality: 75, constraint: false}
                 slider:    { width: 750, height: 750, quality: 75, constraint: false}
                 small:     { width: 250, quality: 80}
-                large:     { width: 750, quality: 100}
+                large:     { height: 750, quality: 80, constraint: false}
 
     cdn:
         # define the public base url for the uploaded media
