@@ -1,9 +1,10 @@
 <div class="row category-top" style="margin-top: 77px;">
+    <div class="col-xs-12 text-center"><h2>Categoria: {{ category.name }}</h2></div>
     <div class="col-sm-3 col-sm-offset-9 sort">
         {{ form(sortByForm) }}
     </div>
     {% block inEvidenza %}
-        {{ render(controller('ApplicationSonataProductBundle:Prodotto:view', { 'product': inEvidenza })) }}
+        {{ render(controller('ApplicationSonataProductBundle:Prodotto:view', { 'product': inEvidenza, 'categoryList': true })) }}
     {% endblock %}
     {% block products %}
     <div class="col-sm-12 category-grid" style="margin-top: 20px;">

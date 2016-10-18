@@ -2,17 +2,12 @@
     <div class="row">
         {% include ('CTICibourBundle:Block:home_slider.html.twig') %}
     </div>
-    <div class="row" style="margin-top:10px">
-        <div class="col-md-12">
+
             {{ sonata_block_render({'type': 'sonata.product.block.trending_now_products', 'settings': {'number': 12}}) }}
-        </div>
-        <div class="col-md-12">
+
             {{ sonata_block_render({'type': 'sonata.product.block.recent_products', 'settings': {'number': 12}},
             {'title' : 'Ultimi Arrivi',
                 'template' : 'ApplicationSonataProductBundle:Block:recent_products.html.twig'}) }}
-        </div>
-        <div class="col-md-12">
+
             {{ sonata_block_render({'type': 'sonata.product.block.most_popular_products', 'settings': {'number': 12}}) }}
-        </div>
-    </div>
 {% endblock %}

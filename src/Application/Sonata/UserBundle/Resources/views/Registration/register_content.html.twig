@@ -1,15 +1,24 @@
 {% form_theme form 'CTICibourBundle:Form:register_form.html.twig' %}
-<div class="panel">
-    <div class="panel-heading">
-        <h2 class="panel-title">{{ 'title_user_registration'|trans({}, 'SonataUserBundle') }}</h2>
+<div class="panel no-pad reg  ">
+    <div class="panel-heading no-pad  ">
+
+
+        <div class="col-xs-12 col-md-4 no-pad "><hr/></div>
+        <div class="col-xs-12 col-md-4 no-pad "><h2 class="panel-title text-up-bold ">{{ 'title_user_registration'|trans({}, 'SonataUserBundle') }}</h2></div>
+        <div class="col-xs-12 col-md-4 no-pad"><hr/></div>
+
+
     </div>
-    <div class="panel-body">
+    <div class="panel-body   ">
         <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register form-horizontal">
-            {{ form_widget(form) }}
+            <fieldset>
+                {{ form_widget(form) }}
+            </fieldset>
+
             <div class="form-actions">
                 <div class="row">
                     <div class="col-lg-8 col-sm-8 col-lg-offset-2 col-sm-offset-2">
-                        <button type="submit" class="btn pull-right" style="padding: 0">
+                        <button type="submit" class="btn pull-right text-up-bold-2" style="padding: 0; padding-top:8px;"  title="REGISTER">
                             <img src="{{ asset('bundles/cticibour/images/icon_submit.png') }}">
                         </button>
                     </div>

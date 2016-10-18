@@ -66,7 +66,10 @@ class AddressType extends BaseAddressType
 
             if (($type == AddressInterface::TYPE_BILLING && !count($addresses)) || $type != AddressInterface::TYPE_BILLING)
             {
-                $builder->add('name', null, array('required' => !count($addresses)));
+                $builder->add('name', null, array('required' => !count($addresses),
+                    'label' => "Nome dell'indirizzo",
+                    'translation_domain' => 'SonataBasketBundle'
+                    ));
 
                 if (isset($options['types'])) {
                     $builder->add('type', 'choice', array(
@@ -76,26 +79,48 @@ class AddressType extends BaseAddressType
                 }
 
                 $builder
-                    ->add('firstname', null, array('required' => !count($addresses)))
-                    ->add('lastname', null, array('required' => !count($addresses)));
+                    ->add('firstname', null, array('required' => !count($addresses),
+                        'label' => 'sonata_basket_address_firstname',
+                        'translation_domain' => 'SonataBasketBundle'))
+                    ->add('lastname', null, array('required' => !count($addresses),
+                        'label' => 'sonata_basket_address_lastname',
+                        'translation_domain' => 'SonataBasketBundle'));
                 if (!$type == AddressInterface::TYPE_DELIVERY)
                 {
                     $builder
-                        ->add('codice_fiscale', null, array('required' => !count($addresses)))
-                        ->add('partita_iva', null, array('required' => !count($addresses)));
+                        ->add('codice_fiscale', null, array('required' => !count($addresses),
+                            'label' => 'Codice Fiscale'))
+                        ->add('partita_iva', null, array('required' => !count($addresses),
+                            'label' => 'Partita IVA'));
                 }
                 $builder
-                    ->add('address1', null, array('required' => !count($addresses)))
-                    ->add('address2')
-                    ->add('postcode', null, array('required' => !count($addresses)))
-                    ->add('city', null, array('required' => !count($addresses)))
-                    ->add('provincia', null, array('required' => !count($addresses)))
-                    ->add('phone')
+                    ->add('address1', null, array('required' => !count($addresses),
+                        'label' => 'sonata_basket_address_address1',
+                        'translation_domain' => 'SonataBasketBundle'))
+                    /*->add('address2', null, array(
+                        'label' => 'sonata_basket_address_address2',
+                        'translation_domain' => 'SonataBasketBundle'
+                    ))*/
+                    ->add('postcode', null, array('required' => !count($addresses),
+                        'label' => 'sonata_basket_address_postcode',
+                        'translation_domain' => 'SonataBasketBundle'))
+                    ->add('city', null, array('required' => !count($addresses),
+                        'label' => 'sonata_basket_address_city',
+                        'translation_domain' => 'SonataBasketBundle'))
+                    ->add('provincia', null, array('required' => !count($addresses),
+                        'label' => 'Provincia'
+                    ))
+                    ->add('phone', null, array(
+                        'label' => 'sonata_basket_address_phone',
+                        'translation_domain' => 'SonataBasketBundle'
+                    ))
                 ;
 
                 $countries = $this->getBasketDeliveryCountries();
 
-                $countryOptions = array('required' => !count($addresses));
+                $countryOptions = array('required' => !count($addresses),
+                    'label' => 'sonata_basket_address_countryCode',
+                    'translation_domain' => 'SonataBasketBundle');
 
                 if (count($countries) > 0) {
                     $countryOptions['choices'] = $countries;

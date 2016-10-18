@@ -4,6 +4,10 @@
         <body>
 
             <!-- Begin - Title translations -->
+            <trans-unit id="catalog_index_title">
+                <source>catalog_index_title</source>
+                <target>Catalogo</target>
+            </trans-unit>
             <trans-unit id="title_select_provider">
                 <source>title_select_provider</source>
                 <target>Seleziona un fornitore</target>

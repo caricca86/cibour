@@ -12,10 +12,12 @@ file that was distributed with this source code.
 
 {% block block %}
 
-    <div class="sonata-order-block-recent-order panel panel-default">
+    <div class="sonata-order-block-recent-order panel panel-final-review">
         {% if settings.title %}
-            <div class="panel-heading">
-                <h3 class="panel-title sonata-order-block-recent-order"><i class="fa fa-barcode"></i> {{ settings.title }}</h3>
+            <div class="panel-heading no-pad ">
+                <div class="col-xs-12 col-md-4 no-pad "><hr/></div>
+                <div class="col-xs-12 col-md-4 no-pad "><h2 class="panel-title text-up-bold-2 ">{{ settings.title }}</h2></div>
+                <div class="col-xs-12 col-md-4 no-pad"><hr/></div>
             </div>
         {% endif %}
 

@@ -1,34 +1,50 @@
+
+{% block product_javascript_init %}
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            Sonata.Product.init({
+                url: {
+                    infoStockPrice: '{{ path('sonata_product_price_stock', {'productId': product.id}) }}'
+                },
+                targets: {
+                    inputAddBasket:  $('#add_basket_quantity'),
+                    productPrice:    $('#sonata_product_price'),
+                    submitBasketBtn: $('#sonata_add_basket_submit'),
+                    addBasketError:  $('#sonata_add_basket_error')
+                }
+            });
+        });
+    </script>
+{% endblock %}
+{% block product %}
 {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
 <!-- Begin product display -->
 
-<div class="product-view_{{ product.id }}" itemscope itemtype="http://schema.org/Product">
-    <div class="col-xs-1 col-xs-offset-11">
-        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    </div>
-    <div class="col-md-12">
-        <div class="col-sm-4">
-            {% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'center-block img-responsive'} %}
-        </div>
-        <div class="col-sm-4">
-            <h4 itemprop="name">{{ product.name }}</h4>
-            <h5 itemprop="produttore">{{ product.produttore }}</h5>
-            <h6 itemprop="price">
-                {% block product_price_price %}
-                    {% if provider.hasEnabledVariations(product) %}
-                        {{ cheapest_variation.price|number_format_currency(currency) }}
-                    {% else %}
-                        {{ sonata_product_price(product, currency, true)|number_format_currency(currency) }}
-                    {% endif %}
-                {% endblock %}
-            </h6>
-            <h6 itemprop="pezzatura">
-                {{ product.pezzatura }}
-            </h6>
-            <div class="col-md-12 hidden-sm">
+    <div class="product-view_{{ product.id }}" itemscope itemtype="http://schema.org/Product">
+        <div class="col-md-12">
+            <div class="col-sm-4">
+                {% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'center-block img-responsive'} %}
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="
+            <div class="col-sm-4">
+                <h4 itemprop="name">{{ product.name }}</h4>
+                <h5 itemprop="produttore">{{ product.produttore }}</h5>
+                <h6 itemprop="price">
+                    {% block product_price_price %}
+                        {% if provider.hasEnabledVariations(product) %}
+                            {{ cheapest_variation.price|number_format_currency(currency) }}
+                        {% else %}
+                            {{ sonata_product_price(product, currency, true)|number_format_currency(currency) }}
+                        {% endif %}
+                    {% endblock %}
+                </h6>
+                <h6 itemprop="pezzatura">
+                    {{ product.pezzatura }}
+                </h6>
+                <div class="col-md-12 hidden-sm">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="
                             {% if product.macroregione == 0 %}
                                 {{ asset('bundles/cticibour/images/italia/nord.png') }}
                             {% elseif product.macroregione == 1 %}
@@ -39,66 +55,68 @@
                                 {{ asset('bundles/cticibour/images/italia/isole.png') }}
                             {% endif %}
                         " style="margin: 17px 0px 0px 0; max-height: 70px;" class="img-responsive pull-left" itemprop="image">
-                </div>
-                {% if product.isSalable %}
-                    <div class="col-md-6">
-                        {% block product_basket %}
-                            {% include "ApplicationSonataBasketBundle:Basket:add_product_form.html.twig" %}
-                        {% endblock %}
                     </div>
-                {% endif %}
+                    {% if product.isSalable %}
+                        <div class="col-md-6">
+                            {% block product_basket %}
+                                {% include "ApplicationSonataBasketBundle:Basket:add_product_form.html.twig" %}
+                            {% endblock %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <canvas id="pentagono_{{ product.id }}" class="center-block" width="250" height="250"></canvas>
             </div>
         </div>
-        <div class="col-sm-4">
-            <canvas id="pentagono_{{ product.id }}" class="center-block" width="250" height="250"></canvas>
-        </div>
     </div>
-</div>
-<div class="col-sm-5">
-    <table class="table text-center prodotto">
-        <tr>
-            <th class="{% if product.glutenFree %}disabled{% endif %}"><small>GLUTEN FREE</small></th>
-            <th><small> {{ product.tipoDieta }}</small></th>
-            <th><small>{{ product.metodoProduzione }}</small></th>
-        </tr>
-        <tr>
-            <td><a class="active" href="#descrizione" aria-controls="descrizione" role="tab" data-toggle="tab">OVERVIEW</a></td>
-            <td><a href="#eat-with" aria-controls="eat-with" role="tab" data-toggle="tab">EAT WITH</a></td>
-            <td><a href="#more" aria-controls="more" role="tab" data-toggle="tab">MORE LIKE THIS</a></td>
-        </tr>
-    </table>
-</div>
-{% if product.superfood %}
-    <div class="col-sm-4 col-sm-offset-3">
-        <table class="table text-center prodotto">
+    <div class="col-sm-5">
+        <table class="table text-center prodotto {{ product.id }}">
             <tr>
-                <th style="color:#99b0c2;"><small>SUPERFOOD</small></th>
-                <th><small>{{ product.superfoodDescription }}</small></th>
+                <th class="{% if product.glutenFree %}disabled{% endif %}"><small>GLUTEN FREE</small></th>
+                <th><small> {{ product.tipoDieta }}</small></th>
+                <th><small>{{ product.metodoProduzione }}</small></th>
+            </tr>
+            <tr>
+                <td><a class="active" href="#descrizione" aria-controls="descrizione" role="tab" data-toggle="tab">OVERVIEW</a></td>
+                <td><a href="#eat-with" aria-controls="eat-with" role="tab" data-toggle="tab">EAT WITH</a></td>
             </tr>
         </table>
     </div>
-{% endif %}
-<div class="col-xs-12">
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="descrizione">{{ product.rawDescription }}</div>
-        <div role="tabpanel" class="tab-pane" id="eat-with">
-            {{ sonata_block_render({'type': 'sonata.product.block.eat_with_products', 'settings': {'base_product_id': product.id, 'number': 24}}) }}
+    {% if product.superfood %}
+        <div class="col-sm-4 col-sm-offset-3">
+            <table class="table text-center prodotto">
+                <tr>
+                    <th style="color:#99b0c2;"><small>SUPERFOOD</small></th>
+                    <th><small>{{ product.superfoodDescription }}</small></th>
+                </tr>
+            </table>
         </div>
-        <div role="tabpanel" class="tab-pane" id="more">
-            {{ sonata_block_render({'type': 'sonata.product.block.similar_products', 'settings': {'base_product_id': product.id, 'number': 24}}) }}
+    {% endif %}
+    <div class="col-xs-12">
+        <div class="tab-content tab-product">
+            <div role="tabpanel" class="tab-pane active" id="descrizione">{{ product.rawDescription }}</div>
+            <div role="tabpanel" class="tab-pane" id="eat-with">
+                {{ sonata_block_render({'type': 'sonata.product.block.eat_with_products', 'settings': {'base_product_id': product.id, 'number': 24}}) }}
+            </div>
         </div>
     </div>
 </div>
-</div>
 <script>
-    $('.product-view_{{product.id}} table.prodotto a').click(function (e){
-        $('.product-view_{{product.id}} table.prodotto a.active').removeClass('active');
+    $('.{{product.id}}.table.prodotto a').click(function (e){
+        $('.{{product.id}}.table.prodotto a.active').removeClass('active');
         $(this).addClass('active');
     });
-</script>
-<script>
+
     var canvas = document.getElementById('pentagono_{{ product.id }}');
     var ctx = canvas.getContext("2d");
+
+    var width = 250;
+    if ($(canvas).parent().width() < 250){
+        width = $(canvas).parent().width();
+    }
+
+    $(canvas).attr('width',width).attr('height', width);
 
     function drawShape(ctx, x, y, points, radius1, radius2, alpha0) {
         //points: number of points (or number of sides for polygons)
@@ -116,52 +134,53 @@
         }
     }
     ctx.beginPath();
-    drawShape(ctx, 125, 125, 5, 100, 100, 0);
+    drawShape(ctx, width/2, width/2, 5, 100, 100, 0);
     ctx.strokeStyle = "black";
     ctx.lineWidth = 1;
     ctx.stroke();
     ctx.beginPath();
-    drawShape(ctx, 125, 125, 5, 80, 80, 0);
+    drawShape(ctx, width/2, width/2, 5, 80, 80, 0);
     ctx.strokeStyle = "#eee";
     ctx.fillStyle = "#bada55";
     ctx.lineWidth = 1;
     ctx.stroke();
     ctx.beginPath();
-    drawShape(ctx, 125, 125, 5, 60, 60, 0);
+    drawShape(ctx, width/2, width/2, 5, 60, 60, 0);
     ctx.strokeStyle = "#eee";
     ctx.lineWidth = 1;
     ctx.stroke();
     ctx.beginPath();
-    drawShape(ctx, 125, 125, 5, 40, 40, 0);
+    drawShape(ctx, width/2, width/2, 5, 40, 40, 0);
     ctx.strokeStyle = "#eee";
     ctx.lineWidth = 1;
     ctx.stroke();
     ctx.beginPath();
-    drawShape(ctx, 125, 125, 5, 20, 20, 0);
+    drawShape(ctx, width/2, width/2, 5, 20, 20, 0);
     ctx.strokeStyle = "#eee";
     ctx.lineWidth = 1;
     ctx.stroke();
     ctx.beginPath();
-    drawShape(ctx, 125, 125, 5, 100, 0, 0);
+    drawShape(ctx, width/2, width/2, 5, 100, 0, 0);
     ctx.strokeStyle = "#eee";
     ctx.lineWidth = 0.5;
     ctx.stroke();
     ctx.beginPath();
-    ctx.moveTo(125, 125);
+    ctx.moveTo(width/2, width/2);
     var angle = 0 * 2 * Math.PI / 5 - Math.PI / 2 + 0;
-    ctx.lineTo(125 + {{ product.alimentazione }} * Math.cos(angle), 125 + {{ product.alimentazione }} * Math.sin(angle));
+    ctx.lineTo(width/2 + {{ product.alimentazione }} * Math.cos(angle), width/2 + {{ product.alimentazione }} * Math.sin(angle));
     angle = 1 * 2 * Math.PI / 5 - Math.PI / 2 + 0;
-    ctx.lineTo(125 + {{ product.agricoltura }} * Math.cos(angle), 125 + {{ product.agricoltura }} * Math.sin(angle));
+    ctx.lineTo(width/2 + {{ product.agricoltura }} * Math.cos(angle), width/2 + {{ product.agricoltura }} * Math.sin(angle));
     angle = 2 * 2 * Math.PI / 5 - Math.PI / 2 + 0;
-    ctx.lineTo(125 + {{ product.ambiente }} * Math.cos(angle), 125 + {{ product.ambiente }} * Math.sin(angle));
+    ctx.lineTo(width/2 + {{ product.ambiente }} * Math.cos(angle), width/2 + {{ product.ambiente }} * Math.sin(angle));
     angle = 3 * 2 * Math.PI / 5 - Math.PI / 2 + 0;
-    ctx.lineTo(125 + {{ product.artigianato }} * Math.cos(angle), 125 + {{ product.artigianato }} * Math.sin(angle));
+    ctx.lineTo(width/2 + {{ product.artigianato }} * Math.cos(angle), width/2 + {{ product.artigianato }} * Math.sin(angle));
     angle = 4 * 2 * Math.PI / 5 - Math.PI / 2 + 0;
-    ctx.lineTo(125 + {{ product.arte }} * Math.cos(angle), 125 + {{ product.arte }} * Math.sin(angle));
+    ctx.lineTo(width/2 + {{ product.arte }} * Math.cos(angle), width/2 + {{ product.arte }} * Math.sin(angle));
     angle = 0 * 2 * Math.PI / 5 - Math.PI / 2 + 0;
-    ctx.lineTo(125 + {{ product.alimentazione }} * Math.cos(angle), 125 + {{ product.alimentazione }} * Math.sin(angle));
+    ctx.lineTo(width/2 + {{ product.alimentazione }} * Math.cos(angle), width/2 + {{ product.alimentazione }} * Math.sin(angle));
     ctx.strokeStyle = "#eee";
     ctx.fillStyle = "#eee";
     ctx.stroke();
     ctx.fill();
 </script>
+{% endblock %}

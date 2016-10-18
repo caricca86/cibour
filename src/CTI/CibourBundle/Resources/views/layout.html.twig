@@ -113,7 +113,7 @@ file that was distributed with this source code.
     </div>
     <div class="container-fluid">
 
-                <div class="row">
+                <div class="row" style="margin-right: 0;">
                     {% block page_content %}
                         {% if content is defined %}
                             {{ content|raw }}
@@ -122,19 +122,18 @@ file that was distributed with this source code.
                 </div>
             </div>
         </div>
+    {#
     <div class="container-fluid">
         <footer class="row">
             {% block page_footer %}
-                footer
+                <div class="col-xs-12">Cibour.com</div>
             {% endblock %}
         </footer>
-    </div>
+    </div>#}
     <script>
         $(function () {
             $('[data-toggle="popover"]').popover()
-        })
-        </script>
-    <script>
+        });
         $(document).ready(function(){
             $('input').iCheck({
                 checkboxClass: 'icheckbox_minimal',
@@ -142,5 +141,21 @@ file that was distributed with this source code.
                 increaseArea: '20%' // optional
             });
         });
+        var fontMob1 = $(".text-up-bold");
+        if(fontMob1.is(".text-up-bold")){
+            fontMob1.addClass("font-mob-1")
+        }
+        var fontMob2 = $(".text-up-bold-2");
+        if(fontMob2.is(".text-up-bold-2")){
+            fontMob2.addClass("font-mob-2")
+        }
+        var fontMob4 = $(".text-up-bold-4");
+        if(fontMob4.is(".text-up-bold-4")){
+            fontMob4.addClass("font-mob-4")
+        }
+        var fontMob5 = $(".text-up-bold-5");
+        if(fontMob5.is(".text-up-bold-5")){
+            fontMob5.addClass("font-mob-5")
+        }
     </script>
 {% endblock %}

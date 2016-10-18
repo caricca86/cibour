@@ -13,6 +13,7 @@ a {
 
 input[type=number] {
     -moz-appearance: textfield;
+   
 }
 
 /* Re-applies the controls on :hover and :focus
@@ -130,6 +131,11 @@ nav li.last a {
     padding-left: 25px;
 }
 
+
+footer > div {
+    background-color: black;
+    color: white;
+}
 /* Dropdown menu*/
 
 .popover-content li a {
@@ -311,6 +317,15 @@ nav .popover-content .divider {
     text-align: center;
     margin-top: 60px;
 }
+.menu.addr-list,
+.menu.dett-ord,
+.menu.past-orders,
+.edit.menu{
+   
+    text-align: center;
+    margin-top: 100px;
+}
+
 .sonata-user-show .menu .list-group .list-group-item {
     display: inline-block;
     border: 0;
@@ -351,6 +366,28 @@ table.table.prodotto th {
     font-weight: 400;
 }
 
+.tab-product .tab-pane{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.tab-product .tab-pane .carousel-control {
+    padding-top: 2.5%;
+    width: 2%;
+}
+
+/*css tabella ordini passati*/
+.tab-ord > tbody > tr > td {
+width:20%;
+border:0;
+}
+.table-del-bill > tbody > tr > td {
+
+border:0;
+}
+
+
+/*----------------------------*/
 table.table.prodotto td {
     border-top: 1px solid black;
 }
@@ -367,7 +404,7 @@ table.prodotto a.active{
 
 ul.stepper {
     margin-top: 125px !important;
-    margin-bottom: 125px !important;
+    margin-bottom: 90px;
     text-transform: uppercase;
     height: auto !important;
 }
@@ -403,21 +440,40 @@ ul.stepper li div.img-circle {
 
 
 /* Table bag */
-.table.bag {
+.table.bag  {
     text-transform: uppercase;
-    margin-bottom: 80px;
+    margin-bottom: 40px;
+    font-size:0.9em;
 }
 
+
+
+/*
 .table.bag > thead > tr > th {
     border-bottom: 1px solid black;
     vertical-align: bottom;
     margin-bottom: 25px;
 }
+*/
 
 .table.bag tbody td {
     padding-top: 30px;
     vertical-align: middle;
 }
+
+/*Table review order*/
+.status, .dates{
+text-transform:uppercase;
+font-size:0.85em;
+}
+.status > tbody > tr > th,
+.status > tbody > tr > td ,
+.dates  > tbody > tr > th,
+.dates  > tbody > tr > td {
+border:0;
+
+}
+
 
 .table.bag tr:first-child td, .table.bag tfoot tr:first-child th{
     padding-top: 40px;
@@ -429,6 +485,9 @@ ul.stepper li div.img-circle {
 
 .table.bag td input[type="number"] {
     max-width: 50px;
+    margin-left:35%;
+    min-width:30px;
+    
 }
 
 .sonata-basket-nextstep {
@@ -442,14 +501,39 @@ ul.stepper li div.img-circle {
 /* panels */
 .panel {
     border: 0;
+    box-shadow: none;
+     
 }
+.panel.register, 
+.panel.reg-log {
+padding-top:120px;
+}
+
 .panel-body, .panel-heading {
     text-align: center;
+    
+}
+
+.panel-body.profile-edit{
+margin-bottom:20px;
+
+}
+
+.panel-heading > div > hr {
+border-color: black;
+margin-top:3%;
+
 }
 
 .panel-heading {
     text-transform: uppercase;
-}
+	padding-bottom:6%;
+	
+	}
+	
+	
+
+
 
 .panel-body h3 {
     text-transform: uppercase;
@@ -459,7 +543,9 @@ ul.stepper li div.img-circle {
     padding-bottom: 30px;
     border-bottom: 1px solid black;
     margin-bottom: 90px;
+       
 }
+
 
 .panel.panel-final-review {
     margin-bottom: 40px;
@@ -473,23 +559,29 @@ ul.stepper li div.img-circle {
     border:0;
 }
 
+/*Testo sottolineato menu profilo*/
+a.list-group-item:focus{
+text-decoration: underline;
+}
+
+/*
 .sonata-payment-confirmation b {
     text-transform: uppercase;
 
 }
-
-.sonata-payment-confirmation div {
-    margin-bottom: 90px;
-    margin-top: 65px;
+*/
+.sonata-payment-confirmation {
+    margin-bottom: 50px;
+    margin-top: 100px;
 }
-
+/*
 .sonata-payment-confirmation p {
     margin-bottom: 40px;
-}
+}*/
 
 #collapseHome .carrello {
-    margin-top: 130px;
-    max-height: 41px;
+    margin-top: 75px;
+    max-height: 25px;
 }
 
 #collapseHome {
@@ -510,26 +602,29 @@ padding-top:12%;
 }
 
 #collapseHome .logo {
-    margin-top: 100px;
-    margin-bottom: 30px;
-    max-height: 108px;
+    margin-top: 68px;
+    margin-bottom: 15px;
+    max-height: 54px;
+    
 }
 
 #collapseHome .our-network {
     text-align: center;
-    height: 175px;
+    height: 120px;
     padding-top: 45px;
-    font-size: 29px;
-    letter-spacing: 6px;
+    font-size: 15px;
+    letter-spacing: 3px;
+
+
 }
 
 #collapseHome .join-us, #collapseHome .sign-in {
     text-align: center;
-    height: 170px;
+    height: 120px;
     width: 100%;
-    padding-top:70px;
-    font-size : 22px ;
-    letter-spacing: 6px;
+    padding-top:52.5px;
+    font-size : 12px ;
+    letter-spacing: 3px;
 }
 
 #collapseHome .search {
@@ -537,33 +632,47 @@ padding-top:12%;
 }
 
 #collapseHome .search form {
-    height: 41px;
-    margin-bottom: 160px;
+    height: 25px;
+    margin-bottom: 120px;
     margin-left: 15%;
-    margin-top: 130px;
+    margin-top: 75px;
     width: 77%;
 }
 
 #collapseHome .forchetta {
     left: 18%;
-    margin-top: 3px;
+    margin-top: 2.5px;
     position: absolute;
+    max-height:19px;
+}
+
+/*NEW IMMAGINE ICONA*/
+#collapseHome .img-responsive-fixed-height{
+height: 50px;
+max-width:auto;
+}
+#collapseHome .img-responsive-height-resized{
+width:100%;
+max-height:500px;
+
 }
 
 #collapseHome .search input {
     border: 1px solid;
     border-radius: 6px;
-    font-size: 20px;
+    font-size: 12px;
     height: 100%;
-    line-height: 50px;
+    line-height: 30px;
     padding-left: 7%;
     width: 100%;
 }
 
+
+
 #collapseHome .link {
-    font-size: 21px;
-    letter-spacing: 6px;
-    margin-bottom: 20px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 45px;
     text-align: center;
 }
 
@@ -610,3 +719,383 @@ padding-top:12%;
 }
 
 
+#padding_buttons{
+padding-top:6%;
+
+}
+
+/* No padding right-left panel-heading */
+.no-pad{
+padding-left:0;
+padding-right:0;
+}
+.no-pad-l{
+padding-left:0;
+}
+
+.no-pad-r{
+padding-right:0;
+}
+
+.no-marg{
+margin:0;
+}
+
+
+.no-marg-top-bot{
+margin-top:0;
+margin-bottom:0;
+}
+
+/*margin */
+
+.marg-bot-delivery {
+margin-bottom:1.5%;
+}
+.marg-top-delivery{
+margin-top:12px;
+}
+
+/*text bold e uppercase*/
+
+.text-up-bold{
+text-transform:uppercase;
+font-weight:bold;
+font-size:1em;
+}
+.text-up-bold-2{
+text-transform:uppercase;
+font-weight:bold;
+font-size:0.95em;
+}
+.text-up-bold-3{
+text-transform:uppercase;
+font-weight:bold;
+font-size:0.75em;
+}
+.text-up-bold-4{
+text-transform:uppercase;
+font-weight:bold;
+font-size:0.82em;
+}
+.text-up-bold-5{
+text-transform:uppercase;
+font-weight:bold;
+font-size:0.86em;
+}
+
+/*pagina ordini vecchi  reference number*/
+.text-reference{
+text-transform:uppercase;
+font-weight:bold;
+font-size:0.82em;
+
+}
+.text-reference a{
+text-transform:uppercase;
+font-weight:normal;
+font-size:1.1em;
+color:#4f4f4f;
+
+}
+hr.ref{
+border-color:#4f4f4f;
+margin-top:22px;
+}
+
+/*Margini scritte thead carrello*/
+.thead-tablebag-margin-text{
+margin-top:10px;
+}
+.thead-tablebag-margin-text-2{
+margin-top:12px;}
+
+hr {
+border-color:#000000;
+
+}
+/*
+hr.delivery {
+margin-top:18px;
+
+}*/
+.pad-bot-top{
+padding-bottom:19px;
+padding-top:5px;
+}
+
+/*metodi di pagamento, modificare e adattare appena si aggiungono tutti i metodi*/
+.pad-bot-top-payment{
+padding-bottom:74px;
+padding-top:50px;
+}
+
+
+.marg-top-3{
+margin-top:3px;
+}
+
+.marg-top-7{
+margin-top:7px;
+}
+.marg-top-10{
+margin-top:10px;
+}
+.marg-top-13{
+margin-top:13px;
+}
+.marg-top-14{
+margin-top:14px;
+}
+.marg-top-15{
+margin-top:15px;
+}
+.marg-top-30{
+margin-top:30px;
+}
+
+.marg-top-90{
+margin-top:90px;
+}
+
+
+.marg-bot-30{
+margin-bottom:30px;
+}
+.marg-bot-10{
+margin-bottom:10px;}
+
+.padd-left-10{
+padding-left:10px;
+}
+.text-underl{
+text-decoration:underline;
+}
+
+
+
+
+/*Media query personalizzate per correzione errori mobile*/
+@media ( max-width:900px) {
+
+.margin-top-xs-media{
+margin-top:70px;
+
+}
+
+.margin-top-xs-media-alert{
+margin-top:90px;
+}
+
+ul.stepper  {
+margin-bottom:25px;
+
+}
+.no-pad-xs,.change-pwd-mob{
+padding-left:0;
+padding-right:0;
+}
+
+.log.panel-body{
+margin-bottom:30px;
+
+}
+.reg.panel{
+padding-top:20px;;
+}
+
+table.tab-ord tbody tr > td {
+font-size:0.80em;
+
+}
+
+.tab-ord-mob{
+text-align:center;
+font-size: 0.84em;
+
+}
+.tab-head-mob{
+margin-left:11px;
+}
+.deliv-mob, .del-addr, .regist-hr-mob{
+margin-top:5px;
+margin-bottom:5px;
+
+}
+.paym-confirm{
+margin-top:10px;
+margin-bottom:5px;
+
+}
+
+.bill-addr-mob.panel-body, .del-add-method, .review-panel{
+margin-bottom:50px;
+
+}
+.paym-mob.panel-body {
+margin-bottom:65px;
+}
+
+.marg-bot-mob-20{
+margin-bottom:20px;
+
+}
+
+.table-del-bill > tbody address{
+margin-left:30px;
+
+
+}
+.panel-del-bill{
+margin-bottom:60px;
+
+
+}
+.del-add-method  label{
+margin-left:-20px;
+}
+/*basket correzioni per Mobile*/
+
+.table.bag {
+   text-transform: uppercase !important; 
+    margin-bottom: 40px !important;
+  font-size:0.79em !important;    
+}
+.table-buttons-mob {
+    margin-bottom: 40px ;  
+}
+.cart-thead{
+margin-left:-27px !important;
+}
+
+/*text bold e uppercase*/
+/*
+.font-mob-2, .status,.dates{
+font-size:0.79em ;
+   text-transform: uppercase ; 
+}
+.font-mob-5{
+font-size:0.75em ;
+   text-transform: uppercase; 
+}
+
+
+.font-mob-1{
+text-transform:uppercase;
+
+font-size:0.83em;
+}
+
+.font-mob-4{
+text-transform:uppercase;
+
+font-size:0.73em;
+}
+*/
+
+
+
+
+/*margini e padding basket*/
+
+.marg-left-mob-35{
+margin-left:35px;
+}
+.marg-left-mob-25{
+margin-left:25px;
+}
+.marg-left-mob-15{
+margin-left:15px;
+}
+.marg-left-mob-10{
+margin-left:10px;
+}
+
+.marg-left-mob-5{
+margin-left:5px;
+}
+
+.pad-mob-0{
+padding-left:0;
+padding-right:0;
+}
+.padd-left-mob-15{
+padding-left:15px;
+}
+.padd-right-mob-15{
+padding-right:15px;
+}
+/*final review margini e pannello prodotti*/
+
+.marg-top-mob-10{
+margin-top:10px;
+}
+.marg-bot-mob-50{margin-bottom:50px;}
+
+
+.marg-top-mob-30{
+margin-top:20px;;
+}
+
+
+tbody.review tr > td{
+
+font-size:0.75em ;
+   text-transform: uppercase;  
+  padding-left:30px;  
+}
+tbody.review tr > td.number{
+text-align:left;
+ padding-right:35px;
+}
+tbody.review tr > td.number:last-child{
+text-align:left;
+padding-right:40px;
+ 
+}
+
+.marg-top-mob-60{
+margin-top:60px;;
+}
+.mob-pad-top-320{
+padding-top:320px;
+}
+.marg-bot-mob-40{
+margin-bottom:40px;
+}
+
+
+
+
+}
+
+
+@media (max-width:1500px){
+.font-mob-2, .status,.dates{
+font-size:0.79em ;
+   text-transform: uppercase ; 
+}
+.font-mob-5{
+font-size:0.75em ;
+   text-transform: uppercase; 
+}
+
+
+.font-mob-1{
+text-transform:uppercase;
+
+font-size:0.83em;
+}
+
+.font-mob-4{
+text-transform:uppercase;
+
+font-size:0.73em;
+}
+
+
+
+
+}
+
+table {border-collapse: inherit;}

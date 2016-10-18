@@ -8,33 +8,61 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 
 #}
+<div class=" col-xs-12 col-sm-6 col-sm-offset-3 no-pad " >
 
-<div class="sonata-payment-confirmation text-center">
     {% if order.isvalidated %}
-        <div><b>{{ 'title_validation_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}</b></div>
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 sonata-payment-confirmation text-center no-pad"  >
+            <div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>
+            <div class="text-up-bold-2 no-pad col-xs-12 col-sm-6 marg-top-10"  >
+                {{ 'title_validation_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}
+            </div>
+            <div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>
+        </div>
+    <div class=" col-xs-12 text-center ">
         <p>
             {% autoescape false %}
                 {{ 'message_validation_payment'|trans({}, 'SonataPaymentBundle') }}
             {% endautoescape %}
         </p>
-
+    </div>
     {% elseif order.ispending %}
-        <div><b>{{ 'title_pending_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}</b></div>
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 sonata-payment-confirmation text-center no-pad"  >
+            <div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>
+            <div class="text-up-bold-2 no-pad col-xs-12 col-sm-6 marg-top-10"  >
+                {{ 'title_pending_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}
+            </div>
+            <div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>
+        </div>
 
+        <div class=" col-xs-12 text-center ">
         <p>
             {{ 'message_pending_payment'|trans({}, 'SonataPaymentBundle') }}
         </p>
+            </div>
     {% else %}
-
-        <div><b>{{ 'title_not_validated_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}</b></div>
-
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 sonata-payment-confirmation text-center no-pad"  >
+            <div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>
+            <div class="text-up-bold-2 no-pad col-xs-12 col-sm-6 marg-top-10"  >
+                {{ 'title_not_validated_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}
+            </div>
+            <div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>
+        </div>
+        <div class=" col-xs-12 text-center ">
         <p>
             {{ 'message_not_validated_payment'|trans({}, 'SonataPaymentBundle') }}
         </p>
-
+        </div>
     {% endif %}
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3 no-pad"><hr/></div>
+    <div  class="row ">
+
+        <div class="col-xs-6 col-sm-6 marg-top-30   ">
+            <a class="btn basket-control text-up-bold-2" href="{{ url('sonata_catalog_index') }}">{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_go_back_shopping{% endtrans %}</a>
+        </div>
+        <div class="col-xs-6 col-sm-6 marg-top-30 ">
+            <a class="btn basket-control pull-right text-up-bold-2" href="{{ url('sonata_order_view', {'reference' : order.reference }) }}">{{ 'message_view_order_payment'|trans({}, 'SonataPaymentBundle') }}</a>
+        </div>
+    </div>
+
+
 </div>
-<a class="btn basket-control" href="{{ url('sonata_user_profile_show') }}">{{ 'message_view_user_profile'|trans({}, 'SonataPaymentBundle') }}</a>
-
-<a class="btn basket-control pull-right" href="{{ url('sonata_order_view', {'reference' : order.reference }) }}">{{ 'message_view_order_payment'|trans({}, 'SonataPaymentBundle') }}</a>
-

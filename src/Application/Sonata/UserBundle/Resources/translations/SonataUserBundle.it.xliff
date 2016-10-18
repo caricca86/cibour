@@ -168,7 +168,7 @@
             </trans-unit>
             <trans-unit id="list.label_email">
                 <source>list.label_email</source>
-                <target>Indirizzo-E-Mail</target>
+                <target>Indirizzo E-Mail</target>
             </trans-unit>
             <trans-unit id="list.label_groups">
                 <source>list.label_groups</source>
@@ -388,7 +388,7 @@
             </trans-unit>
             <trans-unit id="show.label_created_at">
                 <source>show.label_created_at</source>
-                <target>Creato al</target>
+                <target>Creato il</target>
             </trans-unit>
             <trans-unit id="show.label_last_login">
                 <source>show.label_last_login</source>

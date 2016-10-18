@@ -12,7 +12,7 @@ file that was distributed with this source code.
 {% extends sonata_block.templates.block_base %}
 {% block block %}
 <div class="row">
-    <div class="col-md-12 slider">
+    <div class="col-md-12 slider no-pad">
         <div id="recent-products-carousel_{{ block.id }}" class="carousel product-carousel slide">
 
             <!-- Carousel items -->
@@ -20,7 +20,7 @@ file that was distributed with this source code.
                 <div class="item active">
                     <div class="row">
                         {% for product in products|slice(0, 12) if product.enabled %}
-                        {% set link = url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) %}
+                        {% set link = url('catalog_category', {'categorySlug': product.categories[0].slug, 'categoryId': product.categories[0].id, 'prodottoSlug': product.slug, 'prodottoId': product.id}) %}
                         <div class="col-sm-1">
                             <a href="{{ link }}">
                                 {% if product.image %}
@@ -35,10 +35,11 @@ file that was distributed with this source code.
                     <!--/row-->
                 </div>
                 <!--/item-->
+                {% if products|length > 12 %}
                 <div class="item">
                     <div class="row">
                         {% for product in products|slice(12, 24) if product.enabled %}
-                            {% set link = url('sonata_product_view', {'productId': product.id, 'slug': product.slug}) %}
+                            {% set link = url('catalog_category', {'categorySlug': product.category.slug, 'categoryId': product.category.id, 'prodottoSlug': product.slug, 'prodottoId': product.id}) %}
                             <div class="col-sm-1">
                                 <a href="{{ link }}">
                                     {% if product.image %}
@@ -53,43 +54,16 @@ file that was distributed with this source code.
                     <!--/row-->
                 </div>
                 <!--/item-->
+                {% endif %}
             </div>
             <!--/carousel-inner-->
+    {% if products|length > 12 %}
             <a class="left carousel-control" href="#recent-products-carousel_{{ block.id }}" data-slide="prev">‹</a>
 
             <a class="right carousel-control" href="#recent-products-carousel_{{ block.id }}" data-slide="next">›</a>
+        {% endif %}
         </div>
         <!--/myCarousel-->
     </div>
 </div>
-<div id="recent-products-view_{{ block.id }}" class="scheda-prodotto row" style="display: none;">
-
-</div>
-<script>
-$('#recent-products-carousel_{{block.id}} .item a').click(function(e) {
-    e.preventDefault();
-    var target = $('#recent-products-view_{{ block.id }}');
-    var loader = '<hr><img class="img-responsive center-block" src="{{ asset('bundles/cticibour/images/ajax_loader.gif') }}" /><hr>';
-
-    var url = $(this).attr('href');
-    $.ajax({url: url,
-        beforeSend: function() {
-            target.html(loader);
-            target.slideDown();
-        },
-        success: function(result) {
-            target.html(result);
-            $('.close', target).click( function(){
-                target.slideUp();
-            });
-        }
-    });
-
-    $(this).click(function (e) {
-        e.preventDefault();
-
-        target.slideUp();
-    })
-});
-</script>
 {% endblock %}

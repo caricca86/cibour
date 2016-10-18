@@ -3,30 +3,36 @@
 {% endblock %}
 
 {% block stepper_content %}
-    <ul class="stepper hidden-xs">
-        <li{% if 'basket' == step %} class="active"{% endif %}>
+    <ul class="stepper no-pad">
+        <li class="hidden-xs hidden-sm {% if 'basket' == step %} active{% endif %}">
             <div class="img-circle">1</div>
             <p>{{ 'basket_stepper_basket_title'|trans({}, 'SonataBasketBundle') }}</p>
         </li>
 
-        <li{% if 'identification' == step %} class="active"{% endif %}>
+        <li class="hidden-sm hidden-xs {% if 'identification' == step %} active{% endif %}">
             <div class="img-circle">2</div>
             <p>{{ 'basket_stepper_identification_title'|trans({}, 'SonataBasketBundle') }}</p>
         </li>
 
-        <li{% if 'delivery' == step %} class="active"{% endif %}>
+        <li class="hidden-sm hidden-xs {% if 'delivery' == step %} active{% endif %}">
             <div class="img-circle">3</div>
             <p>{{ 'basket_stepper_delivery_title'|trans({}, 'SonataBasketBundle') }}</p>
         </li>
 
-        <li{% if 'billing' == step %} class="active"{% endif %}>
+        <li class="hidden-sm hidden-xs {% if 'billing' == step %} active{% endif %}">
             <div class="img-circle">4</div>
             <p>{{ 'basket_stepper_billing_title'|trans({}, 'SonataBasketBundle') }}</p>
         </li>
 
-        <li{% if 'checkout' == step %} class="active"{% endif %}>
+        <li class="hidden-sm hidden-xs {% if 'checkout' == step %} active{% endif %}">
             <div class="img-circle">5</div>
             <p>{{ 'basket_stepper_checkout_title'|trans({}, 'SonataBasketBundle') }}</p>
         </li>
     </ul>
+    <script>
+        var toSee = $( "ul.stepper > li.active" );
+        if (toSee.is("ul.stepper > li.active")){
+            toSee.removeClass("hidden-xs hidden-sm");
+        }
+    </script>
 {% endblock %}

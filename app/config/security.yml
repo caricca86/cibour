@@ -72,8 +72,10 @@ security:
                 use_forward:    false
                 check_path:     /login_check
                 failure_path:   null
+                default_target_path: /shop/catalog
             logout:
                 path: /logout
+                target: /shop/catalog
                 # We set invalidate_session to false because we want basket
                 # to be fully persisted even when user logout and login again
                 invalidate_session: false

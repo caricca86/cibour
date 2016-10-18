@@ -18,19 +18,38 @@ file that was distributed with this source code.
 {% if basket.hasBasketElements %}
 
     {{ form_errors(form) }}
-
-    <form id="product_form" class="col-md-offset-1" action="{{ url('sonata_basket_update') }}" method="POST" novalidate="novalidate">
+<div class=" col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 pad-mob-0">
+    <form action="{{ url('sonata_basket_update') }}" method="POST" novalidate="novalidate">
 
         <table class="table bag">
 
             <thead>
-                <tr>
-                    <th class="col-sm-6">{% trans from 'SonataBasketBundle'%}header_basket_information{% endtrans %}</th>
-                    <th class="text-center">{% trans from 'SonataBasketBundle'%}header_basket_unit_price{% endtrans %}</th>
-                    <th class="col-sm-1 text-center">{% trans from 'SonataBasketBundle'%}header_basket_quantity{% endtrans %}</th>
-                    <th class="text-center">{% trans from 'SonataBasketBundle'%}header_basket_total_inc{% endtrans %}</th>
-                    <th class="text-center">{% trans from 'SonataBasketBundle'%}header_basket_delete{% endtrans %}</th>
-                </tr>
+
+            <div class=" col-xs-12 visible-xs hidden-md no-pad"><hr /></div>
+
+            <div class=" col-xs-5 col-sm-6  no-pad "  >
+                <div class="no-pad hidden-xs col-sm-1 center-block"><hr style="border-color:black;" class=""/></div>
+                <div class=" no-pad col-xs-12 col-sm-2 cart-thead  text-up-bold-2 text-center  thead-tablebag-margin-text">{% trans from 'SonataBasketBundle'%}header_basket_information{% endtrans %}</div>
+                <div class="no-pad  hidden-xs col-sm-9 center-block"><hr style="border-color:black;"/></div>
+            </div>
+
+            <div class="col-xs-5 col-sm-3  no-pad cart-thead ">
+                <div class="no-pad hidden-xs col-sm-1  "><hr style="border-color:black;"/></div>
+                <div class="no-pad col-xs-5 col-sm-4  text-up-bold-2  text-center thead-tablebag-margin-text  ">{% trans from 'SonataBasketBundle'%}header_basket_unit_price{% endtrans %}</div>
+                <div class="no-pad hidden-xs col-sm-1  "><hr style="border-color:black;"/></div>
+                <div class="no-pad col-xs-7 col-sm-4 text-up-bold-2 thead-tablebag-margin-text text-center    ">{% trans from 'SonataBasketBundle'%}header_basket_quantity{% endtrans %}</div>
+                <div class="no-pad hidden-xs col-sm-2  center-block"><hr style="border-color:black;"/></div>
+            </div>
+
+            <div class="col-xs-2 col-sm-3  no-pad cart-thead ">
+                <div class="no-pad hidden-xs col-sm-1  "><hr style="border-color:black; "/></div>
+                <div class="col-xs-10 col-sm-4 text-up-bold-2 font-mob-2 text-center ">{% trans from 'SonataBasketBundle'%}header_basket_total_inc{% endtrans %}</div>
+                <div class="no-pad hidden-xs col-sm-4 "><hr style="border-color:black; "/></div>
+                <div class="no-pad col-xs-2 col-sm-2 font-mob-2 thead-tablebag-margin-text text-center  " >{% trans from 'SonataBasketBundle'%}header_basket_delete{% endtrans %}</div>
+                <div class="no-pad hidden-xs col-sm-1 " ><hr style="border-color:black;"/></div>
+            </div>
+
+            <div class="visible-xs col-xs-12  hidden-md no-pad"><hr /></div>
             </thead>
 
             <tbody>
@@ -46,8 +65,8 @@ file that was distributed with this source code.
                 {# mark the widget as rendered ... TODO: create a custom widget type ...#}
                 {% set dummy = form.basketElements.setrendered %}
             </tbody>
-
-            <tfoot>
+            <div>
+            <tfoot class=" text-up-bold-2 ">
                 <tr>
                     <td colspan="3" rowspan="{{ 3 + basket.getVatAmounts|length }}"></td>
                     <th style="text-align: right">{% trans from 'SonataBasketBundle'%}footer_basket_total_excl{% endtrans %}</th>
@@ -71,28 +90,31 @@ file that was distributed with this source code.
                     <td colspan="2" class="number"><b>{{ basket.getTotal(true)|number_format_currency(basket.currency.label, {}, {}, basket.locale) }}</b></td>
                 </tr>
             </tfoot>
-
+            </div>
         </table>
+        <div class=" col-xs-12 no-pad"><hr /></div>
 
 
-        <button type="submit" class="btn basket-control">{% trans from 'SonataBasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}</button>
+        <button type="submit" class="btn basket-control text-up-bold-2 table-buttons-mob">{% trans from 'SonataBasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}</button>
 
-        <a href="{{ url('sonata_basket_delivery_address') }}" class="btn pull-right sonata-basket-nextstep"{% if form.vars.errors is not empty %} disabled{% endif %}>{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}&nbsp;</a>
+        <a href="{{ url('sonata_basket_delivery_address') }}" class="btn pull-right sonata-basket-nextstep text-up-bold-2 table-buttons-mob"{% if form.vars.errors is not empty %} disabled{% endif %}>{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}&nbsp;</a>
 
 
         {{ form_rest(form) }}
     </form>
+</div>
 {#
     {% set single_basket_element = basket.basketElements|last %}
     {{ sonata_block_render({'type': 'sonata.product.block.similar_products', 'settings': {'number': 4, 'base_product_id': single_basket_element.productId}}) }}
 #}
 {% else %}
-
+<div class="text-center">
     <p>
         {% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_is_empty{% endtrans %}.
         <br />
-        <a href="{{ path('sonata_catalog_index') }}">{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_go_back_shopping{% endtrans %}</a>.
+    <div class="text-up-bold-2"><a href="{{ path('sonata_catalog_index') }}">{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_go_back_shopping{% endtrans %}</a>.</div>
     </p>
+    </div>
 {#
     {{ sonata_block_render({'type': 'sonata.product.block.recent_products', 'settings': {'number': 4}}) }}
 #}

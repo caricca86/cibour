@@ -40,7 +40,9 @@ file that was distributed with this source code.
         <td class="text-center">
             {% block product_quantity %}
                 <div{% if formView.quantity.vars.errors|length > 0 %} class="has-error"{% endif %}>
-                    {{ form_widget(formView.quantity, {'attr': {'class': 'input-mini', 'min': 1}, 'horizontal_input_wrapper_class': ''}) }}
+                    <div class="padd-left-mob-15 padd-right-mob-15 ">
+                        {{ form_widget(formView.quantity, {'attr': {'class': 'input-mini', 'min': 1}, 'horizontal_input_wrapper_class': ''}) }}
+                    </div>
                 </div>
             {% endblock %}
         </td>

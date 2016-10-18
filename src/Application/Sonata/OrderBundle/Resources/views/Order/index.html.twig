@@ -16,8 +16,6 @@ file that was distributed with this source code.
 
 {% block sonata_profile_content %}
 
-    {% sonata_template_box 'This is the orders list template. Feel free to override it.' %}
-
     {% if orders|length > 0 %}
 
         {% set looped = false %}
@@ -28,17 +26,20 @@ file that was distributed with this source code.
             {% set looped = true %}
 
             {% if loop.first %}
-                <h3>{% trans from 'SonataOrderBundle' %}sonata.order.view.in_progress_title{% endtrans %}</h3>
-                <table class="table table-bordered" id="sonata-ecommerce-current-orders">
-                    {{ block('order_list_heading') }}
-            {% endif %}
 
+                <div class="col-lg-4 col-sm-4 col-lg-offset-4 col-sm-offset-4 no-pad marg-bot-delivery marg-top-30">
+                    <div class="col-xs-12 col-md-1 col-md-offset-3 no-pad "><hr class="delivery"></div>
+                    <div class="col-xs-12 col-md-4 no-pad"><h2 class=" text-center text-up-bold marg-top-delivery no-pad">{% trans from 'SonataOrderBundle' %}sonata.order.view.in_progress_title{% endtrans %}</div>
+                    <div class="col-xs-12 col-md-1 no-pad"><hr class="delivery"></div>
+                </div>
+
+            {% endif %}
+            {{ block('order_list_heading') }}
             {{ block('order_list_row') }}
         {% endfor %}
 
         {% if looped %}
             {% set looped = false %}
-            </table>
         {% endif %}
 
         {% for order in orders
@@ -47,16 +48,18 @@ file that was distributed with this source code.
             {% set looped = true %}
 
             {% if loop.first %}
-                <h3>{% trans from 'SonataOrderBundle' %}sonata.order.view.done_title{% endtrans %}</h3>
-                <table class="table table-bordered" id="sonata-ecommerce-past-orders">
-                    {{ block('order_list_heading') }}
-            {% endif %}
+                <div class="col-lg-4 col-sm-4 col-lg-offset-4 col-sm-offset-4 no-pad marg-bot-delivery marg-top-30">
+                    <div class="col-xs-12 col-md-1 col-md-offset-3 no-pad "><hr class="delivery"></div>
+                    <div class="col-xs-12 col-md-4 no-pad"><h2 class=" text-center text-up-bold marg-top-delivery no-pad">{% trans from 'SonataOrderBundle' %}sonata.order.view.done_title{% endtrans %}</div>
+                    <div class="col-xs-12 col-md-1 no-pad"><hr class="delivery"></div>
+                </div>
 
+            {% endif %}
+            {{ block('order_list_heading') }}
             {{ block('order_list_row') }}
         {% endfor %}
 
         {% if looped %}
-            </table>
         {% endif %}
 
     {% else %}
@@ -66,23 +69,56 @@ file that was distributed with this source code.
 
 
 {% block order_list_heading %}
-    <tr>
-        <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.reference{% endtrans %}</th>
-        <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.created_at{% endtrans %}</th>
-        <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.order_status{% endtrans %}</th>
-        <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.payment_status{% endtrans %}</th>
-        <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_status{% endtrans %}</th>
-        <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
-    </tr>
+    <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-4 marg-top-30" >
+        <div class="col-sm-1 col-sm-offset-1 hidden-xs no-pad  "><hr class="ref"/></div>
+        <div class="col-xs-12 col-sm-8 text-reference marg-top-13  text-center no-pad">
+            {% trans from 'SonataOrderBundle' %}sonata.order.view.reference{% endtrans %} n°
+            <a href="{{ url('sonata_order_view', {'reference' : order.reference}) }}"> {{ order.reference }}</a>
+        </div>
+        <div class="col-sm-1 hidden-xs no-pad"><hr class="ref"/></div>
+    </div>
+    <div class="col-xs-12 col-sm-12   no-pad tab-ord-mob ">
+        <div class="col-xs-2 col-xs-offset-1  col-md-2 col-md-offset-1   no-pad tab-head-mob" >
+            <div class="col-sm-2 hidden-xs no-pad  "><hr/></div>
+            <div class="col-xs-12 col-sm-8 text-up-bold-4 marg-top-13 text-center no-pad">{% trans from 'SonataOrderBundle' %}sonata.order.view.created_at{% endtrans %}</div>
+            <div class="col-sm-2 hidden-xs no-pad"><hr/></div>
+        </div>
+        <div class="col-xs-2 col-md-2 no-pad tab-head-mob" >
+            <div class="col-sm-2 hidden-xs no-pad  "><hr/></div>
+            <div class="col-xs-12 col-sm-8 text-up-bold-4 marg-top-13 text-center no-pad">{% trans from 'SonataOrderBundle' %}sonata.order.view.order_status{% endtrans %}</div>
+            <div class="col-sm-2 hidden-xs no-pad"><hr/></div>
+        </div>
+        <div class="col-xs-2 col-md-2 no-pad tab-head-mob" >
+            <div class="col-sm-2 hidden-xs no-pad  "><hr/></div>
+            <div class="col-xs-12 col-sm-8 text-up-bold-4 marg-top-13 text-center no-pad">{% trans from 'SonataOrderBundle' %}sonata.order.view.payment_status{% endtrans %}</div>
+            <div class="col-sm-2 hidden-xs no-pad"><hr/></div>
+        </div>
+        <div class="col-xs-2 col-md-2 no-pad tab-head-mob" >
+            <div class="col-sm-2 hidden-xs no-pad  "><hr/></div>
+            <div class="col-xs-12 col-sm-8 text-up-bold-4 marg-top-13 text-center no-pad">{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_status{% endtrans %}</div>
+            <div class="col-sm-2 hidden-xs no-pad"><hr/></div>
+        </div>
+        <div class="col-xs-2 col-md-2 no-pad tab-head-mob" >
+            <div class="col-sm-2 hidden-xs no-pad  "><hr/></div>
+            <div class="col-xs-12 col-sm-8 text-up-bold-4 marg-top-13 text-center no-pad">{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</div>
+            <div class="col-sm-2 hidden-xs no-pad"><hr/></div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block order_list_row %}
-    <tr>
-        <td><a href="{{ url('sonata_order_view', {'reference' : order.reference}) }}">{{ order.reference }}</a></td>
-        <td>{{ order.createdAt|format_datetime(null, order.locale) }}</td>
-        <td><span class="label{{ order|sonata_status_class(null, 'danger') ? ' label-'~order|sonata_status_class(null, 'danger') : '' }}">{{ order.statusName|trans([], 'SonataOrderBundle') }}</span></td>
-        <td><span class="label{{ order|sonata_status_class('payment', 'danger') ? ' label-'~order|sonata_status_class('payment', 'danger') : '' }}">{{ order.paymentStatusName|trans([], 'SonataPaymentBundle') }}</span></td>
-        <td><span class="label{{ order|sonata_status_class('delivery', 'danger') ? ' label-'~order|sonata_status_class('delivery', 'danger') : '' }}">{{ order.deliveryStatusName|trans([], 'SonataDeliveryBundle') }}</span></td>
-        <td class="number">{{ order.totalInc|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
-    </tr>
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1   no-pad marg-bot-30  ">
+        <table class="table tab-ord  " id="sonata-ecommerce-past-orders">
+            <tbody >
+            <tr class="text-center">
+                <td>{{ order.createdAt|format_datetime(null, order.locale) }}</td>
+                <td><span class="label{{ order|sonata_status_class(null, 'danger') ? ' label-'~order|sonata_status_class(null, 'danger') : '' }}">{{ order.statusName|trans([], 'SonataOrderBundle') }}</span></td>
+                <td><span class="label{{ order|sonata_status_class('payment', 'danger') ? ' label-'~order|sonata_status_class('payment', 'danger') : '' }}">{{ order.paymentStatusName|trans([], 'SonataPaymentBundle') }}</span></td>
+                <td><span class="label{{ order|sonata_status_class('delivery', 'danger') ? ' label-'~order|sonata_status_class('delivery', 'danger') : '' }}">{{ order.deliveryStatusName|trans([], 'SonataDeliveryBundle') }}</span></td>
+                <td>{{ order.totalInc|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class=" no-pad"><hr/></div>
+    </div>
 {% endblock %}

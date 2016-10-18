@@ -135,31 +135,17 @@ class BasketController extends Controller
                 $basketElement = $provider->basketAddProduct($basket, $product, $basketElement);
             }
 
-            $form = $form ?: $this->createForm('sonata_basket_basket', $this->get('sonata.basket'), array(
-                'validation_groups' => array('elements')
-            ));
-
             $this->get('sonata.basket.factory')->save($basket);
 
             if ($request->isXmlHttpRequest() && $provider->getOption('product_add_modal')) {
-
-                $form = $this->createForm('sonata_basket_basket', $this->get('sonata.basket'), array(
-                    'validation_groups' => array('elements')
-                ));
-
-                // always validate the basket
-                if (!$form->isBound()) {
-                    if ($violations = $this->get('validator')->validate($form)) {
-                        $violationMapper = new ViolationMapper();
-                        foreach ($violations as $violation) {
-                            $violationMapper->mapViolation($violation, $form, true);
-                        }
-                    }
-                }
-
                 return $this->render('SonataBasketBundle:Basket:add_product_popin.html.twig', array(
-                    'basket'        => $this->get('sonata.basket'),
-                    'form'          => $form->createView()
+                    'basketElement' => $basketElement,
+                    'locale'        => $basket->getLocale(),
+                    'product'       => $product,
+                    'price'         => $price,
+                    'currency'      => $currency,
+                    'quantity'      => $quantity,
+                    'provider'      => $provider,
                 ));
             } else {
                 return new RedirectResponse($this->generateUrl('sonata_basket_index'));

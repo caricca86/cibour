@@ -10,54 +10,52 @@
         </div>
         <div class="modal-body">
             {% block product_details %}
+                <div class="row" itemtype="http://schema.org/Product">
+                    <div class="col-sm-6">
+                        {% block product_image %}{% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'img-rounded img-responsive'} %}{% endblock%}
+                    </div>
 
-                {% if basket.hasBasketElements %}
+                    <div class="col-sm-6">
+                        <h4 itemprop="name" style="margin-top: 0px;">{% block product_title %}{{ product.name }}{% endblock %}</h4>
 
-                    {{ form_errors(form) }}
+                        {% block product_sku %}
+                            <dl class="dl-horizontal" style="margin-bottom: 0;">
+                                <dt style="width: auto;">{{ 'sonata.product.sku'|trans([], 'SonataProductBundle') }}</dt>
+                                <dd style="margin-left: 110px; word-wrap: break-word;">{{ product.sku }}</dd>
+                            </dl>
+                        {% endblock %}
 
-                    <form action="{{ url('sonata_basket_update') }}" method="POST" novalidate="novalidate">
+                        {% block product_properties %}
+                            {{ render(controller(provider.baseControllerName ~ ':renderProperties', {product: product})) }}
+                        {% endblock %}
 
-                        <table class="table bag">
-                            <tbody>
-                            {# call each product controller to render its own view #}
-                            {% for basketElement in basket.getBasketElements %}
-                                {% render controller('SonataProductBundle:Prodotto:renderFormBasketElement', {
-                                'formView':       form.basketElements.children[basketElement.position],
-                                'basketElement':  basketElement,
-                                'basket':         basket,
-                                'modal':          true
-                                }) %}
-                            {% endfor %}
+                        <dl class="dl-horizontal" style="margin-bottom: 0;">
+                            <dt style="width: auto;">{{ 'header_basket_unit_price'|trans([], 'SonataBasketBundle') }}</dt>
+                            <dd style="margin-left: 110px;">{{ basketElement.getUnitPrice(true)|number_format_currency(currency.label, {}, {}, locale) }}</dd>
 
-                            {# mark the widget as rendered ... TODO: create a custom widget type ...#}
-                            {% set dummy = form.basketElements.setrendered %}
-                            </tbody>
-                        </table>
+                            <dt style="width: auto;">{{ 'header_basket_quantity'|trans([], 'SonataBasketBundle') }}</dt>
+                            <dd style="margin-left: 110px;">{{ quantity }}</dd>
 
+                            <dt style="width: auto;">{{ 'sonata_basket_total_price'|trans([], 'SonataBasketBundle') }}</dt>
+                            <dd style="margin-left: 110px;">{{ price|number_format_currency(currency.label, {}, {}, locale) }}</dd>
+                        </dl>
+                    </div>
+                </div>
 
-                        <button type="submit" class="btn basket-control">{% trans from 'SonataBasketBundle' %}sonata.basket.btn_update_basket{% endtrans %}</button>
-
-                        <a href="{{ url('sonata_basket_delivery_address') }}" class="btn pull-right sonata-basket-nextstep"{% if form.vars.errors is not empty %} disabled{% endif %}>{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}&nbsp;</a>
-
-
-                        {{ form_rest(form) }}
-                    </form>
-                    {#
-                        {% set single_basket_element = basket.basketElements|last %}
-                        {{ sonata_block_render({'type': 'sonata.product.block.similar_products', 'settings': {'number': 4, 'base_product_id': single_basket_element.productId}}) }}
-                    #}
-                {% else %}
-
-                    <p>
-                        {% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_is_empty{% endtrans %}.
-                        <br />
-                        <a href="{{ path('sonata_catalog_index') }}">{% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_go_back_shopping{% endtrans %}</a>.
-                    </p>
-                    {#
-                        {{ sonata_block_render({'type': 'sonata.product.block.recent_products', 'settings': {'number': 4}}) }}
-                    #}
-                {% endif %}
+                <div class="col-md-12" style="margin-top: 15px;">
+                    <p>{{ product.rawShortDescription|raw }}</p>
+                </div>
             {% endblock %}
+        </div>
+        <div class="modal-footer" style="border-top-width: 0px;">
+            <div class="row-fluid">
+                <div class="col-md-4 col-md-offset-1">
+                    <button type="button" class="btn close" data-dismiss="modal" aria-hidden="true">CONTINUA LO SHOPPING</button>
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+                    <a href="{{ url('sonata_basket_index') }}" class="btn btn-primary btn-large">PROCEDI AL CHECKOUT</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

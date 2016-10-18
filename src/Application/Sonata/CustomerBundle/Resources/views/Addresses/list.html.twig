@@ -4,19 +4,18 @@
 {% block sonata_profile_title %}{% trans from 'SonataCustomerBundle' %}address_list{% endtrans %}{% endblock %}
 
 {% block sonata_profile_content %}
-
-    {% sonata_template_box 'This is the customer addresses list template. Feel free to override it.' %}
-
     {% block sonata_flash_messages %}
         {% include 'SonataCoreBundle:FlashMessage:render.html.twig' with {domain: 'SonataCustomerBundle'} %}
     {% endblock %}
 
     {% block sonata_profile_address_actions %}
-        <div class="panel" style="height: 35px;">
-            <div class="pull-right btn-group">
-                <a class="btn btn-success" href="{{ url('sonata_customer_address_add') }}"><i class="glyphicon glyphicon-plus-sign icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}sonata.address.list.add{% endtrans %}</a>
+    <div class=" col-xs-12 col-sm-4 col-sm-offset-4 text-center marg-top-30 marg-bot-30 " >
+        <div class="row">
+            <div class="btn-group">
+                <a class="btn text-up-bold-2" href="{{ url('sonata_customer_address_add') }}"><i class="glyphicon glyphicon-plus-sign icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}sonata.address.list.add{% endtrans %}</a>
             </div>
         </div>
+    </div>
     {% endblock %}
 
     {% block sonata_profile_address_list %}
@@ -24,17 +23,32 @@
         {% for type,addressesByType in addresses %}
 
             {% block sonata_profile_address_typelist %}
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="panel-title">{{ type|trans({}, 'SonataCustomerBundle') }}</h3></div>
+                <div class="panel panel-del-bill">
+                    <div class="col-lg-4 col-sm-4 col-lg-offset-4 col-sm-offset-4 no-pad marg-bot-delivery marg-top-30">
+                        <div class="col-xs-12 col-md-2 col-md-offset-1 no-pad "><hr class="del-addr" /></div>
+                        <div class="col-xs-12 col-md-6 no-pad"><h2 class=" text-center text-up-bold-5 marg-top-15 no-pad ">{{ type|trans({}, 'SonataCustomerBundle') }}</div>
+                        <div class="col-xs-12 col-md-2 no-pad"><hr class="del-addr"  /></div>
+                    </div>
 
                     {% if addressesByType|length > 0 %}
-                        <table class="table">
-                            {% block sonata_profile_address_table_headers %}
-                                <tr>
-                                    <th>{% trans from 'SonataCustomerBundle' %}address_full_label{% endtrans %}</th>
-                                    <th>{% trans from 'SonataCustomerBundle' %}address_actions_label{% endtrans %}</th>
-                                </tr>
-                            {% endblock %}
+                        {% block sonata_profile_address_table_headers %}
+                            <div class="col-xs-12 no-pad" >
+                                <div class="col-xs-6 col-sm-6 no-pad">
+                                    <div class="hidden-xs col-sm-5 no-pad "><hr/></div>
+                                    <div class=" col-xs-12 col-sm-2 no-pad text-center text-up-bold-5 marg-top-13 deliv-addr-mob marg-bot-mob-20 ">{% trans from 'SonataCustomerBundle' %}address_full_label{% endtrans %}</div>
+                                    <div class="hidden-xs col-sm-5 no-pad "><hr/></div>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-6 no-pad">
+                                    <div class="hidden-xs col-sm-5 no-pad "><hr/></div>
+                                    <div class=" col-xs-12 col-sm-2 no-pad text-center text-up-bold-5 marg-top-13 deliv-action marg-bot-mob-20 ">{% trans from 'SonataCustomerBundle' %}address_actions_label{% endtrans %}</div>
+                                    <div class="hidden-xs col-sm-5 no-pad "><hr/></div>
+
+                                </div>
+
+                            </div>
+                        {% endblock %}
+                        <table class="table table-del-bill">
 
                             {% for address in addressesByType %}
                                 {% block sonata_profile_address_row %}
@@ -43,16 +57,16 @@
                                     <td style="width: 30%;">
                                         <div>
                                             <form action="{{ url('sonata_customer_address_delete', {'id': address.id}) }}" method="post" onsubmit="return confirm('{% trans from 'SonataCustomerBundle' %}sonata.address.list.delete_confirm{% endtrans %}');" style="display:inline;">
-                                                <button type="submit" class="btn btn-danger">
+                                                <button type="submit" class="btn">
                                                     <i class="glyphicon glyphicon-trash icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}sonata.address.list.delete{% endtrans %}
                                                 </button>
                                             </form>
                                             {% if addressesByType|length > 1 %}
                                                 {% if address.current %}
-                                                    <a style="display:inline;" class="btn btn-default disabled" href="#"><i class="glyphicon glyphicon-ok icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}address_list_default{% endtrans %}</a>
+                                                    <a style="display:inline;" class="btn disabled" href="#"><i class="glyphicon glyphicon-ok icon-white"></i>&nbsp;{% trans from 'SonataCustomerBundle' %}address_list_default{% endtrans %}</a>
                                                 {% else %}
                                                     <form action="{{ url('sonata_customer_address_setcurrent', {'id': address.id}) }}" method="post" style="display:inline;">
-                                                        <input class="btn btn-primary" type="submit" value="{% trans from 'SonataCustomerBundle' %}address_list_set_current{% endtrans %}" />
+                                                        <input class="btn " type="submit" value="{% trans from 'SonataCustomerBundle' %}address_list_set_current{% endtrans %}" />
                                                     </form>
                                                 {% endif %}
                                             {% endif %}
@@ -63,15 +77,22 @@
                             {% endfor %}
                         </table>
                     {% else %}
-                        <div class="panel-body">
-                            {% trans from 'SonataCustomerBundle' %}sonata.address.list.no_addresses{% endtrans %}
-                        </div>
-                    {% endif %}
+                        <table class="table table-del-bill">
+                            <tbody>
 
+                            <tr>
+                                <td>
+                                <div class="text-center">{% trans from 'SonataCustomerBundle' %}sonata.address.list.no_addresses{% endtrans %}</div>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    {% endif %}
+                    <div class=" no-pad"><hr/></div>
                 </div>
             {% endblock %}
         {% endfor %}
 
     {% endblock %}
-
 {% endblock %}

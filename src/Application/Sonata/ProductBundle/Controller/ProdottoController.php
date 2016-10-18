@@ -31,7 +31,7 @@ class ProdottoController extends BaseProductController
      *
      * @return Response
      */
-    public function viewAction($product)
+    public function viewAction($product, $categoryList = false)
     {
         if (!is_object($product)) {
             throw new NotFoundHttpException('invalid product instance');
@@ -51,8 +51,12 @@ class ProdottoController extends BaseProductController
 
         $this->get('cibour.counter.manager')->addViewToProduct($product);
 
+        $template = sprintf('%s:view.html.twig', $provider->getBaseControllerName());
+        if ($categoryList){
+            $template = 'CTICibourBundle:Default:categoryList_inEvidenza.html.twig';
+        }
         return $this->render(
-            sprintf('%s:view.html.twig', $provider->getBaseControllerName()),
+            $template,
             array(
                 'provider'      => $provider,
                 'product'       => $product,
@@ -72,8 +76,6 @@ class ProdottoController extends BaseProductController
      */
     public function renderFormBasketElementAction(FormView $formView, BasketElementInterface $basketElement, BasketInterface $basket, $modal = false)
     {
-        $provider = $this->get('sonata.product.pool')->getProvider($basketElement->getProduct());
-
         $view = 'ApplicationSonataProductBundle:Product:form_basket_element.html.twig';
         if ($modal) {
             $view = 'ApplicationSonataProductBundle:Product:form_basket_element_modal.html.twig';
