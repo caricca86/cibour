@@ -96,3 +96,4 @@ sonata_block:
         sonata.product.block.most_popular_products:
         sonata.product.block.eat_with_products:
         sonata.product.block.similar_products:
+        sonata.category.block.menu:

@@ -158,3 +158,8 @@ sensio_framework_extra:
     view:    { annotations: false }
     router:  { annotations: true }
     request: { converters:  true }
+
+services:
+    sonata.media.resizer.fixedDimensions:
+        class: Application\Sonata\MediaBundle\Resizer\FixedDimensionsResizer
+        arguments: [@sonata.media.adapter.image.gd, 'outbound', @sonata.media.metadata.proxy]

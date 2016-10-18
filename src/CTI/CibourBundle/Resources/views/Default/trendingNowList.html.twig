@@ -1,0 +1,40 @@
+<div class="row category-top" style="margin-top: 77px;">
+    <div class="col-xs-12 text-center"><h2>Trending Now</h2></div>
+    {% block inEvidenza %}
+        {{ render(controller('ApplicationSonataProductBundle:Prodotto:view', { 'product': inEvidenza, 'categoryList': true })) }}
+    {% endblock %}
+    {% block products %}
+    <div class="col-sm-12 category-grid" style="margin-top: 20px;">
+
+        {% if products|length == 0 %}
+
+            {% block no_products %}
+                <div class="no-products-available">
+                    {% trans from 'SonataProductBundle' %}no_products_available{% endtrans %}
+                </div>
+            {% endblock %}
+
+        {% else %}
+            <div class="row">
+                {% for product in products if product.enabled %}
+                    {% set link = url('catalog_trending_now', {'prodottoSlug': product.slug, 'prodottoId': product.id}) %}
+                    <div class="col-sm-2" style="margin-bottom:20px;">
+                        <a href="{{ link }}">
+                            {% if product.image %}
+                                {% thumbnail product.image, 'slider' with {'itemprop': 'image', 'class': 'img-responsive', 'width': null, 'height': null} %}
+                            {% else %}
+                                <img src="http://placehold.it/500x500" alt="Image" class="img-responsive">
+                            {% endif %}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    {% endblock %}
+</div>
+<script>
+    $('.sort select').change(function(){
+        $('.sort form').submit();
+    });
+</script>

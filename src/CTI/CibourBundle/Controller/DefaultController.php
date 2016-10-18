@@ -114,7 +114,7 @@ class DefaultController extends Controller
         $sortByForm = $this->createFormBuilder()
             ->add('sortBy', 'choice', array(
                 'choices' => array(
-                    'tranding-now' => 'Tranding Now',
+                    'trending-now' => 'Trending Now',
                     'recent' => 'Ultimi Arrivi',
                     'most-popular' => 'Most Popular'
                 ),
@@ -127,7 +127,7 @@ class DefaultController extends Controller
 
         if ($sortByForm->isSubmitted() && $sortByForm->isValid()) {
             $sortBy = $sortByForm->getData()['sortBy'];
-            if ($sortBy == 'tranding-now')
+            if ($sortBy == 'trending-now')
             {
                 $products = $prodottoRepository->findMostSelledProducts($categoryId, 200);
             } elseif ($sortBy == 'recent'){
@@ -149,6 +149,186 @@ class DefaultController extends Controller
             'provider'     => $this->getProviderFromCategory($category),
             'inEvidenza'    => $inEvidenza,
             'sortByForm'    => $sortByForm->createView()
+        );
+    }
+
+    /**
+     * @Route("/shop/catalog/trending-now/{prodottoSlug}/{prodottoId}", name="catalog_trending_now")
+     * @Template()
+     */
+    public function trendingNowListAction($prodottoSlug = null, $prodottoId = null)
+    {
+        $page        = $this->getRequest()->get('page', 1);
+        $displayMax  = $this->getRequest()->get('max', 9);
+        $displayMode = $this->getRequest()->get('mode', 'grid');
+        $filter      = $this->getRequest()->get('filter');
+        $option      = $this->getRequest()->get('option');
+
+        if (!in_array($displayMode, array('grid'))) { // "list" mode will be added later
+            throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
+        }
+
+        $this->get('sonata.seo.page')->setTitle('Trending Now' );
+
+        $prodottoRepository = $this->getDoctrine()->getManager()->getRepository('ApplicationSonataProductBundle:Prodotto');
+
+        $products = $prodottoRepository->findMostSelledProducts(null, 200);
+
+        if ($prodottoId != null)
+        {
+            $inEvidenza = $prodottoRepository->find($prodottoId);
+        } else {
+            $inEvidenza = $products[0];
+        }
+        return array(
+            'display_mode' => $displayMode,
+            'products'        => $products,
+            'currency'     => $this->getCurrencyDetector()->getCurrency(),
+            'inEvidenza'    => $inEvidenza,
+            'sortByForm'    => null
+        );
+    }
+
+    /**
+     * @Route("/shop/catalog/recently-added/{prodottoSlug}/{prodottoId}", name="catalog_recently_added")
+     * @Template()
+     */
+    public function ultimiArriviListAction($prodottoSlug = null, $prodottoId = null)
+    {
+        $page        = $this->getRequest()->get('page', 1);
+        $displayMax  = $this->getRequest()->get('max', 9);
+        $displayMode = $this->getRequest()->get('mode', 'grid');
+        $filter      = $this->getRequest()->get('filter');
+        $option      = $this->getRequest()->get('option');
+
+        if (!in_array($displayMode, array('grid'))) { // "list" mode will be added later
+            throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
+        }
+
+        $this->get('sonata.seo.page')->setTitle('Ultimi Arrivi' );
+
+        $prodottoRepository = $this->getDoctrine()->getManager()->getRepository('ApplicationSonataProductBundle:Prodotto');
+
+        $products = $prodottoRepository->findLastActiveProducts(null, 200);
+
+        if ($prodottoId != null)
+        {
+            $inEvidenza = $prodottoRepository->find($prodottoId);
+        } else {
+            $inEvidenza = $products[0];
+        }
+        return array(
+            'display_mode' => $displayMode,
+            'products'        => $products,
+            'currency'     => $this->getCurrencyDetector()->getCurrency(),
+            'inEvidenza'    => $inEvidenza,
+            'sortByForm'    => null
+        );
+    }
+
+    /**
+     * @Route("/shop/catalog/search/{prodottoSlug}/{prodottoId}", name="catalog_search")
+     * @Template()
+     */
+    public function searchListAction($prodottoSlug = null, $prodottoId = null)
+    {
+        $page        = $this->getRequest()->get('page', 1);
+        $displayMax  = $this->getRequest()->get('max', 9);
+        $displayMode = $this->getRequest()->get('mode', 'grid');
+        $filter      = $this->getRequest()->get('filter');
+        $option      = $this->getRequest()->get('option');
+
+        if (!in_array($displayMode, array('grid'))) { // "list" mode will be added later
+            throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
+        }
+
+        $search = $this->get('request')->query->get('search');
+
+        $this->get('sonata.seo.page')->setTitle('Ricerca su: '.$search);
+
+        $prodottoRepository = $this->getDoctrine()->getManager()->getRepository('ApplicationSonataProductBundle:Prodotto');
+
+        $products = $prodottoRepository->createQueryBuilder('p')
+            ->where('p.name LIKE :search')
+            ->orWhere('p.rawDescription LIKE :search')
+            ->orWhere('p.rawShortDescription LIKE :search')
+            ->andWhere('p.enabled = true')
+            ->setParameter('search', "%$search%")
+            ->getQuery()
+            ->getResult();
+
+        $sortByForm = $this->createFormBuilder()
+            ->add('sortBy', 'choice', array(
+                'choices' => array(
+                    'trending-now' => 'Trending Now',
+                    'recent' => 'Ultimi Arrivi',
+                    'most-popular' => 'Most Popular'
+                ),
+                'label' => false,
+            ))->getForm();
+
+        /*$sortByForm->handleRequest($this->getRequest());
+
+        if ($sortByForm->isSubmitted() && $sortByForm->isValid()) {
+            $sortBy = $sortByForm->getData()['sortBy'];
+            if ($sortBy == 'trending-now')
+            {
+                $products = $prodottoRepository->findMostSelledProducts($categoryId, 200);
+            } elseif ($sortBy == 'recent'){
+                $products = $prodottoRepository->findLastActiveProducts($categoryId, 200);
+            }
+        }*/
+
+        if ($prodottoId != null)
+        {
+            $inEvidenza = $prodottoRepository->find($prodottoId);
+        } else {
+            $inEvidenza = $products[0];
+        }
+        return array(
+            'display_mode' => $displayMode,
+            'products'        => $products,
+            'currency'     => $this->getCurrencyDetector()->getCurrency(),
+            'inEvidenza'    => $inEvidenza,
+            'sortByForm'    => null,
+            'search'        => $search
+        );
+    }
+
+    /**
+     * @Route("/shop/catalog/most-popular/{prodottoSlug}/{prodottoId}", name="catalog_popular")
+     * @Template()
+     */
+    public function mostPopularListAction($prodottoSlug = null, $prodottoId = null)
+    {
+        $page        = $this->getRequest()->get('page', 1);
+        $displayMax  = $this->getRequest()->get('max', 9);
+        $displayMode = $this->getRequest()->get('mode', 'grid');
+        $filter      = $this->getRequest()->get('filter');
+        $option      = $this->getRequest()->get('option');
+
+        if (!in_array($displayMode, array('grid'))) { // "list" mode will be added later
+            throw new NotFoundHttpException(sprintf('Given display_mode "%s" doesn\'t exist.', $displayMode));
+        }
+
+        $this->get('sonata.seo.page')->setTitle('Ultimi Arrivi' );
+
+        $prodottoRepository = $this->getDoctrine()->getManager()->getRepository('ApplicationSonataProductBundle:Prodotto');
+
+        $products = $prodottoRepository->findMostViewedProducts(null, 200);
+
+        if ($prodottoId != null)
+        {
+            $inEvidenza = $prodottoRepository->find($prodottoId);
+        } else {
+            $inEvidenza = $products[0];
+        }
+        return array(
+            'display_mode' => $displayMode,
+            'products'        => $products,
+            'currency'     => $this->getCurrencyDetector()->getCurrency(),
+            'inEvidenza'    => $inEvidenza,
+            'sortByForm'    => null
         );
     }
 

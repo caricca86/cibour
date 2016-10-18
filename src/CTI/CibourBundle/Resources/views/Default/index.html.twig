@@ -3,14 +3,14 @@
     <div class="text-center container-fluid" style="width: 100%" id="collapseHome">
         <div class="row">
             <div class="col-md-5 col-xs-12 col-sm-12 no-pad">
-                <a href="http://localhost/cibour/web/shop/catalog/">
+                <a href="{{ path('sonata_catalog_index') }}">
                     <img class="img-responsive center-block logo" src="{{ asset('bundles/cticibour/images/home/cibour_logo_black_big.png') }}">
                 </a>
             </div>
             <div class="col-md-7 col-xs-12 col-sm-12 search">
                 <div class="row">
                     <div class=" col-xs-10 no-pad">
-                        <form class="home-form" action="{{ path('sonata_catalog_index') }}" name="form">
+                        <form class="home-form" action="{{ path('catalog_search') }}" name="form">
                             <img class="img-responsive forchetta" src="{{ asset('bundles/cticibour/images/home/forchetta.png') }}">
                             <input name="search" type="search">
                         </form>

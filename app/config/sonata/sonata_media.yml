@@ -48,20 +48,21 @@ sonata_media:
                 - sonata.media.provider.image
 
             formats:
-                preview:   { width: 50, quality: 100}
-                slider:    { width: 170, quality: 100}
-                small:     { width: 250, quality: 100}
+                preview:   { width: 50, quality: 80}
+                slider_mini:    { width: 170, height: 170, quality: 75, constraint: false}
+                slider:    { width: 750, height: 750, quality: 75, constraint: false}
+                small:     { width: 250, quality: 80}
                 large:     { width: 750, quality: 100}
 
     cdn:
         # define the public base url for the uploaded media
         server:
-            path:      http://localhost/cibour/web/uploads/media
+            path:      http://cibour.com/uploads/media
 
     filesystem:
         # define where the uploaded file will be stored
         local:
-            directory:  %kernel.root_dir%/../web/uploads/media
+            directory:  %kernel.root_dir%/../public_html/uploads/media
             create:     true
 
     providers:
@@ -71,6 +72,7 @@ sonata_media:
             resizer:    false
         image:
            thumbnail: sonata.media.thumbnail.format          # default value
+           resizer: sonata.media.resizer.fixedDimensions
 #           thumbnail: sonata.media.thumbnail.consumer.format # can be used to dispatch the resize action to async task
 #            thumbnail: sonata.media.thumbnail.liip_imagine    # use the LiipImagineBundle to resize the image
         vimeo:
@@ -92,8 +94,8 @@ sonata_media:
 
     resizer:
         simple:
-#            mode:  outbound
-            mode:  inset
+            mode:  outbound
+#            mode:  inset
 
 #
 # The LiipImagineBundle can be used if you want to convert on demand an image

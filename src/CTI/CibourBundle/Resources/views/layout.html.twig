@@ -83,15 +83,11 @@ file that was distributed with this source code.
                             {% endif %}
                             </span>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Trending now</a></li>
-                            <li><a href="#">Recently Added</a></li>
+                            <li><a href="{{ path('catalog_trending_now') }}">Trending now</a></li>
+                            <li><a href="{{ path('catalog_recently_added') }}">Ultimi Arrivi</a></li>
                             <li><a href="#">POD</a></li>
-                            <li><a href="#">Popular</a></li>
-                            <li><a href="#">Pasta e Cereali</a></li>
-                            <li><a href="#">Vino</a></li>
-                            <li><a href="#">Salumi e Formaggi</a></li>
-                            <li><a href="#">Olio</a></li>
-                            <li><a href="#">Conserve</a></li>
+                            <li><a href="{{ path('catalog_popular') }}">Most Popular</a></li>
+                            {{ sonata_block_render({'type': 'sonata.category.block.menu'}) }}
                         </ul>'><img src="{{ asset('bundles/cticibour/images/icon_menu.png') }}" height="25" class="navbar-icons-padding" /></a>
 
                                     </li>

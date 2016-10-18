@@ -45,6 +45,13 @@
             <argument type="service" id="doctrine" />
             <argument type="service" id="sonata.price.currency.detector" />
         </service>
+
+        <service id="sonata.category.block.menu" class="Application\Sonata\ClassificationBundle\Block\CategoryMenuBlock">
+            <tag name="sonata.block" />
+            <argument>sonata.category.block.menu</argument>
+            <argument type="service" id="templating" />
+            <argument type="service" id="doctrine" />
+        </service>
     </services>
 
 </container>
