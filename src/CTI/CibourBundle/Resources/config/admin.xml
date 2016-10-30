@@ -73,6 +73,13 @@
                 <argument>%sonata.classification.admin.collection.translation_domain%</argument>
             </call>
         </service>
+
+        <service id="cibour.admin.slide" class="CTI\CibourBundle\Admin\SlideAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" show_in_dashboard="true" label="Slide" label_translator_strategy="sonata.admin.label.strategy.native"/>
+            <argument />
+            <argument>CTI\CibourBundle\Entity\Slide</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+        </service>
     </services>
 
 </container>

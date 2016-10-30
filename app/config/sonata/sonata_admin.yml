@@ -54,11 +54,12 @@ sonata_admin:
                 label_catalogue: SonataDemoBundle
                 icon:            '<i class="fa fa-th"></i>'
                 items:
-                    - sonata.news.admin.comment
-                    - sonata.news.admin.post
+                    - cibour.admin.slide
+                    #- sonata.news.admin.comment
+                    #- sonata.news.admin.post
                     - sonata.media.admin.media
                     - sonata.media.admin.gallery
-                    - sonata.comment.admin.thread
+                    #- sonata.comment.admin.thread
 
             sonata.admin.group.ecommerce:
                 label:           sonata_ecommerce
@@ -66,7 +67,7 @@ sonata_admin:
                 icon:            '<i class="fa fa-dollar"></i>'
                 items:
                     - sonata.customer.admin.customer
-                    - sonata.invoice.admin.invoice
+                    #- sonata.invoice.admin.invoice
                     - sonata.order.admin.order
                     - sonata.product.admin.product
                     - cibour.admin.produttore
@@ -77,8 +78,8 @@ sonata_admin:
                 icon:            '<i class="fa fa-sitemap"></i>'
                 items:
                     - sonata.classification.admin.category
-                    - sonata.classification.admin.tag
-                    - sonata.classification.admin.collection
+                    #- sonata.classification.admin.tag
+                    #- sonata.classification.admin.collection
                     - cibour.admin.caratteristica_gustativa
 
             sonata.admin.group.site_builder:
@@ -96,17 +97,8 @@ sonata_admin:
                 items:
                     - sonata.user.admin.user
                     - sonata.user.admin.group
-                    - sonata.page.admin.site
-                    - sonata.notification.admin.message
-
-            sonata.admin.group.demo:
-                label: Demo
-                icon:  '<i class="fa fa-play-circle"></i>'
-                items:
-                    - sonata.demo.admin.car
-                    - sonata.demo.admin.engine
-                    - sonata.demo.admin.color
-                    - sonata.demo.admin.material
+                    #- sonata.page.admin.site
+                    #- sonata.notification.admin.message
 
     assets:
         stylesheets:

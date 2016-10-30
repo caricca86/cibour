@@ -9,6 +9,7 @@
             <tag name="sonata.block" />
             <argument>cibour.block.home.slider</argument>
             <argument type="service" id="templating" />
+            <argument type="service" id="doctrine" />
         </service>
 
         <service id="cibour.counter.manager" class="CTI\CibourBundle\Entity\CounterManager">
@@ -26,6 +27,9 @@
         <service id="sonata.classification.controller.api.category" class="Application\Sonata\ClassificationBundle\Controller\Api\CategoryController">
             <argument type="service" id="sonata.classification.manager.category" />
             <argument type="service" id="form.factory" />
+        </service>
+        <service id="cibour.payment.braintree" class="CTI\CibourBundle\Entity\BrainTreePayment">
+            <tag name="sonata.delivery.method" />
         </service>
     </services>
 </container>

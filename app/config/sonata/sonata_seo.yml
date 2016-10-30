@@ -5,11 +5,11 @@ sonata_seo:
     encoding:             UTF-8
     page:
         default:          sonata.seo.page.default
-        title:            Cibour
+        title:            Cibour - La Tavola Italiana - prodotti agroalimentari biologici naturali made in italy secondo il disciplinare delle 5A
         metas:
             name:
-                keywords:             foo bar
-                description:          The description
+                keywords:             prodotti, prodotto,biologico,agroalimentare,naturale,food,art,cucina,culinaria,5A,cucinare,italiano,italiani,made in italy,food as art,cibo,ricette,fody,fooder, tavola italiana
+                description:          Cibour prodotti online nella tradizione italiana agroalimentare secondo il disciplinare delle 5A
                 robots:               index, follow
 
             property:
@@ -19,8 +19,8 @@ sonata_seo:
 
                 # Open Graph information
                 # see http://developers.facebook.com/docs/opengraphprotocol/#types or http://ogp.me/
-                'og:site_name':       Cibour
-                'og:description':     Cibour
+                'og:site_name':       Cibour - La Tavola Italiana - prodotti agroalimentari biologici naturali made in italy secondo il disciplinare delle 5A
+                'og:description':     Cibour prodotti online nella tradizione italiana agroalimentare secondo il disciplinare delle 5A
 
             http-equiv:
                 'Content-Type':         text/html; charset=utf-8

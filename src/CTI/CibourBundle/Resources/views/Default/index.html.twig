@@ -3,20 +3,20 @@
     <div class="text-center container-fluid" style="width: 100%" id="collapseHome">
         <div class="row">
             <div class="col-md-5 col-xs-12 col-sm-12 no-pad">
-                <a href="{{ path('sonata_catalog_index') }}">
+                <a href="#">
                     <img class="img-responsive center-block logo" src="{{ asset('bundles/cticibour/images/home/cibour_logo_black_big.png') }}">
                 </a>
             </div>
             <div class="col-md-7 col-xs-12 col-sm-12 search">
                 <div class="row">
                     <div class=" col-xs-10 no-pad">
-                        <form class="home-form" action="{{ path('catalog_search') }}" name="form">
+                        <form class="home-form" action="#" name="form">
                             <img class="img-responsive forchetta" src="{{ asset('bundles/cticibour/images/home/forchetta.png') }}">
                             <input name="search" type="search">
                         </form>
                     </div>
                     <div class="col-xs-2 no-pad">
-                        <a href="">
+                        <a href="#">
                             <img class="img-responsive carrello" src="{{ asset('bundles/cticibour/images/home/CARRELLO.png') }}">
                         </a>
                     </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 no-pad">
-                <a href="">
+                <a href="#">
                     <img src="{{ asset('bundles/cticibour/images/home/facies_oriz.jpg') }}" class="img-responsive-height-resized">
                 </a>
             </div>
@@ -37,7 +37,7 @@
                 </a>
             </div>
             <div class="col-xs-6 no-pad">
-                <a href="{{ path('fos_user_security_login') }}">
+                <a href="#">
                     <div class="sign-in">SIGN IN</div>
                 </a>
             </div>
@@ -70,4 +70,22 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog text-center" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><b>LA TAVOLA ITALIANA</b></h4>
+                </div>
+                <div class="modal-body">
+                    <p>Prossimamente on-line<br>
+                        il sito E-Commerce di CIBOUR<br>
+                        per poter ordinare i prodotti de "La Tavola Italiana"<br>
+                        selezionati secondo la disciplinare delle 5A<br> </p>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script>
+        $('#modal').modal('show')
+    </script>
 {% endblock %}

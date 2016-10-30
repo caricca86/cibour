@@ -52,8 +52,15 @@ sonata_media:
                 slider_mini:    { width: 170, height: 170, quality: 75, constraint: false}
                 slider:    { width: 750, height: 750, quality: 75, constraint: false}
                 small:     { width: 250, quality: 80}
-                large:     { height: 750, quality: 80, constraint: false}
+                large:     { width: 750, quality: 80}
 
+        cibour_slide:
+            providers:
+              - sonata.media.provider.image
+
+            formats:
+                preview: { width: 100, quality: 100}
+                wide:    { width: 2880, height: 960, quality: 80, constraint: false}
     cdn:
         # define the public base url for the uploaded media
         server:

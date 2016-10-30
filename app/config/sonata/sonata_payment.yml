@@ -1,6 +1,7 @@
 sonata_payment:
     methods:
         pass: ~
+        #braintree: cibour.payment.braintree
     services:
 #        sonata.payment.method.paypal:
 #            name:     Paypal

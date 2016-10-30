@@ -9,16 +9,31 @@
 namespace CTI\CibourBundle\Block;
 
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class HomeSliderBlock extends BaseBlockService
 {
+    protected $em;
+    /**
+     * @param string          $name
+     * @param EngineInterface $templating
+     */
+    public function __construct($name, EngineInterface $templating, RegistryInterface $em)
+    {
+        parent::__construct($name, $templating);
+        $this->em = $em->getManager();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -26,9 +41,12 @@ class HomeSliderBlock extends BaseBlockService
     {
         $settings = $blockContext->getSettings();
 
+        $slides = $this->em->getRepository('CTI\CibourBundle\Entity\Slide')->findByEnabled(true);
+
         return $this->renderResponse($blockContext->getTemplate(), array(
             'block'     => $blockContext->getBlock(),
-            'settings'  => $settings
+            'settings'  => $settings,
+            'slides'    => $slides
         ), $response);
     }
 

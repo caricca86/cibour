@@ -15,6 +15,9 @@
         <property name="city"        serialized-name="Iccitta" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="countryCode" serialized-name="Icnazion" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="phone"       serialized-name="Ictelefo" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="provincia"       serialized-name="Ictelefo" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="partita_iva"        type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="codice_fiscale"    type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
 
         <property name="customer" serialized-name="Iccodcli" type="sonata_customer_customer_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
 

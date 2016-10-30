@@ -5,35 +5,25 @@
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
+                {% for slide in slides %}
+                <li data-target="#myCarousel" data-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
+                {% endfor %}
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="{{ asset('bundles/cticibour/img/claim.jpg') }}" alt="Image">
-                    <div class="carousel-caption">
-                        <h3>Sell $</h3>
-                        <p>Money Money.</p>
-                    </div>
-                </div>
+                {% for slide in slides %}
 
-                <div class="item">
-                    <img src="{{ asset('bundles/cticibour/img/giancotti.jpg') }}" alt="Image">
-                    <div class="carousel-caption">
-                        <h3>More Sell $</h3>
-                        <p>Lorem ipsum...</p>
+                    <div class="item {% if loop.first %}active{% endif %}">
+                        <a href="{{ slide.link }}">
+                        {% thumbnail slide.image, 'wide' with{'class': 'img-responsive', 'width': null, 'height': null} %}
+                        <div class="carousel-caption">
+                            <h3>{{ slide.titolo }}</h3>
+                            <p>{{ slide.testo }}</p>
+                        </div>
+                        </a>
                     </div>
-                </div>
-                <div class="item">
-                    <img src="{{ asset('bundles/cticibour/img/pera.jpg') }}" alt="Image">
-                    <div class="carousel-caption">
-                        <h3>More Sell $</h3>
-                        <p>Lorem ipsum...</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
 
             <!-- Left and right controls -->
