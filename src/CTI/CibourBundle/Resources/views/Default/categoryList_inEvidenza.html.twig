@@ -23,7 +23,7 @@
     <div class="product-view_{{ product.id }}" itemscope itemtype="http://schema.org/Product">
         <div class="col-md-12">
             <div class="col-sm-4">
-                {% thumbnail product.image, 'small' with {'itemprop':'image', 'class': 'center-block img-responsive'} %}
+                {% thumbnail product.image, 'slider' with {'itemprop':'image', 'class': 'center-block img-responsive'} %}
             </div>
             <div class="col-sm-4">
                 <h4 itemprop="name">{{ product.name }}</h4>
@@ -74,12 +74,13 @@
         <table class="table text-center prodotto {{ product.id }}">
             <tr>
                 <th class="{% if product.glutenFree %}disabled{% endif %}"><small>GLUTEN FREE</small></th>
-                <th><small> {{ product.tipoDieta }}</small></th>
-                <th><small>{{ product.metodoProduzione }}</small></th>
+                <th><small> {{ product.tipoDietaName }}</small></th>
+                <th><small>{{ product.metodoProduzioneName }}</small></th>
             </tr>
             <tr>
                 <td><a class="active" href="#descrizione" aria-controls="descrizione" role="tab" data-toggle="tab">OVERVIEW</a></td>
                 <td><a href="#eat-with" aria-controls="eat-with" role="tab" data-toggle="tab">EAT WITH</a></td>
+                <td></td>
             </tr>
         </table>
     </div>

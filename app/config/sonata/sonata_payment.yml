@@ -1,37 +1,38 @@
 sonata_payment:
     methods:
         pass: ~
+        paypal: ~
         #braintree: cibour.payment.braintree
     services:
-#        sonata.payment.method.paypal:
-#            name:     Paypal
-#            id:       paypal
-#            enabled:  true
-#
-#            transformers:
-#                basket: sonata.payment.transformer.basket
-#                order:  sonata.payment.transformer.order
-#
-#            options:
-#                web_connector_name: curl
-#
-#                account:            your_paypal_account@fake.com
-#                cert_id:            fake
-#                paypal_cert_file:   %kernel.root_dir%/paypal_cert_pem_sandbox.txt
-#                url_action:         https://www.sandbox.paypal.com/cgi-bin/webscr
-#
-#                debug: true
-#                class_order:        Application\Sonata\OrderBundle\Entity\Order
-#                url_callback:       sonata_payment_callback
-#                url_return_ko:      sonata_payment_error
-#                url_return_ok:      sonata_payment_confirmation
-#
-#                method:             encryptViaBuffer # encryptViaFile || encryptViaBuffer
-#
-#                key_file:           %kernel.root_dir%/my-prvkey.pem
-#                cert_file:          %kernel.root_dir%/my-pubcert.pem
-#
-#                openssl:            /opt/local/bin/openssl
+        paypal:
+            name:                 Paypal
+            code:                 paypal
+
+            transformers:
+                basket: sonata.payment.transformer.basket
+                order:  sonata.payment.transformer.order
+
+            options:
+                web_connector_name: curl
+
+                account:            NR844ZUGCGNB6
+                cert_id:            W45TMLPSDZX7E
+                url_action:         https://www.sandbox.paypal.com/cgi-bin/webscr
+
+                debug: true
+                class_order:        Application\Sonata\OrderBundle\Entity\Order
+                url_callback:       sonata_payment_callback
+                url_return_ko:      sonata_payment_error
+                url_return_ok:      sonata_payment_confirmation
+
+                method:             encryptViaBuffer
+
+                key_file:           %kernel.root_dir%/paypal_key.pem
+                cert_file:          %kernel.root_dir%/paypal_cert.pem
+                paypal_cert_file:   %kernel.root_dir%/paypal_cert_pem.txt
+
+                openssl:            C:\xampp\apache\bin\openssl.exe
+
         pass:
             name:    Pass
             code:    pass

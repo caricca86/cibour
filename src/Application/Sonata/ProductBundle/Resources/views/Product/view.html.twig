@@ -45,7 +45,7 @@ file that was distributed with this source code.
         </div>
         <div class="col-md-12">
             <div class="col-sm-4">
-                {% thumbnail product.image, 'large' with {'itemprop':'image', 'class': 'center-block img-responsive'} %}
+                {% thumbnail product.image, 'slider' with {'itemprop':'image', 'class': 'center-block img-responsive'} %}
             </div>
             <div class="col-sm-4">
                 <h4 itemprop="name">{{ product.name }}</h4>
@@ -96,13 +96,13 @@ file that was distributed with this source code.
         <table class="table text-center prodotto {{ product.id }}">
             <tr>
                 <th class="{% if product.glutenFree %}disabled{% endif %}"><small>GLUTEN FREE</small></th>
-                <th><small> {{ product.tipoDieta }}</small></th>
-                <th><small>{{ product.metodoProduzione }}</small></th>
+                <th><small> {{ product.tipoDietaName }}</small></th>
+                <th><small>{{ product.metodoProduzioneName }}</small></th>
             </tr>
             <tr>
-                <td><a class="active" href="#descrizione" aria-controls="descrizione" role="tab" data-toggle="tab">OVERVIEW</a></td>
-                <td><a href="#eat-with" aria-controls="eat-with" role="tab" data-toggle="tab">EAT WITH</a></td>
-                <td><a href="#more" aria-controls="more" role="tab" data-toggle="tab">MORE LIKE THIS</a></td>
+                <td><a class="active" href="#descrizione_{{ product.id }}" aria-controls="descrizione" role="tab" data-toggle="tab">OVERVIEW</a></td>
+                <td><a href="#eat-with_{{ product.id }}" aria-controls="eat-with" role="tab" data-toggle="tab">EAT WITH</a></td>
+                <td><a href="#more_{{ product.id }}" aria-controls="more" role="tab" data-toggle="tab">MORE LIKE THIS</a></td>
             </tr>
         </table>
     </div>
@@ -118,11 +118,11 @@ file that was distributed with this source code.
     {% endif %}
         <div class="col-xs-12">
             <div class="tab-content tab-product">
-                <div role="tabpanel" class="tab-pane active" id="descrizione">{{ product.rawDescription }}</div>
-                <div role="tabpanel" class="tab-pane" id="eat-with">
+                <div role="tabpanel" class="tab-pane active" id="descrizione_{{ product.id }}">{{ product.rawDescription }}</div>
+                <div role="tabpanel" class="tab-pane" id="eat-with_{{ product.id }}">
                 {{ sonata_block_render({'type': 'sonata.product.block.eat_with_products', 'settings': {'base_product_id': product.id, 'number': 24}}) }}
                 </div>
-                <div role="tabpanel" class="tab-pane" id="more">
+                <div role="tabpanel" class="tab-pane" id="more_{{ product.id }}">
                 {{ sonata_block_render({'type': 'sonata.product.block.similar_products', 'settings': {'base_product_id': product.id, 'number': 24}}) }}
                 </div>
             </div>

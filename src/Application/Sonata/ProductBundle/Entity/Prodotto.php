@@ -64,7 +64,7 @@ class Prodotto extends Product
     protected $produttore;
 
     /**
-     * @var integer
+     * @var string
      */
     protected $macroregione;
 
@@ -94,7 +94,7 @@ class Prodotto extends Product
     protected $gluten_free;
 
     /**
-     * @var integer
+     * @var string
      */
     protected $metodo_produzione;
 
@@ -199,9 +199,9 @@ class Prodotto extends Product
      */
     public function getMacroregione()
     {
-        if ($this->macroregione != null) {
+        /*if ($this->macroregione != null) {
             return Prodotto::$macroregione_choice_list[$this->macroregione];
-        }
+        }*/
         return $this->macroregione;
     }
 
@@ -248,9 +248,9 @@ class Prodotto extends Product
      */
     public function getTipoDieta()
     {
-        if ($this->tipo_dieta != null){
+        /*if ($this->tipo_dieta != null){
             return Prodotto::$tipo_dieta_choice_list[$this->tipo_dieta];
-        }
+        }*/
 
         return $this->tipo_dieta;
     }
@@ -327,7 +327,7 @@ class Prodotto extends Product
     /**
      * Set metodo_produzione
      *
-     * @param integer $metodoProduzione
+     * @param string $metodoProduzione
      * @return Product
      */
     public function setMetodoProduzione($metodoProduzione)
@@ -344,9 +344,9 @@ class Prodotto extends Product
      */
     public function getMetodoProduzione()
     {
-        if ($this->metodo_produzione != null) {
+        /*if ($this->metodo_produzione != null) {
             return Prodotto::$metodo_produzione_choice_list[$this->metodo_produzione];
-        }
+        }*/
 
         return $this->metodo_produzione;
     }
@@ -550,6 +550,10 @@ class Prodotto extends Product
 
     public function getTipoDietaName()
     {
+        if ($this->tipo_dieta == null)
+        {
+            return null;
+        }
         $tipo_dieta_list = self::getTipoDietaList();
 
         return $tipo_dieta_list[$this->getTipoDieta()];
@@ -565,6 +569,11 @@ class Prodotto extends Product
 
     public function getMetodoProduzioneName()
     {
+        if ($this->metodo_produzione == null)
+        {
+            return null;
+        }
+
         $metodo_produzione_list = self::getMetodoProduzioneList();
 
         return $metodo_produzione_list[$this->getMetodoProduzione()];
