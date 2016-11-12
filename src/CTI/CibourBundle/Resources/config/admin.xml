@@ -5,7 +5,7 @@
 
     <parameters>
         <!-- PRODUCT -->
-        <parameter key="sonata.product.admin.product.class">Sonata\ProductBundle\Admin\ProductAdmin</parameter>
+        <parameter key="sonata.product.admin.product.class">Application\Sonata\ProductBundle\Admin\ProductAdmin</parameter>
         <parameter key="sonata.product.admin.product.controller">SonataProductBundle:ProductAdmin</parameter>
 
         <parameter key="sonata.product.admin.product.variation.class">Sonata\ProductBundle\Admin\ProductVariationAdmin</parameter>

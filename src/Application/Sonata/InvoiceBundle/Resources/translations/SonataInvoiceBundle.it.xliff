@@ -144,7 +144,7 @@
             <!-- Begin - Status translations -->
             <trans-unit id="status_open">
                 <source>status_open</source>
-                <target>Apri</target>
+                <target>Aperto</target>
             </trans-unit>
             <trans-unit id="status_paid">
                 <source>status_paid</source>

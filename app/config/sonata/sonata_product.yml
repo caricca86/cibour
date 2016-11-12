@@ -6,10 +6,10 @@ sonata_product:
 
     seo:
         product:
-            site: '@sonataproject'
-            creator: '@th0masr'
-            domain: 'http://demo.sonata-project.org'
-            media_prefix: 'http://demo.sonata-project.org'
+            site: '@cibour'
+            creator: '@Riccardo Cartei'
+            domain: 'http://cibour.com'
+            media_prefix: 'http://cibour.com'
             media_format: 'reference'
 
 

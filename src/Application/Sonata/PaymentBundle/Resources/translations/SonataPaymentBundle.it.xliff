@@ -45,21 +45,13 @@
         <source>title_validation_confirmation_payment</source>
         <target>Conferma di pagamento valida</target>
       </trans-unit>
-      <trans-unit id="process_to_paiement_bank_page">
-        <source>process_to_paiement_bank_page</source>
-        <target>Procedi al pagamento (pagina bancaria)</target>
-      </trans-unit>
-      <trans-unit id="process_to_paiement_btn">
-        <source>process_to_paiement_btn</source>
-        <target>Cassa</target>
-      </trans-unit>
       <trans-unit id="status_stopped">
         <source>status_stopped</source>
         <target>Fermato</target>
       </trans-unit>
       <trans-unit id="status_open">
         <source>status_open</source>
-        <target>Apri</target>
+        <target>Aperto</target>
       </trans-unit>
       <trans-unit id="status_pending">
         <source>status_pending</source>
@@ -107,7 +99,7 @@
       </trans-unit>
       <trans-unit id="open">
         <source>open</source>
-        <target>Apri</target>
+        <target>Aperto</target>
       </trans-unit>
       <trans-unit id="pending">
         <source>pending</source>
@@ -225,6 +217,14 @@
         <source>debug_payment_delivery_method</source>
         <target>Metodo di consegna</target>
       </trans-unit>
+      <trans-unit id="process_to_paiement_bank_page">
+          <source>process_to_paiement_bank_page</source>
+          <target>Entro 10 secondi sarai reindirizzato al sito per il pagamento. Altrimenti clicca il pulsante qui sotto</target>
+        </trans-unit>
+        <trans-unit id="process_to_paiement_btn">
+          <source>process_to_paiement_btn</source>
+          <target>Procedi al pagamento</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>

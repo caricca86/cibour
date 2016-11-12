@@ -24,7 +24,7 @@
             <!-- Begin - Status translations -->
             <trans-unit id="status_open">
                 <source>status_open</source>
-                <target>Apri</target>
+                <target>Aperto</target>
             </trans-unit>
             <trans-unit id="status_pending">
                 <source>status_pending</source>

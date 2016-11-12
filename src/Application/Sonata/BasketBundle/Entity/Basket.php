@@ -43,19 +43,10 @@ class Basket extends BaseBasket
     {
         $method = $this->getDeliveryMethod();
 
-        $price = 0;
-
         if (!$method instanceof ServiceDeliveryInterface || !$method->isAddressRequired()) {
-            return $price;
+            return 0;
         }
 
-        foreach ($this->getBasketElements() as $basketElement) {
-            if ($basketElement->getProduct()->isRecurrentPayment() === false)
-            {
-                $price = bcadd($price, $basketElement->getTotal($vat));
-            }
-        }
-
-        return ($price < 400 ? ($price*10)/100 : 0);
+        return 8;
     }
 }

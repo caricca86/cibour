@@ -71,10 +71,18 @@ class AddressType extends BaseAddressType
                     'translation_domain' => 'SonataBasketBundle'
                     ));
 
-                if (isset($options['types'])) {
+                if ($type != null && isset($options['types'])) {
                     $builder->add('type', 'choice', array(
                             'choices' => $options['types'],
-                            'translation_domain' => 'SonataCustomerBundle')
+                            'translation_domain' => 'SonataCustomerBundle',
+                            'disabled' => true
+                            )
+                    );
+                }elseif ($type == null && isset($options['types'])) {
+                    $builder->add('type', 'choice', array(
+                            'choices' => array(AddressInterface::TYPE_DELIVERY => 'Consegna'),
+                            'translation_domain' => 'SonataCustomerBundle',
+                            'data' => AddressInterface::TYPE_DELIVERY)
                     );
                 }
 
