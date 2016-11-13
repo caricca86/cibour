@@ -59,7 +59,8 @@ class AddressType extends BaseAddressType
                             'style' => 'margin-bottom:20px;'
                         ),
                         'translation_domain' => 'SonataBasketBundle',
-                        'validation_groups'  => false
+                        'validation_groups'  => false,
+                        'label' => 'USA SELEZIONATO'
                     )
                 );
         }

@@ -52,7 +52,7 @@
             </trans-unit>
             <trans-unit id="status_wrong_callback">
                 <source>status_wrong_callback</source>
-                <target>Richiamo errato</target>
+                <target>Callback errato</target>
             </trans-unit>
             <trans-unit id="status_wrong_request">
                 <source>status_wrong_request</source>

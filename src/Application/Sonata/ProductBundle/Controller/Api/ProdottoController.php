@@ -11,6 +11,7 @@
 
 namespace Application\Sonata\ProductBundle\Controller\Api;
 
+use Application\Sonata\ProductBundle\Entity\Delivery;
 use CTI\CibourBundle\Entity\Counter;
 use Doctrine\ORM\EntityManager;
 use JMS\Serializer\SerializationContext;
@@ -266,16 +267,35 @@ class ProdottoController extends BaseProductController
             $product->setDescription($this->formatterPool->transform('markdown', $product->getRawDescription()));
             $product->setShortDescription($this->formatterPool->transform('markdown', $product->getRawShortDescription()));
             $product->setCounter(new Counter());
+
+            $delivery = new Delivery();
+            $delivery->setProduct($product);
+            $delivery->setCode('dhl');
+            $delivery->setCountryCode('IT');
+            $delivery->setEnabled(true);
+            $delivery->setZone('Italy');
+            $delivery2 = new Delivery();
+            $delivery2->setProduct($product);
+            $delivery2->setCode('take_away');
+            $delivery2->setCountryCode('IT');
+            $delivery2->setEnabled(true);
+            $delivery2->setZone('Italy');
+
             if ($form->get('produttore_codice')->getData() != null) {
                 $produttore = $this->entityManager->getRepository('CTICibourBundle:Produttore')->findOneByCodice($form->get('produttore_codice')->getData());
                 $product->setProduttore($produttore);
+
                 $manager->save($product);
+                $this->entityManager->persist($delivery);
+                $this->entityManager->persist($delivery2);
             }
             if ($form->get('categoria_codice')->getData() != null)
             {
                 $categoria = $this->entityManager->getRepository('ApplicationSonataClassificationBundle:Category')->findOneByCodice($form->get('categoria_codice')->getData());
                 try {
                     $this->productCategoryManager->addCategoryToProduct($product, $categoria, true);
+                    $this->entityManager->persist($delivery);
+                    $this->entityManager->persist($delivery2);
                 } catch (\Exception $e) {
                     $manager->delete($product);
                     return \FOS\RestBundle\View\View::create(array('error' => 'La categoria non esiste. Il prodotto non sarà creato.'), 400);

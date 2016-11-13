@@ -23,7 +23,7 @@ use Sonata\Component\Delivery\BaseServiceDelivery;
  *
  * @author Hugo Briand <briand@ekino.com>
  */
-class ThreeDaysTakeAwayDelivery extends BaseServiceDelivery
+class TakeAwayDelivery extends BaseServiceDelivery
 {
     public function getPrice()
     {
@@ -32,7 +32,7 @@ class ThreeDaysTakeAwayDelivery extends BaseServiceDelivery
 
     public function getName()
     {
-        return 'Consegna entro 3 giorni (ritiro a mano)';
+        return 'Ritiro presso Container EPASTA';
     }
 
     public function getVatRate()
@@ -53,7 +53,7 @@ class ThreeDaysTakeAwayDelivery extends BaseServiceDelivery
      */
     public function getCode()
     {
-        return 'three_days_take_away';
+        return 'take_away';
     }
 
     public function getEnabled(){
@@ -62,6 +62,6 @@ class ThreeDaysTakeAwayDelivery extends BaseServiceDelivery
 
     public function getPriority()
     {
-        return 5;
+        return 2;
     }
 }
