@@ -109,6 +109,11 @@ class Prodotto extends Product
     protected $abbinamento;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    protected $composizione;
+
+    /**
      * @var integer
      */
     protected $alimentazione;
@@ -585,5 +590,38 @@ class Prodotto extends Product
             self::METODO_PRODUZIONE_BIOLOGICO => 'Biologico',
             self::METODO_PRODUZIONE_DINAMICO => 'Dinamico'
         );
+    }
+
+    /**
+     * Add composizione
+     *
+     * @param \Application\Sonata\ProductBundle\Entity\Prodotto $composizione
+     * @return Prodotto
+     */
+    public function addComposizione(\Application\Sonata\ProductBundle\Entity\Prodotto $composizione)
+    {
+        $this->composizione[] = $composizione;
+
+        return $this;
+    }
+
+    /**
+     * Remove composizione
+     *
+     * @param \Application\Sonata\ProductBundle\Entity\Prodotto $composizione
+     */
+    public function removeComposizione(\Application\Sonata\ProductBundle\Entity\Prodotto $composizione)
+    {
+        $this->composizione->removeElement($composizione);
+    }
+
+    /**
+     * Get composizione
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComposizione()
+    {
+        return $this->composizione;
     }
 }

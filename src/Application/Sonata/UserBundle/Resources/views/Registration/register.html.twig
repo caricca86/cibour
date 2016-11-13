@@ -1,0 +1,15 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    {% if login is defined %}
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 no-pad " style="margin-top: 100px">
+        <div class="col-xs-12 col-md-12  no-pad-xs ">
+        {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+            </div>
+        </div>
+    </div>
+        {% else %}
+            {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+    {% endif %}
+{% endblock fos_user_content %}

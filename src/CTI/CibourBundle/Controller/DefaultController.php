@@ -24,6 +24,15 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/privacy", name="privacy")
+     * @Template()
+     */
+    public function privacyAction()
+    {
+        return array();
+    }
+
+    /**
      * @Route("/init", name="init")
      * @Template()
      */

@@ -30,7 +30,7 @@ class CategoryAdmin extends Admin
         $formMapper
             ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
-                ->add('codice')
+                ->add('codice', null, array('label' => 'Codice'))
                 ->add('description', 'textarea', array('required' => false))
             ->add('enabled')
             ->end()
@@ -68,7 +68,7 @@ class CategoryAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
-            ->add('codice')
+            ->add('codice', null, array('label' => 'Codice'))
             ->add('enabled')
             ->add('parent')
         ;
@@ -82,7 +82,7 @@ class CategoryAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('slug')
-            ->add('codice')
+            ->add('codice', null, array('label' => 'Codice'))
             ->add('description')
             ->add('enabled', null, array('editable' => true))
             ->add('position')

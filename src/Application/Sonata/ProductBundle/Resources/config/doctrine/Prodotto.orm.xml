@@ -17,6 +17,7 @@
         <many-to-one target-entity="CTI\CibourBundle\Entity\Produttore" field="produttore" inversed-by="prodotti"/>
         <many-to-one target-entity="CTI\CibourBundle\Entity\CaratteristicaGustativa" field="caratteristica_gustativa" inversed-by="prodotti"/>
         <many-to-many target-entity="CTI\CibourBundle\Entity\CaratteristicaGustativa" field="abbinamento" />
+        <many-to-many target-entity="Application\Sonata\ProductBundle\Entity\Prodotto" field="composizione" />
 
         <attribute-overrides>
             <attribute-override name="sku">

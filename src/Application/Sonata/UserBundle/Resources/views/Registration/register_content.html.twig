@@ -11,9 +11,13 @@
 
     </div>
     <div class="panel-body   ">
-        <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register form-horizontal">
+        <form onsubmit="return ctrlForm(this)" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register form-horizontal">
             <fieldset>
                 {{ form_widget(form) }}
+                <label style="font-size: 10px; text-transform: uppercase;" for="basket_tac">
+                    <input type="checkbox" name="tac" id="basket_tac"/>
+                    Accetto l'informativa sulla <a style="text-decoration: underline" href="{{ path('privacy') }}" target="_blank">privacy</a>
+                </label>
             </fieldset>
 
             <div class="form-actions">
@@ -28,3 +32,14 @@
         </form>
     </div>
 </div>
+<script>
+    function ctrlForm(form) {
+        if (!form.tac.checked) {
+            alert("Devi accettare l'infromativa sulla privacy per procedere");
+
+            return false;
+        }
+
+        return true;
+    }
+</script>

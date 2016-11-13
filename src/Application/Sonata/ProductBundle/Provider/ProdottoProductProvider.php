@@ -81,7 +81,7 @@ class ProdottoProductProvider extends BaseProductProvider
         return $orderElement;
     }
 
-    public function buildEditForm(FormMapper $formMapper, $isVariation = false)
+    public function buildEditForm(FormMapper $formMapper, $isVariation = false, $product = null)
     {
         $formMapper->with('Product');
 
@@ -94,7 +94,18 @@ class ProdottoProductProvider extends BaseProductProvider
             ->add('price', 'number')
             ->add('priceIncludingVat')
             ->add('vatRate', 'number')
-            ->add('stock', 'integer')
+            ->add('stock', 'integer');
+            if ($product != null) {
+                if ($product->getCategories() != null){
+                    foreach ($product->getCategories() as $category) {
+                        if (strtolower($category->getCodice()) == 'pod') {
+                            $formMapper->add('composizione', null, array('label' => 'Composizione POD'));
+                            break;
+                        }
+                    }
+                }
+            }
+        $formMapper
             ->add('macroregione', 'choice', array(
                 'choices' => Prodotto::getMacroregioneList()))
             ->add('pezzatura')
