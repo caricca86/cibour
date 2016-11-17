@@ -624,4 +624,21 @@ class Prodotto extends Product
     {
         return $this->composizione;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStock()
+    {
+        if ($this->getCategories() != null)
+        {
+            foreach ($this->getCategories() as $category) {
+                if (strtolower($category->getCodice()) == 'pod') {
+                    return 99;
+                    break;
+                }
+            }
+        }
+        return $this->stock;
+    }
 }

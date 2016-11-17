@@ -39,14 +39,4 @@ class Basket extends BaseBasket
         return $this->id;
     }
 
-    public function getDeliveryPrice($vat = false)
-    {
-        $method = $this->getDeliveryMethod();
-
-        if (!$method instanceof ServiceDeliveryInterface || !$method->isAddressRequired()) {
-            return 0;
-        }
-
-        return 8;
-    }
 }

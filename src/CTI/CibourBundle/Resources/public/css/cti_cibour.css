@@ -3,6 +3,10 @@
     src: url(GothamRoundedLight.otf);
 }
 
+html {
+    background-color: black;
+}
+
 a {
     color: black;
 }

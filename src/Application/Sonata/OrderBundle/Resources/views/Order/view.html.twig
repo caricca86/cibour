@@ -185,13 +185,6 @@ file that was distributed with this source code.
                                 <td class="number"><b>{{ order.totalExcl|number_format_currency(order.currency.label, {}, {}, order.locale) }}</b></td>
                             </tr>
 
-                            {% for item in order.getVatAmounts %}
-                                <tr>
-                                    <th style="text-align: right">{% trans from 'SonataOrderBundle' %}sonata_order_view_vat{% endtrans %} {{ item.rate|number_format(2) }}%</th>
-                                    <td class="number"><b>{{ item.amount|number_format_currency(order.currency.label, {}, {}, order.locale) }}</b></td>
-                                </tr>
-                            {% endfor %}
-
                             <tr>
                                 <th style="text-align: right">{% trans from 'SonataOrderBundle' %}sonata.order.view.total_vat{% endtrans %}</th>
                                 <td class="number"><b>{{ order.vat|number_format_currency(order.currency.label, {}, {}, order.locale) }}</b></td>

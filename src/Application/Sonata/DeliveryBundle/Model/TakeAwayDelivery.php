@@ -32,7 +32,7 @@ class TakeAwayDelivery extends BaseServiceDelivery
 
     public function getName()
     {
-        return 'Ritiro presso Container EPASTA';
+        return 'Ritiro presso Container ePASTA di P.le Cadorna di fronte Stazione Nord';
     }
 
     public function getVatRate()

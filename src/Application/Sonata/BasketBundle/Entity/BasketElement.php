@@ -37,4 +37,22 @@ class BasketElement extends BaseBasketElement
     {
         return $this->id;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUnitPrice($vat = false)
+    {
+        $price = $this->unitPrice;
+
+        if (!$vat && true === $this->isPriceIncludingVat()) {
+            $price = bcdiv($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
+        }
+
+        if ($vat && false === $this->isPriceIncludingVat()) {
+            $price = bcmul($price, bcadd(1, bcdiv($this->getVatRate(), 100)));
+        }
+
+        return $price;
+    }
 }

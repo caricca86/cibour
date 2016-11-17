@@ -52,7 +52,7 @@ class CategoryMenuBlock extends BaseBlockService
      */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
-        $categories = $this->productRepository->findAll();
+        $categories = $this->productRepository->findBy(array(), array('position' => 'DESC', 'name' => 'ASC'));
         if (!$categories)
         {
             return;

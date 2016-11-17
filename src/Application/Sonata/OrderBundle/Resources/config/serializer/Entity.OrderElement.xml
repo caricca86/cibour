@@ -4,6 +4,7 @@
 
         <property xml-attribute-map="true" name="id" type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="productSku" type="string"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <virtual-property name="unitPrice"      type="double" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" method="getUnitPriceWithoutVat" />
 
     </class>
 </serializer>

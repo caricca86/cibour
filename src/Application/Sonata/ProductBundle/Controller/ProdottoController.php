@@ -63,6 +63,7 @@ class ProdottoController extends BaseProductController
                 'cheapest_variation' => $provider->getCheapestEnabledVariation($product),
                 'currency'      => $currency,
                 'form'          => $form,
+                'category_list'  => $categoryList
             )
         );
     }
@@ -124,6 +125,7 @@ class ProdottoController extends BaseProductController
                 'cheapest_variation' => $provider->getCheapestEnabledVariation($product),
                 'currency'      => $currency,
                 'form'          => $form,
+                'ajax_call'     => true
             )
         );
     }

@@ -63,6 +63,7 @@ class ProductAdmin extends Admin
     public function configureListFields(ListMapper $list)
     {
         $list
+            ->add('image', null, array('label' => 'Immagine'))
             ->addIdentifier('sku')
             ->addIdentifier('name')
             ->add('enabled', null, array('editable' => true))

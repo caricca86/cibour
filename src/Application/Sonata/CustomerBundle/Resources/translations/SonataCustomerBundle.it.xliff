@@ -381,7 +381,7 @@
             </trans-unit>
             <trans-unit id="sonata.customer.address.save">
                 <source>sonata.customer.address.save</source>
-                <target>Salva i tuoi indirizzi</target>
+                <target>Salva</target>
             </trans-unit>
             <trans-unit id="sonata.address.list.add">
                 <source>sonata.address.list.add</source>

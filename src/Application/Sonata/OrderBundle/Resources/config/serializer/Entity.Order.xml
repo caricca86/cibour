@@ -13,5 +13,7 @@
 
         <property name="shippingAddressId" type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="shippingProvincia"   type="string"   expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <virtual-property name="deliveryWithoutVat"      type="double" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" method="getDeliveryWithoutVat" />
+
     </class>
 </serializer>

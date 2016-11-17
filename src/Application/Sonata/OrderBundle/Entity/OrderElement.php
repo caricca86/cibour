@@ -62,4 +62,9 @@ class OrderElement extends BaseOrderElement
     {
         return $this->productSku;
     }
+
+    public function getUnitPriceWithoutVat()
+    {
+        return $this->getUnitPrice(false);
+    }
 }

@@ -421,7 +421,7 @@
             </trans-unit>
             <trans-unit id="sonata.order.view.delivery">
                 <source>sonata.order.view.delivery</source>
-                <target>Carico di consegna</target>
+                <target>Spese di spedizione</target>
             </trans-unit>
             <trans-unit id="sonata.order.view.delivery_title">
                 <source>sonata.order.view.delivery_title</source>

@@ -24,7 +24,9 @@ file that was distributed with this source code.
     {{ form_errors(form) }}
     {{ form_rest(form) }}
     <div class="form-actions">
-        <button type="submit" class="btn btn-success pull-right">{{ 'sonata.customer.address.save'|trans({}, 'SonataCustomerBundle') }}</button>
+        <button type="submit" class="btn text-center">{{ 'sonata.customer.address.save'|trans({}, 'SonataCustomerBundle') }}
+            <img src="{{ asset('bundles/cticibour/images/icon_submit.png') }}">
+        </button>
     </div>
 {{ form_end(form) }}
 

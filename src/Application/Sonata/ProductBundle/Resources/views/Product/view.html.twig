@@ -39,7 +39,7 @@ file that was distributed with this source code.
     #}
     <!-- Begin product display -->
 
-    <div class="product-view_{{ product.id }}" itemscope itemtype="http://schema.org/Product">
+    <div class="product-view_{{ product.id }}" {% if not category_list %}style="margin-top: 100px; margin-bottom: 50px;"{% endif %} itemscope itemtype="http://schema.org/Product">
         <div class="col-xs-1 col-xs-offset-11">
             <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
@@ -95,7 +95,7 @@ file that was distributed with this source code.
     <div class="col-sm-5">
         <table class="table text-center prodotto {{ product.id }}">
             <tr>
-                <th class="{% if product.glutenFree %}disabled{% endif %}"><small>GLUTEN FREE</small></th>
+                <th class="{% if not product.glutenFree %}disabled{% endif %}"><small>GLUTEN FREE</small></th>
                 <th><small> {{ product.tipoDietaName }}</small></th>
                 <th><small>{{ product.metodoProduzioneName }}</small></th>
             </tr>

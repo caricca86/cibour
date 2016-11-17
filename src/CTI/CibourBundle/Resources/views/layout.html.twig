@@ -85,7 +85,6 @@ file that was distributed with this source code.
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ path('catalog_trending_now') }}">Trending now</a></li>
                             <li><a href="{{ path('catalog_recently_added') }}">Ultimi Arrivi</a></li>
-                            <li><a href="#">POD</a></li>
                             <li><a href="{{ path('catalog_popular') }}">Most Popular</a></li>
                             {{ sonata_block_render({'type': 'sonata.category.block.menu'}) }}
                         </ul>'><img src="{{ asset('bundles/cticibour/images/icon_menu.png') }}" height="25" class="navbar-icons-padding" /></a>
@@ -118,14 +117,14 @@ file that was distributed with this source code.
                 </div>
             </div>
         </div>
-    {#
+
     <div class="container-fluid">
         <footer class="row">
             {% block page_footer %}
-                <div class="col-xs-12">Cibour.com</div>
+                <div style="background-color: black; color: white; padding: 15px;" class="col-xs-12 text-center">CTI S.r.l. società con sede legale in Via Matteotti 5, Menfi (AG) – Italia - P. IVA 02783110840</div>
             {% endblock %}
         </footer>
-    </div>#}
+    </div>
     <script>
         $(function () {
             $('[data-toggle="popover"]').popover()
