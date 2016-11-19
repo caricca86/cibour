@@ -3,6 +3,7 @@
 namespace CTI\CibourBundle\Controller;
 
 use Application\Sonata\ProductBundle\Entity\Delivery;
+use Application\Sonata\ProductBundle\Entity\Prodotto;
 use CTI\CibourBundle\Entity\Counter;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\Component\Currency\CurrencyDetector;
@@ -42,6 +43,7 @@ class DefaultController extends Controller
         $prodotti = $em->getRepository('ApplicationSonataProductBundle:Prodotto')->findAll();
         foreach ($prodotti as $prodotto)
         {
+            /*
             $prodotto->setEnabled(true);
             $prodotto->setCounter(new Counter());
             $prodotto->setStock(10);
@@ -56,10 +58,13 @@ class DefaultController extends Controller
             $delivery2->setCode('take_away');
             $delivery2->setCountryCode('IT');
             $delivery2->setEnabled(true);
-            $delivery2->setZone('Italy');
+            $delivery2->setZone('Italy');*/
+            $prodotto->setAlimentazione(0);
+            $prodotto->setAgricoltura(0);
+            $prodotto->setAmbiente(0);
+            $prodotto->setArte(0);
+            $prodotto->setArtigianato(0);
             $em->persist($prodotto);
-            $em->persist($delivery);
-            $em->persist($delivery2);
         }
 
         $em->flush();

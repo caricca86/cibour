@@ -80,6 +80,38 @@
             <argument>CTI\CibourBundle\Entity\Slide</argument>
             <argument>SonataAdminBundle:CRUD</argument>
         </service>
+
+        <service id="sonata.order.admin.order" class="Application\Sonata\OrderBundle\Admin\OrderAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="order"  label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument />
+            <argument>%sonata.order.admin.order.entity%</argument>
+            <argument>%sonata.order.admin.order.controller%</argument>
+            <call method="addChild">
+                <argument type="service" id="sonata.order.admin.order_element" />
+            </call>
+            <call method="setCurrencyDetector">
+                <argument type="service" id="sonata.price.currency.detector" />
+            </call>
+            <call method="setInvoiceManager">
+                <argument type="service" id="sonata.invoice.manager" />
+            </call>
+            <call method="setOrderManager">
+                <argument type="service" id="sonata.order.manager" />
+            </call>
+        </service>
+
+        <service id="sonata.order.admin.order_element" class="Application\Sonata\OrderBundle\Admin\OrderElementAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_ecommerce" label="orderElement" show_in_dashboard="false"  label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument />
+            <argument>%sonata.order.admin.order_element.entity%</argument>
+            <argument>%sonata.order.admin.order_element.controller%</argument>
+            <call method="setCurrencyDetector">
+                <argument type="service" id="sonata.price.currency.detector" />
+            </call>
+            <call method="setProductPool">
+                <argument type="service" id="sonata.product.pool" />
+            </call>
+        </service>
     </services>
 
 </container>

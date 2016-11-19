@@ -63,7 +63,7 @@ class DhlDelivery extends BaseServiceDelivery
 
     public function getPriority()
     {
-        return 1;
+        return 2;
     }
 
     /**

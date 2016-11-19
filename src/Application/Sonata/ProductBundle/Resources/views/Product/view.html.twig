@@ -39,10 +39,12 @@ file that was distributed with this source code.
     #}
     <!-- Begin product display -->
 
-    <div class="product-view_{{ product.id }}" {% if not category_list %}style="margin-top: 100px; margin-bottom: 50px;"{% endif %} itemscope itemtype="http://schema.org/Product">
+    <div class="product-view_{{ product.id }}" {% if not category_list and not ajax_call %}style="margin-top: 100px"{% endif %} itemscope itemtype="http://schema.org/Product">
+        {% if ajax_call %}
         <div class="col-xs-1 col-xs-offset-11">
             <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
+        {% endif %}
         <div class="col-md-12">
             <div class="col-sm-4">
                 {% thumbnail product.image, 'slider' with {'itemprop':'image', 'class': 'center-block img-responsive', 'width': 250, 'height': 250} %}
@@ -89,13 +91,16 @@ file that was distributed with this source code.
             </div>
             <div class="col-sm-4">
                 <canvas id="pentagono_{{ product.id }}" class="center-block" width="250" height="250"></canvas>
+                {% if not (product.alimentazione and product.agricoltura and product.ambiente and product.artigianato and product.arte) %}
+                    <div><small>La valutazione dei prodotti ai sensi del disciplinare 5A è in corso di analisi</small></div>
+                {% endif %}
             </div>
         </div>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-5" {% if not category_list and not ajax_call %}style="margin-bottom: 50px;"{% endif %}>
         <table class="table text-center prodotto {{ product.id }}">
             <tr>
-                <th class="{% if not product.glutenFree %}disabled{% endif %}"><small>GLUTEN FREE</small></th>
+                <th>{% if product.glutenFree %}<small>GLUTEN FREE</small>{% endif %}</th>
                 <th><small> {{ product.tipoDietaName }}</small></th>
                 <th><small>{{ product.metodoProduzioneName }}</small></th>
             </tr>
@@ -166,28 +171,28 @@ file that was distributed with this source code.
         ctx.stroke();
         ctx.beginPath();
         drawShape(ctx, width/2, width/2, 5, 80, 80, 0);
-        ctx.strokeStyle = "#eee";
+        ctx.strokeStyle = "#bbb";
         ctx.fillStyle = "#bada55";
         ctx.lineWidth = 1;
         ctx.stroke();
         ctx.beginPath();
         drawShape(ctx, width/2, width/2, 5, 60, 60, 0);
-        ctx.strokeStyle = "#eee";
+        ctx.strokeStyle = "#bbb";
         ctx.lineWidth = 1;
         ctx.stroke();
         ctx.beginPath();
         drawShape(ctx, width/2, width/2, 5, 40, 40, 0);
-        ctx.strokeStyle = "#eee";
+        ctx.strokeStyle = "#bbb";
         ctx.lineWidth = 1;
         ctx.stroke();
         ctx.beginPath();
         drawShape(ctx, width/2, width/2, 5, 20, 20, 0);
-        ctx.strokeStyle = "#eee";
+        ctx.strokeStyle = "#bbb";
         ctx.lineWidth = 1;
         ctx.stroke();
         ctx.beginPath();
         drawShape(ctx, width/2, width/2, 5, 100, 0, 0);
-        ctx.strokeStyle = "#eee";
+        ctx.strokeStyle = "#bbb";
         ctx.lineWidth = 0.5;
         ctx.stroke();
         ctx.beginPath();
@@ -204,8 +209,8 @@ file that was distributed with this source code.
         ctx.lineTo(width/2 + {{ product.arte }} * Math.cos(angle), width/2 + {{ product.arte }} * Math.sin(angle));
         angle = 0 * 2 * Math.PI / 5 - Math.PI / 2 + 0;
         ctx.lineTo(width/2 + {{ product.alimentazione }} * Math.cos(angle), width/2 + {{ product.alimentazione }} * Math.sin(angle));
-        ctx.strokeStyle = "#eee";
-        ctx.fillStyle = "#eee";
+        ctx.strokeStyle = "#bbb";
+        ctx.fillStyle = "#bbb";
         ctx.stroke();
         ctx.fill();
     </script>

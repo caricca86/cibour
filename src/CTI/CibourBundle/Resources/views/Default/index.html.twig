@@ -3,20 +3,20 @@
     <div class="text-center container-fluid" style="width: 100%" id="collapseHome">
         <div class="row">
             <div class="col-md-5 col-xs-12 col-sm-12 no-pad">
-                <a href="#">
+                <a href="{{ path('sonata_catalog_index') }}">
                     <img class="img-responsive center-block logo" src="{{ asset('bundles/cticibour/images/home/cibour_logo_black_big.png') }}">
                 </a>
             </div>
             <div class="col-md-7 col-xs-12 col-sm-12 search">
                 <div class="row">
                     <div class=" col-xs-10 no-pad">
-                        <form class="home-form" action="#" name="form">
+                        <form class="home-form" action="{{ path('catalog_search') }}" name="form">
                             <img class="img-responsive forchetta" src="{{ asset('bundles/cticibour/images/home/forchetta.png') }}">
                             <input name="search" type="search">
                         </form>
                     </div>
                     <div class="col-xs-2 no-pad">
-                        <a href="#">
+                        <a href="#" onclick="$('.home-form').submit()">
                             <img class="img-responsive carrello" src="{{ asset('bundles/cticibour/images/home/CARRELLO.png') }}">
                         </a>
                     </div>
@@ -25,19 +25,19 @@
         </div>
         <div class="row">
             <div class="col-md-12 no-pad">
-                <a href="#">
+                <a href="{{ path('sonata_catalog_index') }}">
                     <img src="{{ asset('bundles/cticibour/images/home/facies_oriz.jpg') }}" class="img-responsive-height-resized">
                 </a>
             </div>
         </div>
         <div class="row login" style="border-bottom:1px solid;">
             <div class="col-xs-6 no-pad">
-                <a href="">
+                <a href="#">
                     <div class="join-us">JOIN US</div>
                 </a>
             </div>
             <div class="col-xs-6 no-pad">
-                <a href="#">
+                <a href="{{ path('fos_user_security_login') }}">
                     <div class="sign-in">SIGN IN</div>
                 </a>
             </div>
@@ -45,51 +45,149 @@
         <div class="row">
             <div class="col-md-12 no-pad"><div class="our-network">OUR NETWORK</div></div>
             <div class="col-sm-3 col-xs-6 link no-pad">
-                <a href="">
+                <a href="http://www.latavolaitaliana.org" target="_blank">
                     <img class="img-responsive-fixed-height center-block" src="{{ asset('bundles/cticibour/images/home/TAVOLA.png')}}">
                     FOOD AS ART
                 </a>
             </div>
             <div class="col-sm-3 col-xs-6 link no-pad">
-                <a href="">
+                <button class="btn-landing" id="fyt">
                     <img class="img-responsive-fixed-height center-block" src="{{ asset('bundles/cticibour/images/home/FYT.png')}}">
                     FYT
-                </a>
+                </button>
             </div>
             <div class="col-sm-3 col-xs-6 link no-pad">
-                <a href="">
+                <a href="https://www.facebook.com/fodytour/" target="_blank">
                     <img class="img-responsive-fixed-height center-block" src="{{ asset('bundles/cticibour/images/home/FODY.png')}}">
                     FODY
                 </a>
             </div>
             <div class="col-sm-3 col-xs-6 link no-pad">
-                <a href="">
+                <button class="btn-landing" id="e-pasta">
                     <img class="img-responsive-fixed-height center-block" src="{{ asset('bundles/cticibour/images/home/e-PASTA.png')}}">
                     e-PASTA
-                </a>
+                </button>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog text-center" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"><b>LA TAVOLA ITALIANA</b></h4>
+
+    <!-- Modal FYT  -->
+
+    <div class="modalfyt fade in col-xs-12 col-md-4 col-md-offset-4" id="modalfyt" tabindex="-1" role="dialog" aria-labelledby="Fyt" aria-hidden="false" >
+        <div class="modalfyt-dialog" role="document">
+            <div class="modalfyt-content">
+
+
+                <div class="modalfyt-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#fff;">×</button>
+                    <p class="text-up-bold-2 text-center" style="color:#fff;">LEGGI LA NOSTRA RIVISTA "Fit Your Table" SU FLIPBOARD</p>
+                </div>			<!-- /modal-header -->
+
+                <div class="modalfyt-body">
+
+                    <a data-flip-widget="mag" href="https://flipboard.com/@fityourtable/fyt-9moetfkky">View my Flipboard Magazine.</a>
+                    <script src="{{ asset('bundles/cticibour/js/flipboard_modal.js') }}" type="text/javascript"></script>
+
+
+                </div>			<!-- /modal-body -->
+                <div class="modalfyt-footer">
+                    <button type="button" class="btn text-up-bold-3 " data-dismiss="modal" style="color:black;">Chiudi</button>
                 </div>
-                <div class="modal-body">
-                    <p>Prossimamente on-line<br>
-                        il sito E-Commerce di CIBOUR<br>
-                        per poter ordinare i prodotti de "La Tavola Italiana"<br>
-                        selezionati secondo la disciplinare delle 5A<br> </p>
+
+
+            </div>
+        </div>
+    </div>
+    <!--Fine Modal FYT-->
+
+
+    <!-- Modal E-PASTA  -->
+    <div class="modalepasta fade in col-xs-12 col-md-6 col-md-offset-3" id="modalepasta" tabindex="-1" role="dialog" aria-labelledby="E-pasta" aria-hidden="false" >
+        <div class="modalepasta-dialog" role="document">
+            <div class="modalepasta-content">
+
+
+                <div class="modalepasta-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#fff;">×</button>
+                    <p class="text-up-bold-2 text-center" style="color:#fff;">Visita uno dei punti e-pasta a Milano</p>
+                </div>			<!-- /modal-header -->
+
+                <div class="modalepasta-body col-xs-12">
+                    <div class="row marg-top-mob-30">
+                        <div class="col-xs-12">
+                            <iframe class="maps-epasta" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2798.336361914883!2d9.17454941581958!3d45.46302774154209!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c156a511e923%3A0xaafb2da79528bf37!2sLargo+Agostino+Gemelli%2C+20123+Milano!5e0!3m2!1sit!2sit!4v1479166194000" frameborder="0" style="border:0" ></iframe>
+                        </div>
+                        <div class="col-xs-12">
+                            <img class="img img-address-epasta hidden-xs" src="{{ asset('bundles/cticibour/images/addr_image.png') }}" >
+                            <span class="text-up-bold-3" style="color:#fff;">Largo Agostino Gemelli (Universit&agrave; Cattolica) - 20123 - Milano  (Fermata Metropolitana "Sant'Ambrogio")</span>
+                        </div>
+                    </div>
+
+
+                    <div class="row marg-top-mob-30">
+                        <div class="col-xs-12">
+                            <iframe class="maps-epasta" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2798.08269087458!2d9.174596415819682!3d45.468138141201145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c151d102e01f%3A0x53b2045589098859!2sPiazzale+Luigi+Cadorna%2C+20123+Milano!5e0!3m2!1sit!2sit!4v1479170551043"  frameborder="0" style="border:0" ></iframe>
+                        </div>
+                        <div class="col-xs-12">
+                            <img class="img img-address-epasta hidden-xs" src="{{ asset('bundles/cticibour/images/addr_image.png') }}" >
+                            <span class="text-up-bold-3" style="color:#fff;">[Coming Soon]&nbsp;Piazzale Luigi Cadorna - 20123 - Milano  (Fermata Metropolitana "Cadorna")</span>
+                        </div>
+                    </div>
+
+
+                </div>			<!-- /modal-body -->
+                <div class="modalepasta-footer">
+                    <a class="text-up-bold-3" style="color:#fff;  padding-right:5px;" href="http://www.epastait.com/" target="_blank">Vai al sito E-PASTA</a>
+                    <button type="button" class="btn text-up-bold-3 " data-dismiss="modal" style="color:black;">Chiudi</button>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+
+
+            </div>
+        </div>
+    </div>
+    <!--Fine Modal e-pasta-->
+
+    <!-- Modal cookie  -->
+    <div class="modalCookie fade in" id="modalCookiemain" tabindex="-1" role="dialog" aria-labelledby="Cookie" aria-hidden="false" >
+        <div class="modalCookie-dialog" role="document">
+            <div class="modalCookie-content">
+
+
+                <div class="modalCookie-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color:#fff;">×</button>
+                </div>			<!-- /modal-header -->
+
+                <div class="modalCookie-body">
+
+                    <div class="text-center">
+                        <label class="text-up-bold-3">&nbsp;"Questo sito raccoglie dati sulla navigazione, mediante l'utilizzo dei cookie, e li gestisce secondo le norme sul
+                            <a href="{{ path('privacy') }}" data-toggle="modal" style=" text-decoration: underline;color:#fff;" >trattamento dei dati personali</a> ai sensi del D.lgs. 196 del 30/06/2003. Cliccando su "accetta",continuando a navigare su questo sito, cliccando sui link al suo interno o semplicemente scrollando la pagina verso il basso, accetti il servizio e gli stessi cookie."</label>
+                    </div>
+
+
+                </div>			<!-- /modal-body -->
+                <div class="modalCookie-footer">
+                    <button type="button" class="btn text-up-bold-3 " data-dismiss="modal" style="color:black;">Accetta</button>
                 </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+
+
+            </div>
+        </div>
+    </div>
+
     <script>
-        $('#modal').modal('show')
+        $('#modalCookiemain').modal('show');
+        $( window ).scroll(function() {
+            $(".modalCookie" ).modal('hide');
+            $(".modalfyt").modal('hide');
+        });
+        $("#e-pasta").click(function() {
+            $( "#modalepasta" ).modal('show');
+        });
+        $("#fyt").click(function() {
+            $( "#modalfyt" ).modal('show');
+        });
     </script>
+
 {% endblock %}
