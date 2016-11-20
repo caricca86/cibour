@@ -10,6 +10,8 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="terms" column="terms" type="boolean" />
+
     </entity>
 
 </doctrine-mapping>

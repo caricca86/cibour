@@ -459,7 +459,20 @@ class BasketController extends Controller
         }
 
         if ($this->get('request')->getMethod() == 'POST' ) {
-            if ($this->get('request')->get('tac')) {
+            if ($this->getUser()->getTerms()) {
+
+                return $this->forward('SonataPaymentBundle:Payment:sendbank');
+
+            } elseif ($this->get('request')->get('tac')){
+
+                $em = $this->getDoctrine()->getManager();
+
+                $user = $this->getDoctrine()->getRepository('ApplicationSonataUserBundle:User')->find($this->getUser()->getId());
+                $user->setTerms(true);
+
+                $em->persist($user);
+                $em->flush();
+
                 // send the basket to the payment callback
                 return $this->forward('SonataPaymentBundle:Payment:sendbank');
             }

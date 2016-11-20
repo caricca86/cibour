@@ -28,6 +28,8 @@ class User extends BaseUser
      */
     protected $id;
 
+    protected $terms = false;
+
     /**
      * Get id
      *
@@ -36,5 +38,15 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getTerms()
+    {
+        return $this->terms;
+    }
+
+    public function setTerms($terms)
+    {
+        $this->terms = $terms;
     }
 }

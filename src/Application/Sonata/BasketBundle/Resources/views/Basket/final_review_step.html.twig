@@ -152,17 +152,18 @@ file that was distributed with this source code.
 <form action="{{ url('sonata_basket_final') }}" method="POST" onsubmit="ctrlForm(this)">
     <div class="text-center">
         <div class="text-center">
-
+        {% if not app.user.terms %}
             <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center marg-bot-30 no-pad"  >
                 <div class=" no-pad col-xs-12 col-sm-2 col-sm-offset-1"><hr/></div>
                 <div class="text-up-bold-2 no-pad col-xs-12 col-sm-6 marg-top-10"  ><a href="{{ path('sonata_payment_terms') }}" target="_blank">{{ 'sonata.basket.link_terms_and_condition'|trans({}, 'SonataBasketBundle') }}</a></div>
                 <div class=" no-pad col-xs-12 col-sm-2"><hr/></div>
             </div>
+
         <label style="font-weight: 400; margin-bottom: 90px; text-transform: uppercase;" for="basket_tac">
             <input type="checkbox" name="tac" id="basket_tac"/>
             {{ 'sonata.basket.label_terms_and_condition'|trans({}, 'SonataBasketBundle') }}
         </label>
-
+        {% endif %}
         <div>
             <input type="submit" value="{{ 'sonata.basket.label_process_to_payment'|trans({}, 'SonataBasketBundle') }}" class="btn basket-control" />
         </div>
