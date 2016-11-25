@@ -33,8 +33,9 @@ class AddressType extends BaseAddressType
     {
         $addresses = $options['addresses'];
         $type = $options['type'];
+        $first = $options['first'];
 
-        if (count($addresses) > 0) {
+        if (count($addresses) > 0 && $first == false) {
             $defaultAddress = current($addresses);
 
             foreach ($addresses as $address) {
@@ -65,7 +66,7 @@ class AddressType extends BaseAddressType
                 );
         }
 
-            if (($type == AddressInterface::TYPE_BILLING && !count($addresses)) || $type != AddressInterface::TYPE_BILLING)
+            if (($type == AddressInterface::TYPE_BILLING && !count($addresses)) || $type != AddressInterface::TYPE_BILLING || $first == true)
             {
                 $builder->add('name', null, array('required' => !count($addresses),
                     'label' => "Nome dell'indirizzo",
@@ -174,6 +175,7 @@ class AddressType extends BaseAddressType
             'addresses'   => array(),
             'type'        => null,
             'validation_groups' => array('front'),
+            'first' => false
         ));
     }
 
