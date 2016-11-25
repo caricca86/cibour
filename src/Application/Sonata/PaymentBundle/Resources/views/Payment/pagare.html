@@ -1,0 +1,25 @@
+<html><body onload="document.getElementById('submit_button').disabled = 'disabled'; document.getElementById('formPaiement').submit();">
+<div class=" col-xs-12 col-sm-6 col-sm-offset-3 no-pad " >
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3 sonata-payment-confirmation text-center no-pad"  >
+        <div class="text-up-bold-2 no-pad col-xs-12 col-sm-12 marg-top-10"  >
+            Pagare
+        </div>
+    </div>
+    <div class=" col-xs-12 text-center ">
+        <p>
+        <form id='formPaiement' name='formKeyclient' method='post' action='$url_action'>
+            <input type='hidden' name='alias' value='$alias'>
+            <input type='hidden' name='importo' value='$importo_da_passare'>
+            <input type='hidden' name='divisa' value='$divisa'>
+            <input type='hidden' name='codTrans' value='$codTrans'>
+            <input type='hidden' name='url' value='$url'>
+            <input type='hidden' name='url_back' value='$url_back'>
+            <input type='hidden' name='languageId' value='$languageId'>
+            <input type='hidden' name='mac' value='$mac'>
+            <input type='submit' id='submit_button' value='INVIA PAGAMENTO'>
+        </form>
+        </p>
+    </div>
+
+    </body>
+</html>

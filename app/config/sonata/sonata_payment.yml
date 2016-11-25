@@ -2,7 +2,8 @@ sonata_payment:
     methods:
         pass: ~
         paypal: ~
-        #braintree: cibour.payment.braintree
+        xpay: cibour.payment.method.xpay
+
     services:
         paypal:
             name:                 Paypal
@@ -15,8 +16,8 @@ sonata_payment:
             options:
                 web_connector_name: curl
 
-                account:            NR844ZUGCGNB6
-                cert_id:            W45TMLPSDZX7E
+                account:            amministrazione@latavolaitaliana.org
+                cert_id:            SAAZA6Z6D94H4
                 url_action:         https://www.sandbox.paypal.com/cgi-bin/webscr
 
                 debug: true
@@ -27,14 +28,14 @@ sonata_payment:
 
                 method:             encryptViaBuffer
 
-                key_file:           %kernel.root_dir%/paypal_key.pem
-                cert_file:          %kernel.root_dir%/paypal_cert.pem
-                paypal_cert_file:   %kernel.root_dir%/paypal_cert_pem.txt
+                key_file:           %kernel.root_dir%/my-prvkey.pem
+                cert_file:          %kernel.root_dir%/my-pubcert.pem
+                paypal_cert_file:   %kernel.root_dir%/sandbox.paypal_cert_pem.txt
 
                 openssl:            C:\xampp\apache\bin\openssl.exe
 
         pass:
-            name:    Pass
+            name:    Bonifico Bancario
             code:    pass
             browser: sonata.payment.browser.curl
 

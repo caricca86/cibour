@@ -28,8 +28,22 @@
             <argument type="service" id="sonata.classification.manager.category" />
             <argument type="service" id="form.factory" />
         </service>
-        <service id="cibour.payment.braintree" class="CTI\CibourBundle\Entity\BrainTreePayment">
-            <tag name="sonata.delivery.method" />
+
+        <service id="cibour.payment.method.xpay" class="Application\Sonata\PaymentBundle\Payment\Xpay">
+            <tag name="sonata.payment.method" />
+
+            <argument type="service" id="router" />
+            <argument type="service" id="translator" on-invalid="null"/>
+
+            <call method="addTransformer">
+                <argument type="string" >basket</argument>
+                <argument type="service" id="sonata.payment.transformer.basket" />
+            </call>
+
+            <call method="addTransformer">
+                <argument type="string" >order</argument>
+                <argument type="service" id="sonata.payment.transformer.order" />
+            </call>
         </service>
     </services>
 </container>
