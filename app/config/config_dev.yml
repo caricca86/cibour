@@ -18,6 +18,9 @@ monolog:
 #        firephp:
 #            type:  firephp
 #            level: info
+swiftmailer:
+    delivery_address: riccardo.cartei7@gmail.com
+    disable_delivery: false
 
 sonata_payment:
     methods:

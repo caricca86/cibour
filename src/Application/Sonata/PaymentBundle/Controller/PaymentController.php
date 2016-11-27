@@ -51,6 +51,21 @@ class PaymentController extends BaseController
             $counterManager->addSaleToProduct($product);
         }
 
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Conferma Ordine '.$order->getReference())
+            ->setFrom(array('ecommerce@cibour.com' => 'Cibour'))
+            ->setTo($this->getUser()->getEmail())
+            ->setBody(
+                $this->container->get('templating')->render(
+                // app/Resources/views/Emails/registration.html.twig
+                    'CTICibourBundle:Mail:mail_conferma_ordine.html.twig',
+                    array('order' => $order)
+                ),
+                'text/html'
+            )
+        ;
+        $this->container->get('mailer')->send($message);
+
         return $this->render('SonataPaymentBundle:Payment:confirmation.html.twig', array(
             'order' => $order,
         ));

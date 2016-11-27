@@ -36,9 +36,6 @@
             <tr>
                 {% block sonata_order_element %}
                     <td>
-                        {% block product_thumbnail %}
-                            {% thumbnail element.product.image, 'preview' with {'itemprop':'image', 'class': 'img-rounded img-responsive'} %}
-                        {% endblock %}
                     </td>
                     <td><a href="{{ url('sonata_product_view', {'productId': element.productId, 'slug': element.product.slug}) }}">{{ element.designation }}</a></td>
                     <td class="number">{{ element.unitPrice(true)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
