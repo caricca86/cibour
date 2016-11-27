@@ -168,8 +168,10 @@ class DefaultController extends Controller
         {
             $inEvidenza = $prodottoRepository->find($prodottoId);
         } else {
-            if (count($inEvidenza) > 0){
-                $inEvidenza = $inEvidenza[0];
+            $inEvidenza = array();
+
+            if (count($products) > 0){
+                $inEvidenza = $products[0];
             }
         }
         return array(
@@ -207,8 +209,10 @@ class DefaultController extends Controller
         {
             $inEvidenza = $prodottoRepository->find($prodottoId);
         } else {
-            if (count($inEvidenza) > 0){
-                $inEvidenza = $inEvidenza[0];
+            $inEvidenza = array();
+
+            if (count($products) > 0){
+                $inEvidenza = $products[0];
             }
         }
         return array(
@@ -277,8 +281,10 @@ class DefaultController extends Controller
         {
             $inEvidenza = $prodottoRepository->find($prodottoId);
         } else {
-            if (count($inEvidenza) > 0){
-                $inEvidenza = $inEvidenza[0];
+            $inEvidenza = array();
+
+            if (count($products) > 0){
+                $inEvidenza = $products[0];
             }
         }
         return array(
@@ -317,8 +323,10 @@ class DefaultController extends Controller
         {
             $inEvidenza = $prodottoRepository->find($prodottoId);
         } else {
-            if (count($inEvidenza) > 0){
-                $inEvidenza = $inEvidenza[0];
+            $inEvidenza = array();
+
+            if (count($products) > 0){
+                $inEvidenza = $products[0];
             }
         }
         return array(
