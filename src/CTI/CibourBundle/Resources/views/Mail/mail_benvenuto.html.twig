@@ -1,0 +1,49 @@
+<html>
+<style>
+    .header, .footer {
+        text-align: center;
+    }
+
+</style>
+<body>
+<div class="header">
+    <a href="{{ app.request.getSchemeAndHttpHost() ~ path('sonata_catalog_index') }}">
+        <img src="{{ app.request.getSchemeAndHttpHost() ~ asset('bundles/cticibour/images/home/cibour_logo_mail.jpg') }}">
+    </a>
+    <div>Partner</div>
+    <a href="http://www.latavolaitaliana.org">
+        <img src="{{ app.request.getSchemeAndHttpHost() ~ asset('bundles/cticibour/images/home/tavola_italiana_logo_mail.jpg') }}">
+    </a>
+</div>
+<div>
+    <p>
+        Grazie di averci scelto.
+    </p>
+    <p>
+        Le diamo il benvenuto su cibour.com, il portale per la tavola e la salute che accorcia le distanze tra produttori e consumatori.
+    </p>
+    {#<p>
+        La preghiamo di verificare i Suoi dati:
+        <br><br>
+            Nome utente: {{ app.user.name }}<br>
+            Password:    {{ app.user.password }}
+        <br><br>
+    </p>#}
+    <p>
+        Adesso potrà scegliere i prodotti e i servizi selezionati per Lei da noi con i rigidi criteri del disciplinare de “La Tavola Italiana”, che punta a promuovere le 5 A dell’eccellenza (Alimentazione,  Artigianato,  Agricoltura,  Ambiente,  Arte) per l’agroalimentare ma non solo...
+    </p>
+    <p>
+        <a href="{{ app.request.getSchemeAndHttpHost() ~ path('sonata_catalog_index') }}">Vai al sito</a>
+    </p>
+</div>
+<div class="footer">
+    <p>
+        Customer service <a href="mailto:ecommerce@cibour.com">ecommerce@cibour.com</a>
+        Telefono +39 392 5948794
+    </p>
+    <p>
+        <a href="https://www.facebook.com/Cibour-179476069060260/"><img src="{{ app.request.getSchemeAndHttpHost() ~ asset('bundles/cticibour/images/home/fb_icon.png') }}"></a>
+    </p>
+</div>
+</body>
+</html>

@@ -125,6 +125,25 @@ file that was distributed with this source code.
             {% endblock %}
         </footer>
     </div>
+
+    {% if app.user != null %}
+    <div class="modal fade" id="modalBenvenuto" tabindex="-1" role="dialog" aria-hidden="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content col-xs-4 col-xs-offset-4">
+                <div class="modal-body text-center">
+                    <img class="img-responsive center-block logo" src="{{ asset('bundles/cticibour/images/home/cibour_logo_black_big.png') }}" >
+                    <br><br>
+                    <p style="font-size: 30px">Benvenuto {{ app.user }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    {% endif %}
+
     <script>
         $(function () {
             $('[data-toggle="popover"]').popover()
@@ -151,6 +170,35 @@ file that was distributed with this source code.
         var fontMob5 = $(".text-up-bold-5");
         if(fontMob5.is(".text-up-bold-5")){
             fontMob5.addClass("font-mob-5")
+        }
+
+        {% if app.user != null %}
+        var x = readCookie('cti_cibour_first');
+        if (x == null) {
+            $('#modalBenvenuto').modal('show');
+            createCookie('cti_cibour_first', 'OK');
+        }
+        {% endif %}
+
+        function createCookie(name,value,days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime()+(days*24*60*60*1000));
+                var expires = "; expires="+date.toGMTString();
+            }
+            else var expires = "";
+            document.cookie = name+"="+value+expires+"; path=/";
+        }
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
         }
     </script>
 {% endblock %}

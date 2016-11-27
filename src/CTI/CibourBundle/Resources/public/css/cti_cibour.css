@@ -1208,3 +1208,7 @@ font-size:0.73em;
 }
 
 table {border-collapse: inherit;}
+
+.fos_user_resetting_form_new_first_form_group {
+    margin-bottom: 50px;
+}

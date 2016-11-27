@@ -1,0 +1,101 @@
+<html>
+<style>
+    .header, .footer {
+        text-align: center;
+    }
+
+</style>
+<body>
+<div class="header">
+    <a href="{{ app.request.getSchemeAndHttpHost() ~ path('sonata_catalog_index') }}">
+        <img src="{{ app.request.getSchemeAndHttpHost() ~ asset('bundles/cticibour/images/home/cibour_logo_mail.jpg') }}">
+    </a>
+</div>
+<div>
+    <p>
+        Grazie di avere acquistato i nostri prodotti. Ecco il riepilogo del Suo acquisto.
+    </p>
+
+    <p>
+    <table class="table">
+
+        {% block sonata_order_elements_header %}
+            <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.label{% endtrans %}</th>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.unit_price{% endtrans %}</th>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.quantity{% endtrans %}</th>
+                <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
+            </tr>
+            </thead>
+        {% endblock %}
+
+        <tbody>
+        {% for element in order.orderElements %}
+            <tr>
+                {% block sonata_order_element %}
+                    <td>
+                        {% block product_thumbnail %}
+                            {% thumbnail element.product.image, 'preview' with {'itemprop':'image', 'class': 'img-rounded img-responsive'} %}
+                        {% endblock %}
+                    </td>
+                    <td><a href="{{ url('sonata_product_view', {'productId': element.productId, 'slug': element.product.slug}) }}">{{ element.designation }}</a></td>
+                    <td class="number">{{ element.unitPrice(true)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                    <td class="number">{{ element.quantity }}</td>
+                    <td class="number">{{ element.total(true)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                {% endblock %}
+            </tr>
+        {% endfor %}
+        <tr>
+            <td><span class="glyphicon glyphicon-plane" style="font-size:50px;">&nbsp;</span></td>
+            <td>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery{% endtrans %}</td>
+            <td class="number">{{ order.deliveryCost|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+            <td class="number">1</td>
+            <td class="number">{{ order.deliveryCost|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+        </tr>
+        </tbody>
+
+        {% block sonata_order_elements_sumup %}
+            <tfoot>
+            <tr>
+                <td colspan="3" rowspan="{{ 3 + order.getVatAmounts|length }}">&nbsp;</td>
+                <th style="text-align: right">{% trans from 'SonataOrderBundle' %}sonata.order.view.total_excl{% endtrans %}</th>
+                <td class="number"><b>{{ order.totalExcl|number_format_currency(order.currency.label, {}, {}, order.locale) }}</b></td>
+            </tr>
+
+            <tr>
+                <th style="text-align: right">{% trans from 'SonataOrderBundle' %}sonata.order.view.total_vat{% endtrans %}</th>
+                <td class="number"><b>{{ order.vat|number_format_currency(order.currency.label, {}, {}, order.locale) }}</b></td>
+            </tr>
+
+            <tr>
+                <th style="text-align: right">{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</th>
+                <td class="number"><b>{{ order.totalInc|number_format_currency(order.currency.label, {}, {}, order.locale) }}</b></td>
+            </tr>
+            </tfoot>
+        {% endblock %}
+
+    </table>
+    </p>
+    <p>
+        Nel caso in cui Lei decida di effettuare il pagamento tramite bonifico bancario IBAN….. la informiamo che il Suo ordine verrà evaso dopo 3 giorni lavorativi previa verifica dell’avvenuto pagamento.
+    </p>
+
+    DISCLOSURE SULLA PRIVACY
+    CONDIZIONI GENERALI
+    <p>
+        <a href="{{ app.request.getSchemeAndHttpHost() ~ path('sonata_catalog_index') }}">Vai al sito</a>
+    </p>
+</div>
+<div class="footer">
+    <p>
+        Customer service <a href="mailto:ecommerce@cibour.com">ecommerce@cibour.com</a>
+        Telefono +39 392 5948794
+    </p>
+    <p>
+        <a href="https://www.facebook.com/Cibour-179476069060260/"><img src="{{ app.request.getSchemeAndHttpHost() ~ asset('bundles/cticibour/images/home/fb_icon.png') }}"></a>
+    </p>
+</div>
+</body>
+</html>

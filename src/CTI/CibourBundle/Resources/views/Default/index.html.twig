@@ -32,7 +32,7 @@
         </div>
         <div class="row login" style="border-bottom:1px solid;">
             <div class="col-xs-6 no-pad">
-                <a href="#">
+                <a href="http://www.latavolaitaliana.org/partner">
                     <div class="join-us">JOIN US</div>
                 </a>
             </div>
@@ -131,7 +131,7 @@
                         </div>
                         <div class="col-xs-12">
                             <img class="img img-address-epasta hidden-xs" src="{{ asset('bundles/cticibour/images/addr_image.png') }}" >
-                            <span class="text-up-bold-3" style="color:#fff;">[Coming Soon]&nbsp;Piazzale Luigi Cadorna - 20123 - Milano  (Fermata Metropolitana "Cadorna")</span>
+                            <span class="text-up-bold-3" style="color:#fff;">Piazzale Luigi Cadorna - 20123 - Milano  (Fermata Metropolitana "Cadorna")</span>
                         </div>
                     </div>
 
@@ -168,7 +168,7 @@
 
                 </div>			<!-- /modal-body -->
                 <div class="modalCookie-footer">
-                    <button type="button" class="btn text-up-bold-3 " data-dismiss="modal" style="color:black;">Accetta</button>
+                    <button type="button" class="btn text-up-bold-3 cookie-accept" data-dismiss="modal" style="color:black;">Accetta</button>
                 </div>
 
 
@@ -177,10 +177,18 @@
     </div>
 
     <script>
-        $('#modalCookiemain').modal('show');
+
+        var x = readCookie('cti_cibour');
+        if (x == null) {
+            $('#modalCookiemain').modal('show');
+        }
+
+        $(".cookie-accept").on('click', function(){
+            createCookie('cti_cibour','cookie');
+        });
+
         $( window ).scroll(function() {
             $(".modalCookie" ).modal('hide');
-            $(".modalfyt").modal('hide');
         });
         $("#e-pasta").click(function() {
             $( "#modalepasta" ).modal('show');
@@ -188,6 +196,27 @@
         $("#fyt").click(function() {
             $( "#modalfyt" ).modal('show');
         });
+
+        function createCookie(name,value,days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime()+(days*24*60*60*1000));
+                var expires = "; expires="+date.toGMTString();
+            }
+            else var expires = "";
+            document.cookie = name+"="+value+expires+"; path=/";
+        }
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
     </script>
 
 {% endblock %}
