@@ -125,7 +125,11 @@ class DefaultController extends Controller
         {
             $inEvidenza = $prodottoRepository->find($prodottoId);
         } else {
-            $inEvidenza = $prodottoRepository->findLastActiveProducts($category->getId(), 1)[0];
+            $inEvidenza = $prodottoRepository->findLastActiveProducts($category->getId(), 1);
+
+            if (count($inEvidenza) > 0){
+                $inEvidenza = $inEvidenza[0];
+            }
         }
         return array(
             'display_mode' => $displayMode,
@@ -164,7 +168,9 @@ class DefaultController extends Controller
         {
             $inEvidenza = $prodottoRepository->find($prodottoId);
         } else {
-            $inEvidenza = $products[0];
+            if (count($inEvidenza) > 0){
+                $inEvidenza = $inEvidenza[0];
+            }
         }
         return array(
             'display_mode' => $displayMode,
@@ -201,7 +207,9 @@ class DefaultController extends Controller
         {
             $inEvidenza = $prodottoRepository->find($prodottoId);
         } else {
-            $inEvidenza = $products[0];
+            if (count($inEvidenza) > 0){
+                $inEvidenza = $inEvidenza[0];
+            }
         }
         return array(
             'display_mode' => $displayMode,
@@ -269,7 +277,9 @@ class DefaultController extends Controller
         {
             $inEvidenza = $prodottoRepository->find($prodottoId);
         } else {
-            $inEvidenza = $products[0];
+            if (count($inEvidenza) > 0){
+                $inEvidenza = $inEvidenza[0];
+            }
         }
         return array(
             'display_mode' => $displayMode,
@@ -307,7 +317,9 @@ class DefaultController extends Controller
         {
             $inEvidenza = $prodottoRepository->find($prodottoId);
         } else {
-            $inEvidenza = $products[0];
+            if (count($inEvidenza) > 0){
+                $inEvidenza = $inEvidenza[0];
+            }
         }
         return array(
             'display_mode' => $displayMode,

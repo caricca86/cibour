@@ -4,7 +4,9 @@
         {{ form(sortByForm) }}
     </div>
     {% block inEvidenza %}
+        {% if inEvidenza|length > 0 %}
         {{ render(controller('ApplicationSonataProductBundle:Prodotto:view', { 'product': inEvidenza, 'categoryList': true })) }}
+        {% endif %}
     {% endblock %}
     {% block products %}
     <div class="col-sm-12 category-grid" style="margin-top: 20px;">
