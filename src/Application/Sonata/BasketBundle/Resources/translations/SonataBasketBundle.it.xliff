@@ -20,11 +20,11 @@
             </trans-unit>
             <trans-unit id="sonata.basket.btn_update_delivery_step">
                 <source>sonata.basket.btn_update_delivery_step</source>
-                <target>Aggiorna il form di consegna</target>
+                <target>Salva Indirizzo</target>
             </trans-unit>
             <trans-unit id="sonata.basket.btn_update_payment_step">
                 <source>sonata.basket.btn_update_payment_step</source>
-                <target>Aggiorna il form di pagamento</target>
+                <target>Salva Indirizzo</target>
             </trans-unit>
             <trans-unit id="sonata.basket.label_delivery_charge">
                 <source>sonata.basket.label_delivery_charge</source>
@@ -120,11 +120,11 @@
             </trans-unit>
             <trans-unit id="sonata.basket.title_address_delivery_step_basket">
                 <source>sonata.basket.title_address_delivery_step_basket</source>
-                <target>Seleziona indirizzo di consegna</target>
+                <target>Indirizzo di consegna scelto</target>
             </trans-unit>
             <trans-unit id="sonata.basket.title_address_billing_step_basket">
                 <source>sonata.basket.title_address_billing_step_basket</source>
-                <target>Seleziona indirizzo di fatturazione</target>
+                <target>Indirizzo di fatturazione scelto</target>
             </trans-unit>
             <trans-unit id="sonata.basket.title_billing">
                 <source>sonata.basket.title_billing</source>

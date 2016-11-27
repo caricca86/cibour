@@ -26,13 +26,12 @@ file that was distributed with this source code.
             <div class="col-xs-12 col-md-6">
                 <div class="panel">
                     <div class="panel-heading no-pad">
-                        <div class="panel-title">
                             <div class="col-xs-12 col-md-2 no-pad "><hr/></div>
                             <div class="col-xs-12 col-md-8 no-pad ">
                                 <h2 class="panel-title text-up-bold-2 text-center">{% trans from 'SonataBasketBundle' %}sonata.basket.delivery_use_existing_title{% endtrans %}</h2>
                             </div>
                             <div class="col-xs-12 col-md-2 no-pad "><hr/></div>
-                        </div>
+
                     </div>
                     <ul class="list-group marg-top-mob-60">
                     {% set has_deliverable = false %}
@@ -75,11 +74,9 @@ file that was distributed with this source code.
             <div class="col-xs-12 col-md-6">
                 <div class="panel">
                     <div class="panel-heading no-pad">
-                        <div class="panel-title">
                             <div class="col-xs-12 col-md-2 no-pad "><hr/></div>
                             <div class="col-xs-12 col-md-8 no-pad text-up-bold-2 text-center ">{% trans from 'SonataBasketBundle' %}sonata.basket.delivery_create_new_title{% endtrans %}</div>
                             <div class="col-xs-12 col-md-2 no-pad"><hr/></div>
-                        </div>
                     </div>
                     <div class="panel-body">
                         {{ form_rest(form) }}

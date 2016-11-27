@@ -13,6 +13,7 @@ file that was distributed with this source code.
 
 {% block fos_user_content %}
     {% if app.request.session.get('sonata_basket_delivery_redirect') %}
+        <div style="margin-top: 100px"></div>
         {% include 'SonataBasketBundle:Basket:stepper.html.twig' with {step: 'identification'} %}
         {% else %}
         <div style="margin-top: 100px"></div>

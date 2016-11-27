@@ -38,11 +38,9 @@ file that was distributed with this source code.
                 <div class="col-xs-12 col-md-6  ">
                     <div class="panel">
                         <div class="panel-heading no-pad">
-                            <div class="panel-title">
                                 <div class="col-xs-12 col-md-4 no-pad "><hr/></div>
                                 <div class="col-xs-12 col-md-4 no-pad "><h2 class="panel-title text-up-bold-2 ">{{ 'sonata.basket.title_delivery_methods'|trans({}, 'SonataBasketBundle') }}</h2></div>
                                 <div class="col-xs-12 col-md-4 no-pad"><hr/></div>
-                            </div>
                         </div>
                         <div class="panel-body bill-addr-mob">
                             {{ form_errors(form.deliveryMethod) }}
@@ -57,7 +55,7 @@ file that was distributed with this source code.
         {% block delivery_submit %}
             <a href="{{ url('sonata_basket_delivery_address') }}" class="btn basket-control text-up-bold-2">{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
 
-            <button type="submit" class="btn basket-control pull-right text-up-bold-2">{{ 'sonata.basket.btn_update_delivery_step'|trans({}, 'SonataBasketBundle') }}</button>
+            <button type="submit" class="btn basket-control pull-right text-up-bold-2">{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}</button>
         {% endblock %}
     </form>
 </div>

@@ -20,13 +20,11 @@ file that was distributed with this source code.
         <div class="col-xs-12 col-md-6">
             <div class="panel">
                 <div class="panel-heading no-pad">
-                    <div class="panel-title">
                         <div class="col-xs-12 col-md-2 no-pad "><hr/></div>
                         <div class="col-xs-12 col-md-8 no-pad ">
                             <h2 class="panel-title text-up-bold-2 text-center">{{ 'sonata.basket.title_address_billing_step_basket'|trans({}, 'SonataBasketBundle') }}</h2>
                         </div>
                         <div class="col-xs-12 col-md-2 no-pad "><hr/></div>
-                    </div>
                 </div>
                 <div class="panel-body">
                     {{ sonata_address_render(basket.billingAddress) }}
@@ -36,13 +34,11 @@ file that was distributed with this source code.
         <div class="col-xs-12 col-md-6">
             <div class="panel">
                 <div class="panel-heading no-pad">
-                    <div class="panel-title">
                         <div class="col-xs-12 col-md-2 no-pad "><hr/></div>
                         <div class="col-xs-12 col-md-8 no-pad ">
                             <h2 class="panel-title text-up-bold-2 text-center">{{ 'sonata.basket.title_payment_method'|trans({}, 'SonataBasketBundle') }}</h2>
                         </div>
                         <div class="col-xs-12 col-md-2 no-pad "><hr/></div>
-                    </div>
                 </div>
                 <div class="panel-body pad-bot-top-payment paym-mob">
                     {{ form_errors(form.paymentMethod) }}
@@ -57,7 +53,7 @@ file that was distributed with this source code.
         <div class="col-lg-12">
             <a href="{{ url('sonata_basket_payment_address') }}" class="btn basket-control text-up-bold-2">{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
 
-            <button type="submit" class="btn basket-control pull-right text-up-bold-2">{{ 'sonata.basket.btn_update_payment_step'|trans({}, 'SonataBasketBundle') }}</button>
+            <button type="submit" class="btn basket-control pull-right text-up-bold-2">{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}</button>
         </div>
     </div>
 </form>
