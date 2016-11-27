@@ -10,11 +10,13 @@ file that was distributed with this source code.
 #}
 
 {% block sonata_flash_messages %}
-    {% include 'SonataCoreBundle:FlashMessage:render.html.twig' with {domain: 'SonataCustomerBundle'} %}
+
 {% endblock %}
 
 {% include 'SonataBasketBundle:Basket:stepper.html.twig' with {step: 'billing'} %}
-
+<div class="col-md-6 col-md-offset-3">
+    {% include 'SonataCoreBundle:FlashMessage:render.html.twig' with {domain: 'SonataCustomerBundle'} %}
+</div>
 
 {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 {{ form_errors(form) }}
