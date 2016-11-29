@@ -17,6 +17,7 @@ use Sonata\Component\Payment\BasePayment;
 use Sonata\Component\Payment\TransactionInterface;
 use Sonata\Component\Product\ProductInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -157,6 +158,8 @@ class Xpay extends BasePayment
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
 
+            $this->logger->debug('Tutto ok');
+
             return true;
         }
 
@@ -193,7 +196,10 @@ class Xpay extends BasePayment
             $transaction->setState(TransactionInterface::STATE_KO);
             $transaction->setStatusCode(TransactionInterface::STATUS_ORDER_UNKNOWN);
 
-            return false;
+            return new Response('', 302, array(
+                'Location' => $this->router->generate('sonata_payment_error', $transaction->getParameters(), true),
+                'Content-Type' => 'text/plain',
+            ));
         }
 
         if ($transaction->get('codiceEsito' != '0'))
@@ -201,7 +207,10 @@ class Xpay extends BasePayment
             $transaction->setState(TransactionInterface::STATE_KO);
             $transaction->setStatusCode(TransactionInterface::STATUS_ERROR_VALIDATION);
 
-            return false;
+            return new Response('', 302, array(
+                'Location' => $this->router->generate('sonata_payment_error', $transaction->getParameters(), true),
+                'Content-Type' => 'text/plain',
+            ));
         }
 
         $transaction->setState(TransactionInterface::STATE_OK);
@@ -210,7 +219,8 @@ class Xpay extends BasePayment
         $transaction->getOrder()->setStatus(OrderInterface::STATUS_VALIDATED);
         $transaction->getOrder()->setPaymentStatus(TransactionInterface::STATUS_VALIDATED);
 
-        return new Response('ok', 200, array(
+        return new Response('', 302, array(
+            'Location' => $this->router->generate('sonata_payment_confirmation', $transaction->getParameters(), true),
             'Content-Type' => 'text/plain',
         ));
     }
@@ -226,11 +236,20 @@ class Xpay extends BasePayment
      */
     public function isRequestValid(TransactionInterface $transaction)
     {
+
         $checkUrl = $transaction->get('check');
         $checkPrivate = $this->generateUrlCheck($transaction->getOrder());
 
-        return $checkUrl == $checkPrivate
-            && $transaction->get('mac') == $this->getResponseMac($transaction);
+        $this->logger->debug('Check URL: '.$checkUrl);
+        $this->logger->debug('Check Private: '.$checkPrivate);
+
+        $this->logger->debug('MAC: '.$transaction->get('mac'));
+        $this->logger->debug('Response MAC: '.$this->getResponseMac($transaction));
+
+
+        return $checkUrl == $checkPrivate;
+        /*&& $transaction->get('mac') == $this->getResponseMac($transaction);*/
+
     }
 
     /**
@@ -300,12 +319,14 @@ class Xpay extends BasePayment
         $importo = (int)(round($order->getTotalInc(), 2) * 100);
         $mac = 'codTrans=' . $order->getReference() .
             'esito=' . $transaction->get('esito') .
-            'importo=1' . 1 .
-            'divisa=' . $this->divisa .
+            'importo=1' .
+            'divisa=' . $transaction->get('divisa') .
             'data=' . $transaction->get('data') .
             'orario=' . $transaction->get('orario') .
             'codAut=' . $transaction->get('codAut') .
             $this->chiaveMac;
+
+        $this->logger->debug('Response MAC no encrypt: '.$mac);
 
         return sha1($mac);
     }
