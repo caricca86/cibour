@@ -625,9 +625,7 @@ class Prodotto extends Product
         return $this->composizione;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /*
     public function getStock()
     {
         if ($this->getCategories() != null)
@@ -640,5 +638,5 @@ class Prodotto extends Product
             }
         }
         return $this->stock;
-    }
+    }*/
 }

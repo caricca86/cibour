@@ -57,4 +57,13 @@ abstract class Product extends BaseProduct
     {
         return $this->counter;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isSalable()
+    {
+        // Product is enabled and is a variation or a single product.
+        return true;
+    }
 }

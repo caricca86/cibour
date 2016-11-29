@@ -200,4 +200,9 @@ class ProdottoProductProvider extends BaseProductProvider
             );
         }
     }
+
+    public function getStockAvailable(ProductInterface $product)
+    {
+        return 99;
+    }
 }
