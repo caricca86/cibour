@@ -24,6 +24,9 @@
         <div class="col-md-12">
             <div class="col-sm-4">
                 {% thumbnail product.image, 'slider' with {'itemprop':'image', 'alt': product.name, 'title': product.name, 'class': 'center-block img-responsive', 'width': 250, 'height': 250} %}
+                {% if product.stock <= 0 %}
+                    <div><small>Il prodotto sarà consegnato entro 7 giorni</small></div>
+                {% endif %}
             </div>
             <div class="col-sm-4">
                 <h4 itemprop="name">{{ product.name }}</h4>
