@@ -17,7 +17,7 @@ file that was distributed with this source code.
             {{ form_widget(formView.productId) }}
             <div class="col-sm-2 hidden-xs">
                 {% block product_thumbnail %}
-                    {% thumbnail basketElement.product.image, 'preview' with {'itemprop':'image', 'class': 'img-responsive'} %}
+                    {% thumbnail basketElement.product.image, 'preview' with {'itemprop':'image', 'alt': basketElement.product.name, 'title': basketElement.product.name, 'class': 'img-responsive'} %}
                 {% endblock %}
             </div>
             <div class="col-sm-10">

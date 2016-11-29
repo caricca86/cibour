@@ -24,7 +24,6 @@ file that was distributed with this source code.
                         <div class="col-sm-1">
                             <a href="{{ link }}">
                                 {% if product.image %}
-                                    {% thumbnail product.image, 'slider' with {'itemprop': 'image', 'class': 'img-responsive', 'width': null, 'height': null} %}
                                 {% else %}
                                     <img src="http://placehold.it/500x500" alt="Image" class="img-responsive">
                                 {% endif %}
@@ -43,7 +42,7 @@ file that was distributed with this source code.
                             <div class="col-sm-1">
                                 <a href="{{ link }}">
                                     {% if product.image %}
-                                        {% thumbnail product.image, 'slider' with {'itemprop': 'image', 'class': 'img-responsive', 'width': null, 'height': null} %}
+                                        {% thumbnail product.image, 'slider' with {'itemprop': 'image', 'alt': product.name, 'title': product.name,, 'class': 'img-responsive', 'width': null, 'height': null} %}
                                     {% else %}
                                         <img src="http://placehold.it/500x500" alt="Image" class="img-responsive">
                                     {% endif %}

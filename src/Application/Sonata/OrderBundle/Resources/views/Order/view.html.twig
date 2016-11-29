@@ -158,7 +158,7 @@ file that was distributed with this source code.
                                 {% block sonata_order_element %}
                                     <td class="hidden-xs">
                                         {% block product_thumbnail %}
-                                            {% thumbnail element.product.image, 'preview' with {'itemprop':'image', 'class': 'img-rounded img-responsive'} %}
+                                            {% thumbnail element.product.image, 'preview' with {'itemprop':'image', 'alt': element.product.name, 'title': element.product.name, 'class': 'img-rounded img-responsive'} %}
                                         {% endblock %}
                                     </td>
                                     <td><a href="{{ url('sonata_product_view', {'productId': element.productId, 'slug': element.product.slug}) }}">{{ element.designation }}</a></td>

@@ -23,7 +23,7 @@
     <div class="product-view_{{ product.id }}" itemscope itemtype="http://schema.org/Product">
         <div class="col-md-12">
             <div class="col-sm-4">
-                {% thumbnail product.image, 'slider' with {'itemprop':'image', 'class': 'center-block img-responsive', 'width': 250, 'height': 250} %}
+                {% thumbnail product.image, 'slider' with {'itemprop':'image', 'alt': product.name, 'title': product.name, 'class': 'center-block img-responsive', 'width': 250, 'height': 250} %}
             </div>
             <div class="col-sm-4">
                 <h4 itemprop="name">{{ product.name }}</h4>
@@ -67,6 +67,9 @@
             </div>
             <div class="col-sm-4">
                 <canvas id="pentagono_{{ product.id }}" class="center-block" width="250" height="250"></canvas>
+                {% if not (product.alimentazione and product.agricoltura and product.ambiente and product.artigianato and product.arte) %}
+                    <div><small>La valutazione dei prodotti ai sensi del disciplinare 5A è in corso di analisi</small></div>
+                {% endif %}
             </div>
         </div>
     </div>

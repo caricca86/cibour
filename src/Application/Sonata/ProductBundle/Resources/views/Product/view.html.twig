@@ -47,7 +47,7 @@ file that was distributed with this source code.
         {% endif %}
         <div class="col-md-12">
             <div class="col-sm-4">
-                {% thumbnail product.image, 'slider' with {'itemprop':'image', 'class': 'center-block img-responsive', 'width': 250, 'height': 250} %}
+                {% thumbnail product.image, 'slider' with {'itemprop':'image', 'alt': product.name, 'title': product.name, 'class': 'center-block img-responsive', 'width': 250, 'height': 250} %}
             </div>
             <div class="col-sm-4">
                 <h4 itemprop="name">{{ product.name }}</h4>
