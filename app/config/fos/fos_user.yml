@@ -11,3 +11,7 @@ fos_user:
 
     service:
         user_manager: sonata.user.orm.user_manager
+
+    from_email:
+        address:        info@cibour.com
+        sender_name:    Cibour

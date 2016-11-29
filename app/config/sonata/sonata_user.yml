@@ -31,8 +31,8 @@ sonata_user:
         dashboard:
             blocks:
                 #- { position: left, type: sonata.block.service.text }
-                - { position: left, type: sonata.order.block.recent_orders, settings: { title: Ordini Recenti, number: 5, mode: public }}
-                - { position: right, type: sonata.timeline.block.timeline, settings: { max_per_page: 15 }}
+                - { position: center, type: sonata.order.block.recent_orders, settings: { title: Ordini Recenti, number: 5, mode: public }}
+                #- { position: right, type: sonata.timeline.block.timeline, settings: { max_per_page: 15 }}
                 #- { position: right, type: sonata.news.block.recent_posts, settings: { title: Recent Posts, number: 5, mode: public }}
                 #- { position: right, type: sonata.news.block.recent_comments, settings: { title: Recent Comments, number: 5, mode: public }}
         menu:
