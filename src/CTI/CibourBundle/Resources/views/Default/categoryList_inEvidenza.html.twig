@@ -79,7 +79,7 @@
     <div class="col-sm-5">
         <table class="table text-center prodotto {{ product.id }}">
             <tr>
-                <th class="{% if product.glutenFree %}disabled{% endif %}"><small>GLUTEN FREE</small></th>
+                <th>{% if product.glutenFree %}<small>GLUTEN FREE</small>{% endif %}</th>
                 <th><small> {{ product.tipoDietaName }}</small></th>
                 <th><small>{{ product.metodoProduzioneName }}</small></th>
             </tr>

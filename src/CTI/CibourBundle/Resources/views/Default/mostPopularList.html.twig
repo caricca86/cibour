@@ -17,7 +17,7 @@
         {% else %}
             <div class="row">
                 {% for product in products if product.enabled %}
-                    {% set link = url('catalog_most_popular', {'prodottoSlug': product.slug, 'prodottoId': product.id}) %}
+                    {% set link = url('catalog_popular', {'prodottoSlug': product.slug, 'prodottoId': product.id}) %}
                     <div class="col-sm-2" style="margin-bottom:20px;">
                         <a href="{{ link }}">
                             {% if product.image %}
