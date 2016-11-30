@@ -13,6 +13,8 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sonata.product_category.product" />
             <argument type="service" id="sonata.product_collection.product" />
+            <argument type="service" id="logger" />
+            <tag name="monolog.logger" channel="api" />
         </service>
     </services>
 </container>

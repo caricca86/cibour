@@ -15,6 +15,7 @@ use Application\Sonata\ProductBundle\Entity\Delivery;
 use CTI\CibourBundle\Entity\Counter;
 use Doctrine\ORM\EntityManager;
 use JMS\Serializer\SerializationContext;
+use Monolog\Logger;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\Component\Product\DeliveryInterface;
@@ -79,6 +80,8 @@ class ProdottoController extends BaseProductController
 
     protected $productCollectionManager;
 
+    protected $logger;
+
     /**
      * Constructor
      *
@@ -88,7 +91,7 @@ class ProdottoController extends BaseProductController
      * @param FormatterPool           $formatterPool
      */
     public function __construct(ProductManagerInterface $productManager, Pool $productPool, FormFactoryInterface $formFactory, FormatterPool $formatterPool, EntityManager $entityManager,
-                                ProductCategoryManager $productCategoryManager, ProductCollectionManager $productCollectionManager)
+                                ProductCategoryManager $productCategoryManager, ProductCollectionManager $productCollectionManager, Logger $logger)
     {
         $this->productManager   = $productManager;
         $this->productPool      = $productPool;
@@ -97,6 +100,7 @@ class ProdottoController extends BaseProductController
         $this->entityManager    = $entityManager;
         $this->productCategoryManager = $productCategoryManager;
         $this->productCollectionManager = $productCollectionManager;
+        $this->logger = $logger;
 
     }
 
@@ -245,6 +249,11 @@ class ProdottoController extends BaseProductController
      */
     protected function handleWriteProduct($provider, $request, $id = null)
     {
+        $this->logger->info('Request URI: '.$request->getRequestUri());
+        $this->logger->info('Request Content: '.$request->getContent());
+        $this->logger->info('Query Parameters: '.print_r($request->query->all(), true));
+        $this->logger->info('POST Parameters: '.print_r($request->request->all(), true));
+
         $product = $id ? $this->getProduct($id) : null;
 
         $manager = $this->productPool->getManager($provider);
