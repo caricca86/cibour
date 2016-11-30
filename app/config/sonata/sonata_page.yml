@@ -17,6 +17,11 @@ sonata_page:
     ignore_uri_patterns:
         - ^/admin(.*)
         - ^/api/(.*)
+        - ^/robots.txt
+        - ^/sitemap.xml
+        - ^/googledac8e3a945d71040.html
+        - ^/js/mage/cookies.js
+        - ^/api.log
 
     ignore_route_patterns:
         - (.*)admin(.*)     # ignore admin route, ie route containing 'admin'
