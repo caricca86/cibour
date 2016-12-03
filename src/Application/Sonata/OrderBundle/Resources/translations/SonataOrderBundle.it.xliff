@@ -547,7 +547,7 @@
             </trans-unit>
             <trans-unit id="sonata.order.list.no_orders">
                 <source>sonata.order.list.no_orders</source>
-                <target>Non hai ancora nessun ordine nel carrello.</target>
+                <target>Non hai ancora effettuato alcun ordine</target>
             </trans-unit>
             <trans-unit id="view_all_orders">
                 <source>view_all_orders</source>

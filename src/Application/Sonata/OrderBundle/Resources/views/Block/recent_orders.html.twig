@@ -43,13 +43,13 @@ file that was distributed with this source code.
                 {% if context.getSetting('mode') == 'admin' %}
                     <a href="{{ url('admin_sonata_order_order_list') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
                 {% else %}
-                    <a href="{{ url('sonata_order_index') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
-                {% endif %}
+                   {# <a href="{{ url('sonata_order_index') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i>&nbsp;{{ 'view_all_orders'|trans({}, 'SonataOrderBundle') }}</a>
+               #} {% endif %}
             {% else %}
                 {% if context.getSetting('mode') == 'admin' %}
-                    <p>{{ 'no_order_found'|trans({}, 'SonataOrderBundle') }}</p>
+                    <p style="margin-top: 100px; margin-bottom: 100px;">{{ 'no_order_found'|trans({}, 'SonataOrderBundle') }}</p>
                 {% else %}
-                    <p>{{ 'sonata.order.list.no_orders'|trans({}, 'SonataOrderBundle') }}</p>
+                    <p style="margin-top: 100px; margin-bottom: 100px;">{{ 'sonata.order.list.no_orders'|trans({}, 'SonataOrderBundle') }}</p>
                 {% endif %}
             {% endif %}
         </div>

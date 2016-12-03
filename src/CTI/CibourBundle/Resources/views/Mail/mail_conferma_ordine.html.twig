@@ -12,10 +12,10 @@
     <tr>
         <td>
             <p>
-                Grazie di avere acquistato i nostri prodotti. Ecco il riepilogo del Suo ordine
+                Grazie di avere acquistato i nostri prodotti. Ecco il riepilogo del Suo ordine rif. {{ order.reference }}
             </p>
 
-            <table style="font-size: 10px; border-collapse: collapse;">
+            <table style="font-size: 10px; border-collapse: collapse; width: 100%; margin: 30px;">
                  <thead>
                     <tr style="padding: 10px" align="center">
                         <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.label{% endtrans %}</th>
@@ -59,16 +59,74 @@
                     </tr>
                 </tfoot>
             </table>
+            <table style="font-size: 10px; border-collapse: collapse;width: 100%; margin: 30px;">
+                <thead>
+                <tr style="padding: 10px" align="center">
+                    <th>
+                        {% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_title{% endtrans %}
+                    </th>
+                    <th>
+                        {% trans from 'SonataOrderBundle' %}sonata.order.view.billing_title{% endtrans %}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="padding: 10px" align="center">
+                    <td style="border-bottom: 1px solid black; padding: 10px">
+                        {% if order.deliverycost != 0 %}
+                                {{ sonata_address_render(order.deliveryAsArray) }}
+                        {% else %}
+                            <i>{{ 'sonata.basket.title_delivery_address_not_required'|trans({}, 'SonataBasketBundle') }}</i>
+                        {% endif %}
+                    </td>
+                    <td style="border-bottom: 1px solid black; padding: 10px">
+                        {{ sonata_address_render(order.billingAsArray) }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table style="font-size: 10px; border-collapse: collapse;width: 100%; margin: 30px;">
+                <thead>
+                <tr style="padding: 10px" align="center">
+                    <th>
+                        {{ 'sonata.basket.title_delivery_method'|trans({}, 'SonataBasketBundle') }}
+                    </th>
+                    <th>
+                        {{ 'sonata.basket.title_payment_method'|trans({}, 'SonataBasketBundle') }}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="padding: 10px" align="center">
+                    <td style="border-bottom: 1px solid black; padding: 10px">
+                        {% if order.deliverymethod == 'dhl' %}
+                            Corriere Espresso
+                        {% else %}
+                            Ritiro presso Container èPASTA di P.le Cadorna di fronte Stazione Nord
+                        {% endif %}
+                    </td>
+                    <td style="border-bottom: 1px solid black; padding: 10px">
+                        {% if order.paymentmethod == 'pass' %}
+                            BONIFICO BANCARIO
+                        {% else %}
+                            {{ order.paymentmethod|capitalize }}
+                        {% endif %}
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
             </p>
             <br>
             <p>
-                Nel caso in cui Lei decida di effettuare il pagamento tramite bonifico bancario:<br>
-                <div><b>IBAN IT 58 F 05034 01633 00 00 00 005579</b> intesta a <b>CTI SRL</b></div><br><br><br>
+                Nel caso in cui Lei non abbia scelto la modalità di pagamento on line e decida di effettuare il pagamento tramite bonifico bancario:<br>
+                <div><b>IBAN IT 58 F 05034 01633 00 00 00 005579</b> intestato a <b>CTI SRL</b></div><br><br><br>
                 La informiamo che il Suo ordine verrà evaso dopo 3 giorni lavorativi previa verifica dell’avvenuto pagamento.
             </p>
 
-            DISCLOSURE SULLA PRIVACY<br>
-            CONDIZIONI GENERALI
+            <p style="text-align: center; font-size: 8px;">
+                <a href="http://cibour.com/PRIVACY.pdf">DISCLOSURE SULLA PRIVACY</a> - <a href="http://cibour.com/CONDIZIONIDIVENDITA.pdf">CONDIZIONI GENERALI</a>
+            </p>
             <p>
                 <a href="{{ app.request.getSchemeAndHttpHost() ~ path('sonata_catalog_index') }}">Vai al sito</a>
             </p>
@@ -80,9 +138,13 @@
                 Customer service <a href="mailto:ecommerce@cibour.com">ecommerce@cibour.com</a><br>
                 Telefono +39 392 5948794
             </p>
-            <p>
-                <a href="https://www.facebook.com/Cibour-179476069060260/">
-                    <img width="20" src="http://cibour.com/uploads/media/default/0001/01/602f97841073baf7e9f19ac7dcb0e3761a3731ae.png"></a>
+            <p >
+                <a style="text-decoration: none" href="https://www.facebook.com/Cibour-179476069060260/">
+                    <img width="20" src="http://cibour.com/uploads/media/default/0001/01/602f97841073baf7e9f19ac7dcb0e3761a3731ae.png">
+                </a>
+                <a style="text-decoration: none" href="https://is.gd/luMbOa">
+                    <img width="20" src="http://cibour.com/uploads/media/default/0001/01/1da3f87c8cc838d24816a793507e3ac9e1fea395.png">
+                </a>
             </p>
         </td>
     </tr>

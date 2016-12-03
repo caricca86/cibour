@@ -12,7 +12,7 @@
             {% block product_details %}
                 <div class="row" itemtype="http://schema.org/Product">
                     <div class="col-sm-6">
-                        {% block product_image %}{% thumbnail product.image, 'small' with {'itemprop':'image', 'alt': product.name, 'title': product.name, 'class': 'img-responsive pull-right'} %}{% endblock%}
+                        {% block product_image %}{% thumbnail product.image, 'small' with {'itemprop':'image', 'alt': product.name, 'title': product.name, 'class': 'img-responsive'} %}{% endblock%}
                         {% if product.stock <= 0 %}
                             <div><small>Il prodotto sarà consegnato entro 7 giorni</small></div>
                         {% endif %}
