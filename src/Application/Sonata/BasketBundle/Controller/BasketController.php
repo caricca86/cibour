@@ -11,6 +11,7 @@
 
 namespace Application\Sonata\BasketBundle\Controller;
 
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Faker\Provider\cs_CZ\DateTime;
 use Sonata\Component\Delivery\UndeliverableCountryException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -447,9 +448,19 @@ class BasketController extends Controller
                                 'addresses' => $addresses
                             ));
                         } else {
-                            $customer->addAddress($address);
+                            try {
+                                $customer->addAddress($address);
+                                $this->get('sonata.customer.manager')->save($customer);
+                            } catch (UniqueConstraintViolationException $e) {
+                                $this->get('session')->getFlashBag()->add('sonata_customer_success', "La partita iva inserita esiste già");
 
-                            $this->get('sonata.customer.manager')->save($customer);
+                                $this->get('sonata.seo.page')->setTitle($this->get('translator')->trans('basket_payment_title', array(), "SonataBasketBundle"));
+
+                                return $this->render($template, array(
+                                    'form'      => $form->createView(),
+                                    'addresses' => $addresses
+                                ));
+                            }
 
                             $this->get('session')->getFlashBag()->add('sonata_customer_success', 'address_add_success');
                         }

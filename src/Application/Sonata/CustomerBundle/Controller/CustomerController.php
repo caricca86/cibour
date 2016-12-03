@@ -11,6 +11,7 @@
 
 namespace Application\Sonata\CustomerBundle\Controller;
 
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Sonata\Component\Customer\AddressInterface;
 use Sonata\Component\Customer\AddressManagerInterface;
 use Sonata\Component\Customer\CustomerManagerInterface;
@@ -198,9 +199,17 @@ class CustomerController extends Controller
                             ));
 
                         } else {
-                            $customer->addAddress($address);
+                            try {
+                                $customer->addAddress($address);
+                                $this->get('sonata.customer.manager')->save($customer);
+                            } catch (UniqueConstraintViolationException $e) {
+                                $this->get('session')->getFlashBag()->add('sonata_customer_success', "La partita iva inserita esiste già");
 
-                            $this->getCustomerManager()->save($customer);
+                                return $this->render($template, array(
+                                    'form'      => $form->createView(),
+                                    'addresses' => $addresses
+                                ));
+                            }
 
                             $this->get('session')->getFlashBag()->add('sonata_customer_success', $id ? 'address_edit_success' : 'address_add_success');
 

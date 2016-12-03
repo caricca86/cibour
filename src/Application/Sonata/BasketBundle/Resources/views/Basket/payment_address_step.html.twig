@@ -68,3 +68,16 @@ file that was distributed with this source code.
     {% endif %}
 
 {{ form_end(form) }}
+
+<script>
+    $('form[name=sonata_basket_address]').on('submit', function (e) {
+       if ($('#sonata_basket_address_partita_iva').val().trim() == ""){
+           e.preventDefault();
+           alert('Inserire Partita Iva');
+       }
+       if ($('#sonata_basket_address_codice_fiscale').val().trim() == ""){
+           e.preventDefault();
+           alert('Inserire Codice Fiscale');
+       }
+    });
+</script>
