@@ -22,6 +22,9 @@ sonata_page:
         - ^/googledac8e3a945d71040.html
         - ^/js/mage/cookies.js
         - ^/api.log
+        - ^/token.log
+        - ^/CONDIZIONIDIVENDITA.pdf
+        - ^/PRIVACY.pdf
 
     ignore_route_patterns:
         - (.*)admin(.*)     # ignore admin route, ie route containing 'admin'
