@@ -20,7 +20,6 @@ file that was distributed with this source code.
 
     {% include "SonataSeoBundle:Block:_facebook_sdk.html.twig" %}
     {% include "SonataSeoBundle:Block:_twitter_sdk.html.twig" %}
-    {% include "SonataSeoBundle:Block:_pinterest_sdk.html.twig" %}
 
 {% endblock %}
 {% block sonata_page_stylesheets %}
@@ -79,26 +78,29 @@ file that was distributed with this source code.
                                         </a>
                                     </li>
                                 </ul>
-
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="hidden-xs">
-                                        <a href="#"  role="button" data-toggle="popover" data-html="true" data-placement="bottom" data-content='<ul class="list-unstyled">
-                                <span class="first-group">
-                            {% if app.user %}
-                                <li class="first"><a href="{{ path('fos_user_profile_show') }}">Account</a></li>
-                                <li><a href="{{ path('sonata_order_index') }}">Ordini</a></li>
-                                <li><a href="{{ path('fos_user_security_logout') }}">Sign Out</a></li>
-                            {% else %}
-                                <li class="first"><a href="{{ path('fos_user_security_login') }}">Log in/Register</a></li>
-                            {% endif %}
-                            </span>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{{ path('catalog_trending_now') }}">Trending now</a></li>
-                            <li><a href="{{ path('catalog_recently_added') }}">Ultimi Arrivi</a></li>
-                            <li><a href="{{ path('catalog_popular') }}">Most Popular</a></li>
-                            {{ sonata_block_render({'type': 'sonata.category.block.menu'}) }}
-                        </ul>'><img src="{{ asset('bundles/cticibour/images/icon_menu.png') }}" height="25" class="navbar-icons-padding" /></a>
-
+                                        <a href="#"  role="button" data-toggle="popover" data-html="true" data-placement="bottom"
+                                           data-content='
+                                            <ul class="list-unstyled">
+                                                <span class="first-group">
+                                                    {% if app.user %}
+                                                        <li class="first"><a href="{{ path('fos_user_profile_show') }}">Account</a></li>
+                                                        <li><a href="{{ path('sonata_order_index') }}">Ordini</a></li>
+                                                        <li><a href="{{ path('fos_user_security_logout') }}">Sign Out</a></li>
+                                                    {% else %}
+                                                        <li class="first"><a href="{{ path('fos_user_security_login') }}">Log in/Register</a></li>
+                                                    {% endif %}
+                                                </span>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="{{ path('catalog_trending_now') }}">Trending now</a></li>
+                                                <li><a href="{{ path('catalog_recently_added') }}">Ultimi Arrivi</a></li>
+                                                <li><a href="{{ path('catalog_popular') }}">Most Popular</a></li>
+                                                {{ sonata_block_render({'type': 'sonata.category.block.menu'}) }}
+                                            </ul>
+                                        '>
+                                            <img src="{{ asset('bundles/cticibour/images/icon_menu.png') }}" height="25" class="navbar-icons-padding" />
+                                        </a>
                                     </li>
                                     <li>
                                         <form class="navbar-form" role="search" action="{{ path('catalog_search') }}">
@@ -204,12 +206,9 @@ file that was distributed with this source code.
         {% endif %}
 
         function createCookie(name,value,days) {
-            if (days) {
                 var date = new Date();
                 date.setTime(date.getTime()+(365*24*60*60*1000));
                 var expires = "; expires="+date.toGMTString();
-            }
-            else var expires = "";
             document.cookie = name+"="+value+expires+"; path=/";
         }
 

@@ -11,10 +11,7 @@
     </div>
     <div class="panel-body   ">
         <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register form-horizontal">
-            <fieldset>
-                {{ form_widget(form) }}
-            </fieldset>
-
+            {{ form_rest(form) }}
             <div class="form-actions">
                 <div class="row">
                     <div class="col-lg-8 col-sm-8 col-lg-offset-2 col-sm-offset-2">
