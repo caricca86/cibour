@@ -19,7 +19,8 @@
             <a href="{{ path('sonata_user_change_password') }}"><i class="icon-lock glyphicon glyphicon-lock"></i> {{ 'change_password.submit'|trans({}, 'FOSUserBundle') }}</a>
         </div>
             <form action="{{ path('sonata_user_profile_edit') }}" method="POST" class="form-horizontal">
-                {{ form_widget(form) }}
+                {{ form_errors(form) }}
+                {{ form_rest(form) }}
                 <div class="form-actions">
                     <button type="submit" name="submit"  class="btn text-center">{{ 'sonata_user_submit'|trans({}, 'SonataUserBundle') }}
                         <img src="{{ asset('bundles/cticibour/images/icon_submit.png') }}">
