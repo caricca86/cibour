@@ -94,6 +94,15 @@ nav li.last a {
     padding-left: 5px;
 }
 
+.navbar-toggle .icon-bar {
+    background-color: white;
+    height: 1px;
+    margin-top:1px;
+}
+
+.navbar-toggle .icon-bar+.icon-bar {
+    margin-top: 5px;
+}
 #myCarousel .item {
     max-height: 450px;
 }
@@ -139,6 +148,10 @@ margin:auto;
 
 footer > div {
     background-color: black;
+    color: white;
+}
+
+footer a {
     color: white;
 }
 /* Dropdown menu*/
@@ -626,6 +639,8 @@ text-decoration: underline;
 padding-top:12%;
 
 }
+
+
 
 #collapseHome .logo {
     margin-top: 68px;
@@ -1211,4 +1226,65 @@ table {border-collapse: inherit;}
 
 .fos_user_resetting_form_new_first_form_group {
     margin-bottom: 50px;
+}
+
+@media ( max-width:767px) {
+
+    .nav.navbar-nav {
+        color: white;
+        text-transform: uppercase;
+    }
+
+    .navbar-collapse{
+        max-height: none;
+        overflow-y: scroll !important;
+    }
+
+    .navbar-collapse a{
+        color: white !important;
+    }
+
+    .navbar-icons-padding{
+        padding-top: 0;
+    }
+
+    #home-link.visible-xs{
+        display: inline-block !important;
+        margin: 10px 0px 8px 15px;
+    }
+
+    .menu-bag.visible-xs {
+        display: inline-block !important;
+        margin: 10px 15px 8px 0px;
+        float: right;
+    }
+
+    .navbar-form {
+        border: 0;
+        width: 100%;
+        margin: 0 0 0 15px;
+        padding: 5px 5px 15px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .navbar-form .form-group {
+        text-align: center;
+    }
+
+    .navbar-form input {
+        width: 80%;
+    }
+
+    .nav span.visible-xs {
+        color: white;
+    }
+    .nav span.visible-xs li {
+        padding-top: 10px;
+    }
+
+    .nav span.visible-xs li.divider {
+        border-bottom: 1px solid white;
+    }
+
 }
