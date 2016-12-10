@@ -12,7 +12,7 @@ file that was distributed with this source code.
 {% extends "SonataUserBundle:Profile:action.html.twig" %}
 
 {% block sonata_profile_title %}
-    {{ "title_user_account" | trans({}, 'SonataUserBundle')}} - {{ "title_user_edit_profile" | trans({}, 'SonataUserBundle')}}
+    {{ "title_user_account" | trans({}, 'SonataUserBundle')}} - {{ "title_user_edit_authentication" | trans({}, 'SonataUserBundle')}}
 {% endblock %}
 
 {% block sonata_profile_content %}
@@ -21,9 +21,9 @@ file that was distributed with this source code.
     {% form_theme form 'CTICibourBundle:Form:cti_form.html.twig' %}
 
     <div class="col-lg-10 col-sm-10 col-lg-offset-1 col-sm-offset-1 no-pad marg-bot-delivery marg-top-30">
-        <div class="col-xs-12 col-md-5 no-pad "><hr class="delivery"></div>
-        <div class="col-xs-12 col-md-2 no-pad"><h2 class=" text-center text-up-bold-2 marg-top-delivery"> {{ "title_user_edit_authentication" | trans({}, 'SonataUserBundle')}}</h2></div>
-        <div class="col-xs-12 col-md-5 no-pad"><hr class="delivery"></div>
+        <div class="col-xs-12 col-md-4 no-pad "><hr class="delivery"></div>
+        <div class="col-xs-12 col-md-4 no-pad"><h2 class=" text-center text-up-bold-2 marg-top-delivery"> {{ "title_user_edit_authentication" | trans({}, 'SonataUserBundle')}}</h2></div>
+        <div class="col-xs-12 col-md-4 no-pad"><hr class="delivery"></div>
     </div>
     <div class="panel-body profile-edit col-lg-12">
         <form action="{{ path('fos_user_profile_edit_authentication') }}" method="POST" class="form-horizontal">
