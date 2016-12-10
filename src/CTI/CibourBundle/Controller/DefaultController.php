@@ -39,11 +39,11 @@ class DefaultController extends Controller
      */
     public function initAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        /*$em = $this->getDoctrine()->getManager();
         $prodotti = $em->getRepository('ApplicationSonataProductBundle:Prodotto')->findAll();
         foreach ($prodotti as $prodotto)
         {
-            /*
+
             $prodotto->setEnabled(true);
             $prodotto->setCounter(new Counter());
             $prodotto->setStock(10);
@@ -58,7 +58,7 @@ class DefaultController extends Controller
             $delivery2->setCode('take_away');
             $delivery2->setCountryCode('IT');
             $delivery2->setEnabled(true);
-            $delivery2->setZone('Italy');*/
+            $delivery2->setZone('Italy');
             $prodotto->setAlimentazione(0);
             $prodotto->setAgricoltura(0);
             $prodotto->setAmbiente(0);
@@ -67,7 +67,26 @@ class DefaultController extends Controller
             $em->persist($prodotto);
         }
 
-        $em->flush();
+        $em->flush(); */
+
+        $em = $this->getDoctrine()->getManager();
+
+        $order = $em->getRepository('ApplicationSonataOrderBundle:Order')->findOneByReference('161203000001');
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Conferma Ordine '.$order->getReference())
+            ->setFrom(array('ecommerce@cibour.com' => 'Cibour'))
+            ->setTo($this->getUser()->getEmail())
+            ->setBody(
+                $this->container->get('templating')->render(
+                // app/Resources/views/Emails/registration.html.twig
+                    'CTICibourBundle:Mail:mail_conferma_ordine.html.twig',
+                    array('order' => $order)
+                ),
+                'text/html'
+            )
+        ;
+        $this->container->get('mailer')->send($message);
 
         return $this->redirect($this->generateUrl('homepage'));
     }
@@ -336,6 +355,83 @@ class DefaultController extends Controller
             'inEvidenza'    => $inEvidenza,
             'sortByForm'    => null
         );
+    }
+
+    /**
+     * @Route("/shop/diventa-partner", name="partner")
+     * @Template()
+     */
+    public function partnerAction()
+    {
+        if ($this->get('request')->getMethod() == 'POST')
+        {
+            $user_type = $_POST['user_type'];
+            $nome = trim($_POST['nome']);
+            $cognome = trim($_POST['cognome']);
+            $rag_soc = trim($_POST['rag_soc']);
+            $p_iva = trim($_POST['p_iva']);
+            $email = trim($_POST['email']);
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $phone = trim($_POST['phone']);
+
+            $ok = true;
+#controllo input obbligatori
+            if(!isset($user_type))
+            {
+                $this->get('session')->getFlashBag()->add('error',
+                    'Non hai scelto la tipologia utente.');
+
+                $ok = false;
+            }
+
+            if(!isset($nome, $cognome))
+            {
+                $this->get('session')->getFlashBag()->add('error',
+                    'I dati inviati non sono corretti. Inserire nome e cognome');
+
+                $ok = false;
+            }
+
+            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $this->get('session')->getFlashBag()->add('error',
+                    'Inserire un indirizzo email valido.');
+
+                $ok = false;
+            }
+
+            if ($ok)
+            {
+
+                $destinatario = "riccardo.cartei7@gmail.com"; //"produttori@latavolaitaliana.org";
+                $header = "From: Registrazione Produttore <registrazionenewsletter@latavolaitaliana.org>\r\n";
+                $header .= "Cc: Registrazione Produttore <info@latavolaitaliana.org> \r\n";
+                $oggetto = "Registrazione Produttore";
+                $messaggio = "Un nuovo produttore vuole diventare partner <br><br> Dati utente: <br> NOME: $nome <br> COGNOME: $cognome <br> INDIRIZZO EMAIL: $email <br> TIPOLOGIA UTENTE: $user_type <br> RAGIONE SOCIALE: $rag_soc <br> PARTITA IVA: $p_iva <br> NUMERO DI TELEFONO: $phone <br> ";
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Registrazione Produttore')
+                    ->setFrom(array('registrazionenewsletter@latavolaitaliana.org' => 'Registrazione Produttore'))
+                    ->setCc('info@latavolaitaliana.org')
+                    ->setTo('produttori@latavolaitaliana.org')
+                    ->setBody($messaggio,
+                        'text/html'
+                    )
+                ;
+                $this->container->get('mailer')->send($message);
+
+                $this->get('session')->getFlashBag()->add('success',
+                    'La richiesta per diventare partner &egrave stata effettuata con successo, 
+verrete contattati al più presto.');
+
+                return array();
+            } else {
+                return array();
+            }
+        }
+
+        return array();
+
     }
 
     /**

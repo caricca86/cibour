@@ -1,0 +1,96 @@
+{% block page_content %}
+    <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 no-pad">
+        {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
+        <div class="panel ">
+            <div class="marg-top-90 no-pad">
+                <div class="col-lg-8 col-sm-8 col-lg-offset-2 col-sm-offset-2 no-pad marg-bot-delivery">
+                    <table>
+                        <tr>
+                            <td> <img class="img img-responsive" src="{{ asset('bundles/cticibour/images/line_scaled.png') }}"></td>
+                            <td class="text-up-bold-2 text-center">DIVENTA PARTNER</td>
+                            <td> <img class="img img-responsive" src="{{ asset('bundles/cticibour/images/line_scaled.png') }}"></td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+
+            <div class="partner panel-body col-xs-12 col-lg-8 col-sm-8 col-lg-offset-2 col-sm-offset-2 ">
+
+                <form action="{{ path('partner') }}" method="POST" onsubmit="ctrlForm(this)" class="fos_user_registration_register form-horizontal">
+
+                    <div class="col-xs-12  col-md-10 col-md-offset-1">
+                        <div class="form-group ">
+                            <input type="hidden" class="form-control text-uppercase" id="user_type" name="user_type" value="PRODUTTORE/PARTNER" >
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-5 col-md-offset-1">
+
+                        <div class="form-group ">
+                            <input class="form-control text-uppercase" id="nome" name="nome" placeholder="NOME &#42" required>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-5 ">
+                        <div class="form-group  ">
+                            <input class="form-control text-uppercase" id="cognome" name="cognome" placeholder="COGNOME &#42" required>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-5 col-md-offset-1">
+                        <div class="form-group ">
+                            <input class="form-control text-uppercase" id="rag_soc" name="rag_soc" placeholder="RAGIONE SOCIALE">
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-5 ">
+                        <div class="form-group  ">
+                            <input class="form-control text-uppercase" id="p_iva" name="p_iva" placeholder="PARTITA IVA">
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-5 col-md-offset-1">
+                        <div class="form-group  ">
+                            <input class="form-control " id="phone" name="phone" placeholder="NUMERO DI TELEFONO &#42" required>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-5">
+                        <div class="form-group  ">
+                            <input class="form-control " id="email" name="email" placeholder="INDIRIZZO EMAIL &#42" type="email" required>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-10 col-md-offset-1 ">
+                        <p style="color: grey;"> I dati contrassegnati con l'asterisco (&#42) sono obbligatori. </p>
+
+                    </div>
+
+                    <div class="text-center">
+                        <label class="marg-top-30  text-up-bold-3"><input type="checkbox" name="tac" required >&nbsp;"Autorizzo il <a style="text-decoration: underline;" target="_blank" href="http://www.cibour.com/privacy">trattamento dei dati personali</a>
+                            , ai sensi del D.lgs. 196 del 30/06/2003"</label>
+                    </div>
+                    <div class="form-actions ">
+                        <div class="row">
+                            <div class="col-lg-8 col-sm-8 col-lg-offset-2 col-sm-offset-2 marg-top-20">
+                                <button type="submit" class="btn pull-right text-up-bold-2" style=" padding: 10;" title="INVIA" >
+                                    INVIA <img  src="{{ asset('bundles/cticibour/images/icon_submit.png') }}">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function ctrlForm(form) {
+            if (!form.tac.checked) {
+                alert("{{ 'sonata.basket.label_confirm_tac'|trans({}, 'SonataBasketBundle') }}");
+
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+{% endblock %}
