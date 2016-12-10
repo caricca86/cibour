@@ -169,35 +169,63 @@ class CustomerController extends Controller
                     $cf = $address->getCodiceFiscale();
                     $pIva = $address->getPartitaIva();
 
-                    if ($this->ControllaCF($cf) && $this->controllaPIVA($pIva)) {
-                        $anno = substr($cf, 6, 2);
-                        $tabellamesi = array(
-                            "A" => "01",
-                            "B" => "02",
-                            "C" => "03",
-                            "D" => "04",
-                            "E" => "05",
-                            "H" => "06",
-                            "L" => "07",
-                            "M" => "08",
-                            "P" => "09",
-                            "R" => "10",
-                            "S" => "11",
-                            "T" => "12"
-                        );
-                        $mese = $tabellamesi[strtoupper(substr($cf, 8, 1))];
-                        $giorno = substr($cf, 9, 2);
+                    if ($this->ControllaCF($cf) || $this->controllaPIVA($pIva)) {
 
-                        $diff = date_diff(date_create(), date_create("$anno-$mese-$giorno"));
+                        if ($cf != null) {
+                            $anno = substr($cf, 6, 2);
+                            $tabellamesi = array(
+                                "A" => "01",
+                                "B" => "02",
+                                "C" => "03",
+                                "D" => "04",
+                                "E" => "05",
+                                "H" => "06",
+                                "L" => "07",
+                                "M" => "08",
+                                "P" => "09",
+                                "R" => "10",
+                                "S" => "11",
+                                "T" => "12"
+                            );
+                            $mese = $tabellamesi[strtoupper(substr($cf, 8, 1))];
+                            $giorno = substr($cf, 9, 2);
 
-                        if ($diff->y < 18) {
-                            $this->get('session')->getFlashBag()->add('sonata_customer_success', "L'acquisto è permesso solo a utenti con età maggiore di 18 anni");
+                            $diff = date_diff(date_create(), date_create("$anno-$mese-$giorno"));
 
-                            return $this->render($template, array(
-                                'form'               => $form->createView(),
-                                'breadcrumb_context' => 'customer_address',
-                            ));
+                            if ($diff->y < 18) {
+                                $this->get('session')->getFlashBag()->add('sonata_customer_success', "L'acquisto è permesso solo a utenti con età maggiore di 18 anni");
 
+                                return $this->render($template, array(
+                                    'form'               => $form->createView(),
+                                    'breadcrumb_context' => 'customer_address',
+                                ));
+
+                            } elseif ($this->controllaPIVA($pIva) || $pIva == null) {
+                                try {
+                                    $customer->addAddress($address);
+                                    $this->get('sonata.customer.manager')->save($customer);
+                                } catch (UniqueConstraintViolationException $e) {
+                                    $this->get('session')->getFlashBag()->add('sonata_customer_success', "La partita iva inserita esiste già");
+
+                                    return $this->render($template, array(
+                                        'form'      => $form->createView(),
+                                        'addresses' => $addresses
+                                    ));
+                                }
+
+                                $this->get('session')->getFlashBag()->add('sonata_customer_success', $id ? 'address_edit_success' : 'address_add_success');
+
+                                $url = $this->get('session')->get('sonata_address_redirect', $this->generateUrl('sonata_customer_addresses'));
+
+                                return new RedirectResponse($url);
+                            } else {
+                                $this->get('session')->getFlashBag()->add('sonata_customer_success', 'Partita iva errata');
+
+                                return $this->render($template, array(
+                                    'form'               => $form->createView(),
+                                    'breadcrumb_context' => 'customer_address',
+                                ));
+                            }
                         } else {
                             try {
                                 $customer->addAddress($address);
@@ -217,14 +245,19 @@ class CustomerController extends Controller
 
                             return new RedirectResponse($url);
                         }
+
                     } else {
 
-                        if (!$this->ControllaCF($cf)){
+                        if (!$this->ControllaCF($cf) && $cf != null){
                             $this->get('session')->getFlashBag()->add('sonata_customer_success', 'Codice fiscale errato');
                         }
 
-                        if (!$this->controllaPIVA($pIva)){
+                        if (!$this->controllaPIVA($pIva) && $pIva != null){
                             $this->get('session')->getFlashBag()->add('sonata_customer_success', 'Partita iva errata');
+                        }
+
+                        if ($cf == null && $pIva == null){
+                            $this->get('session')->getFlashBag()->add('sonata_customer_success', 'Inserire Codice Fiscale o Partita iva');
                         }
 
                         return $this->render($template, array(

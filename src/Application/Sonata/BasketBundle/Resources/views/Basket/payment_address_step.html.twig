@@ -62,7 +62,7 @@ file that was distributed with this source code.
             {{ form_rest(form) }}
             <a href="{{ url('sonata_basket_delivery') }}" class="btn basket-control text-up-bold-2">{% trans from 'SonataBasketBundle' %}sonata.basket.link_previous_step{% endtrans %}</a>
 
-            <button type="submit" class="btn basket-control pull-right text-up-bold-2">{{ 'sonata.basket.btn_update_payment_step'|trans({}, 'SonataBasketBundle') }}</button>
+            <button type="submit" class="btn basket-control pull-right text-up-bold-2">{% trans from 'SonataBasketBundle' %}sonata.basket.link_next_step{% endtrans %}</button>
         </div>
     </div>
     {% endif %}
@@ -71,13 +71,9 @@ file that was distributed with this source code.
 
 <script>
     $('form[name=sonata_basket_address]').on('submit', function (e) {
-       if ($('#sonata_basket_address_partita_iva').val().trim() == ""){
+       if ($('#sonata_basket_address_partita_iva').val().trim() == "" && $('#sonata_basket_address_codice_fiscale').val().trim() == ""){
            e.preventDefault();
-           alert('Inserire Partita Iva');
-       }
-       if ($('#sonata_basket_address_codice_fiscale').val().trim() == ""){
-           e.preventDefault();
-           alert('Inserire Codice Fiscale');
+           alert('Inserire Partita Iva o Codice Fiscale');
        }
     });
 </script>

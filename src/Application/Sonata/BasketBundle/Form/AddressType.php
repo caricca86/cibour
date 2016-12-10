@@ -97,9 +97,9 @@ class AddressType extends BaseAddressType
                 if ($type == AddressInterface::TYPE_BILLING)
                 {
                     $builder
-                        ->add('codice_fiscale', null, array('required' => !count($addresses),
+                        ->add('codice_fiscale', null, array(
                             'label' => 'Codice Fiscale'))
-                        ->add('partita_iva', null, array('required' => !count($addresses),
+                        ->add('partita_iva', null, array(
                             'label' => 'Partita IVA'));
                 }
                 $builder

@@ -29,5 +29,12 @@ file that was distributed with this source code.
         </button>
     </div>
 {{ form_end(form) }}
-
+    <script>
+        $('form[name=sonata_customer_address]').on('submit', function (e) {
+            if ($('#sonata_customer_address_partita_iva').val().trim() == "" && $('#sonata_customer_address_codice_fiscale').val().trim() == ""){
+                e.preventDefault();
+                alert('Inserire Partita Iva o Codice Fiscale');
+            }
+        });
+    </script>
 {% endblock %}
