@@ -468,7 +468,7 @@
             </trans-unit>
             <trans-unit id="profile.flash.updated">
                 <source>profile.flash.updated</source>
-                <target>Il tuo profile è stato aggiornato.</target>
+                <target>Il tuo profilo è stato aggiornato.</target>
             </trans-unit>
             <trans-unit id="sonata_change_password_link">
                 <source>sonata_change_password_link</source>

@@ -9,29 +9,34 @@ file that was distributed with this source code.
 
 #}
 
-<div class="row">
-    <div class="span6 col-lg-6">
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{ 'title_user_edit_authentication'|trans({}, 'SonataUserBundle') }}</h3>
-            </div>
-            <div class="panel-body">
-                <form action="{{ path('sonata_user_profile_edit_authentication') }}" method="POST" class="form-horizontal">
-                    {{ form_widget(form) }}
+{% extends "SonataUserBundle:Profile:action.html.twig" %}
 
-                    <button type="submit" name="submit" class="btn btn-primary pull-right">{{ 'sonata_user_submit'|trans({}, 'SonataUserBundle') }}</button>
-                </form>
-            </div>
-        </div>
+{% block sonata_profile_title %}
+    {{ "title_user_account" | trans({}, 'SonataUserBundle')}} - {{ "title_user_edit_profile" | trans({}, 'SonataUserBundle')}}
+{% endblock %}
+
+{% block sonata_profile_content %}
+    {{ form_errors(form) }}
+
+    {% form_theme form 'CTICibourBundle:Form:cti_form.html.twig' %}
+
+    <div class="col-lg-10 col-sm-10 col-lg-offset-1 col-sm-offset-1 no-pad marg-bot-delivery marg-top-30">
+        <div class="col-xs-12 col-md-5 no-pad "><hr class="delivery"></div>
+        <div class="col-xs-12 col-md-2 no-pad"><h2 class=" text-center text-up-bold-2 marg-top-delivery"> {{ "title_user_edit_authentication" | trans({}, 'SonataUserBundle')}}</h2></div>
+        <div class="col-xs-12 col-md-5 no-pad"><hr class="delivery"></div>
     </div>
-    <div class="span6 col-lg-6">
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{ 'sonata_change_password_link'|trans({}, 'SonataUserBundle') }}</h3>
+    <div class="panel-body profile-edit col-lg-12">
+        <form action="{{ path('fos_user_profile_edit_authentication') }}" method="POST" class="form-horizontal">
+            {{ form_errors(form) }}
+            {{ form_rest(form) }}
+            <div class="form-actions">
+                <button type="submit" name="submit"  class="btn text-center">{{ 'sonata_user_submit'|trans({}, 'SonataUserBundle') }}
+                    <img src="{{ asset('bundles/cticibour/images/icon_submit.png') }}">
+                </button>
             </div>
-            <div class="panel-body">
-                {% render url("sonata_user_change_password") %}
-            </div>
-        </div>
+        </form>
+        <br><br>
+        {% render url("sonata_user_change_password") %}
     </div>
-</div>
+{% endblock %}
+
