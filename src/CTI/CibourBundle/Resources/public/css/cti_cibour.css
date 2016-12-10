@@ -1233,11 +1233,12 @@ table {border-collapse: inherit;}
     .nav.navbar-nav {
         color: white;
         text-transform: uppercase;
+        width:100%;
     }
 
     .navbar-collapse{
-        max-height: none;
         overflow-y: scroll !important;
+        width:100%;
     }
 
     .navbar-collapse a{

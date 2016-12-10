@@ -12,7 +12,7 @@
       </trans-unit>
       <trans-unit id="message_error_payment">
         <source>message_error_payment</source>
-        <target>C’è un errore. Il tuo pagamento non può essere completato.</target>
+        <target>Pagamento annullato</target>
       </trans-unit>
       <trans-unit id="message_not_validated_payment">
         <source>message_not_validated_payment</source>

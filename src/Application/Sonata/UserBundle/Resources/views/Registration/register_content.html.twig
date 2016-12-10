@@ -12,6 +12,7 @@
     </div>
     <div class="panel-body   ">
         <form onsubmit="return ctrlForm(this)" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register form-horizontal">
+            {{ form_errors(form) }}
             {{ form_rest(form) }}
                 <label style="font-size: 10px; text-transform: uppercase;" for="basket_tac">
                     <input type="checkbox" name="tac" id="basket_tac"/>
