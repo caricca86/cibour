@@ -94,6 +94,9 @@ class OrderManager extends BaseOrderManager implements OrderManagerInterface
         $query->andWhere('o.processato = :processato');
         $parameters['processato'] = $criteria['processato'];
 
+        $query->andWhere('o.paymentStatus = :paymentStatus');
+        $parameters['paymentStatus'] = $criteria['paymentStatus'];
+
         if (isset($criteria['status'])) {
             $query->andWhere('o.status = :status');
             $parameters['status'] = $criteria['status'];

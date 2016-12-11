@@ -72,6 +72,7 @@ class OrderController
      * @QueryParam(name="status", requirements="\d+", nullable=true, default="2", strict=true, description="Filter on order statuses")
      * @QueryParam(name="customer", requirements="\d+", nullable=true, strict=true, description="Filter on customer id")
      * @QueryParam(name="processato", requirements="\d+", nullable=true, default=false, description="Filtra gli ordini processati dall'ERP")
+     * @QueryParam(name="paymentStatus", requirements="\d+", nullable=true, default="2", description="Filtra gli ordini per stato di pagamento")
      *
      * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
      *
@@ -84,7 +85,8 @@ class OrderController
         $supportedCriteria = array(
             'status' => "",
             'customer' => "",
-            'processato' => ""
+            'processato' => "",
+            'paymentStatus' => ""
         );
 
         $page     = $paramFetcher->get('page');
