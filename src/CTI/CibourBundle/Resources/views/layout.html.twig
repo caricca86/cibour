@@ -145,9 +145,71 @@ file that was distributed with this source code.
         </div>
 
     <div class="container-fluid">
-        <footer class="row">
+        <footer class="row footer">
             {% block page_footer %}
-                <div style="background-color: black; color: white; padding: 15px;" class="col-xs-12 text-center">CTI S.r.l. società con sede legale in Via Matteotti 5, Menfi (AG) – Italia - P. IVA 02783110840</div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 " >
+
+                        <div class="col-xs-12 col-sm-12 col-md-3" >
+                            <div class="col-xs-12 col-sm-12 text-up-bold-2 no-pad padd-bot-15 mob-foot mob-foot-first ">
+                                <div class="col-xs-11 no-pad ">Culture of food</div>
+                                <div class="col-xs-1 no-pad "><button class=" updown  visible-sm visible-xs"><img class="img visible-sm  visible-xs arrow-size arrow-down" src="{{ asset('bundles/cticibour/images/arrow-down.png') }}"><img class="img hidden arrow-size arrow-up" src="{{ asset('bundles/cticibour/images/arrow-up.png') }}"></button></div>
+                            </div>
+                            <ul class="list-unstyled">
+                                <li>Mangiare</li>
+                                <li>Bere</li>
+                                <li>Regali</li>
+                                <li>Novit&aacute;</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-3" >
+                            <div class="col-xs-12  col-sm-12 text-up-bold-2 no-pad padd-bot-15 mob-foot ">
+                                <div class="col-xs-11 no-pad ">Chi siamo</div>
+                                <div class="col-xs-1 no-pad "><button class=" updown visible-sm visible-xs"><img class="img visible-sm  visible-xs arrow-size arrow-down" src="{{ asset('bundles/cticibour/images/arrow-down.png') }}"><img class="img hidden arrow-size arrow-up" src="{{ asset('bundles/cticibour/images/arrow-up.png') }}"></button></div>
+                            </div>
+                            <ul class="list-unstyled ">
+                                <li>Cibour &egrave;</li>
+                                <li>Storia</li>
+                                <li>La Tavola Italiana</li>
+                                <li>Lavora con noi</li>
+                                <li><a href="{{ path('partner') }}">Diventa fornitore</a></li>
+                                <li>I partner di cibour</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-3">
+                            <div class="col-xs-12 col-sm-12 text-up-bold-2 no-pad padd-bot-15 mob-foot ">
+                                <div class="col-xs-11 no-pad ">Community</div>
+                                <div class="col-xs-1 no-pad "><button class=" updown visible-sm visible-xs"><img class="img visible-sm  visible-xs arrow-size arrow-down" src="{{ asset('bundles/cticibour/images/arrow-down.png') }}"><img class="img hidden arrow-size arrow-up" src="{{ asset('bundles/cticibour/images/arrow-up.png') }}"></button></div>
+                            </div>
+                            <ul class="list-unstyled">
+                                <li>Eventi</li>
+                                <li><a href="http://www.latavolaitaliana.org/it/community/sei-un-appassionato/">Sei un appassionato?</a></li>
+                                <li><a href="http://www.latavolaitaliana.org/it/community/sei-un-esperto/">Sei un esperto?</a></li>
+                                <li><a href="http://www.latavolaitaliana.org/it/community/sei-un-produttore/">Sei un produttore?</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-3">
+                            <div class="col-xs-12 col-sm-12 text-up-bold-2 no-pad padd-bot-15 mob-foot ">
+                                <div class="col-xs-11 no-pad ">Informazioni</div>
+                                <div class="col-xs-1 no-pad "><button class="updown  visible-sm visible-xs"><img class="img visible-sm  visible-xs arrow-size arrow-down" src="{{ asset('bundles/cticibour/images/arrow-down.png') }}"><img class="img hidden arrow-size arrow-up" src="{{ asset('bundles/cticibour/images/arrow-up.png') }}"></button></div>
+                            </div>
+                            <ul class="list-unstyled ">
+                                <li>FAQ - Domande frequenti</li>
+                                <li>Contatti</li>
+                                <li><a href="{{ path('privacy') }}">Politica di Privacy</a></li>
+                                <li><a href="{{ path('sonata_payment_terms') }}">Condizioni di acquisto</a></li>
+                                <li>Cookie policy</li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-10 col-xs-offset-1 col-md-5 col-md-offset-7 text-right text-up-bold-4 marg-top-60 marg-bot-10">Metodi di pagamento accettati</div>
+                            <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-4   marg-bot-30"><img class="img img-responsive" src="{{ asset('bundles/cticibour/images/payment-logo.png') }}"></div>
+                        </div>
+                        <div class="col-xs-12 marg-top-10"><p class="text-center text-up-bold-2">CTI S.r.l. società con sede legale in Via Matteotti 5, Menfi (AG) – Italia - P. IVA 02783110840</p></div>
+
+                    </div>
             {% endblock %}
         </footer>
     </div>
@@ -169,7 +231,19 @@ file that was distributed with this source code.
     </div><!-- /.modal -->
 
     {% endif %}
+    <!--Dropdown FOOTER MOBILE-->
+    <script>
 
+
+        $(".updown").click(function(){
+            var target = $(this).parents("div.col-xs-12").next();
+
+            target.prev().find("img.arrow-down").toggleClass("visible-sm visible-xs hidden");
+            target.prev().find("img.arrow-up").toggleClass("visible-sm visible-xs hidden");
+            target.toggle(250);
+
+        });
+    </script>
     <script>
         $(function () {
             $('[data-toggle="popover"]').popover()
