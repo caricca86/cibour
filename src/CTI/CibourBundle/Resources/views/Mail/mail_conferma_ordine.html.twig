@@ -12,7 +12,7 @@
     <tr>
         <td>
             <p>
-                Grazie di avere acquistato i nostri prodotti. Ecco il riepilogo del Suo ordine rif. {{ order.reference }}
+                Grazie di avere acquistato i nostri prodotti. Ecco il riepilogo del Suo ordine rif. <a href="{{ app.request.getSchemeAndHttpHost() ~ path('sonata_order_view', {'reference' : order.reference}) }}">{{ order.reference }}</a>
             </p>
 
             <table style="font-size: 10px; border-collapse: collapse; width: 100%; margin: 30px;">
@@ -72,14 +72,14 @@
                 </thead>
                 <tbody>
                 <tr style="padding: 10px" align="center">
-                    <td style="border-bottom: 1px solid black; padding: 10px">
+                    <td style="border-bottom: 1px solid black; padding: 10px; width: 50%;">
                         {% if order.deliverycost != 0 %}
                                 {{ sonata_address_render(order.deliveryAsArray) }}
                         {% else %}
                             <i>{{ 'sonata.basket.title_delivery_address_not_required'|trans({}, 'SonataBasketBundle') }}</i>
                         {% endif %}
                     </td>
-                    <td style="border-bottom: 1px solid black; padding: 10px">
+                    <td style="border-bottom: 1px solid black; padding: 10px;width: 50%;">
                         {{ sonata_address_render(order.billingAsArray) }}
                     </td>
                 </tr>
@@ -98,16 +98,21 @@
                 </thead>
                 <tbody>
                 <tr style="padding: 10px" align="center">
-                    <td style="border-bottom: 1px solid black; padding: 10px">
+                    <td style="border-bottom: 1px solid black; padding: 10px; width: 50%;">
                         {% if order.deliverymethod == 'dhl' %}
                             Corriere Espresso*
                         {% else %}
-                            Ritiro presso Container èPASTA di P.le Cadorna di fronte Stazione Nord*
+                            Ritiro presso Container èPASTA di P.le Cadorna di fronte Stazione Nord, Milano*<br>
+                            <a href="https://www.google.com/maps?ll=45.468134,9.176785&z=16&t=m&hl=it-IT&gl=IT&mapclient=embed&q=Piazzale+Luigi+Cadorna+20123+Milano">
+                                (vedi mappa)
+                            </a>
                         {% endif %}
                     </td>
-                    <td style="border-bottom: 1px solid black; padding: 10px">
+                    <td style="border-bottom: 1px solid black; padding: 10px; width: 50%;">
                         {% if order.paymentmethod == 'pass' %}
                             BONIFICO BANCARIO
+                        {% elseif order.paymentmethod == 'pass' %}
+                            Carta di Credito
                         {% else %}
                             {{ order.paymentmethod|capitalize }}
                         {% endif %}
