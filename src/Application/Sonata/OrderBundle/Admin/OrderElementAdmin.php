@@ -62,14 +62,14 @@ class OrderElementAdmin extends BaseAdmin
     {
         $formMapper
             ->with($this->trans('order_element.form.group_main_label', array(), 'SonataOrderBundle'))
-                ->add('productType', 'choice', array('choices' => array_keys($this->productPool->getProducts())))
+                //->add('productType', 'choice', array('choices' => array_keys($this->productPool->getProducts())))
                 ->add('quantity')
-                ->add('productSku')
+                ->add('productSku', null, array('label' => 'Codice'))
                 ->add('price')
-                ->add('vatRate')
+                ->add('vatRate', null, array('label' => 'Percentuale Iva'))
                 ->add('designation')
                 ->add('description', null, array('required' => false))
-                ->add('status', 'sonata_order_status', array('translation_domain' => 'SonataOrderBundle'))
+                //->add('status', 'sonata_order_status', array('translation_domain' => 'SonataOrderBundle'))
                 ->add('deliveryStatus', 'sonata_product_delivery_status', array('translation_domain' => 'SonataDeliveryBundle'))
             ->end()
         ;
@@ -80,14 +80,14 @@ class OrderElementAdmin extends BaseAdmin
      */
     public function configureListFields(ListMapper $list)
     {
-        $list->addIdentifier('id');
+        $list->addIdentifier('productSku', null, array('label' => 'Codice'));
 
         if (!$list->getAdmin()->isChild()) {
             $list->add('order');
         }
 
         $list
-            ->add('product')
+            ->add('designation', null, array('label' => 'Prodotto'))
             ->add('getStatusName', 'trans', array('name' => 'status', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'status'))
             ->add('getDeliveryStatusName', 'trans', array('name' => 'deliveryStatus', 'catalogue' => 'SonataOrderBundle', 'sortable' => 'deliveryStatus'))
             ->add('getTotalWithVat', 'currency', array('currency' => $this->currencyDetector->getCurrency()->getLabel()))

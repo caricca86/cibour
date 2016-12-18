@@ -98,6 +98,11 @@ class OrderAdmin extends BaseAdmin
             ->with($this->trans('order.form.group_main_label', array(), 'SonataOrderBundle'))
                 ->add('currency', 'sonata_currency')
                 ->add('locale', 'locale')
+                ->add('paymentMethod', 'choice', array('label' => 'Tipo di Pagamento',
+                    'choices' => array(
+                        'pass' => 'Bonifico Bancario',
+                        'xpay' => 'Carta di Credito',
+                        'paypal' => 'Paypal')))
                 ->add('status', 'sonata_order_status', array('translation_domain' => 'SonataOrderBundle'))
                 ->add('paymentStatus', 'sonata_payment_transaction_status', array('translation_domain' => 'SonataPaymentBundle'))
                 ->add('deliveryStatus', 'sonata_product_delivery_status', array('translation_domain' => 'SonataDeliveryBundle'))
@@ -105,27 +110,23 @@ class OrderAdmin extends BaseAdmin
             ->end()
             ->with($this->trans('order.form.group_billing_label', array(), 'SonataOrderBundle'), array('collapsed' => true))
                 ->add('billingName')
+                ->add('billingPartitaIva', null, array('label' => 'Partita Iva'))
+                ->add('billingCodiceFiscale', null, array('label' => 'Codice Fiscale'))
+                ->add('billingPhone')
                 ->add('billingAddress1')
-                ->add('billingAddress2')
-                ->add('billingAddress3')
                 ->add('billingCity')
                 ->add('billingPostcode')
+                ->add('billingProvincia', null, array('label' => 'Provincia'))
                 ->add('billingCountryCode', 'country')
-                ->add('billingFax')
-                ->add('billingEmail')
-                ->add('billingMobile')
             ->end()
             ->with($this->trans('order.form.group_shipping_label', array(), 'SonataOrderBundle'), array('collapsed' => true))
                 ->add('shippingName')
+                ->add('shippingPhone')
                 ->add('shippingAddress1')
-                ->add('shippingAddress2')
-                ->add('shippingAddress3')
                 ->add('shippingCity')
                 ->add('shippingPostcode')
+                ->add('shippingProvincia', null, array('label' => 'Provincia'))
                 ->add('shippingCountryCode', 'country')
-                ->add('shippingFax')
-                ->add('shippingEmail')
-                ->add('shippingMobile')
             ->end()
         ;
     }
@@ -179,7 +180,7 @@ class OrderAdmin extends BaseAdmin
     public function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('create');
-        $collection->add('generateInvoice');
+        //$collection->add('generateInvoice');
     }
 
     /**
@@ -204,20 +205,5 @@ class OrderAdmin extends BaseAdmin
             $this->trans('sonata.order.sidemenu.link_order_elements_list', array(), 'SonataOrderBundle'),
             array('uri' => $admin->generateUrl('sonata.order.admin.order_element.list', array('id' => $id)))
         );
-
-        $order = $this->orderManager->findOneBy(array('id' => $id));
-        $invoice = $this->invoiceManager->findOneBy(array('reference' => $order->getReference()));
-
-        if (null === $invoice) {
-            $menu->addChild(
-                $this->trans('sonata.order.sidemenu.link_oRDER_TO_INVOICE_generate', array(), 'SonataOrderBundle'),
-                array('uri' => $admin->generateUrl('generateInvoice', array('id' => $id)))
-            );
-        } else {
-            $menu->addChild(
-                $this->trans('sonata.order.sidemenu.link_oRDER_TO_INVOICE_edit', array(), 'SonataOrderBundle'),
-                array('uri' => $admin->getRouteGenerator()->generate('admin_sonata_invoice_invoice_edit', array('id' => $invoice->getId())))
-            );
-        }
     }
 }

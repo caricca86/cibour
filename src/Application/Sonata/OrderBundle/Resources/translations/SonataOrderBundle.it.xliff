@@ -129,7 +129,7 @@
             <!-- Begin - List translations -->
             <trans-unit id="list.label_id">
                 <source>list.label_id</source>
-                <target>Cliente</target>
+                <target>Id</target>
             </trans-unit>
             <trans-unit id="list.label_reference">
                 <source>list.label_reference</source>
