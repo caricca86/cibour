@@ -10,7 +10,7 @@ file that was distributed with this source code.
 #}
 <div class=" col-xs-12 col-sm-6 col-sm-offset-3 no-pad " >
 
-    {% if order.isvalidated %}
+    {#{% if order.isvalidated %}#}
         <div class="col-xs-12 col-sm-6 col-sm-offset-3 sonata-payment-confirmation text-center no-pad"  >
             <div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>
             <div class="text-up-bold-2 no-pad col-xs-12 col-sm-6 marg-top-10"  >
@@ -25,34 +25,34 @@ file that was distributed with this source code.
             {% endautoescape %}
         </p>
     </div>
-    {% elseif order.ispending %}
-        <div class="col-xs-12 col-sm-6 col-sm-offset-3 sonata-payment-confirmation text-center no-pad"  >
-            <div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>
-            <div class="text-up-bold-2 no-pad col-xs-12 col-sm-6 marg-top-10"  >
-                {{ 'title_pending_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}
-            </div>
-            <div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>
-        </div>
+    {#{% elseif order.ispending %}#}
+        {#<div class="col-xs-12 col-sm-6 col-sm-offset-3 sonata-payment-confirmation text-center no-pad"  >#}
+            {#<div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>#}
+            {#<div class="text-up-bold-2 no-pad col-xs-12 col-sm-6 marg-top-10"  >#}
+                {#{{ 'title_pending_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}#}
+            {#</div>#}
+            {#<div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>#}
+        {#</div>#}
 
-        <div class=" col-xs-12 text-center ">
-        <p>
-            {{ 'message_pending_payment'|trans({}, 'SonataPaymentBundle') }}
-        </p>
-            </div>
-    {% else %}
-        <div class="col-xs-12 col-sm-6 col-sm-offset-3 sonata-payment-confirmation text-center no-pad"  >
-            <div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>
-            <div class="text-up-bold-2 no-pad col-xs-12 col-sm-6 marg-top-10"  >
-                {{ 'title_not_validated_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}
-            </div>
-            <div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>
-        </div>
-        <div class=" col-xs-12 text-center ">
-        <p>
-            {{ 'message_not_validated_payment'|trans({}, 'SonataPaymentBundle') }}
-        </p>
-        </div>
-    {% endif %}
+        {#<div class=" col-xs-12 text-center ">#}
+        {#<p>#}
+            {#{{ 'message_pending_payment'|trans({}, 'SonataPaymentBundle') }}#}
+        {#</p>#}
+            {#</div>#}
+    {#{% else %}#}
+        {#<div class="col-xs-12 col-sm-6 col-sm-offset-3 sonata-payment-confirmation text-center no-pad"  >#}
+            {#<div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>#}
+            {#<div class="text-up-bold-2 no-pad col-xs-12 col-sm-6 marg-top-10"  >#}
+                {#{{ 'title_not_validated_confirmation_payment'|trans({}, 'SonataPaymentBundle') }}#}
+            {#</div>#}
+            {#<div class=" no-pad col-xs-12 col-sm-3"><hr class="paym-confirm"/></div>#}
+        {#</div>#}
+        {#<div class=" col-xs-12 text-center ">#}
+        {#<p>#}
+            {#{{ 'message_not_validated_payment'|trans({}, 'SonataPaymentBundle') }}#}
+        {#</p>#}
+        {#</div>#}
+    {#{% endif %}#}
     <div class="col-xs-12 col-sm-6 col-sm-offset-3 no-pad"><hr/></div>
     <div  class="row ">
 

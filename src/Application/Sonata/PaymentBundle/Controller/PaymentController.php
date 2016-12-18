@@ -36,11 +36,17 @@ class PaymentController extends BaseController
             throw new UnauthorizedHttpException($ex->getMessage());
         }
 
-        if (!($order->isValidated() || $order->isPending())) {
-            return $this->render('SonataPaymentBundle:Payment:error.html.twig', array(
-                'order' => $order,
-            ));
+        $this->container->get('logger')->critical('Ordine Valido? '.$order->isValidated().' Ordine Pendente? '.$order->isPending());
+
+        if ($order->getPaymentMethod() != 'paypal') {
+            if (!($order->isValidated() || $order->isPending())) {
+                return $this->render('SonataPaymentBundle:Payment:error.html.twig', array(
+                    'order' => $order,
+                ));
+            }
         }
+
+        $this->container->get('logger')->critical('L\'ordine: '. $order->getReference().' è ok!!!!. Metodo pagamento: '.$order->getPaymentMethod());
 
         $counterManager = $this->get('cibour.counter.manager');
         $productManager = $this->get('cibour.product.prodotto.manager');
@@ -50,11 +56,13 @@ class PaymentController extends BaseController
             $product = $productManager->find($orderElement->getProductId());
             $counterManager->addSaleToProduct($product);
         }
+        $this->container->get('logger')->critical('Sto per inviare la mail per l\'ordine: '. $order->getReference().'. Metodo pagamento: '.$order->getPaymentMethod());
 
         $message = \Swift_Message::newInstance()
             ->setSubject('Conferma Ordine '.$order->getReference())
             ->setFrom(array('ecommerce@cibour.com' => 'Cibour'))
             ->setTo($this->getUser()->getEmail())
+            ->setBcc('ecommerce@cibour.com')
             ->setBody(
                 $this->container->get('templating')->render(
                 // app/Resources/views/Emails/registration.html.twig
@@ -65,6 +73,8 @@ class PaymentController extends BaseController
             )
         ;
         $this->container->get('mailer')->send($message);
+
+        $this->container->get('logger')->critical('Mail inviata per ordine: '. $order->getReference().'. Metodo pagamento: '.$order->getPaymentMethod());
 
         return $this->render('SonataPaymentBundle:Payment:confirmation.html.twig', array(
             'order' => $order,
