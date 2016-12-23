@@ -31,13 +31,13 @@ class Xpay extends BasePayment
 
     protected $translator;
 
-    protected $chiaveMac = 'TLGHTOWIZXQPTIZRALWKG';
+    protected $chiaveMac = '8t37Qy7Fk4IYkVy861NH1lUe27136B7B3120Jm52';
 
     protected $divisa = 'EUR';
 
     protected $languageId = 'ITA';
 
-    protected $alias = 'payment_3444153';
+    protected $alias = 'payment_1504508';
 
     public function __construct(RouterInterface $router, TranslatorInterface $translator = null)
     {
@@ -59,7 +59,7 @@ class Xpay extends BasePayment
 
     public function getName()
     {
-        return 'Xpay';
+        return 'Carta di Credito (Xpay)';
     }
 
     /**
@@ -83,8 +83,8 @@ class Xpay extends BasePayment
             'cancel_return' => $this->router->generate($this->getOption('url_return_ko'), $params, true),
             'return'        => $this->router->generate($this->getOption('url_return_ok'), $params, true),
 */
-        $url_action = 'https://coll-ecommerce.keyclient.it/ecomm/ecomm/DispatcherServlet';
-        $alias = 'payment_3444153';
+        $url_action = 'https://ecommerce.keyclient.it/ecomm/ecomm/DispatcherServlet';
+        $alias = $this->alias;
         $codTrans = $order->getReference(); // Inserisci qui il tuo identificativo dell'ordine;
         $importo_da_passare = (int)(round($order->getTotalInc(), 2) * 100);
         $divisa = $this->divisa;
@@ -93,7 +93,7 @@ class Xpay extends BasePayment
         $url = $this->router->generate($this->getOption('url_callback'), $params, true);
         $mac = $this->getMac($order);
 
-        $html = '<html><body onload="">';
+        $html = '<html><body onload="document.getElementById(\'submit_button\').disabled = \'disabled\'; document.getElementById(\'formPaiement\').submit();">';
         $html .= '<div class=" col-xs-12 col-sm-6 col-sm-offset-3 no-pad " >
         <div class="col-xs-12 col-sm-6 col-sm-offset-3 sonata-payment-confirmation text-center no-pad"  >
             <div class="text-up-bold-2 no-pad col-xs-12 col-sm-12 marg-top-10"  >';
@@ -104,7 +104,7 @@ class Xpay extends BasePayment
         $html .= "
         <form id='formPaiement' name='formKeyclient' method='post' action='$url_action'>
           <input type='hidden' name='alias' value='$alias'>
-          <input type='hidden' name='importo' value='1'>
+          <input type='hidden' name='importo' value='$importo_da_passare'>
           <input type='hidden' name='divisa' value='$divisa'>
           <input type='hidden' name='codTrans' value='$codTrans'>
           <input type='hidden' name='url' value='$url'>
@@ -112,7 +112,7 @@ class Xpay extends BasePayment
           <input type='hidden' name='url_back' value='$url_back'>
           <input type='hidden' name='languageId' value='$languageId'>
           <input type='hidden' name='mac' value='$mac'>
-          <input type='submit' id='submit_button' value='INVIA PAGAMENTO'>
+          <input type='submit' id='submit_button' class='btn basket-control' value='INVIA PAGAMENTO'>
         </form>
         </p>
         </div>
@@ -158,7 +158,7 @@ class Xpay extends BasePayment
             $transaction->setState(TransactionInterface::STATE_OK);
             $transaction->setStatusCode(TransactionInterface::STATUS_VALIDATED);
 
-            $this->logger->debug('Tutto ok');
+            $this->getLogger()->debug('Tutto ok');
 
             return true;
         }
@@ -240,11 +240,11 @@ class Xpay extends BasePayment
         $checkUrl = $transaction->get('check');
         $checkPrivate = $this->generateUrlCheck($transaction->getOrder());
 
-        $this->logger->debug('Check URL: '.$checkUrl);
-        $this->logger->debug('Check Private: '.$checkPrivate);
+        $this->getLogger()->debug('Check URL: '.$checkUrl);
+        $this->getLogger()->debug('Check Private: '.$checkPrivate);
 
-        $this->logger->debug('MAC: '.$transaction->get('mac'));
-        $this->logger->debug('Response MAC: '.$this->getResponseMac($transaction));
+        $this->getLogger()->debug('MAC: '.$transaction->get('mac'));
+        $this->getLogger()->debug('Response MAC: '.$this->getResponseMac($transaction));
 
 
         return $checkUrl == $checkPrivate;
@@ -308,7 +308,7 @@ class Xpay extends BasePayment
     private function getMac(OrderInterface $order)
     {
         $importo_da_passare = (int)(round($order->getTotalInc(), 2) * 100);
-        $mac = 'codTrans=' . $order->getReference() . 'divisa=' . $this->divisa . 'importo=' . 1 . $this->chiaveMac;
+        $mac = 'codTrans=' . $order->getReference() . 'divisa=' . $this->divisa . 'importo=' . $importo_da_passare . $this->chiaveMac;
 
         return sha1($mac);
     }
@@ -319,14 +319,14 @@ class Xpay extends BasePayment
         $importo = (int)(round($order->getTotalInc(), 2) * 100);
         $mac = 'codTrans=' . $order->getReference() .
             'esito=' . $transaction->get('esito') .
-            'importo=1' .
+            'importo=' .$importo .
             'divisa=' . $transaction->get('divisa') .
             'data=' . $transaction->get('data') .
             'orario=' . $transaction->get('orario') .
             'codAut=' . $transaction->get('codAut') .
             $this->chiaveMac;
 
-        $this->logger->debug('Response MAC no encrypt: '.$mac);
+        $this->getLogger()->debug('Response MAC no encrypt: '.$mac);
 
         return sha1($mac);
     }

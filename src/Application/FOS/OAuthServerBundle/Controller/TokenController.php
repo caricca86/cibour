@@ -37,21 +37,21 @@ class TokenController extends \FOS\OAuthServerBundle\Controller\TokenController
     public function tokenAction(Request $request)
     {
         try {
-            //$this->log($request);
+            $this->log($request);
             return $this->server->grantAccessToken($request);
         } catch (OAuth2ServerException $e) {
             return $e->getHttpResponse();
         }
     }
 
-    /*private function log(Request $request)
+    private function log(Request $request)
     {
         $data_log = "\n======================".date('d-m-Y h:i:s');
         $data_log = $data_log."\n".$request->__toString()."\n";
         $data_log = $data_log."\nQuery Parameters\n".print_r($request->query->all(), true);
         $data_log = $data_log."\nRequest Parameters\n".print_r($request->request->all(), true);
         $data_log = $data_log."\nFiles\n".print_r($request->files->all(), true);
-        file_put_contents('api_log.txt', $data_log, FILE_APPEND);
-    }*/
+        file_put_contents('token.log', $data_log, FILE_APPEND);
+    }
 
 }
