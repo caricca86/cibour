@@ -30,6 +30,7 @@ file that was distributed with this source code.
                                 {% else %}
                                     <img src="http://placehold.it/500x500" alt="Image" class="img-responsive">
                                 {% endif %}
+                                <div class="col-xs-12 text-center">{{ product.name }} - {{ sonata_product_price(product, currency, true)|number_format_currency(currency) }}</div>
                             </a>
                         </div>
                         {% endfor %}
@@ -49,6 +50,7 @@ file that was distributed with this source code.
                                     {% else %}
                                         <img src="http://placehold.it/500x500" alt="Image" class="img-responsive">
                                     {% endif %}
+                                    <div class="col-xs-12 text-center">{{ product.name }} - {{ sonata_product_price(product, currency, true)|number_format_currency(currency) }}</div>
                                 </a>
                             </div>
                         {% endfor %}
