@@ -18,8 +18,8 @@ file that was distributed with this source code.
 {% block sonata_page_body_tag %}
 <body>
 
-    {% include "SonataSeoBundle:Block:_facebook_sdk.html.twig" %}
-    {% include "SonataSeoBundle:Block:_twitter_sdk.html.twig" %}
+{#    {% include "SonataSeoBundle:Block:_facebook_sdk.html.twig" %}
+    {% include "SonataSeoBundle:Block:_twitter_sdk.html.twig" %}#}
 
 {% endblock %}
 {% block sonata_page_stylesheets %}
@@ -168,10 +168,10 @@ file that was distributed with this source code.
                                 <div class="col-xs-1 no-pad "><button class=" updown visible-sm visible-xs"><img class="img visible-sm  visible-xs arrow-size arrow-down" src="{{ asset('bundles/cticibour/images/arrow-down.png') }}"><img class="img hidden arrow-size arrow-up" src="{{ asset('bundles/cticibour/images/arrow-up.png') }}"></button></div>
                             </div>
                             <ul class="list-unstyled ">
-                                <li>Cibour &egrave;</li>
-                                <li>Storia</li>
-                                <li>La Tavola Italiana</li>
-                                <li>Lavora con noi</li>
+                                <li><a href="{{ path('cibour') }}">Cibour &egrave;</a></li>
+                                <li><a href="{{ path('storia') }}">Storia</a></li>
+                                <li><a href="http://www.latavolaitaliana.org">La Tavola Italiana</a></li>
+                                <li><a href="{{ path('lavora_con_noi') }}">Lavora con noi</a></li>
                                 <li><a href="{{ path('partner') }}">Diventa fornitore</a></li>
                                 <li>I partner di cibour</li>
                             </ul>
@@ -183,7 +183,7 @@ file that was distributed with this source code.
                                 <div class="col-xs-1 no-pad "><button class=" updown visible-sm visible-xs"><img class="img visible-sm  visible-xs arrow-size arrow-down" src="{{ asset('bundles/cticibour/images/arrow-down.png') }}"><img class="img hidden arrow-size arrow-up" src="{{ asset('bundles/cticibour/images/arrow-up.png') }}"></button></div>
                             </div>
                             <ul class="list-unstyled">
-                                <li>Eventi</li>
+                                <li><a href="http://www.latavolaitaliana.org/it/category/eventi/?future=true">Eventi</a></li>
                                 <li><a href="http://www.latavolaitaliana.org/it/community/sei-un-appassionato/">Sei un appassionato?</a></li>
                                 <li><a href="http://www.latavolaitaliana.org/it/community/sei-un-esperto/">Sei un esperto?</a></li>
                                 <li><a href="http://www.latavolaitaliana.org/it/community/sei-un-produttore/">Sei un produttore?</a></li>
@@ -200,7 +200,6 @@ file that was distributed with this source code.
                                 <li>Contatti</li>
                                 <li><a href="{{ path('privacy') }}">Politica di Privacy</a></li>
                                 <li><a href="{{ path('sonata_payment_terms') }}">Condizioni di acquisto</a></li>
-                                <li>Cookie policy</li>
                             </ul>
                         </div>
                         <div class="row">

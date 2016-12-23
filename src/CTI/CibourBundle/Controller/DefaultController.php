@@ -34,6 +34,24 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/storia", name="storia")
+     * @Template()
+     */
+    public function storiaAction()
+    {
+        return array();
+    }
+
+    /**
+     * @Route("/cibour", name="cibour")
+     * @Template()
+     */
+    public function cibourAction()
+    {
+        return array();
+    }
+
+    /**
      * @Route("/init", name="init")
      * @Template()
      */
@@ -373,6 +391,8 @@ class DefaultController extends Controller
             $email = trim($_POST['email']);
             $ip = $_SERVER['REMOTE_ADDR'];
             $phone = trim($_POST['phone']);
+            $note = trim($_POST['note']);
+            $sito = trim($_POST['sito']);
 
             $ok = true;
 #controllo input obbligatori
@@ -407,7 +427,11 @@ class DefaultController extends Controller
                 $header = "From: Registrazione Produttore <registrazionenewsletter@latavolaitaliana.org>\r\n";
                 $header .= "Cc: Registrazione Produttore <info@latavolaitaliana.org> \r\n";
                 $oggetto = "Registrazione Produttore";
-                $messaggio = "Un nuovo produttore vuole diventare partner <br><br> Dati utente: <br> NOME: $nome <br> COGNOME: $cognome <br> INDIRIZZO EMAIL: $email <br> TIPOLOGIA UTENTE: $user_type <br> RAGIONE SOCIALE: $rag_soc <br> PARTITA IVA: $p_iva <br> NUMERO DI TELEFONO: $phone <br> ";
+                $messaggio = "Un nuovo produttore vuole diventare partner <br><br>
+Dati utente: <br><br> NOME: $nome <br> COGNOME: $cognome <br> INDIRIZZO EMAIL: $email <br> 
+TIPOLOGIA UTENTE: $user_type <br> RAGIONE SOCIALE: $rag_soc <br> PARTITA IVA/CODICE FISCALE: $p_iva <br> NUMERO DI TELEFONO: $phone <br>
+SITO INTERNET: $sito <br>
+NOTE: <p>$note</p>";
 
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Registrazione Produttore')
@@ -423,6 +447,96 @@ class DefaultController extends Controller
                 $this->get('session')->getFlashBag()->add('success',
                     'La richiesta per diventare partner &egrave stata effettuata con successo, 
 verrete contattati al più presto.');
+
+                return array();
+            } else {
+                return array();
+            }
+        }
+
+        return array();
+
+    }
+
+    /**
+     * @Route("/shop/lavora-con-noi", name="lavora_con_noi")
+     * @Template()
+     */
+    public function lavoraConNoiAction()
+    {
+        if ($this->get('request')->getMethod() == 'POST')
+        {
+            $user_type = $_POST['user_type'];
+            $nome = trim($_POST['nome']);
+            $cognome = trim($_POST['cognome']);
+            $email = trim($_POST['email']);
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $phone = trim($_POST['phone']);
+            $note = trim($_POST['note']);
+            $posizione = trim($_POST['posizione']);
+            $allegato = $_FILES['allegato'];
+
+
+            $ok = true;
+#controllo input obbligatori
+            if(!isset($user_type))
+            {
+                $this->get('session')->getFlashBag()->add('error',
+                    'Non hai scelto la tipologia utente.');
+
+                $ok = false;
+            }
+
+            if(!isset($nome, $cognome))
+            {
+                $this->get('session')->getFlashBag()->add('error',
+                    'I dati inviati non sono corretti. Inserire nome e cognome');
+
+                $ok = false;
+            }
+
+            if(!isset($allegato)){
+                $this->get('session')->getFlashBag()->add('error',
+                    'Inserire il curriculum in allegato');
+
+                $ok = false;
+            }
+
+            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $this->get('session')->getFlashBag()->add('error',
+                    'Inserire un indirizzo email valido.');
+
+                $ok = false;
+            }
+
+            if ($ok)
+            {
+
+                $destinatario = "riccardo.cartei7@gmail.com"; //"produttori@latavolaitaliana.org";
+                $header = "From: Candidatura Lavorativa <registrazionenewsletter@latavolaitaliana.org>\r\n";
+                $header .= "Cc: Candidatura Lavorativa <info@latavolaitaliana.org> \r\n";
+                $oggetto = "Registrazione Produttore";
+                $messaggio = "Nuova candidatura ricevuta <br><br>
+Dati utente: <br><br> NOME: $nome <br> COGNOME: $cognome <br> INDIRIZZO EMAIL: $email <br> 
+TIPOLOGIA UTENTE: $user_type <br> POSIZIONE: $posizione <br> NUMERO DI TELEFONO: $phone <br>
+NOTE: <p>$note</p>";
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Candidatura Lavorativa')
+                    ->setFrom(array('registrazionenewsletter@latavolaitaliana.org' => 'Candidatura Lavorativa'))
+                    ->setCc('info@latavolaitaliana.org')
+                    ->setTo('produttori@latavolaitaliana.org')
+                    ->attach(\Swift_Attachment::fromPath($_FILES['allegato']['tmp_name'])->setFilename($_FILES['allegato']['name']))
+                    ->setBody($messaggio,
+                        'text/html'
+                    )
+                ;
+                $this->container->get('mailer')->send($message);
+
+                $this->get('session')->getFlashBag()->add('success',
+                    'La tua candidatura &egrave stata inviata con successo, 
+verrai contattato al più presto.');
 
                 return array();
             } else {

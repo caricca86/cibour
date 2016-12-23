@@ -7,7 +7,7 @@
                     <table>
                         <tr>
                             <td> <img class="img img-responsive" src="{{ asset('bundles/cticibour/images/line_scaled.png') }}"></td>
-                            <td class="text-up-bold-2 text-center">DIVENTA PARTNER</td>
+                            <td class="text-up-bold-2 text-center">LAVORA CON NOI</td>
                             <td> <img class="img img-responsive" src="{{ asset('bundles/cticibour/images/line_scaled.png') }}"></td>
                         </tr>
                     </table>
@@ -17,11 +17,11 @@
 
             <div class="partner panel-body col-xs-12 col-lg-8 col-sm-8 col-lg-offset-2 col-sm-offset-2 ">
 
-                <form action="{{ path('partner') }}" method="POST" onsubmit="ctrlForm(this)" class="fos_user_registration_register form-horizontal">
+                <form action="{{ path('lavora_con_noi') }}" method="POST" onsubmit="ctrlForm(this)" enctype="multipart/form-data" class="fos_user_registration_register form-horizontal">
 
                     <div class="col-xs-12  col-md-10 col-md-offset-1">
                         <div class="form-group ">
-                            <input type="hidden" class="form-control text-uppercase" id="user_type" name="user_type" value="PRODUTTORE/PARTNER" >
+                            <input type="hidden" class="form-control text-uppercase" id="user_type" name="user_type" value="CANDIDATO" >
                         </div>
                     </div>
 
@@ -39,18 +39,6 @@
                     </div>
 
                     <div class="col-xs-12 col-md-5 col-md-offset-1">
-                        <div class="form-group ">
-                            <input class="form-control text-uppercase" id="rag_soc" name="rag_soc" placeholder="RAG. SOCIALE">
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-5 ">
-                        <div class="form-group  ">
-                            <input class="form-control text-uppercase" id="p_iva" name="p_iva" placeholder="P.IVA/C.FISCALE">
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-5 col-md-offset-1">
                         <div class="form-group  ">
                             <input class="form-control " id="phone" name="phone" placeholder="TELEFONO &#42" required>
                         </div>
@@ -62,7 +50,12 @@
                     </div>
                     <div class="col-xs-12 col-md-10 col-md-offset-1">
                         <div class="form-group  ">
-                            <input class="form-control " id="sito" name="sito" placeholder="SITO INTERNET" type="text">
+                            <input class="form-control " id="posizione" name="posizione" placeholder="POSIZIONE RICERCATA" type="text">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-10 col-md-offset-1">
+                        <div class="form-group  ">
+                            <label>CURRICULUM:</label><input id="allegato" name="allegato" type="file">
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-10 col-md-offset-1">

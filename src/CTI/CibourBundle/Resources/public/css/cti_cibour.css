@@ -16,6 +16,10 @@ input[type=number] {
    
 }
 
+.panel.order address {
+    min-height: 100px;
+}
+
 /* Re-applies the controls on :hover and :focus
 input[type="number"]:hover,
 input[type="number"]:focus {
@@ -104,7 +108,7 @@ nav li.last a {
     margin-top: 5px;
 }
 #myCarousel .item {
-    max-height: 450px;
+    max-height: 650px;
 }
 .img-carousel-responsive{
 max-height:650px;

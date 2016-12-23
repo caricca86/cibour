@@ -11,6 +11,7 @@
 
 namespace Application\Sonata\OrderBundle\Controller;
 
+use Doctrine\ORM\EntityNotFoundException;
 use Sonata\Component\Order\OrderElementInterface;
 use Sonata\Component\Order\OrderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -53,28 +54,59 @@ class OrderController extends BaseController
         ));
     }
 
+
+
     public function payAction($reference)
     {
         /** @var OrderInterface $order */
         $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
 
         if (null === $order) {
-            throw new AccessDeniedException();
+            throw new EntityNotFoundException();
         }
 
         $this->checkAccess($order->getCustomer());
 
-        if ($order->getStatus() == OrderInterface::STATUS_STOPPED)
-        {
-            $basket = $this->get('sonata.basket');
+        if ($this->getRequest()->getMethod() == 'POST') {
+            if ($order->getStatus() == OrderInterface::STATUS_STOPPED || $order->getStatus() == OrderInterface::STATUS_OPEN)
+            {
+                $payment = $this->get('sonata.payment.pool')->getMethod($order->getPaymentMethod());
 
-            $transformer = $this->get('sonata.payment.transformer.order');
-            $transformer->transformIntoBasket($order, $basket);
-
-            return $this->forward('SonataPaymentBundle:Payment:sendbank');
+                return $payment->sendBank($order);
+            }
         }
 
         $this->get('session')->getFlashBag()->add('error', 'Errore di sistema, impossibile procedere al pagamento');
+
+        return $this->render('SonataOrderBundle:Order:view.html.twig', array(
+            'order'              => $order,
+            'breadcrumb_context' => 'user_order',
+        ));
+    }
+
+    public function deleteAction($reference)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->getOrderManager()->findOneBy(array('reference' => $reference));
+
+        if (null === $order) {
+            throw new EntityNotFoundException();
+        }
+
+        $this->checkAccess($order->getCustomer());
+
+        if ($this->getRequest()->getMethod() == 'POST') {
+            if ($order->getStatus() == OrderInterface::STATUS_STOPPED || $order->getStatus() == OrderInterface::STATUS_OPEN)
+            {
+                $this->getOrderManager()->delete($order);
+
+                $this->get('session')->getFlashBag()->add('success', "Ordine n. $reference cancellato correttamente");
+
+                return $this->redirectToRoute('sonata_order_index');
+            }
+        }
+
+        $this->get('session')->getFlashBag()->add('error', 'Errore di sistema, impossibile cancellare l\'ordine');
 
         return $this->render('SonataOrderBundle:Order:view.html.twig', array(
             'order'              => $order,

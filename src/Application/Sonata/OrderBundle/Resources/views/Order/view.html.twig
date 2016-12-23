@@ -25,6 +25,29 @@ file that was distributed with this source code.
         </div>
     </div>
     {% endblock %}#}
+    {% block sonata_order_title %}
+    <div class="row marg-bot-30">
+        <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-4 " >
+            <div class="col-sm-1 col-sm-offset-1 hidden-xs no-pad  "><hr class="ref"/></div>
+            <div class="col-xs-12 col-sm-8 text-reference marg-top-13  text-center no-pad">
+                ORDINE  n°{{ order.reference }}
+            </div>
+            <div class="col-sm-1 hidden-xs no-pad"><hr class="ref"/></div>
+        </div>
+        {% if order.status == 5 or order.status == 0 %}
+            <div class="col-xs-6 text-center marg-top-30">
+                <form action="{{ path('sonata_order_delete', {'reference': order.reference}) }}" method="post">
+                    <button type="submit" class="btn basket-control text-up-bold-2 ">ANNULLA ORDINE</button>
+                </form>
+            </div>
+            <div class="col-xs-6 text-center marg-top-30">
+                <form action="{{ path('sonata_order_pay', {'reference': order.reference}) }}" method="post">
+                    <button type="submit" class="btn basket-control text-up-bold-2">PAGA</button>
+                </form>
+            </div>
+        {% endif %}
+        </div>
+    {% endblock %}
 
     {% block sonata_order_top %}
     <div class="row marg-bot-30 marg-top-30">
@@ -92,13 +115,13 @@ file that was distributed with this source code.
         {% block sonata_order_top_right %}
             <div class="col-xs-12 col-sm-6 no-pad-l  no-pad-xs">
                 {% block sonata_order_delivery %}
-                    <div class="panel   ">
+                    <div class="panel order">
                         <div class="col-sm-4 col-xs-12 no-pad  "><hr /></div>
                         <div class="col-xs-12 col-sm-4 text-up-bold-2 text-center no-pad marg-top-10">{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery_title{% endtrans %}</div>
                         <div class="col-sm-4 col-xs-12 no-pad"><hr  /></div>
                         <div class="panel-body review-panel">
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 marg-top-20">
                                     {% if order.deliveryMethod != 'take_away' %}
                                     {{ sonata_address_render(order.deliveryAsArray) }}
                                     {% else %}
@@ -112,12 +135,12 @@ file that was distributed with this source code.
             </div>
             <div class="col-xs-12 col-sm-6 no-pad-r no-pad-xs">
                 {% block sonata_order_billing %}
-                    <div class="panel  ">
+                    <div class="panel order">
                         <div class="col-sm-4 col-xs-12 no-pad  "><hr /></div>
                         <div class="col-xs-12 col-sm-4 text-up-bold-2 text-center no-pad marg-top-10">{% trans from 'SonataOrderBundle' %}sonata.order.view.billing_title{% endtrans %}</div>
                         <div class="col-sm-4 col-xs-12 no-pad"><hr  /></div>
                         <div class="panel-body review-panel">
-                            <div class="row"><div class="col-sm-12">{{ sonata_address_render(order.billingAsArray) }}</div></div>
+                            <div class="row"><div class="col-sm-12 marg-top-20">{{ sonata_address_render(order.billingAsArray) }}</div></div>
                         </div>
                     </div>
                 {% endblock %}
@@ -140,22 +163,22 @@ file that was distributed with this source code.
 
                     {% block sonata_order_elements_header %}
                         <thead>
-                            <div class=" col-sm-7  no-pad">
+                            <div class=" col-sm-6  no-pad marg-top-20">
                                 <div class="no-pad hidden-xs col-sm-2 "><hr style="border-color:black;" /></div>
                                 <div class=" no-pad col-xs-5 col-sm-3 text-up-bold-5 text-center  thead-tablebag-margin-text-2 ">{% trans from 'SonataOrderBundle' %}sonata.order.view.element.label{% endtrans %}</div>
                                 <div class="no-pad  hidden-xs col-sm-7 "><hr style="border-color:black;"/></div>
                             </div>
-                            <div class="  col-sm-2  no-pad">
-                                <div class="no-pad hidden-xs col-sm-3 "><hr style="border-color:black;"/></div>
-                                <div class="no-pad col-xs-2 col-sm-4  text-up-bold-5  text-center thead-tablebag-margin-text-2 " >{% trans from 'SonataOrderBundle' %}sonata.order.view.element.unit_price{% endtrans %}</div>
-                                <div class="no-pad hidden-xs col-sm-5  "><hr style="border-color:black;"/></div>
+                            <div class="  col-sm-2  no-pad marg-top-20">
+                                {#<div class="no-pad hidden-xs col-sm-3 "><hr style="border-color:black;"/></div>#}
+                                <div class="no-pad col-xs-2 col-sm-8  text-up-bold-5  text-center thead-tablebag-margin-text-2 " >{% trans from 'SonataOrderBundle' %}sonata.order.view.element.unit_price{% endtrans %}</div>
+                                <div class="no-pad hidden-xs col-sm-4  "><hr style="border-color:black;"/></div>
                             </div>
-                            <div class=" col-sm-3  no-pad  ">
-                                <div class="no-pad hidden-xs col-sm-2  "><hr style="border-color:black; "/></div>
-                                <div class="col-sm-5 col-xs-2 text-up-bold-5 text-center  thead-tablebag-margin-text-2    ">{% trans from 'SonataOrderBundle' %}sonata.order.view.element.quantity{% endtrans %}</div>
+                            <div class=" col-sm-4  no-pad marg-top-20 ">
+                                {#<div class="no-pad hidden-xs col-sm-2  "><hr style="border-color:black; "/></div>#}
+                                <div class="col-sm-6 col-xs-2 text-up-bold-5 text-center  thead-tablebag-margin-text-2    ">{% trans from 'SonataOrderBundle' %}sonata.order.view.element.quantity{% endtrans %}</div>
                                 <div class="no-pad hidden-xs col-sm-1 "><hr style="border-color:black; "/></div>
-                                <div class="col-sm-3 col-xs-3 text-up-bold-5 text-center thead-tablebag-margin-text-2   " >{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</div>
-                                <div class="no-pad hidden-xs col-sm-1 "><hr style="border-color:black; "/></div>
+                                <div class="col-sm-5 col-xs-3 text-up-bold-5 text-center thead-tablebag-margin-text-2   " >{% trans from 'SonataOrderBundle' %}sonata.order.view.total_inc{% endtrans %}</div>
+                                {#<div class="no-pad hidden-xs col-sm-1 "><hr style="border-color:black; "/></div>#}
                             </div>
                         </thead>
                     {% endblock %}
@@ -164,14 +187,14 @@ file that was distributed with this source code.
                         {% for element in order.orderElements %}
                             <tr>
                                 {% block sonata_order_element %}
-                                    <td class="hidden-xs">
+                                    <td class="hidden-xs col-xs-1">
                                         {% block product_thumbnail %}
                                             {% thumbnail element.product.image, 'preview' with {'itemprop':'image', 'alt': element.product.name, 'title': element.product.name, 'class': 'img-rounded img-responsive'} %}
                                         {% endblock %}
                                     </td>
                                     <td><a href="{{ url('sonata_product_view', {'productId': element.productId, 'slug': element.product.slug}) }}">{{ element.designation }}</a></td>
-                                    <td class="number">{{ element.unitPrice(true)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
-                                    <td class="number">{{ element.quantity }}</td>
+                                    <td class="number text-center">{{ element.unitPrice(true)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                                    <td class="text-center">{{ element.quantity }}</td>
                                     <td class="number">{{ element.total(true)|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
                                 {% endblock %}
                             </tr>
@@ -179,8 +202,8 @@ file that was distributed with this source code.
                         <tr>
                             <td><span class="glyphicon glyphicon-plane" style="font-size:40px;">&nbsp;</span></td>
                             <td>{% trans from 'SonataOrderBundle' %}sonata.order.view.delivery{% endtrans %}</td>
-                            <td class="number">{{ order.deliveryCost|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
-                            <td class="number">1</td>
+                            <td class="number text-center">{{ order.deliveryCost|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
+                            <td class="text-center">1</td>
                             <td class="number">{{ order.deliveryCost|number_format_currency(order.currency.label, {}, {}, order.locale) }}</td>
                         </tr>
                     </tbody>
@@ -211,9 +234,7 @@ file that was distributed with this source code.
     {% endblock %}
 
     {% block sonata_order_footer %}
-        {% if order.status == 5 %}
-            <a href="{{ path('sonata_order_pay', {'reference': order.reference}) }}" class="btn">PAGA</a>
-        {% endif %}
+
     {% endblock %}
     <script>
         <!-- Correzione colspan tfoot tabella review per mobile-->

@@ -249,8 +249,11 @@ class ProdottoController extends BaseProductController
      */
     protected function handleWriteProduct($provider, $request, $id = null)
     {
-        $this->logger->info('Request URI: '.$request->getRequestUri());
-        $this->logger->info('Request Content: '.$request->getContent());
+        $this->logger->info('-------------------------------------------------------');
+        $this->logger->info('URI: '.$request->getRequestUri());
+        $this->logger->info('Method: '.$request->getMethod());
+        $this->logger->info('Content Type: '.$request->getContentType());
+        $this->logger->info('Content: '.$request->getContent());
         $this->logger->info('Query Parameters: '.print_r($request->query->all(), true));
         $this->logger->info('POST Parameters: '.print_r($request->request->all(), true));
 
@@ -289,6 +292,7 @@ class ProdottoController extends BaseProductController
             $delivery2->setCountryCode('IT');
             $delivery2->setEnabled(true);
             $delivery2->setZone('Italy');
+            $this->entityManager->persist($product);
 
             if ($form->get('produttore_codice')->getData() != null) {
                 $produttore = $this->entityManager->getRepository('CTICibourBundle:Produttore')->findOneByCodice($form->get('produttore_codice')->getData());
@@ -298,8 +302,7 @@ class ProdottoController extends BaseProductController
                 $this->entityManager->persist($delivery);
                 $this->entityManager->persist($delivery2);
             }
-            if ($form->get('categoria_codice')->getData() != null)
-            {
+            if ($form->get('categoria_codice')->getData() != null) {
                 $categoria = $this->entityManager->getRepository('ApplicationSonataClassificationBundle:Category')->findOneByCodice($form->get('categoria_codice')->getData());
                 try {
                     $this->productCategoryManager->addCategoryToProduct($product, $categoria, true);
@@ -311,9 +314,11 @@ class ProdottoController extends BaseProductController
                 }
             }
 
+            $this->entityManager->flush();
+
             $view = \FOS\RestBundle\View\View::create($product);
             $serializationContext = SerializationContext::create();
-            $serializationContext->setGroups(array('sonata_api_read'));
+            $serializationContext->setGroups(array('sonata_api_read', 'sonata_api_write'));
             $serializationContext->enableMaxDepthChecks();
             $view->setSerializationContext($serializationContext);
 

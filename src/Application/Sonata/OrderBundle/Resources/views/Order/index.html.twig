@@ -21,7 +21,7 @@ file that was distributed with this source code.
         {% set looped = false %}
 
         {% for order in orders
-            if order.status is constant('STATUS_PENDING', order) or order.status is constant('STATUS_OPEN', order) %}
+            if order.paymentStatus != 2 or order.deliveryStatus != 5 %}
 
             {% set looped = true %}
 
@@ -43,7 +43,7 @@ file that was distributed with this source code.
         {% endif %}
 
         {% for order in orders
-            if order.status is not constant('STATUS_PENDING', order) and order.status is not constant('STATUS_OPEN', order) %}
+            if (order.status is not constant('STATUS_PENDING', order) and order.status is not constant('STATUS_OPEN', order) and order.status is not constant('STATUS_STOPPED', order)) and order.paymentStatus == 2 and order.deliveryStatus == 5 %}
 
             {% set looped = true %}
 

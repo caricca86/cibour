@@ -102,7 +102,7 @@ file that was distributed with this source code.
     {{ sonata_block_render({'type': 'sonata.product.block.similar_products', 'settings': {'number': 4, 'base_product_id': single_basket_element.productId}}) }}
 #}
 {% else %}
-<div class="text-center">
+<div class="col-xs-12 text-center">
     <p>
         {% trans from 'SonataBasketBundle' %}sonata.basket.message_basket_is_empty{% endtrans %}.
         <br />
