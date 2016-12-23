@@ -155,10 +155,9 @@ file that was distributed with this source code.
                                 <div class="col-xs-1 no-pad "><button class=" updown  visible-sm visible-xs"><img class="img visible-sm  visible-xs arrow-size arrow-down" src="{{ asset('bundles/cticibour/images/arrow-down.png') }}"><img class="img hidden arrow-size arrow-up" src="{{ asset('bundles/cticibour/images/arrow-up.png') }}"></button></div>
                             </div>
                             <ul class="list-unstyled">
-                                <li>Mangiare</li>
-                                <li>Bere</li>
-                                <li>Regali</li>
-                                <li>Novit&aacute;</li>
+                                <li><a href="{{ path('catalog_trending_now') }}">Trending now</a></li>
+                                <li><a href="{{ path('catalog_recently_added') }}">Ultimi Arrivi</a></li>
+                                <li><a href="{{ path('catalog_popular') }}">Most Popular</a></li>
                             </ul>
                         </div>
 
@@ -173,7 +172,7 @@ file that was distributed with this source code.
                                 <li><a href="http://www.latavolaitaliana.org">La Tavola Italiana</a></li>
                                 <li><a href="{{ path('lavora_con_noi') }}">Lavora con noi</a></li>
                                 <li><a href="{{ path('partner') }}">Diventa fornitore</a></li>
-                                <li>I partner di cibour</li>
+                                {#<li>I partner di cibour</li>#}
                             </ul>
                         </div>
 
