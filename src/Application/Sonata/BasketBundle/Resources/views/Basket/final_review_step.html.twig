@@ -166,6 +166,14 @@ file that was distributed with this source code.
         </label>
         {% endif %}
         <div>
+            <label style="font-weight: 400; margin: 20px; text-transform: uppercase;" for="fattura">
+                <input type="checkbox" name="fattura" id="fattura"/>
+                Richiedi fattura
+            </label>
+            <label style="font-weight: 400; margin: 20px; text-transform: uppercase;" for="regalo">
+                <input type="checkbox" name="regalo" id="regalo"/>
+                &Egrave; un regalo
+            </label><br>
             <input type="submit" value="{{ 'sonata.basket.label_process_to_payment'|trans({}, 'SonataBasketBundle') }}" class="btn basket-control" />
         </div>
             <div><small>*Alcuni prodotti potrebbero non essere disponibili prima di 7 giorni</small></div>

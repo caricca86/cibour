@@ -19,6 +19,7 @@
 
         <field name="fattura" type="boolean" column="fattura"  nullable="true"/>
         <field name="processato" type="boolean" column="processato" nullable="true"/>
+        <field name="regalo" type="boolean" column="regalo"  nullable="true"/>
 
         <field name="billingAddressId" type="integer" column="billing_address_id" nullable="true"/>
         <field name="billingPartitaIva" type="string" column="billing_partita_iva" length="12" nullable="true"/>

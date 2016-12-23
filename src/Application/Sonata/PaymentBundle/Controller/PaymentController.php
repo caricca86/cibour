@@ -80,4 +80,64 @@ class PaymentController extends BaseController
             'order' => $order,
         ));
     }
+
+    /**
+     * this action redirect the user to the bank
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\Controller\Response
+     */
+    public function sendbankAction()
+    {
+        $basket = $this->getBasket();
+
+        if ($this->get('request')->getMethod() !== 'POST') {
+            return $this->redirect($this->generateUrl('sonata_basket_index'));
+        }
+
+        if (!$basket->isValid()) {
+            $this->get('session')->getFlashBag()->set(
+                'error',
+                $this->container->get('translator')->trans('basket_not_valid', array(), 'SonataPaymentBundle')
+            );
+
+            return $this->redirect($this->generateUrl('sonata_basket_index'));
+        }
+
+        $payment = $basket->getPaymentMethod();
+
+        // check if the basket is valid/compatible with the bank gateway
+        if (!$payment->isBasketValid($basket)) {
+            $this->get('session')->getFlashBag()->set(
+                'error',
+                $this->container->get('translator')->trans('basket_not_valid_with_current_payment_method', array(), 'SonataPaymentBundle')
+            );
+
+            return $this->redirect($this->generateUrl('sonata_basket_index'));
+        }
+
+
+
+        // transform the basket into order
+        $order = $this->getPaymentHandler()->getSendbankOrder($basket);
+
+        $fattura = $this->get('request')->request->get('fattura');
+        $regalo = $this->get('request')->request->get('regalo');
+
+        if ($fattura == 'on') {
+            $order->setFattura(true);
+        } else {
+            $order->setFattura(false);
+        }
+
+        if ($regalo == 'on') {
+            $order->setRegalo(true);
+        } else {
+            $order->setRegalo(false);
+        }
+
+        $this->getBasketFactory()->reset($basket);
+
+        // the payment must handle everything when calling the bank
+        return $payment->sendbank($order);
+    }
 }

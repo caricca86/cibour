@@ -14,8 +14,13 @@
             <p>
                 Grazie di avere acquistato i nostri prodotti. Ecco il riepilogo del Suo ordine rif. <a href="{{ app.request.getSchemeAndHttpHost() ~ path('sonata_order_view', {'reference' : order.reference}) }}">{{ order.reference }}</a>
             </p>
+            {% if order.regalo %}
+                <p>
+                    <b>ATTENZIONE: questo ordine è un regalo</b>
+                </p>
+            {% endif %}
 
-            <table style="font-size: 10px; border-collapse: collapse; width: 100%; margin: 30px;">
+            <table style="font-size: 12px; border-collapse: collapse; width: 100%; margin: 30px;">
                  <thead>
                     <tr style="padding: 10px" align="center">
                         <th>{% trans from 'SonataOrderBundle' %}sonata.order.view.element.label{% endtrans %}</th>
@@ -59,7 +64,7 @@
                     </tr>
                 </tfoot>
             </table>
-            <table style="font-size: 10px; border-collapse: collapse;width: 100%; margin: 30px;">
+            <table style="font-size: 12px; border-collapse: collapse;width: 100%; margin: 30px;">
                 <thead>
                 <tr style="padding: 10px" align="center">
                     <th>
@@ -85,7 +90,7 @@
                 </tr>
                 </tbody>
             </table>
-            <table style="font-size: 10px; border-collapse: collapse;width: 100%; margin: 30px;">
+            <table style="font-size: 12px; border-collapse: collapse;width: 100%; margin: 30px;">
                 <thead>
                 <tr style="padding: 10px" align="center">
                     <th>
@@ -121,7 +126,7 @@
                 </tr>
                 </tbody>
             </table>
-            <i style="font-size: 8px">*Alcuni prodotti potrebbero non essere disponibili prima di 7 giorni</i>
+            <i style="font-size: 10px">*Alcuni prodotti potrebbero non essere disponibili prima di 7 giorni</i>
             </p>
             <br>
             <p>
@@ -130,7 +135,7 @@
                 La informiamo che il Suo ordine verrà evaso dopo 3 giorni lavorativi previa verifica dell’avvenuto pagamento.
             </p>
 
-            <p style="text-align: center; font-size: 8px;">
+            <p style="text-align: center; font-size: 10px;">
                 <a href="http://cibour.com/PRIVACY.pdf">DISCLOSURE SULLA PRIVACY</a> - <a href="http://cibour.com/CONDIZIONIDIVENDITA.pdf">CONDIZIONI GENERALI</a>
             </p>
             <p>
