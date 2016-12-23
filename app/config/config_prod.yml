@@ -20,6 +20,11 @@ monolog:
             path: %kernel.root_dir%/../public_html/api.log
             level: info
             channels: api
+        critical:
+            type: stream
+            path: %kernel.root_dir%/../public_html/api.log
+            level: error
+            channels: request
         main:
             type:         fingers_crossed
             action_level: error

@@ -11,6 +11,11 @@ web_profiler:
 
 monolog:
     handlers:
+        api:
+            type: stream
+            path: %kernel.root_dir%/../public_html/api.log
+            level: info
+            channels: api
         main:
             type:  stream
             path:  %kernel.logs_dir%/%kernel.name%_%kernel.environment%.log
