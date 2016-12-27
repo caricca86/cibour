@@ -159,6 +159,8 @@ file that was distributed with this source code.
                                 <li><a href="{{ path('catalog_recently_added') }}">Ultimi Arrivi</a></li>
                                 <li><a href="{{ path('catalog_popular') }}">Most Popular</a></li>
                                 <li><a href="{{ path('catalog_category', {'categorySlug':'articoli-vari', 'categoryId': 23}) }}">Regali</a></li>
+                                <li><a href="{{ path('catalog_category', {'categorySlug':'pasta-riso-cereali', 'categoryId': 26}) }}">Mangia soprattutto cereali tipici</a></li>
+                                <li><a href="{{ path('catalog_category', {'categorySlug':'birra', 'categoryId': 13}) }}">Bevi anche alternative al vino</a></li>
                             </ul>
                         </div>
 
@@ -196,14 +198,20 @@ file that was distributed with this source code.
                                 <div class="col-xs-1 no-pad "><button class="updown  visible-sm visible-xs"><img class="img visible-sm  visible-xs arrow-size arrow-down" src="{{ asset('bundles/cticibour/images/arrow-down.png') }}"><img class="img hidden arrow-size arrow-up" src="{{ asset('bundles/cticibour/images/arrow-up.png') }}"></button></div>
                             </div>
                             <ul class="list-unstyled ">
-                                <li>FAQ - Domande frequenti</li>
+                                <li><a href="{{ path('faq') }}">FAQ - Domande frequenti</a></li>
                                 <li>Contatti</li>
                                 <li><a href="{{ path('privacy') }}">Politica di Privacy</a></li>
                                 <li><a href="{{ path('sonata_payment_terms') }}">Condizioni di acquisto</a></li>
                             </ul>
                         </div>
                         <div class="row">
-                            <div class="col-xs-10 col-xs-offset-1 col-md-5 col-md-offset-7 text-right text-up-bold-4 marg-top-60 marg-bot-10">Metodi di pagamento accettati</div>
+                            <div class="col-xs-10 col-xs-offset-1 col-md-5 col-md-offset-7 text-right text-up-bold-4 marg-bot-30">
+                                Seguici su:
+                                <a target="_blank" href="https://www.facebook.com/Cibour-179476069060260/">
+                                    <img width="20" src="http://cibour.com/uploads/media/default/0001/01/602f97841073baf7e9f19ac7dcb0e3761a3731ae.png">
+                                </a>
+                            </div>
+                            <div class="col-xs-10 col-xs-offset-1 col-md-5 col-md-offset-7 text-right text-up-bold-4 marg-bot-10">Metodi di pagamento accettati</div>
                             <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-4   marg-bot-30"><img class="img img-responsive" src="{{ asset('bundles/cticibour/images/payment-logo.png') }}"></div>
                         </div>
                         <div class="col-xs-12 marg-top-10"><p class="text-center text-up-bold-2">CTI S.r.l. società con sede legale in Via Matteotti 5, Menfi (AG) – Italia - P. IVA 02783110840</p></div>

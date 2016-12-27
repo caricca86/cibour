@@ -52,6 +52,24 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/faq", name="faq")
+     * @Template()
+     */
+    public function faqAction()
+    {
+        return array();
+    }
+
+    /**
+     * @Route("/contatti", name="contatti")
+     * @Template()
+     */
+    public function contattiAction()
+    {
+        return array();
+    }
+
+    /**
      * @Route("/init", name="init")
      * @Template()
      */
